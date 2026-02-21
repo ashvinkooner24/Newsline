@@ -42,3 +42,36 @@
 ## Customization
 - Add more API endpoints in `app.py`.
 - Expand React components in `App.js`.
+
+# Backend API for News Aggregation Platform
+
+## Setup
+
+1. Create and activate your Python virtual environment:
+   
+   python -m venv .venv
+   .venv\Scripts\Activate.ps1
+
+2. Install dependencies:
+   
+   pip install -r Backend/requirements.txt
+
+3. Run the FastAPI server:
+   
+   uvicorn Backend.main:app --reload
+
+## API Endpoints
+
+- GET /stories — Returns all stories (mock data)
+- GET /stories/{story_id} — Returns a single story by index
+
+## Structure
+
+- Backend/models.py — Data models
+- Backend/main.py — FastAPI app and mock data
+- Backend/requirements.txt — Python dependencies
+
+## Notes
+- Embedding and chunking logic is stubbed for later LLM integration.
+- No authentication included (MVP).
+- Storage is in-memory/mock for now; MongoDB can be integrated later.
