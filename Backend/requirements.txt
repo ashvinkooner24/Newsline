@@ -1,0 +1,36 @@
+# Core API framework
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+
+# Data validation & serialisation
+pydantic==2.10.4
+
+# ---------------------------------------------------------------------------
+# Future / production dependencies (install when implementing real features)
+# ---------------------------------------------------------------------------
+
+# Embeddings & NLP
+# sentence-transformers==3.3.1
+# torch==2.5.1
+# transformers==4.47.1
+
+# LLM clients (for RAG summary generation)
+# openai==1.58.1
+# anthropic==0.40.0
+
+# Vector databases
+# pinecone-client==5.0.1
+# qdrant-client==1.13.0
+# psycopg2-binary==2.9.10   # pgvector via PostgreSQL
+
+# RSS / news ingestion
+# feedparser==6.0.11
+# httpx==0.28.1
+# newspaper3k==0.2.8
+
+# Scheduling (for periodic scrape jobs)
+# apscheduler==3.10.4
+
+# Database ORM (if persisting beyond in-memory)
+# sqlalchemy==2.0.36
+# alembic==1.14.0
