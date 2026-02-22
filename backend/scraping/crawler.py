@@ -1,6 +1,5 @@
 import requests
 import time
-import os
 from bs4 import BeautifulSoup
 from newspaper import Article
 from urllib.parse import urljoin, urlparse
@@ -8,6 +7,7 @@ import random
 import re
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import polars as pl
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
@@ -17,9 +17,9 @@ headers = {
 }
 
 # Create folder to store articles
-FOLDER_NAME = "rag-source/article"
-MAX_PAGES_PER_SITE = 100  
-os.makedirs(FOLDER_NAME, exist_ok=True)
+PROVIDER = "usatoday"
+OUTPUT_FILE = f"{PROVIDER}.csv"
+MAX_PAGES_PER_SITE = 100
 
 def fetch_sitemap_urls(sitemap_url, site_metadata):
 
@@ -49,7 +49,7 @@ def fetch_sitemap_urls(sitemap_url, site_metadata):
         print(f"Failed to fetch sitemap {sitemap_url}: {e}")
     return urls
 
-def fetch_recursive_urls(start_url, safe_folder, use_selenium = False, extraction_method = "article", extraction_config = [], keep_keywords = [], skip_keywords = [], site_metadata = {}):
+def fetch_recursive_urls(start_url, use_selenium = False, extraction_method = "article", extraction_config = [], keep_keywords = [], skip_keywords = [], site_metadata = {}):
 
     """
     Recursively fetch URLs starting from start_url, staying within base_domain.
@@ -57,6 +57,8 @@ def fetch_recursive_urls(start_url, safe_folder, use_selenium = False, extractio
     visited = set()
     to_visit = [start_url]
     urls = []
+
+    df = pl.DataFrame({"url": [], "title": [], "text": []})  # initialize empty dataframe to store results as we go
 
     while to_visit:
         if site_metadata["total_pages_saved"] >= MAX_PAGES_PER_SITE:
@@ -72,7 +74,8 @@ def fetch_recursive_urls(start_url, safe_folder, use_selenium = False, extractio
         urls.append(url)
         site_metadata["total_pages_found"] += 1
         
-        crawl_and_save([url], 1, safe_folder, extraction_method, extraction_config, keep_keywords, skip_keywords, site_metadata)  # crawl and save as we go to avoid losing data if crawl is interrupted
+        df_ = crawl_and_save([url], 1, extraction_method, extraction_config, keep_keywords, skip_keywords, site_metadata)  # crawl and save as we go to avoid losing data if crawl is interrupted
+        df = pl.concat([df, df_])
 
         try:
             response = requests.get(url, timeout=10, headers=headers)
@@ -112,7 +115,7 @@ def fetch_recursive_urls(start_url, safe_folder, use_selenium = False, extractio
             print(f"No new links found on {url} using standard method.")
             to_visit.extend(fetch_selenium_urls(start_url, url, visited, site_metadata))  # try Selenium as fallback for JS-heavy pages
 
-    return urls
+    return df
 
 def fetch_selenium_urls(start_url, page_url, visited, site_metadata = {}):
     """
@@ -188,10 +191,12 @@ def filter_urls(urls, keep_patterns = [], skip_patterns = [], site_metadata = {}
 
     return filtered
 
-def crawl_and_save(urls, max_articles = 5, safe_folder = "", extraction_method = "article", extraction_config = [], keep_keywords = [], skip_keywords = [], site_metadata = {}):
+def crawl_and_save(urls, max_articles = 5, extraction_method = "article", extraction_config = [], keep_keywords = [], skip_keywords = [], site_metadata = {}):
     """
     Crawl all URLS.
     """
+    data = {"url": [], "title": [], "text": []}
+
     for i, url in enumerate(urls[:max_articles]):
         print(f"Crawling {url}")
         session = requests.Session()
@@ -206,47 +211,49 @@ def crawl_and_save(urls, max_articles = 5, safe_folder = "", extraction_method =
             article.download()
             article.parse()
 
-            safe_title = article.title.replace(" ", "_").replace("/", "")
-            filename = f"{FOLDER_NAME}/{safe_folder}/{safe_title}.txt"
-
             if extraction_method == "article":
                 if (crawl_article(url, article)) == "":
                         print(f"No text extracted from {url} using article method, skipping save.")
                 else:
-                    with open(filename, "w", encoding="utf-8") as f:
-                        f.write(crawl_article(url, article))
-                        site_metadata["total_pages_saved"] += 1
-                        site_metadata["page_lengths"].append(len(crawl_article(url, article)))
+                    data["url"].append(url)
+                    data["title"].append(article.title)
+                    data["text"].append(crawl_article(url, article))
+                    site_metadata["total_pages_saved"] += 1
+                    site_metadata["page_lengths"].append(len(crawl_article(url, article)))
             
             elif extraction_method == "class_based":
                 extracted_text = crawl_class_based(url, class_names=extraction_config, keep_keywords=keep_keywords, skip_keywords=skip_keywords)
                 if extracted_text == "":
                     print(f"No text extracted from {url} using class_based method with classes {extraction_config}, skipping save.")
                 else:
-                    with open(filename, "w", encoding="utf-8") as f:
-                        f.write(extracted_text)
-                        site_metadata["total_pages_saved"] += 1
-                        site_metadata["page_lengths"].append(len(extracted_text))
+                    data["url"].append(url)
+                    data["title"].append(article.title)
+                    data["text"].append(extracted_text)
+                    site_metadata["total_pages_saved"] += 1
+                    site_metadata["page_lengths"].append(len(extracted_text))
 
             elif extraction_method == "paragraphs":
                 extracted_text = crawl_paragraphs(url, keep_keywords=keep_keywords, skip_keywords=skip_keywords)
                 if extracted_text == "":
                     print(f"No text extracted from {url} using paragraphs method, skipping save.")
                 else:
-                    with open(filename, "w", encoding="utf-8") as f:
-                        f.write(extracted_text)
-                        site_metadata["total_pages_saved"] += 1
-                        site_metadata["page_lengths"].append(len(extracted_text))
+                    data["url"].append(url)
+                    data["title"].append(article.title)
+                    data["text"].append(extracted_text)
+                    site_metadata["total_pages_saved"] += 1
+                    site_metadata["page_lengths"].append(len(extracted_text))
 
             else:
                 print(f"Unknown extraction method: {extraction_method}")
                 continue
 
-            print(f"Saved {filename}")
+            print(f"Saved {url}")
         except Exception as e:
             print("Error:", e)
 
-        time.sleep(random.uniform(0.5,1))  
+        time.sleep(random.uniform(0.5,1))
+
+    return pl.DataFrame(data)
 
 def crawl_article(url, article, site_metadata = {}):
     """
@@ -391,8 +398,6 @@ def crawl_site(site):
         "crawl_duration_seconds": 0,
         "page_lengths": []
         }
-    safe_folder = site["name"].replace(" ", "_").replace("/", "")
-    os.makedirs(f"{FOLDER_NAME}/{safe_folder}", exist_ok=True)
     
     if site["fetch_method"] == "sitemap":
         all_urls = []
@@ -404,7 +409,7 @@ def crawl_site(site):
                                     site.get("url_exclude", []), site_metadata)
         print(f"{len(filtered_urls)} URLs after filtering")
 
-        crawl_and_save(filtered_urls, MAX_PAGES_PER_SITE, safe_folder,
+        df = crawl_and_save(filtered_urls, MAX_PAGES_PER_SITE,
                        site.get("extraction_method", "article"), site.get("extraction_config", []),
                        site.get("keep_keywords", []), site.get("skip_keywords", []), site_metadata)
         
@@ -413,14 +418,15 @@ def crawl_site(site):
     
     if site["fetch_method"] == "recursive":
         for start_url in site["sites"]:
-            fetch_recursive_urls(start_url, safe_folder, site.get("use_selenium", False), site.get("extraction_method", "article"),site.get("extraction_config", []), site.get("keep_keywords", []), site.get("skip_keywords", []), site_metadata)
+            df = fetch_recursive_urls(start_url, site.get("use_selenium", False), site.get("extraction_method", "article"),site.get("extraction_config", []), site.get("keep_keywords", []), site.get("skip_keywords", []), site_metadata)
             
     print(f"Site crawl completed: {site['name']}")
     site_metadata["average_page_length"] = sum(site_metadata["page_lengths"]) / len(site_metadata["page_lengths"]) if site_metadata["page_lengths"] else 0
     site_metadata["crawl_duration_seconds"] = time.time() - start_time
 
-    site_metadata_title = safe_folder + "_metadata"
-    site_metadata_file = f"{FOLDER_NAME}/{safe_folder}/{site_metadata_title}.txt"
+    df.write_csv(OUTPUT_FILE)
+
+    site_metadata_file = f"{PROVIDER}.txt"
     with open(site_metadata_file, "w") as f:
         f.write(str(site_metadata))
 
@@ -431,7 +437,7 @@ def main():
 
     sites = [
     # {
-    #     "name": "The guardian",  # used for folder naming
+    #     "name": "The Guardian",
     #     "sites": [
     #         "https://www.theguardian.com/sitemaps/news.xml"
     #     ],
@@ -448,12 +454,9 @@ def main():
     # },
 
     # {
-    #     "name": "Routers",  # used for folder naming
+    #     "name": "NY Times",
     #     "sites": [
-    #         "https://www.reuters.com/arc/outboundfeeds/sitemap-index/?outputType=xml",
-    #         "https://www.reuters.com/arc/outboundfeeds/news-sitemap-index/?outputType=xml",
-    #         "https://www.reuters.com/arc/outboundfeeds/sitemap-plj-index/?outputType=xml",
-    #         "https://www.reuters.com/arc/outboundfeeds/pressrelease-sitemap/?outputType=xml"
+    #         "https://www.nytimes.com/sitemaps/new/news.xml.gz"
     #     ],
     #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
     #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
@@ -464,13 +467,64 @@ def main():
     #     "keep_keywords": [],  # not used for article extraction
     #     "skip_keywords": [],  # not used for article extraction
     #     "url_include": [],  # keep only these
-    #     "url_exclude": ["/sport/", "/football/"],  # skip URLs containing these
+    #     "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
+    # },
+
+    # {
+    #     "name": "The Washington Post",
+    #     "sites": [
+    #         "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz"
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
     # }
+
+    # {
+    #     "name": "CNN",
+    #     "sites": [
+    #         "https://www.cnn.com/sitemap/news.xml"
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
+    # }
+
+    {
+        "name": "USA Today",
+        "sites": [
+            "https://www.usatoday.com/news-sitemap.xml"
+        ],
+        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+        "extraction_method": "article",  # use newspaper3k's article extraction
+        "extraction_config": [
+            # could add config options here if needed, e.g. language, fetch_images, etc.
+        ],
+        "keep_keywords": [],  # not used for article extraction
+        "skip_keywords": [],  # not used for article extraction
+        "url_include": [],  # keep only these
+        "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
+    }
     
     ]
 
     all_sites_metadata = {}
-    all_site_metadata_file = f"{FOLDER_NAME}/all_sites_metadata.txt"
+    all_site_metadata_file = f"all_sites_metadata.txt"
 
     for site in sites:
         all_sites_metadata[site['name']] = crawl_site(site)
