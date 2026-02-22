@@ -1,12 +1,37 @@
 import { useParams, Link } from 'react-router-dom';
-import { mockSourceProfiles, mockTopics } from '@/data/mockNews';
+import { useState, useEffect, useMemo } from 'react';
+import { getTopics, mockSourceProfiles } from '@/api/newsApi';
+import { TopicSummary, SourceProfile } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { HeaderBar } from '@/components/HeaderBar';
 import { ExternalLink, FileText } from 'lucide-react';
 
 const SourceProfilePage = () => {
   const { sourceId } = useParams();
+  const [topics, setTopics] = useState<TopicSummary[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getTopics()
+      .then(data => setTopics(data))
+      .catch(err => console.error('[SourceProfile] Failed to load topics:', err))
+      .finally(() => setLoading(false));
+  }, []);
+
   const profile = mockSourceProfiles.find(p => p.source.id === sourceId);
+
+  const sourceArticles = useMemo(
+    () => topics.flatMap(t => t.articles.filter(a => a.source.id === sourceId)),
+    [topics, sourceId]
+  );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <span className="font-mono text-muted-foreground">Loading...</span>
+      </div>
+    );
+  }
 
   if (!profile) {
     return (
@@ -23,8 +48,6 @@ const SourceProfilePage = () => {
     'far-left': -80, 'left': -50, 'center-left': -25, 'center': 0,
     'center-right': 25, 'right': 50, 'far-right': 80,
   };
-
-  const sourceArticles = mockTopics.flatMap(t => t.articles.filter(a => a.source.id === sourceId));
 
   return (
     <div className="min-h-screen bg-background">
@@ -86,7 +109,7 @@ const SourceProfilePage = () => {
             </h2>
             <div className="divide-y divide-border">
               {sourceArticles.map(article => {
-                const topic = mockTopics.find(t => t.articles.some(a => a.id === article.id));
+                const topic = topics.find(t => t.articles.some(a => a.id === article.id));
                 return (
                   <div key={article.id} className="py-3">
                     {topic && (
