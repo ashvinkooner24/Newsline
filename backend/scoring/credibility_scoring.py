@@ -1,83 +1,131 @@
-# credibility_scoring.py
+"""
+credibility_scoring.py
 
-import os
+Computes a composite credibility score for each article:
+    credibility = 0.4 × reputation + 0.3 × objectivity + 0.3 × agreement
+    − 0.2 (if article has contradictions)
+    − 0.1 (if article has missing context)
+
+Score is clipped to [0, 1].
+
+Public API:
+    compute_article_credibility(article, agreement_scores,
+                                contradiction_reports, missing_context)
+        -> float (0–1)
+
+    run_credibility_scoring(articles, agreement_scores,
+                            contradiction_reports, missing_context)
+        -> dict[article_id -> float]
+"""
+
+from __future__ import annotations
+
 from collections import defaultdict
-from sentiment_scoring import score_article
-from agreement_scoring import load_articles, extract_claims, compute_agreement
 
-ARTICLES_DIR = "test"
+# ── Weights ───────────────────────────────────────────────────────────────────
 
-# Weights for credibility
 WEIGHT_REPUTATION = 0.4
 WEIGHT_OBJECTIVITY = 0.3
 WEIGHT_AGREEMENT = 0.3
 
-def compute_article_credibility(article, agreement_score, contradictions, missing_context):
+# ── Public API ────────────────────────────────────────────────────────────────
+
+
+def compute_article_credibility(
+    article: dict,
+    agreement_scores: dict,
+    contradiction_reports: list,
+    missing_context: dict,
+) -> float:
     """
-    Computes a final credibility score per article.
-    Penalizes for contradictions and missing context.
+    Returns a credibility score in [0, 1] for *article*.
+
+    Args:
+        article:             dict with keys id, objectivity, reputation
+        agreement_scores:    dict[article_id -> float (0–1)]
+        contradiction_reports: list of contradiction report dicts
+        missing_context:     dict[article_id -> list[str]]
     """
-    rep = article.get("reputation", 0.5)
-    obj = article.get("objectivity", 0.5)
-    agree = agreement_score.get(article["id"], 0)
+    rep = float(article.get("reputation", 0.5))
+    obj = float(article.get("objectivity", 0.5))
+    agree = float(agreement_scores.get(article["id"], 0.5))
 
-    # Basic weighted score
-    credibility = (WEIGHT_REPUTATION * rep +
-                   WEIGHT_OBJECTIVITY * obj +
-                   WEIGHT_AGREEMENT * agree)
+    credibility = (
+        WEIGHT_REPUTATION * rep
+        + WEIGHT_OBJECTIVITY * obj
+        + WEIGHT_AGREEMENT * agree
+    )
 
-    # Penalize for contradictions or missing context
-    if article["id"] in contradictions:
-        credibility -= 0.2  # higher penalty for contradictions
-    if article["id"] in missing_context and len(missing_context[article["id"]]) > 0:
-        credibility -= 0.1  # smaller penalty for missing context
+    # Penalties
+    contradicted_ids = {r["wrong_article"] for r in contradiction_reports}
+    if article["id"] in contradicted_ids:
+        credibility -= 0.2
 
-    return round(max(credibility, 0), 3)  # ensure not negative
+    if missing_context.get(article["id"]):
+        credibility -= 0.1
 
-def main():
-    # Step 1: Load articles
-    articles = load_articles(ARTICLES_DIR)
+    return round(max(0.0, min(1.0, credibility)), 3)
 
-    # Step 2: Score objectivity/subjectivity
+
+def run_credibility_scoring(
+    articles: list[dict],
+    agreement_scores: dict,
+    contradiction_reports: list,
+    missing_context: dict,
+) -> dict:
+    """
+    Compute credibility score for every article in the list.
+    Returns dict[article_id -> float (0–1)].
+    """
+    return {
+        a["id"]: compute_article_credibility(
+            a, agreement_scores, contradiction_reports, missing_context
+        )
+        for a in articles
+    }
+
+
+# ── Standalone entry point ────────────────────────────────────────────────────
+
+
+def main() -> None:
+    import os
+
+    # When run as a script, load scoring modules via sys.path
+    import sys
+
+    sys.path.insert(0, os.path.dirname(__file__))
+    from agreement_scoring import compute_agreement, load_articles
+    from sentiment_scoring import score_article
+
+    articles_dir = os.path.join(os.path.dirname(__file__), "test")
+    articles = load_articles(articles_dir)
+
+    # Re-score objectivity (load_articles already does this, but
+    # kept explicit for clarity)
     for article in articles:
-        obj, subj = score_article(article["text"])
-        article["objectivity"] = obj
-        article["subjectivity"] = subj
-
-    # Step 3: Compute agreement, contradictions, missing context
-    agreement_score, contradiction_reports, missing_context = compute_agreement(articles)
-
-    # Step 4: Map contradictions per article
-    contradictions_per_article = defaultdict(list)
-    for report in contradiction_reports:
-        contradictions_per_article[report["wrong_article"]].append(report)
-
-    # Step 5: Compute credibility per article
-    credibility_scores = {}
-    for article in articles:
-        credibility_scores[article["id"]] = compute_article_credibility(
-            article,
-            agreement_score,
-            contradictions_per_article,
-            missing_context
+        article["objectivity"], article["subjectivity"] = score_article(
+            article["text"]
         )
 
-    # ==============================
-    # OUTPUT (can be saved per article for website)
-    # ==============================
+    agreement_scores, contradiction_reports, missing_context = compute_agreement(
+        articles
+    )
+    credibility_scores = run_credibility_scoring(
+        articles, agreement_scores, contradiction_reports, missing_context
+    )
+
     for article in articles:
         aid = article["id"]
         print(f"\n=== {aid} ===")
-        print(f"Credibility Score: {credibility_scores[aid]}")
-        print(f"Objectivity: {round(article['objectivity'],3)} | Subjectivity: {round(article['subjectivity'],3)}")
-        print(f"Missing Context: {len(missing_context.get(aid, []))} claims")
-        print(f"Contradictions: {len(contradictions_per_article.get(aid, []))}")
-        # Show some example claims
-        for c in missing_context.get(aid, [])[:3]:
-            print("-", c)
-        for c in contradictions_per_article.get(aid, [])[:3]:
-            print("Wrong claim:", c["wrong_claim"])
-            print("Contradicted by:", c["correct_article"])
+        print(f"  Credibility : {credibility_scores[aid]:.3f}")
+        print(
+            f"  Objectivity : {article['objectivity']:.3f} | "
+            f"Subjectivity: {article['subjectivity']:.3f}"
+        )
+        print(f"  Agreement   : {agreement_scores.get(aid, 0):.3f}")
+        print(f"  Missing ctx : {len(missing_context.get(aid, []))}")
+
 
 if __name__ == "__main__":
     main()

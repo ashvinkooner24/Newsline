@@ -1,30 +1,58 @@
+from __future__ import annotations
+
 from fastapi import APIRouter, HTTPException
-from typing import List
-from ..models import StoryWrapper, User
-from ..data.mockData import mock_stories, mock_users
-from ..utils.slugify import slugify
+from ..models import TopicSummary, UserProfile
+from ..data.mockData import mock_users, get_topics as _get_topics_with_fallback
 
 router = APIRouter()
 
-@router.get("/stories", response_model=List[StoryWrapper])
+
+# ── Helper ────────────────────────────────────────────────────────────────────
+
+def _all_topics() -> list[TopicSummary]:
+    return _get_topics_with_fallback()
+
+
+# ── Stories ───────────────────────────────────────────────────────────────────
+
+@router.get("/stories", response_model=list[TopicSummary])
 def get_stories():
-    return mock_stories
+    return _all_topics()
 
-@router.get("/stories/{slug}", response_model=StoryWrapper)
+
+@router.get("/stories/{slug}", response_model=TopicSummary)
 def get_story(slug: str):
-    for story in mock_stories:
-        if slugify(story.story.heading) == slug:
-            return story
-    raise HTTPException(status_code=404, detail="Story not found")
+    for topic in _all_topics():
+        if topic.slug == slug:
+            return topic
+    raise HTTPException(status_code=404, detail=f"Story '{slug}' not found")
 
 
-@router.get("/users", response_model=List[User])
+# ── Pipeline status ───────────────────────────────────────────────────────────
+
+@router.get("/pipeline/status")
+def get_pipeline_status():
+    """
+    Useful for the frontend to poll while the ML pipeline is loading.
+    Returns: {"running": bool, "done": bool, "error": str | None}
+    """
+    try:
+        from ..scoring.pipeline import pipeline_status
+        return pipeline_status()
+    except Exception as exc:
+        return {"running": False, "done": False, "error": str(exc)}
+
+
+# ── Users ─────────────────────────────────────────────────────────────────────
+
+@router.get("/users", response_model=list[UserProfile])
 def get_users():
     return mock_users
 
-@router.get("/user/{username}", response_model=User)
-def get_user(username: str):
+
+@router.get("/users/{user_id}", response_model=UserProfile)
+def get_user(user_id: str):
     for user in mock_users:
-        if user.username == username:
+        if user.id == user_id:
             return user
-    raise HTTPException(status_code=404, detail="User not found")
+    raise HTTPException(status_code=404, detail=f"User '{user_id}' not found")
