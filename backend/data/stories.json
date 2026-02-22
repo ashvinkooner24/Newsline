@@ -1,0 +1,508 @@
+[
+  {
+    "story": {
+      "heading": "Global Push for AI Safety Standards Intensifies as Nations Draft Competing Frameworks",
+      "political_bias": -0.08,
+      "factual_accuracy": 0.82,
+      "sources": [
+        {"name": "Reuters",           "bias_score":  0.0,  "trust_score": 0.92},
+        {"name": "The Guardian",      "bias_score": -0.3,  "trust_score": 0.82},
+        {"name": "Wall Street Journal","bias_score":  0.3,  "trust_score": 0.87},
+        {"name": "New York Times",    "bias_score": -0.3,  "trust_score": 0.85},
+        {"name": "AP News",           "bias_score":  0.0,  "trust_score": 0.90},
+        {"name": "Fox News",          "bias_score":  0.7,  "trust_score": 0.62}
+      ],
+      "segments": [
+        {
+          "text": "EU Leads with Comprehensive Framework: The European Union has finalized its AI Act enforcement mechanisms, establishing the world's most comprehensive regulatory framework for artificial intelligence. The legislation categorizes AI systems by risk level and imposes strict requirements on high-risk applications.",
+          "sources": [
+            {"name": "Reuters",      "bias_score":  0.0, "trust_score": 0.92},
+            {"name": "The Guardian", "bias_score": -0.3, "trust_score": 0.82}
+          ],
+          "avg_bias": -0.05,
+          "avg_truth": 0.90,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "US Takes Industry-Friendly Approach: The United States has opted for a more industry-collaborative approach, with voluntary commitments from major tech companies supplemented by executive orders. Critics argue this creates insufficient guardrails, while proponents say it fosters innovation.",
+          "sources": [
+            {"name": "Wall Street Journal", "bias_score":  0.3, "trust_score": 0.87},
+            {"name": "New York Times",      "bias_score": -0.3, "trust_score": 0.85}
+          ],
+          "avg_bias": 0.02,
+          "avg_truth": 0.84,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "China's State-Controlled Model: China has implemented strict content-focused AI regulations requiring all generative AI systems to align with socialist values, while simultaneously investing heavily in AI development for economic competitiveness.",
+          "sources": [
+            {"name": "AP News", "bias_score": 0.0, "trust_score": 0.90}
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.86,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "Record-Breaking Temperatures Force Accelerated Climate Action Discussions",
+      "political_bias": -0.22,
+      "factual_accuracy": 0.76,
+      "sources": [
+        {"name": "BBC News",     "bias_score":  0.0,  "trust_score": 0.88},
+        {"name": "Reuters",     "bias_score":  0.0,  "trust_score": 0.92},
+        {"name": "MSNBC",       "bias_score": -0.7,  "trust_score": 0.60},
+        {"name": "Fox News",    "bias_score":  0.7,  "trust_score": 0.62},
+        {"name": "The Guardian","bias_score": -0.3,  "trust_score": 0.82}
+      ],
+      "segments": [
+        {
+          "text": "Temperature Records Broken: 2025 was confirmed as the hottest year on record, exceeding the 1.5°C Paris Agreement threshold for the first time on an annual basis.",
+          "sources": [
+            {"name": "BBC News", "bias_score": 0.0, "trust_score": 0.88},
+            {"name": "Reuters",  "bias_score": 0.0, "trust_score": 0.92}
+          ],
+          "avg_bias": -0.03,
+          "avg_truth": 0.94,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "Political Divide Deepens: Climate policy remains deeply polarized, with progressive leaders calling for emergency measures while conservative voices emphasize economic costs and energy security.",
+          "sources": [
+            {"name": "MSNBC",    "bias_score": -0.7, "trust_score": 0.60},
+            {"name": "Fox News", "bias_score":  0.7, "trust_score": 0.62}
+          ],
+          "avg_bias": -0.05,
+          "avg_truth": 0.68,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "Urban Housing Affordability Hits Historic Low as Policy Responses Diverge",
+      "political_bias": -0.05,
+      "factual_accuracy": 0.88,
+      "sources": [
+        {"name": "New York Times",     "bias_score": -0.3, "trust_score": 0.85},
+        {"name": "AP News",            "bias_score":  0.0, "trust_score": 0.90},
+        {"name": "Wall Street Journal","bias_score":  0.3, "trust_score": 0.87}
+      ],
+      "segments": [
+        {
+          "text": "Crisis by the Numbers: The median home price in major metropolitan areas now exceeds 8x median household income, up from 5x a decade ago. Over 50% of renters in top cities spend more than 30% of income on housing.",
+          "sources": [
+            {"name": "New York Times", "bias_score": -0.3, "trust_score": 0.85},
+            {"name": "AP News",        "bias_score":  0.0, "trust_score": 0.90}
+          ],
+          "avg_bias": -0.03,
+          "avg_truth": 0.91,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "Diplomatic Efforts Intensify as Ceasefire Talks Enter Critical Phase",
+      "political_bias": -0.06,
+      "factual_accuracy": 0.85,
+      "sources": [
+        {"name": "Reuters",        "bias_score":  0.0,  "trust_score": 0.92},
+        {"name": "BBC News",       "bias_score":  0.0,  "trust_score": 0.88},
+        {"name": "Al Jazeera",     "bias_score": -0.3,  "trust_score": 0.75},
+        {"name": "Deutsche Welle", "bias_score":  0.0,  "trust_score": 0.84}
+      ],
+      "segments": [
+        {
+          "text": "Ceasefire Negotiations: Diplomatic envoys from multiple nations have convened in Geneva for what officials describe as the most promising round of ceasefire negotiations since the conflict began. Key sticking points remain territorial sovereignty and security guarantees.",
+          "sources": [
+            {"name": "Reuters",  "bias_score": 0.0, "trust_score": 0.92},
+            {"name": "BBC News", "bias_score": 0.0, "trust_score": 0.88}
+          ],
+          "avg_bias": -0.02,
+          "avg_truth": 0.88,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "Humanitarian Impact: The UN estimates over 14 million people have been displaced, with critical infrastructure damage affecting access to heating, water, and medical care across eastern regions.",
+          "sources": [
+            {"name": "Al Jazeera", "bias_score": -0.3, "trust_score": 0.75}
+          ],
+          "avg_bias": -0.10,
+          "avg_truth": 0.85,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "SEC Unveils Landmark Crypto Framework as Bitcoin Surpasses $150K",
+      "political_bias": 0.15,
+      "factual_accuracy": 0.84,
+      "sources": [
+        {"name": "Reuters",       "bias_score":  0.0, "trust_score": 0.92},
+        {"name": "Wall Street Journal", "bias_score": 0.3, "trust_score": 0.87},
+        {"name": "The Economist", "bias_score":  0.3, "trust_score": 0.89}
+      ],
+      "segments": [
+        {
+          "text": "New Regulatory Framework: The SEC has released a comprehensive framework distinguishing between securities tokens and utility tokens, providing clarity that the industry has long demanded. Compliance deadlines begin in Q3 2026.",
+          "sources": [
+            {"name": "Reuters",             "bias_score": 0.0, "trust_score": 0.92},
+            {"name": "Wall Street Journal", "bias_score": 0.3, "trust_score": 0.87}
+          ],
+          "avg_bias": 0.12,
+          "avg_truth": 0.80,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "Bipartisan Drug Pricing Bill Advances as Pharma Industry Pushes Back",
+      "political_bias": -0.18,
+      "factual_accuracy": 0.78,
+      "sources": [
+        {"name": "AP News",             "bias_score":  0.0,  "trust_score": 0.90},
+        {"name": "New York Times",      "bias_score": -0.3,  "trust_score": 0.85},
+        {"name": "Wall Street Journal", "bias_score":  0.3,  "trust_score": 0.87},
+        {"name": "Jacobin",             "bias_score": -0.7,  "trust_score": 0.65}
+      ],
+      "segments": [
+        {
+          "text": "The Bill's Key Provisions: The proposed legislation would allow Medicare to negotiate prices on 50 additional drugs and cap out-of-pocket costs for seniors at $2,000 annually. Both parties have signaled support for the core framework.",
+          "sources": [
+            {"name": "AP News",        "bias_score":  0.0, "trust_score": 0.90},
+            {"name": "New York Times", "bias_score": -0.3, "trust_score": 0.85}
+          ],
+          "avg_bias": -0.12,
+          "avg_truth": 0.82,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "Border Policy Overhaul Proposed Amid Record Migration Numbers",
+      "political_bias": 0.05,
+      "factual_accuracy": 0.71,
+      "sources": [
+        {"name": "AP News",  "bias_score":  0.0,  "trust_score": 0.90},
+        {"name": "Fox News", "bias_score":  0.7,  "trust_score": 0.62},
+        {"name": "MSNBC",    "bias_score": -0.7,  "trust_score": 0.60},
+        {"name": "ABC News", "bias_score":  0.0,  "trust_score": 0.82}
+      ],
+      "segments": [
+        {
+          "text": "Record Migration Figures: Border encounters exceeded 3 million in 2025, the highest on record. Asylum processing backlogs now stretch over 5 years, leaving millions in legal limbo.",
+          "sources": [
+            {"name": "AP News",  "bias_score":  0.0,  "trust_score": 0.90},
+            {"name": "Fox News", "bias_score":  0.7,  "trust_score": 0.62},
+            {"name": "MSNBC",    "bias_score": -0.7,  "trust_score": 0.60}
+          ],
+          "avg_bias": 0.05,
+          "avg_truth": 0.72,
+          "article_count": 3,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "Artemis III Moon Landing Date Set as Commercial Space Race Accelerates",
+      "political_bias": 0.02,
+      "factual_accuracy": 0.91,
+      "sources": [
+        {"name": "Reuters",       "bias_score": 0.0, "trust_score": 0.92},
+        {"name": "BBC News",      "bias_score": 0.0, "trust_score": 0.88},
+        {"name": "The Economist", "bias_score": 0.3, "trust_score": 0.89}
+      ],
+      "segments": [
+        {
+          "text": "Artemis III Timeline Confirmed: NASA has officially set September 2027 for the Artemis III crewed lunar landing, which will include the first woman and first person of color to walk on the Moon. The Starship lunar lander has completed all key testing milestones.",
+          "sources": [
+            {"name": "Reuters",  "bias_score": 0.0, "trust_score": 0.92},
+            {"name": "BBC News", "bias_score": 0.0, "trust_score": 0.88}
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.92,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "AI Tutoring Revolution Sparks Debate Over Future of Traditional Schooling",
+      "political_bias": -0.12,
+      "factual_accuracy": 0.80,
+      "sources": [
+        {"name": "AP News",        "bias_score":  0.0,  "trust_score": 0.90},
+        {"name": "New York Times", "bias_score": -0.3,  "trust_score": 0.85},
+        {"name": "The Guardian",   "bias_score": -0.3,  "trust_score": 0.82}
+      ],
+      "segments": [
+        {
+          "text": "AI Tutoring Results: A Stanford study found that students using AI tutoring systems for one semester showed learning gains equivalent to two years of traditional instruction in mathematics. The technology is now deployed in over 15,000 US schools.",
+          "sources": [
+            {"name": "AP News",        "bias_score":  0.0, "trust_score": 0.90},
+            {"name": "New York Times", "bias_score": -0.3, "trust_score": 0.85}
+          ],
+          "avg_bias": -0.08,
+          "avg_truth": 0.83,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "New Tariff Escalation Threatens Global Supply Chains as Allies Retaliate",
+      "political_bias": 0.05,
+      "factual_accuracy": 0.81,
+      "sources": [
+        {"name": "Reuters",                 "bias_score":  0.0,  "trust_score": 0.92},
+        {"name": "Fox News",                "bias_score":  0.7,  "trust_score": 0.62},
+        {"name": "New York Times",          "bias_score": -0.3,  "trust_score": 0.85},
+        {"name": "South China Morning Post","bias_score":  0.0,  "trust_score": 0.72},
+        {"name": "Deutsche Welle",          "bias_score":  0.0,  "trust_score": 0.84}
+      ],
+      "segments": [
+        {
+          "text": "Tariff Escalation: The latest round of tariffs affects $500 billion in goods, with retaliatory measures from the EU, China, and Canada. Economists warn of significant GDP impact across all affected economies.",
+          "sources": [
+            {"name": "Reuters",        "bias_score":  0.0,  "trust_score": 0.92},
+            {"name": "Fox News",       "bias_score":  0.7,  "trust_score": 0.62},
+            {"name": "New York Times", "bias_score": -0.3,  "trust_score": 0.85}
+          ],
+          "avg_bias": 0.03,
+          "avg_truth": 0.78,
+          "article_count": 3,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "Supply Chain Disruption: Major manufacturers are scrambling to restructure supply chains as tariffs make established trade routes economically unviable. Southeast Asian nations are emerging as alternative manufacturing hubs.",
+          "sources": [
+            {"name": "South China Morning Post", "bias_score": 0.0, "trust_score": 0.72}
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.86,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": [
+      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
+      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
+      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
+    ]
+  },
+  {
+    "story": {
+      "heading": "Digital Platform Accountability Act Moves Forward Amid Debate Over Transparency and Free Speech",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.75,
+      "sources": [
+        {
+          "name": "Reuters",
+          "bias_score": 0.0,
+          "trust_score": 0.75
+        },
+        {
+          "name": "BBC News",
+          "bias_score": 0.0,
+          "trust_score": 0.75
+        },
+        {
+          "name": "Financial Times",
+          "bias_score": 0.0,
+          "trust_score": 0.75
+        },
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.75
+        },
+        {
+          "name": "Politico",
+          "bias_score": 0.5,
+          "trust_score": 0.75
+        },
+        {
+          "name": "Al Jazeera",
+          "bias_score": -0.5,
+          "trust_score": 0.75
+        }
+      ],
+      "segments": [
+        {
+          "text": "Legislative Framework and Requirements: The Digital Platform Accountability Act targets social media platforms with more than 20 million domestic users. The legislation requires these companies to submit quarterly reports on political advertising expenditures, content moderation practices, and algorithmic recommendation systems. Additionally, the bill mandates the labeling of AI-generated or synthetic content and requires that anonymized data be provided to independent researchers to monitor election integrity.",
+          "sources": [
+            {
+              "name": "Reuters",
+              "bias_score": 0.0,
+              "trust_score": 0.75
+            },
+            {
+              "name": "BBC News",
+              "bias_score": 0.0,
+              "trust_score": 0.75
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.75,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "Data on Misinformation and Moderation Impact: Research presented during parliamentary hearings suggests that structured moderation and transparency can reduce the spread of false content. The European Parliamentary Research Service found that such practices reduced the virality of false content by 10–15% during election cycles. Furthermore, Pew Research Center data from 2025 indicated that 59% of users support labeling disputed content, although approximately 18% expressed concerns regarding potential censorship. Simulated models also projected that quarterly reporting could reduce user exposure to disputed posts by 5–8%.",
+          "sources": [
+            {
+              "name": "Financial Times",
+              "bias_score": 0.0,
+              "trust_score": 0.75
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.75
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.75,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "Stakeholder Perspectives and Concerns: While academic experts generally support the bill as a means to provide checks and balances on platform influence, industry representatives and civil liberties groups have raised concerns. Tech companies emphasize the need to protect proprietary code and user privacy, while advocates warn that vague definitions of 'misinformation' could lead to the over-removal of lawful political speech. Some critics have gone further, alleging the bill could be used to manipulate political discourse or silence dissenting opinions.",
+          "sources": [
+            {
+              "name": "BBC News",
+              "bias_score": 0.0,
+              "trust_score": 0.75
+            },
+            {
+              "name": "Politico",
+              "bias_score": 0.5,
+              "trust_score": 0.75
+            },
+            {
+              "name": "Al Jazeera",
+              "bias_score": -0.5,
+              "trust_score": 0.75
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.75,
+          "article_count": 3,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "text": "Implementation and Oversight: To address concerns regarding enforcement and bias, lawmakers are considering the establishment of an independent oversight committee. This body would include academics, industry experts, and civil society representatives to monitor compliance and mediate disputes. Experts like Dr. Raj Patel note that while transparency is a significant step, it must be paired with media literacy campaigns, as misinformation may migrate to smaller, less regulated platforms.",
+          "sources": [
+            {
+              "name": "Financial Times",
+              "bias_score": 0.0,
+              "trust_score": 0.75
+            },
+            {
+              "name": "Reuters",
+              "bias_score": 0.0,
+              "trust_score": 0.75
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.75,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ]
+    },
+    "comments": []
+  }
+]

@@ -75,3 +75,7 @@
 - Embedding and chunking logic is stubbed for later LLM integration.
 - No authentication included (MVP).
 - Storage is in-memory/mock for now; MongoDB can be integrated later.
+
+
+## To run article ingestion pipeline 
+python backend.scoring.pipeline.run_pipeline(directory: string)
