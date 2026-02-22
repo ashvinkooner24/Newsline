@@ -80,8 +80,7 @@ const ArticleDetail = () => {
             {/* Summary */}
             <section className="border border-border bg-card p-5">
               <h2 className="font-display text-lg font-semibold text-foreground mb-3">Article Summary</h2>
-              {/* <p className="text-secondary-foreground leading-relaxed">{article.excerpt}</p> */}
-              <p className="text-secondary-foreground leading-relaxed mt-3">
+              <p className="text-secondary-foreground leading-relaxed">
                 This article from {article.source.name} provides coverage of the {topic.topic} topic with a{' '}
                 <span className="font-semibold">{article.source.biasLean}</span> editorial perspective.
                 The reporting style is primarily <span className="font-semibold">{article.tone || 'balanced'}</span>,
