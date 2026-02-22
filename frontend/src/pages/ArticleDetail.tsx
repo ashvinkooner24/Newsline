@@ -1,5 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { mockTopics } from '@/data/mockNews';
+import { useState, useEffect } from 'react';
+import { getTopic } from '@/api/newsApi';
+import { TopicSummary } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { ToneAnalysis } from '@/components/ToneAnalysis';
 import { FactCheckDisplay } from '@/components/FactCheckDisplay';
@@ -10,8 +12,26 @@ import { ExternalLink } from 'lucide-react';
 
 const ArticleDetail = () => {
   const { slug, articleId } = useParams();
-  const topic = mockTopics.find(t => t.slug === slug);
+  const [topic, setTopic] = useState<TopicSummary | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!slug) return;
+    getTopic(slug).then(data => {
+      setTopic(data);
+      setLoading(false);
+    });
+  }, [slug]);
+
   const article = topic?.articles.find(a => a.id === articleId);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <span className="font-mono text-muted-foreground">Loading...</span>
+      </div>
+    );
+  }
 
   if (!topic || !article) {
     return (
@@ -23,6 +43,7 @@ const ArticleDetail = () => {
       </div>
     );
   }
+
 
   const biasLeanToScore: Record<string, number> = {
     'far-left': -80, 'left': -50, 'center-left': -25, 'center': 0,

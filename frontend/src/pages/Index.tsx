@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react';
-import { mockTopics, allCategories, allCountries } from '@/data/mockNews';
+import { useState, useMemo, useEffect } from 'react';
+import { getTopics } from '@/api/newsApi';
+import { allCategories, allCountries } from '@/data/mockNews';
+import { TopicSummary } from '@/types/news';
 import { TopicCard } from '@/components/TopicCard';
 import { SearchFilter } from '@/components/SearchFilter';
 import { HeaderBar } from '@/components/HeaderBar';
@@ -21,6 +23,16 @@ const topicIcons: Record<string, React.ReactNode> = {
 };
 
 const Index = () => {
+  const [topics, setTopics] = useState<TopicSummary[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getTopics()
+      .then(data => setTopics(data))
+      .catch(err => console.error('[Index] Failed to load topics:', err))
+      .finally(() => setLoading(false));
+  }, []);
+
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -29,7 +41,7 @@ const Index = () => {
   const [followedTopics, setFollowedTopics] = useState<string[]>(['Technology', 'Geopolitics', 'Economy']);
 
   const filtered = useMemo(() => {
-    return mockTopics.filter(t => {
+    return topics.filter(t => {
       if (search && !t.headline.toLowerCase().includes(search.toLowerCase()) && !t.topic.toLowerCase().includes(search.toLowerCase())) return false;
       if (selectedCategory && t.category !== selectedCategory) return false;
       if (selectedCountry && t.country !== selectedCountry) return false;
@@ -44,14 +56,14 @@ const Index = () => {
       if (selectedCredibility && t.credibility.label !== selectedCredibility) return false;
       return true;
     });
-  }, [search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
+  }, [topics, search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
 
   const heroTopic = filtered.find(t => t.isBreaking) || filtered.find(t => t.isFeatured) || filtered[0];
   const secondaryFeatured = filtered.filter(t => t.isFeatured && t.id !== heroTopic?.id).slice(0, 2);
   const restTopics = filtered.filter(t => t.id !== heroTopic?.id && !secondaryFeatured.find(f => f.id === t.id));
 
   // Credibility tiers
-  const sortedByCredibility = [...mockTopics].sort((a, b) => a.credibility.score - b.credibility.score);
+  const sortedByCredibility = [...topics].sort((a, b) => a.credibility.score - b.credibility.score);
   const lowCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Low' || t.credibility.score < 65).slice(0, 3);
   const midCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Medium').slice(0, 3);
   const highCredibility = [...sortedByCredibility].reverse().filter(t => t.credibility.label === 'High').slice(0, 3);
@@ -87,9 +99,9 @@ const Index = () => {
         <div className="container max-w-6xl mx-auto px-4 py-2 flex items-center gap-6 text-xs font-mono text-muted-foreground">
           <div className="flex items-center gap-1.5">
             <TrendingUp className="w-3.5 h-3.5 text-primary" />
-            <span>{mockTopics.length} active topics</span>
+            <span>{topics.length} active topics</span>
           </div>
-          <div>{mockTopics.reduce((sum, t) => sum + t.articles.length, 0)} sources analyzed</div>
+          <div>{topics.reduce((sum, t) => sum + t.articles.length, 0)} sources analyzed</div>
           <div className="ml-auto">
             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
           </div>
@@ -105,6 +117,12 @@ const Index = () => {
         selectedCredibility={selectedCredibility} onCredibilityChange={setSelectedCredibility}
         categories={allCategories} countries={allCountries}
       />
+
+      {loading && (
+        <div className="text-center py-12 font-mono text-sm text-muted-foreground">
+          Loading...
+        </div>
+      )}
 
       <main className="container max-w-6xl mx-auto px-4 py-6">
         {/* Hero + Secondary Featured */}
@@ -271,7 +289,7 @@ const Index = () => {
             <div className="flex-1 border-t border-rule" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[...mockTopics].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
+            {[...topics].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
               <Link key={t.id} to={`/topic/${t.slug}`} className="group flex gap-4 border border-border bg-card p-4 hover:bg-accent/30 transition-colors">
                 <div className="flex-1">
                   <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t.headline}</h4>
