@@ -1,100 +1,65 @@
-"""
-sentiment_scoring.py
-
-Scores article text for subjectivity / objectivity using
-GroNLP/mdebertav3-subjectivity-english.
-
-Public API (importable from pipeline):
-    score_article(text: str) -> tuple[float, float]
-        Returns (objectivity, subjectivity) in 0–1 range.
-    score_sentence(sentence: str) -> tuple[float, float]
-        Returns (objectivity, subjectivity) for one sentence.
-
-Models are loaded lazily on first call so importing this module does NOT
-trigger any network/disk activity at server startup.
-"""
-
-from __future__ import annotations
-
 import nltk
+from transformers import pipeline
 
-nltk.download("punkt", quiet=True)
-nltk.download("punkt_tab", quiet=True)
+nltk.download('punkt')
+nltk.download('punkt_tab')
+from nltk.tokenize import sent_tokenize
 
-# ── Lazy model loader ─────────────────────────────────────────────────────────
+# Load model
+classifier = pipeline(
+    "text-classification",
+    model="GroNLP/mdebertav3-subjectivity-english",
+    top_k=None
+)
 
-_classifier = None
-
-
-def _get_classifier():
-    global _classifier
-    if _classifier is None:
-        from transformers import pipeline as hf_pipeline
-
-        print("[sentiment_scoring] Loading subjectivity model…", flush=True)
-        _classifier = hf_pipeline(
-            "text-classification",
-            model="GroNLP/mdebertav3-subjectivity-english",
-            top_k=None,
-        )
-        print("[sentiment_scoring] Model ready.", flush=True)
-    return _classifier
-
-
-# ── Public API ────────────────────────────────────────────────────────────────
-
-
-def score_sentence(sentence: str) -> tuple[float, float]:
-    """Returns (objectivity, subjectivity) for a single sentence (0–1 each)."""
-    clf = _get_classifier()
-    result = clf(sentence)[0]
-    subj = next(
-        (float(item["score"]) for item in result if item["label"] == "LABEL_1"),
-        0.5,
-    )
-    return 1.0 - subj, subj
-
-
-def score_article(text: str) -> tuple[float, float]:
-    """
-    Returns (objectivity, subjectivity) for a full article.
-    Scores are weighted by sentence word-count so longer sentences
-    have proportionally more influence.
-    """
-    from nltk.tokenize import sent_tokenize
-
+def score_article(text):
     sentences = sent_tokenize(text)
-    if not sentences:
-        return 0.5, 0.5
+    
+    total_weighted_score = 0
+    total_weight = 0
+    
+    for sentence in sentences:
+        result = classifier(sentence)[0]
+        
+        # Get subjectivity score
+        subjectivity_score = None
+        for item in result:
+            if item["label"] == "LABEL_1":  # Assuming LABEL_1 = subjective
+                subjectivity_score = item["score"]
+        
+        # Weight by sentence length
+        weight = len(sentence.split())
+        
+        total_weighted_score += subjectivity_score * weight
+        total_weight += weight
+    
+    article_subjectivity = total_weighted_score / total_weight
+    article_objectivity = 1 - article_subjectivity
+    
+    return {
+        "subjective_percent": round(article_subjectivity * 100, 2),
+        "objective_percent": round(article_objectivity * 100, 2)
+    }
 
-    weighted_obj = 0.0
-    total_words = 0
-    for s in sentences:
-        obj, _ = score_sentence(s)
-        w = len(s.split())
-        weighted_obj += obj * w
-        total_words += w
+def main():
 
-    objectivity = weighted_obj / total_words if total_words > 0 else 0.5
-    return objectivity, 1.0 - objectivity
+    with open("../scraping/rag-source/article/The_guardian/Iran_refusing_to_export_highly_enriched_uranium_but_willing_to_dilute_purity,_sources_say.txt", "r", encoding="utf-8") as file:
+        text = file.read()
+    
+    scores = score_article(text)
+    print(scores)
 
+    with open("../scraping/rag-source/article/The_guardian/The_Liberal_party_believes_Trump-style_politics_is_the_way_to_win_back_power._But_it_just_won’t_work_in_urban_Australia_|_Zoe_Daniel.txt", "r", encoding="utf-8") as file:
+        text = file.read()
+    
+    scores = score_article(text)
+    print(scores)
 
-# ── Standalone entry point ────────────────────────────────────────────────────
-
-
-def main() -> None:
-    import os
-
-    test_dir = os.path.join(os.path.dirname(__file__), "test")
-    for filename in sorted(os.listdir(test_dir)):
-        if not filename.endswith(".txt"):
-            continue
-        path = os.path.join(test_dir, filename)
-        with open(path, encoding="utf-8", errors="replace") as fh:
-            text = fh.read()
-        obj, subj = score_article(text)
-        print(f"{filename}: objectivity={obj:.2%}  subjectivity={subj:.2%}")
-
+    with open("../scraping/rag-source/article/tests/trump_post.txt", "r", encoding="utf-8") as file:
+        text = file.read()
+    
+    scores = score_article(text)
+    print(scores)
 
 if __name__ == "__main__":
     main()

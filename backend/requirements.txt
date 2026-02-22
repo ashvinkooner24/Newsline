@@ -1,14 +1,5 @@
-fastapi
-uvicorn[standard]
-pydantic
-python-dotenv
-
-# Google Gemini
 google-genai>=0.7.0
-
-# ML / NLP
-transformers
-torch
-sentence-transformers
-nltk
-numpy
+python-dotenv>=1.0.1
+fastapi
+pydantic
+uvicorn
