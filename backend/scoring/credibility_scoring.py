@@ -2,10 +2,16 @@
 
 import os
 from collections import defaultdict
-from sentiment_scoring import score_article
-from agreement_scoring import load_articles, extract_claims, compute_agreement
 
-ARTICLES_DIR = "test"
+# Support both standalone execution and package import
+try:
+    from .sentiment_scoring import score_article
+    from .agreement_scoring import load_articles, compute_agreement
+except ImportError:
+    from sentiment_scoring import score_article       # type: ignore
+    from agreement_scoring import load_articles, compute_agreement  # type: ignore
+
+DEFAULT_ARTICLES_DIR = os.path.join(os.path.dirname(__file__), "test")
 
 # Weights for credibility
 WEIGHT_REPUTATION = 0.4
@@ -35,8 +41,10 @@ def compute_article_credibility(article, agreement_score, contradictions, missin
     return round(max(credibility, 0), 3)  # ensure not negative
 
 def main():
+    import sys
+    articles_dir = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_ARTICLES_DIR
     # Step 1: Load articles
-    articles = load_articles(ARTICLES_DIR)
+    articles = load_articles(articles_dir)
 
     # Step 2: Score objectivity/subjectivity
     for article in articles:

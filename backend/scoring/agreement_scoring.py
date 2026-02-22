@@ -8,43 +8,60 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipe
 import numpy as np
 import re
 
-nltk.download('punkt')
+nltk.download('punkt', quiet=True)
 
 # ==============================
 # CONFIG
 # ==============================
-ARTICLES_DIR = "test"
 SIMILARITY_THRESHOLD = 0.75
 CLAIM_OBJECTIVITY_THRESHOLD = 0.6
 MISSING_CONTEXT_SIM_THRESHOLD = 0.8
 DEFAULT_REPUTATION = 0.5
 
 # ==============================
-# LOAD MODELS
+# LAZY MODEL LOADERS
 # ==============================
-print("Loading embedding model...")
-embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+_embedder = None
+_nli_tokenizer = None
+_nli_model = None
+_nli_device = None
+_classifier = None
 
-print("Loading NLI model...")
-nli_model_name = "facebook/bart-large-mnli"
-nli_tokenizer = AutoTokenizer.from_pretrained(nli_model_name)
-nli_model = AutoModelForSequenceClassification.from_pretrained(nli_model_name)
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-nli_model.to(device)
+def _get_embedder():
+    global _embedder
+    if _embedder is None:
+        print("[agreement_scoring] Loading embedding model…")
+        _embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+    return _embedder
 
-print("Loading subjectivity classifier...")
-classifier = pipeline(
-    "text-classification",
-    model="GroNLP/mdebertav3-subjectivity-english",
-    top_k=None
-)
+def _get_nli():
+    global _nli_tokenizer, _nli_model, _nli_device
+    if _nli_model is None:
+        print("[agreement_scoring] Loading NLI model…")
+        name = "facebook/bart-large-mnli"
+        _nli_tokenizer = AutoTokenizer.from_pretrained(name)
+        _nli_model = AutoModelForSequenceClassification.from_pretrained(name)
+        _nli_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        _nli_model.to(_nli_device)
+    return _nli_tokenizer, _nli_model, _nli_device
+
+def _get_classifier():
+    global _classifier
+    if _classifier is None:
+        print("[agreement_scoring] Loading subjectivity classifier…")
+        _classifier = pipeline(
+            "text-classification",
+            model="GroNLP/mdebertav3-subjectivity-english",
+            top_k=None,
+        )
+    return _classifier
 
 # ==============================
 # UTIL FUNCTIONS
 # ==============================
 
 def score_sentence(sentence):
-    result = classifier(sentence)[0]
+    result = _get_classifier()(sentence)[0]
     subj_score = next((item["score"] for item in result if item["label"] == "LABEL_1"), 0.5)
     obj_score = 1 - subj_score
     return obj_score, subj_score
@@ -61,11 +78,12 @@ def score_article(text):
     article_obj = weighted_sum / total_words if total_words > 0 else 0
     return article_obj, 1 - article_obj
 
-def load_articles():
+def load_articles(articles_dir):
+    """Load .txt files from articles_dir and score their objectivity."""
     articles = []
-    for filename in os.listdir(ARTICLES_DIR):
+    for filename in os.listdir(articles_dir):
         if filename.endswith(".txt"):
-            path = os.path.join(ARTICLES_DIR, filename)
+            path = os.path.join(articles_dir, filename)
             with open(path, "r", encoding="utf-8") as f:
                 text = f.read()
             obj, subj = score_article(text)
@@ -75,7 +93,7 @@ def load_articles():
                 "source": "unknown",
                 "reputation": DEFAULT_REPUTATION,
                 "objectivity": obj,
-                "subjectivity": subj
+                "subjectivity": subj,
             })
     return articles
 
@@ -89,6 +107,7 @@ def extract_claims(article):
     return claims
 
 def classify_nli(claim1, claim2):
+    nli_tokenizer, nli_model, device = _get_nli()
     inputs = nli_tokenizer(claim1, claim2, return_tensors="pt", truncation=True).to(device)
     outputs = nli_model(**inputs)
     probs = torch.softmax(outputs.logits, dim=1)
@@ -100,16 +119,24 @@ def has_different_numbers_or_years(claim1, claim2):
     numbers2 = re.findall(r'\d+', claim2)
     if not numbers1 or not numbers2:
         return False
-    # If all numbers are different, ignore as contradiction
     return not any(n in numbers2 for n in numbers1)
 
 # ==============================
-# PIPELINE
+# PUBLIC API
 # ==============================
 
-def main():
-    articles = load_articles()
-    
+def compute_agreement(articles):
+    """
+    Given a list of article dicts (each with 'id', 'text', 'objectivity'),
+    return:
+      (agreement_scores, contradiction_reports, missing_context)
+
+      agreement_scores     : dict[article_id -> float 0-1]
+      contradiction_reports: list[dict]
+      missing_context      : dict[article_id -> list[str]]
+    """
+    embedder = _get_embedder()
+
     # Extract high-objectivity claims
     for article in articles:
         article["claims"] = extract_claims(article)
@@ -123,8 +150,12 @@ def main():
             claim_meta.append({
                 "article_id": article["id"],
                 "article_obj": article["objectivity"],
-                "claim_obj": claim["objectivity"]
+                "claim_obj": claim["objectivity"],
             })
+
+    if not all_claims:
+        empty = {a["id"]: 0.5 for a in articles}
+        return empty, [], defaultdict(list)
 
     # Embed claims
     claim_embeddings = embedder.encode(all_claims, convert_to_tensor=True)
@@ -164,21 +195,16 @@ def main():
                     contradictions_list.append((i, j))
 
     # ==============================
-    # Article Scores
+    # Article Scores  →  agreement_scores dict[id -> float]
     # ==============================
-    article_scores = {}
+    agreement_scores = {}
     for article in articles:
         aid = article["id"]
-        total_weight = sum([c["objectivity"] for c in article["claims"]]) or 1
+        total_weight = sum(c["objectivity"] for c in article["claims"]) or 1
         supported = article_support.get(aid, 0)
         contradicted = article_contradiction.get(aid, 0)
         consistency = (supported - contradicted) / total_weight + 0.5 * article["objectivity"]
-        article_scores[aid] = {
-            "consistency": round(consistency, 3),
-            "objectivity": round(article["objectivity"], 3),
-            "supported": round(supported, 2),
-            "contradicted": round(contradicted,2)
-        }
+        agreement_scores[aid] = round(max(0.0, min(1.0, consistency)), 3)
 
     # ==============================
     # Missing Context
@@ -200,6 +226,7 @@ def main():
                     break
             if not found_similar:
                 missing_context[article["id"]].append(claim_text)
+    missing_context = dict(missing_context)
 
     # ==============================
     # Contradiction Reports
@@ -215,28 +242,34 @@ def main():
         weight2 = meta2["article_obj"] * meta2["claim_obj"]
 
         if weight1 <= weight2:
-            wrong_article = meta1["article_id"]
-            wrong_claim = claim1
-            correct_article = meta2["article_id"]
-            correct_claim = claim2
+            wrong_article, wrong_claim = meta1["article_id"], claim1
+            correct_article, correct_claim = meta2["article_id"], claim2
         else:
-            wrong_article = meta2["article_id"]
-            wrong_claim = claim2
-            correct_article = meta1["article_id"]
-            correct_claim = claim1
+            wrong_article, wrong_claim = meta2["article_id"], claim2
+            correct_article, correct_claim = meta1["article_id"], claim1
 
         contradiction_reports.append({
             "wrong_article": wrong_article,
             "wrong_claim": wrong_claim,
             "correct_article": correct_article,
-            "correct_claim": correct_claim
+            "correct_claim": correct_claim,
         })
 
-    # ==============================
-    # OUTPUT
-    # ==============================
-    print("\n==== Article Scores ====")
-    for aid, score in article_scores.items():
+    return agreement_scores, contradiction_reports, missing_context
+
+
+# ==============================
+# STANDALONE TEST
+# ==============================
+
+def main():
+    import sys
+    articles_dir = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "test")
+    articles = load_articles(articles_dir)
+    agreement_scores, contradiction_reports, missing_context = compute_agreement(articles)
+
+    print("\n==== Agreement Scores ====")
+    for aid, score in agreement_scores.items():
         print(aid, score)
 
     print("\n==== Missing Context ====")

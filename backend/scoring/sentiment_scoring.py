@@ -1,45 +1,57 @@
 import nltk
-from transformers import pipeline
+from transformers import pipeline as hf_pipeline
 
-nltk.download('punkt')
-nltk.download('punkt_tab')
+nltk.download('punkt', quiet=True)
+nltk.download('punkt_tab', quiet=True)
 from nltk.tokenize import sent_tokenize
 
-# Load model
-classifier = pipeline(
-    "text-classification",
-    model="GroNLP/mdebertav3-subjectivity-english",
-    top_k=None
-)
+# Lazy-loaded — not initialised until first call so FastAPI startup is instant
+_classifier = None
 
-def score_article(text):
+def _get_classifier():
+    global _classifier
+    if _classifier is None:
+        print("[sentiment_scoring] Loading subjectivity classifier…")
+        _classifier = hf_pipeline(
+            "text-classification",
+            model="GroNLP/mdebertav3-subjectivity-english",
+            top_k=None,
+        )
+    return _classifier
+
+
+def score_sentence(sentence: str):
+    """Return (objectivity, subjectivity) floats for a single sentence."""
+    result = _get_classifier()(sentence)[0]
+    subj = next((item["score"] for item in result if item["label"] == "LABEL_1"), 0.5)
+    return 1 - subj, subj
+
+
+def score_article(text: str):
+    """
+    Return (objectivity, subjectivity) floats for a whole article,
+    weighted by sentence length.  Values are in [0, 1].
+    """
     sentences = sent_tokenize(text)
-    
+
     total_weighted_score = 0
     total_weight = 0
-    
+
     for sentence in sentences:
-        result = classifier(sentence)[0]
-        
-        # Get subjectivity score
-        subjectivity_score = None
-        for item in result:
-            if item["label"] == "LABEL_1":  # Assuming LABEL_1 = subjective
-                subjectivity_score = item["score"]
-        
-        # Weight by sentence length
+        result = _get_classifier()(sentence)[0]
+
+        subjectivity_score = next(
+            (item["score"] for item in result if item["label"] == "LABEL_1"), 0.5
+        )
+
         weight = len(sentence.split())
-        
         total_weighted_score += subjectivity_score * weight
         total_weight += weight
-    
-    article_subjectivity = total_weighted_score / total_weight
+
+    article_subjectivity = total_weighted_score / total_weight if total_weight else 0.5
     article_objectivity = 1 - article_subjectivity
-    
-    return {
-        "subjective_percent": round(article_subjectivity * 100, 2),
-        "objective_percent": round(article_objectivity * 100, 2)
-    }
+
+    return article_objectivity, article_subjectivity
 
 def main():
 
