@@ -1,0 +1,4 @@
+pymongo>=4.3.0
+dnspython>=2.3.0          # required for mongodb+srv URIs
+sentence-transformers>=2.2.0
+numpy>=1.25.0
