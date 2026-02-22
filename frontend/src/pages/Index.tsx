@@ -59,7 +59,8 @@ const Index = () => {
   }, [topics, search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
 
   const heroTopic = filtered.find(t => t.isBreaking) || filtered.find(t => t.isFeatured) || filtered[0];
-  const secondaryFeatured = filtered.filter(t => t.isFeatured && t.id !== heroTopic?.id).slice(0, 2) || filtered.filter(t => t.id !== heroTopic?.id).slice(0, 2)||filtered.slice(1, 3);
+  const _featuredSecondary = filtered.filter(t => t.isFeatured && t.id !== heroTopic?.id).slice(0, 2);
+  const secondaryFeatured = _featuredSecondary.length > 0 ? _featuredSecondary : filtered.filter(t => t.id !== heroTopic?.id).slice(0, 2);
   const restTopics = filtered.filter(t => t.id !== heroTopic?.id && !secondaryFeatured.find(f => f.id === t.id));
 
   // Credibility tiers

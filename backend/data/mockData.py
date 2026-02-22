@@ -107,4 +107,4 @@ _hardcoded_stories = [
 ]
 
 # Live list served by the API — hardcoded mock stories + anything in stories.json
-mock_stories: list = _hardcoded_stories + _load_json_stories()
+mock_stories: list =  _load_json_stories() + _hardcoded_stories
