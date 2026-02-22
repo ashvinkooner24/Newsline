@@ -9,9 +9,16 @@ import re
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+headers = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Accept-Language": "en-GB,en;q=0.9",
+    "Accept": "text/html,application/xhtml+xml",
+    "Connection": "keep-alive"
+}
+
 # Create folder to store articles
-FOLDER_NAME = "rag-source/final"
-MAX_PAGES_PER_SITE = 1000  
+FOLDER_NAME = "rag-source/article"
+MAX_PAGES_PER_SITE = 100  
 os.makedirs(FOLDER_NAME, exist_ok=True)
 
 def fetch_sitemap_urls(sitemap_url, site_metadata):
@@ -21,7 +28,7 @@ def fetch_sitemap_urls(sitemap_url, site_metadata):
     """
     urls = []
     try:
-        response = requests.get(sitemap_url, timeout=10)
+        response = requests.get(sitemap_url, timeout=10, headers=headers)
         response.raise_for_status()
         soup = BeautifulSoup(response.content, "xml")
 
@@ -35,6 +42,8 @@ def fetch_sitemap_urls(sitemap_url, site_metadata):
             for loc in soup.find_all("loc"):
                 site_metadata["total_pages_found"] += 1
                 urls.append(loc.text)
+                if len(urls) > MAX_PAGES_PER_SITE:
+                    break
     except Exception as e:
         site_metadata["total_pages_failed"] += 1
         print(f"Failed to fetch sitemap {sitemap_url}: {e}")
@@ -66,7 +75,7 @@ def fetch_recursive_urls(start_url, safe_folder, use_selenium = False, extractio
         crawl_and_save([url], 1, safe_folder, extraction_method, extraction_config, keep_keywords, skip_keywords, site_metadata)  # crawl and save as we go to avoid losing data if crawl is interrupted
 
         try:
-            response = requests.get(url, timeout=10)
+            response = requests.get(url, timeout=10, headers=headers)
             if response.status_code != 200:
                 print("Failed:", url)
                 site_metadata["total_pages_failed"] += 1
@@ -161,6 +170,11 @@ def filter_urls(urls, keep_patterns = [], skip_patterns = [], site_metadata = {}
         # Skip check
         if any(skip.lower() in url_lower for skip in skip_patterns):
             site_metadata["total_pages_skipped"] += 1
+            continue
+
+        if url.endswith((".jpg", ".jpeg", ".png", ".gif")):
+            site_metadata["total_pages_skipped"] += 1
+            continue
 
         # Keep check: only if keep_patterns is not empty
         if keep_patterns:
@@ -180,7 +194,9 @@ def crawl_and_save(urls, max_articles = 5, safe_folder = "", extraction_method =
     """
     for i, url in enumerate(urls[:max_articles]):
         print(f"Crawling {url}")
-        response = requests.get(url)
+        session = requests.Session()
+        session.headers.update(headers)
+        response = session.get(url)
         if response.status_code != 200:
             print(f"Failed to retrieve URL: {url}")
             site_metadata["total_pages_failed"] += 1
@@ -256,7 +272,7 @@ def crawl_class_based(url, class_names = [], keep_keywords = [], skip_keywords =
     Crawl a single URL and extract text based on specified class names and keyword filters.
     """
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         if response.status_code != 200:
             print(f"Failed to retrieve URL: {url}")
             return ""
@@ -414,89 +430,42 @@ def crawl_site(site):
 def main():
 
     sites = [
-    {
-        "name": "International Alliance ALS MND Association",  # used for folder naming
-        "sites": [
-            "https://www.als-mnd.org/page.xml"
-        ],
-        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
-        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
-        "extraction_method": "article",  # use newspaper3k's article extraction
-        "extraction_config": [
-            # could add config options here if needed, e.g. language, fetch_images, etc.
-        ],
-        "keep_keywords": [],  # not used for article extraction
-        "skip_keywords": [],  # not used for article extraction
-        "url_include": ["/support-for-pals-cals/", "/support-for-health-professionals/"],  # keep only these
-        "url_exclude": [],  # skip URLs containing these
-    },
+    # {
+    #     "name": "The guardian",  # used for folder naming
+    #     "sites": [
+    #         "https://www.theguardian.com/sitemaps/news.xml"
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
+    # },
 
-    {
-        "name": "Your ALS Guide",  
-        "sites": [
-            "https://www.youralsguide.com/sitemap.xml"
-        ],
-        "fetch_method": "sitemap",
-        "use_selenium": False,  
-        "extraction_method": "class_based",  
-        "extraction_config": ["paragraph"],  # for class_based, this would be a list of class names to try for extraction
-        "keep_keywords": [],  # if any of these keywords appear in the extracted text, keep the article
-        "skip_keywords": ["newsletter", "coping with the diagnosis", "copyright", "privacy policy"],  # if any of these keywords appear in the extracted text, skip the article
-        "url_include": [],  
-        "url_exclude": ["/our-story", "/mynas-story", "/newsletter", "/testimonials", "/licensing", "/contact-us"]    
-    },
-
-    {
-        "name": "ALS Canada",  
-        "sites": [
-            "https://als.ca/page-sitemap.xml",
-            "https://als.ca/resource-sitemap.xml"
-        ],
-        "fetch_method": "sitemap",
-        "use_selenium": False,
-        "extraction_method": "article",  
-        "extraction_config": [],
-        "keep_keywords": [],  
-        "skip_keywords": [], 
-        "url_include": ["/what-is-als/", "/managing-als/", "/resource/"],  
-        "url_exclude": []    
-    },
-
-    {
-        "name": "ALS Wiki",  
-        "sites": [
-            "https://www.alswiki.org/en/about-als",
-            "https://www.alswiki.org/en/living-with-als",
-            "https://www.alswiki.org/en/care",
-            "https://www.alswiki.org/en/adaptive-equipment",
-            "https://www.alswiki.org/en/research-and-treatments"
-        ],
-        "fetch_method": "recursive",
-        "use_selenium": False,
-        "extraction_method": "article",  
-        "extraction_config": [],
-        "keep_keywords": [],  
-        "skip_keywords": [], 
-        "url_include": ["/about-als/", "/living-with-als/", "/care/", "/adaptive-equipment/", "/research-and-treatments/"],  
-        "url_exclude": []    
-    },
-
-    {
-        "name": "IMNDA",  
-        "sites": [
-            "https://www.imnda.ie/about-mnd",
-            "https://www.imnda.ie/just-diagnosed",
-            "https://www.imnda.ie/living-with-mnd"
-        ],
-        "fetch_method": "recursive",
-        "use_selenium": True,  # this site has some JS-heavy pages where links are generated dynamically, so we will use Selenium as a fallback for those pages
-        "extraction_method": "article",  
-        "extraction_config": [],
-        "keep_keywords": [],  
-        "skip_keywords": [], 
-        "url_include": ["/about-mnd/", "/just-diagnosed/", "/living-with-mnd/"],  
-        "url_exclude": []    
-    },
+    # {
+    #     "name": "Routers",  # used for folder naming
+    #     "sites": [
+    #         "https://www.reuters.com/arc/outboundfeeds/sitemap-index/?outputType=xml",
+    #         "https://www.reuters.com/arc/outboundfeeds/news-sitemap-index/?outputType=xml",
+    #         "https://www.reuters.com/arc/outboundfeeds/sitemap-plj-index/?outputType=xml",
+    #         "https://www.reuters.com/arc/outboundfeeds/pressrelease-sitemap/?outputType=xml"
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/football/"],  # skip URLs containing these
+    # }
     
     ]
 
