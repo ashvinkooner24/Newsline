@@ -1,4 +1,9 @@
+import json
+import os
 from ..models import StoryWrapper, Story, Segment, NewsProvider, User, Comment
+
+_DATA_DIR = os.path.dirname(os.path.abspath(__file__))
+_STORIES_JSON = os.path.join(_DATA_DIR, "stories.json")
 
 mock_providers = [
     NewsProvider(name="The Guardian", bias_score=-0.3, trust_score=0.9),
@@ -16,7 +21,32 @@ mock_comments = [
     Comment(text="I disagree with the bias score.", like_count=2, dislike_count=3, parent=None, user=mock_users[1]),
 ]
 
-mock_stories = [
+def _load_json_stories() -> list:
+    """Load StoryWrapper objects persisted by gemini_article_aggregator."""
+    if not os.path.exists(_STORIES_JSON) or os.path.getsize(_STORIES_JSON) <= 2:
+        return []
+    try:
+        with open(_STORIES_JSON, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+        return [StoryWrapper(**entry) for entry in raw]
+    except Exception as e:
+        print(f"[mockData] Failed to load stories.json: {e}")
+        return []
+
+
+def add_story(wrapper: StoryWrapper) -> None:
+    """Append a StoryWrapper to the in-memory list AND persist it to stories.json."""
+    mock_stories.append(wrapper)
+    stories: list = []
+    if os.path.exists(_STORIES_JSON) and os.path.getsize(_STORIES_JSON) > 2:
+        with open(_STORIES_JSON, "r", encoding="utf-8") as f:
+            stories = json.load(f)
+    stories.append(wrapper.model_dump())
+    with open(_STORIES_JSON, "w", encoding="utf-8") as f:
+        json.dump(stories, f, indent=2, ensure_ascii=False)
+
+
+_hardcoded_stories = [
     StoryWrapper(
         story=Story(
             heading="Climate Change Policy Updates",
@@ -75,3 +105,6 @@ mock_stories = [
         comments=[],
     ),
 ]
+
+# Live list served by the API — hardcoded mock stories + anything in stories.json
+mock_stories: list = _hardcoded_stories + _load_json_stories()

@@ -284,7 +284,7 @@ export const mockTopics: TopicSummary[] = [
 ];
 
 export const mockUsers: UserProfile[] = [
-  { id: 'u1', name: 'DataDrivenReader', joinedAt: '2025-06-15', articlesRead: 342, commentsCount: 28, biasLean: 'center', leanScore: -3, reputation: 87, isPublic: true },
+  { id: 'u1', name: 'DataDrivenReader', joinedAt: '2025-06-15', articlesRead: 0, commentsCount: 1, biasLean: 'center', leanScore: -3, reputation: 67, isPublic: true },
   { id: 'u2', name: 'SkepticalObserver', joinedAt: '2025-09-01', articlesRead: 198, commentsCount: 45, biasLean: 'center-left', leanScore: -15, reputation: 72, isPublic: true },
   { id: 'u3', name: 'MediaAnalyst', joinedAt: '2025-03-20', articlesRead: 567, commentsCount: 89, biasLean: 'center', leanScore: 2, reputation: 91, isPublic: true },
   { id: 'u4', name: 'NewsJunkie42', joinedAt: '2025-11-10', articlesRead: 112, commentsCount: 12, biasLean: 'center-right', leanScore: 18, reputation: 65, isPublic: false },
