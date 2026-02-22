@@ -1,4 +1,8 @@
-# Web App Template: Python (Flask) Backend & React Frontend
+## Inspiration
+We were frustrated by how hard it is to answer a simple question: “what actually happened?” without wading through clickbait, partisan spin, and conflicting headlines. We wanted a way to check out the story and the sources at the same time - not just “left vs right”, but how strongly each claim is supported, and who’s shaping the narrative.
+
+## What it does
+The system scrapes a set of major outlets, clusters articles about the same topic, and uses an LLM to synthesize a single, modular, neutrally-worded article (our Newsblends). Each section of the Newsblend carries live metrics: how many sources back it, how aligned they are, political bias and credibility scores, and emotional tone. On hover, you see a dropdown of outlets and quotes that support that specific passage, turning the article into an interactive, explorable explanation of all the accounts. __**Your opinions are your own.**__
 
 ## Structure
 
