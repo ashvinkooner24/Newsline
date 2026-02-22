@@ -1,6 +1,6 @@
-# The Newsline — Multi-Source News Analysis Platform
+# The Newsline
 
-Newsline aggregates articles from multiple news outlets, runs an ML + Gemini AI scoring pipeline to analyse sentiment, agreement, and credibility, then surfaces a balanced, cited summary to readers.
+Imagine if every breaking story came with x‑ray vision. We ingest coverage from across the media ecosystem, then reconstruct a clean, neutral narrative - making credibility & bias visible at a glance. 
 
 # Inspiration
 We were frustrated by how hard it is to answer a simple question: “what actually happened?” without wading through clickbait, partisan spin, and conflicting headlines. We wanted a way to check out the story and the sources at the same time - not just “left vs right”, but how strongly each claim is supported, and who’s shaping the narrative.
