@@ -17,6 +17,7 @@ import type {
   TopicSummary,
   Source,
   Article,
+  UserProfile,
   Comment,
   SummarySection,
   BiasAnalysis,
@@ -40,6 +41,7 @@ export interface BackendNewsProvider {
 export interface BackendUser {
   username: string;
   email: string;
+  reputation: number;  // 0–100
 }
 
 export interface BackendComment {
@@ -259,6 +261,26 @@ export function transformStory(wrapper: BackendStoryWrapper, index: number): Top
   };
 }
 
+/**
+ * Transform a BackendUser into a frontend UserProfile.
+ * Fields not available from the backend (articlesRead, commentsCount,
+ * biasLean, leanScore, isPublic) get sensible defaults until the backend
+ * model is extended.
+ */
+export function transformUser(user: BackendUser): UserProfile {
+  return {
+    id:            slugify(user.username),
+    name:          user.username,
+    joinedAt:      new Date().toISOString().split('T')[0],
+    articlesRead:  0,
+    commentsCount: 0,
+    biasLean:      'center',
+    leanScore:     0,
+    reputation:    user.reputation,
+    isPublic:      true,
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Fetch functions
 // ---------------------------------------------------------------------------
@@ -292,7 +314,32 @@ export async function getTopic(slug: string): Promise<TopicSummary | null> {
     return transformStory(data, 0);
   } catch (err) {
     console.warn(`[newsApi] Backend unavailable for story ${slug}, falling back to mock data.`, err);
-    return mockTopics[0] ?? null;
+    return mockTopics.find(t => t.slug === slug) ?? null;
+  }
+}
+
+
+export async function getUsers(): Promise<UserProfile[]> {
+  try {
+    const res = await fetch(`${API_BASE}/users`);
+    if (!res.ok) throw new Error(`GET /users → HTTP ${res.status}`);
+    const data: BackendUser[] = await res.json();
+    return data.map((user, index) => transformUser(user));  } catch (err) {
+    console.warn('[newsApi] Backend unavailable, falling back to mock data.', err);
+    return mockUsers;
+  }
+}
+
+export async function getUser(username: string): Promise<UserProfile | null> {
+  try {
+    const res = await fetch(`${API_BASE}/user/${username}`);
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`GET /user/${username} → HTTP ${res.status}`);
+    const data: BackendUser = await res.json();
+    return transformUser(data);
+  } catch (err) {
+    console.warn(`[newsApi] Backend unavailable for user ${username}, falling back to mock data.`, err);
+    return mockUsers[0] ?? null;
   }
 }
 

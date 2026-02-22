@@ -1,12 +1,31 @@
 import { useParams, Link } from 'react-router-dom';
-import { mockUsers, mockTopics } from '@/data/mockNews';
+import { useState, useEffect } from 'react';
+import { getUser } from '@/api/newsApi';
+import { UserProfile as UserProfileType } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { HeaderBar } from '@/components/HeaderBar';
 import { BookOpen, MessageSquare, Shield, Eye } from 'lucide-react';
 
 const UserProfile = () => {
   const { userId } = useParams();
-  const user = mockUsers.find(u => u.id === userId);
+  const [user, setUser] = useState<UserProfileType | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) { setLoading(false); return; }
+    getUser(userId)
+      .then(data => setUser(data))
+      .catch(err => console.error('[UserProfile] Failed to load user:', err))
+      .finally(() => setLoading(false));
+  }, [userId]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <span className="font-mono text-muted-foreground">Loading...</span>
+      </div>
+    );
+  }
 
   if (!user) {
     return (

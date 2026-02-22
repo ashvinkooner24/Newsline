@@ -6,5 +6,5 @@ from .api.stories import router as stories_router
 
 app = FastAPI()
 
-app.include_router(stories_router, prefix="/api")
+app.include_router(stories_router)
 

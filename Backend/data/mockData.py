@@ -7,8 +7,8 @@ mock_providers = [
 ]
 
 mock_users = [
-    User(username="alice", email="alice@example.com"),
-    User(username="bob",   email="bob@example.com"),
+    User(username="alice", email="alice@example.com", reputation=100),
+    User(username="bob",   email="bob@example.com", reputation=50),
 ]
 
 mock_comments = [

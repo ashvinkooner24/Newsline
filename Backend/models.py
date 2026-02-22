@@ -9,6 +9,7 @@ class NewsProvider(BaseModel):
 class User(BaseModel):
     username: str
     email: str
+    reputation: int = 50
 
 class Comment(BaseModel):
     text: str
