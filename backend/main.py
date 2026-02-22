@@ -1,11 +1,31 @@
+from __future__ import annotations
+
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .api.stories import router as stories_router
 
-app = FastAPI(title="The Newsline API")
 
-# Allow the Vite dev-server (port 8080) and any other origin during development.
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Kick off the background scoring pipeline (non-blocking)
+    try:
+        from .scoring.pipeline import start_background_pipeline
+        start_background_pipeline()
+        print("[main] Background scoring pipeline started.", flush=True)
+    except Exception as exc:
+        print(f"[main] Could not start pipeline: {exc}", flush=True)
+    yield
+
+
+app = FastAPI(
+    title="The Newsline API",
+    description="News aggregation platform with bias, credibility, and agreement scoring.",
+    version="0.1.0",
+    lifespan=lifespan,
+)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,3 +35,8 @@ app.add_middleware(
 )
 
 app.include_router(stories_router)
+
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}

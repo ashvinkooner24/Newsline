@@ -398,5 +398,19 @@ export async function getUser(userId: string): Promise<UserProfile | null> {
   }
 }
 
+/**
+ * Fetch the backend scoring pipeline status.
+ * Returns { running, done, error } or null when the backend is unreachable.
+ */
+export async function getPipelineStatus(): Promise<{ running: boolean; done: boolean; error: string | null } | null> {
+  try {
+    const res = await fetch(`${API_BASE}/pipeline/status`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
 // Re-export mock helpers for callers that need them directly
 export { mockUsers, mockSourceProfiles };

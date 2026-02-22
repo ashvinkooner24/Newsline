@@ -1,256 +1,326 @@
-import os
-import nltk
-import torch
+"""
+agreement_scoring.py
+
+Cross-article claim agreement / contradiction pipeline.
+
+Uses:
+  • sentence-transformers/all-MiniLM-L6-v2  — claim embedding & similarity
+  • facebook/bart-large-mnli                 — NLI (entailment / contradiction)
+  • GroNLP/mdebertav3-subjectivity-english   — (shared via sentiment_scoring)
+
+Public API:
+    load_articles(articles_dir: str) -> list[dict]
+        Load .txt files from a directory, return list of article dicts with
+        id, text, objectivity, subjectivity (scored via sentiment_scoring).
+
+    compute_agreement(articles: list[dict])
+        -> tuple[agreement_scores, contradiction_reports, missing_context]
+
+        agreement_scores   : dict[article_id -> float]  (clipped to 0–1)
+        contradiction_reports : list[dict]
+        missing_context    : dict[article_id -> list[str]]
+
+All heavy models are loaded lazily on first call.
+"""
+
+from __future__ import annotations
+
 import itertools
-from collections import defaultdict
-from sentence_transformers import SentenceTransformer, util
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
-import numpy as np
 import re
+from collections import defaultdict
 
-nltk.download('punkt')
+import nltk
+import numpy as np
 
-# ==============================
-# CONFIG
-# ==============================
-ARTICLES_DIR = "test"
+nltk.download("punkt", quiet=True)
+nltk.download("punkt_tab", quiet=True)
+
+# Shared subjectivity scorer from sentiment_scoring
+try:
+    from .sentiment_scoring import score_sentence, score_article as _score_article
+except ImportError:
+    from sentiment_scoring import score_sentence, score_article as _score_article
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
 SIMILARITY_THRESHOLD = 0.75
 CLAIM_OBJECTIVITY_THRESHOLD = 0.6
 MISSING_CONTEXT_SIM_THRESHOLD = 0.8
 DEFAULT_REPUTATION = 0.5
 
-# ==============================
-# LOAD MODELS
-# ==============================
-print("Loading embedding model...")
-embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+# ── Lazy model loader ─────────────────────────────────────────────────────────
 
-print("Loading NLI model...")
-nli_model_name = "facebook/bart-large-mnli"
-nli_tokenizer = AutoTokenizer.from_pretrained(nli_model_name)
-nli_model = AutoModelForSequenceClassification.from_pretrained(nli_model_name)
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-nli_model.to(device)
+_models: dict = {}
 
-print("Loading subjectivity classifier...")
-classifier = pipeline(
-    "text-classification",
-    model="GroNLP/mdebertav3-subjectivity-english",
-    top_k=None
-)
 
-# ==============================
-# UTIL FUNCTIONS
-# ==============================
+def _get_models() -> dict:
+    if not _models:
+        import torch
+        from sentence_transformers import SentenceTransformer
+        from transformers import (
+            AutoModelForSequenceClassification,
+            AutoTokenizer,
+        )
 
-def score_sentence(sentence):
-    result = classifier(sentence)[0]
-    subj_score = next((item["score"] for item in result if item["label"] == "LABEL_1"), 0.5)
-    obj_score = 1 - subj_score
-    return obj_score, subj_score
+        print("[agreement_scoring] Loading embedding model…", flush=True)
+        _models["embedder"] = SentenceTransformer(
+            "sentence-transformers/all-MiniLM-L6-v2"
+        )
 
-def score_article(text):
-    sentences = nltk.sent_tokenize(text)
-    weighted_sum = 0
-    total_words = 0
+        print("[agreement_scoring] Loading NLI model…", flush=True)
+        nli_name = "facebook/bart-large-mnli"
+        _models["nli_tokenizer"] = AutoTokenizer.from_pretrained(nli_name)
+        _models["nli_model"] = AutoModelForSequenceClassification.from_pretrained(
+            nli_name
+        )
+        _models["device"] = torch.device(
+            "cuda" if torch.cuda.is_available() else "cpu"
+        )
+        _models["nli_model"].to(_models["device"])
+        print("[agreement_scoring] Models ready.", flush=True)
+    return _models
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+
+def extract_claims(article: dict) -> list[dict]:
+    """Extract high-objectivity factual claims from an article."""
+    sentences = nltk.sent_tokenize(article["text"])
+    claims = []
     for s in sentences:
-        obj, subj = score_sentence(s)
-        weight = len(s.split())
-        weighted_sum += obj * weight
-        total_words += weight
-    article_obj = weighted_sum / total_words if total_words > 0 else 0
-    return article_obj, 1 - article_obj
+        obj, _ = score_sentence(s)
+        if (
+            obj >= CLAIM_OBJECTIVITY_THRESHOLD
+            and len(s.split()) > 6
+            and not s.strip().endswith("?")
+        ):
+            claims.append({"text": s.strip(), "objectivity": obj})
+    return claims
 
-def load_articles():
+
+def _classify_nli(claim1: str, claim2: str) -> str:
+    import torch
+
+    m = _get_models()
+    inputs = m["nli_tokenizer"](
+        claim1, claim2, return_tensors="pt", truncation=True
+    ).to(m["device"])
+    outputs = m["nli_model"](**inputs)
+    probs = torch.softmax(outputs.logits, dim=1)
+    labels = ["contradiction", "neutral", "entailment"]
+    return labels[torch.argmax(probs)]
+
+
+def _has_different_numbers(claim1: str, claim2: str) -> bool:
+    nums1 = re.findall(r"\d+", claim1)
+    nums2 = re.findall(r"\d+", claim2)
+    if not nums1 or not nums2:
+        return False
+    return not any(n in nums2 for n in nums1)
+
+
+# ── Public API ────────────────────────────────────────────────────────────────
+
+
+def load_articles(articles_dir: str) -> list[dict]:
+    """
+    Load all .txt files from *articles_dir*.
+    Each article is scored for objectivity/subjectivity.
+    """
+    import os
+
     articles = []
-    for filename in os.listdir(ARTICLES_DIR):
-        if filename.endswith(".txt"):
-            path = os.path.join(ARTICLES_DIR, filename)
-            with open(path, "r", encoding="utf-8") as f:
-                text = f.read()
-            obj, subj = score_article(text)
-            articles.append({
+    for filename in sorted(os.listdir(articles_dir)):
+        if not filename.endswith(".txt"):
+            continue
+        path = os.path.join(articles_dir, filename)
+        with open(path, encoding="utf-8", errors="replace") as fh:
+            text = fh.read()
+        obj, subj = _score_article(text)
+        articles.append(
+            {
                 "id": filename,
                 "text": text,
                 "source": "unknown",
                 "reputation": DEFAULT_REPUTATION,
                 "objectivity": obj,
-                "subjectivity": subj
-            })
+                "subjectivity": subj,
+            }
+        )
     return articles
 
-def extract_claims(article):
-    sentences = nltk.sent_tokenize(article["text"])
-    claims = []
-    for s in sentences:
-        obj, subj = score_sentence(s)
-        if obj >= CLAIM_OBJECTIVITY_THRESHOLD and len(s.split()) > 6 and not s.strip().endswith("?"):
-            claims.append({"text": s.strip(), "objectivity": obj})
-    return claims
 
-def classify_nli(claim1, claim2):
-    inputs = nli_tokenizer(claim1, claim2, return_tensors="pt", truncation=True).to(device)
-    outputs = nli_model(**inputs)
-    probs = torch.softmax(outputs.logits, dim=1)
-    labels = ["contradiction", "neutral", "entailment"]
-    return labels[torch.argmax(probs)]
+def compute_agreement(
+    articles: list[dict],
+) -> tuple[dict, list, dict]:
+    """
+    Run the full agreement pipeline.
 
-def has_different_numbers_or_years(claim1, claim2):
-    numbers1 = re.findall(r'\d+', claim1)
-    numbers2 = re.findall(r'\d+', claim2)
-    if not numbers1 or not numbers2:
-        return False
-    # If all numbers are different, ignore as contradiction
-    return not any(n in numbers2 for n in numbers1)
+    Args:
+        articles: list of dicts with keys:
+            id          – unique article identifier (filename)
+            text        – article body text
+            objectivity – pre-computed objectivity score (0–1)
+            subjectivity – pre-computed subjectivity score (0–1)
 
-# ==============================
-# PIPELINE
-# ==============================
+    Returns:
+        (agreement_scores, contradiction_reports, missing_context)
 
-def main():
-    articles = load_articles()
-    
-    # Extract high-objectivity claims
+        agreement_scores:  dict[id -> float in 0–1]
+        contradiction_reports: list[dict] with wrong/correct article + claim
+        missing_context:   dict[id -> list[str]] (missing core claims)
+    """
+    from sentence_transformers import util
+
+    models = _get_models()
+    embedder = models["embedder"]
+
+    # ── Extract claims ────────────────────────────────────────────────────────
     for article in articles:
-        article["claims"] = extract_claims(article)
+        if "claims" not in article:
+            article["claims"] = extract_claims(article)
 
-    all_claims = []
-    claim_meta = []
-
+    all_claims: list[str] = []
+    claim_meta: list[dict] = []
     for article in articles:
         for claim in article["claims"]:
             all_claims.append(claim["text"])
-            claim_meta.append({
-                "article_id": article["id"],
-                "article_obj": article["objectivity"],
-                "claim_obj": claim["objectivity"]
-            })
+            claim_meta.append(
+                {
+                    "article_id": article["id"],
+                    "article_obj": article["objectivity"],
+                    "claim_obj": claim["objectivity"],
+                }
+            )
 
-    # Embed claims
+    if not all_claims:
+        empty: dict = {a["id"]: 0.5 for a in articles}
+        return empty, [], {a["id"]: [] for a in articles}
+
+    # ── Embed claims ──────────────────────────────────────────────────────────
     claim_embeddings = embedder.encode(all_claims, convert_to_tensor=True)
 
-    # Relations and truth voting
-    relations = []
-    contradictions_list = []
-    truth_votes = defaultdict(float)
-    article_support = defaultdict(float)
-    article_contradiction = defaultdict(float)
+    # ── Compare claim pairs ───────────────────────────────────────────────────
+    truth_votes: dict = defaultdict(float)
+    article_support: dict = defaultdict(float)
+    article_contradiction: dict = defaultdict(float)
+    contradictions_list: list = []
 
     for i, j in itertools.combinations(range(len(all_claims)), 2):
         sim = util.cos_sim(claim_embeddings[i], claim_embeddings[j]).item()
-        if sim > SIMILARITY_THRESHOLD:
-            # Skip if numbers or years differ
-            if has_different_numbers_or_years(all_claims[i], all_claims[j]):
-                continue
-            result = classify_nli(all_claims[i], all_claims[j])
-            if result in ["entailment", "contradiction"]:
-                relations.append((i, j, result))
+        if sim <= SIMILARITY_THRESHOLD:
+            continue
+        if _has_different_numbers(all_claims[i], all_claims[j]):
+            continue
 
-                # Compute weight using article + claim objectivity
-                weight_i = claim_meta[i]["article_obj"] * claim_meta[i]["claim_obj"]
-                weight_j = claim_meta[j]["article_obj"] * claim_meta[j]["claim_obj"]
+        result = _classify_nli(all_claims[i], all_claims[j])
+        if result not in ("entailment", "contradiction"):
+            continue
 
-                if result == "entailment":
-                    truth_votes[i] += weight_j
-                    truth_votes[j] += weight_i
-                    article_support[claim_meta[i]["article_id"]] += weight_j
-                    article_support[claim_meta[j]["article_id"]] += weight_i
+        wi = claim_meta[i]["article_obj"] * claim_meta[i]["claim_obj"]
+        wj = claim_meta[j]["article_obj"] * claim_meta[j]["claim_obj"]
 
-                if result == "contradiction":
-                    truth_votes[i] -= weight_j
-                    truth_votes[j] -= weight_i
-                    article_contradiction[claim_meta[i]["article_id"]] += weight_j
-                    article_contradiction[claim_meta[j]["article_id"]] += weight_i
-                    contradictions_list.append((i, j))
+        if result == "entailment":
+            truth_votes[i] += wj
+            truth_votes[j] += wi
+            article_support[claim_meta[i]["article_id"]] += wj
+            article_support[claim_meta[j]["article_id"]] += wi
+        else:  # contradiction
+            truth_votes[i] -= wj
+            truth_votes[j] -= wi
+            article_contradiction[claim_meta[i]["article_id"]] += wj
+            article_contradiction[claim_meta[j]["article_id"]] += wi
+            contradictions_list.append((i, j))
 
-    # ==============================
-    # Article Scores
-    # ==============================
-    article_scores = {}
+    # ── Per-article scores ────────────────────────────────────────────────────
+    raw_scores: dict = {}
     for article in articles:
         aid = article["id"]
-        total_weight = sum([c["objectivity"] for c in article["claims"]]) or 1
-        supported = article_support.get(aid, 0)
-        contradicted = article_contradiction.get(aid, 0)
-        consistency = (supported - contradicted) / total_weight + 0.5 * article["objectivity"]
-        article_scores[aid] = {
-            "consistency": round(consistency, 3),
-            "objectivity": round(article["objectivity"], 3),
-            "supported": round(supported, 2),
-            "contradicted": round(contradicted,2)
-        }
+        total_weight = sum(c["objectivity"] for c in article["claims"]) or 1.0
+        supported = article_support.get(aid, 0.0)
+        contradicted = article_contradiction.get(aid, 0.0)
+        consistency = (
+            (supported - contradicted) / total_weight
+            + 0.5 * article["objectivity"]
+        )
+        raw_scores[aid] = consistency
 
-    # ==============================
-    # Missing Context
-    # ==============================
-    threshold = np.percentile(list(truth_votes.values()), 75) if truth_votes else 0
-    core_claims_idx = [idx for idx, vote in truth_votes.items() if vote > threshold]
+    # Normalise to 0–1
+    agreement_scores = {
+        aid: float(np.clip(score, 0.0, 1.0))
+        for aid, score in raw_scores.items()
+    }
 
-    missing_context = defaultdict(list)
+    # ── Missing context detection ─────────────────────────────────────────────
+    threshold = (
+        float(np.percentile(list(truth_votes.values()), 75))
+        if truth_votes
+        else 0.0
+    )
+    core_claims_idx = [idx for idx, v in truth_votes.items() if v > threshold]
+
+    missing_context: dict = defaultdict(list)
     for idx in core_claims_idx:
-        claim_text = all_claims[idx]
         claim_embed = claim_embeddings[idx]
         for article in articles:
-            found_similar = False
+            found = False
             for sent in nltk.sent_tokenize(article["text"]):
                 sent_embed = embedder.encode(sent, convert_to_tensor=True)
-                sim = util.cos_sim(claim_embed, sent_embed).item()
-                if sim > MISSING_CONTEXT_SIM_THRESHOLD:
-                    found_similar = True
+                if (
+                    util.cos_sim(claim_embed, sent_embed).item()
+                    > MISSING_CONTEXT_SIM_THRESHOLD
+                ):
+                    found = True
                     break
-            if not found_similar:
-                missing_context[article["id"]].append(claim_text)
+            if not found:
+                missing_context[article["id"]].append(all_claims[idx])
 
-    # ==============================
-    # Contradiction Reports
-    # ==============================
-    contradiction_reports = []
+    # ── Contradiction reports ─────────────────────────────────────────────────
+    contradiction_reports: list = []
     for i, j in contradictions_list:
-        claim1 = all_claims[i]
-        claim2 = all_claims[j]
-        meta1 = claim_meta[i]
-        meta2 = claim_meta[j]
-
-        weight1 = meta1["article_obj"] * meta1["claim_obj"]
-        weight2 = meta2["article_obj"] * meta2["claim_obj"]
-
-        if weight1 <= weight2:
-            wrong_article = meta1["article_id"]
-            wrong_claim = claim1
-            correct_article = meta2["article_id"]
-            correct_claim = claim2
+        wi = claim_meta[i]["article_obj"] * claim_meta[i]["claim_obj"]
+        wj = claim_meta[j]["article_obj"] * claim_meta[j]["claim_obj"]
+        if wi <= wj:
+            wrong, correct = i, j
         else:
-            wrong_article = meta2["article_id"]
-            wrong_claim = claim2
-            correct_article = meta1["article_id"]
-            correct_claim = claim1
+            wrong, correct = j, i
+        contradiction_reports.append(
+            {
+                "wrong_article": claim_meta[wrong]["article_id"],
+                "wrong_claim": all_claims[wrong],
+                "correct_article": claim_meta[correct]["article_id"],
+                "correct_claim": all_claims[correct],
+            }
+        )
 
-        contradiction_reports.append({
-            "wrong_article": wrong_article,
-            "wrong_claim": wrong_claim,
-            "correct_article": correct_article,
-            "correct_claim": correct_claim
-        })
+    return agreement_scores, contradiction_reports, dict(missing_context)
 
-    # ==============================
-    # OUTPUT
-    # ==============================
-    print("\n==== Article Scores ====")
-    for aid, score in article_scores.items():
-        print(aid, score)
+
+# ── Standalone entry point ────────────────────────────────────────────────────
+
+
+def main() -> None:
+    import os
+
+    articles_dir = os.path.join(os.path.dirname(__file__), "test")
+    articles = load_articles(articles_dir)
+    agreement_scores, contradiction_reports, missing_context = compute_agreement(
+        articles
+    )
+
+    print("\n==== Agreement Scores ====")
+    for aid, score in agreement_scores.items():
+        print(f"  {aid}: {score:.3f}")
 
     print("\n==== Missing Context ====")
     for aid, claims in missing_context.items():
-        print(f"\n{aid} missing {len(claims)} core claims")
-        for c in claims[:3]:
-            print("-", c)
+        print(f"  {aid}: {len(claims)} missing core claims")
 
     print("\n==== Contradictions ====")
-    for report in contradiction_reports:
-        print(f"\nArticle flagged as WRONG: {report['wrong_article']}")
-        print("Wrong claim:", report['wrong_claim'])
-        print("Contradicted by article:", report['correct_article'])
-        print("Correct claim:", report['correct_claim'])
+    for r in contradiction_reports:
+        print(f"  WRONG: {r['wrong_article']}  |  {r['wrong_claim'][:80]}")
+
 
 if __name__ == "__main__":
     main()
