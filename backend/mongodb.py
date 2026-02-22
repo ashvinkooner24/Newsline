@@ -1,72 +1,49 @@
+import polars as pl
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
 from datetime import datetime
-import numpy as np
+from tqdm import tqdm
 
-# --- Setup ---
+SOURCE = "nytimes"
 MONGO_URI = "mongodb+srv://ashvinkooner24_db_user:akB6uPnlxpogzfnu@news.nsqauzb.mongodb.net/?appName=News"
+INPUT_DF = f"scraping/{SOURCE}.csv"
 
-client = MongoClient(MONGO_URI)
-db = client["news_db"]
-articles_col = db["articles"]
-chunks_col = db["chunks"]
+model = SentenceTransformer("all-mpnet-base-v2")
 
-# Load embedding model once
-model = SentenceTransformer("all-MiniLM-L6-v2")
+mongo_client = MongoClient(MONGO_URI)
+db = mongo_client["news_db"]
+articles_collection = db["articles"]
 
-# --- Chunking Function ---
-def chunk_text(text, chunk_size=400):
-    words = text.split()
-    chunks = []
-    for i in range(0, len(words), chunk_size):
-        chunk = " ".join(words[i:i+chunk_size])
-        chunks.append(chunk)
-    return chunks
 
-# --- Main Insertion Function ---
-def insert_article(article_data):
-    """
-    article_data = {
-        "title": "...",
-        "body": "...",
-        "source": "...",
-        "publish_date": datetime(...)
-    }
-    """
+# ---------------------------
+# Upload articles
+# ---------------------------
+def upload_articles(csv_path):
+    df = pl.read_csv(csv_path)
+    df = df.fill_null("")
 
-    # Chunk the article
-    chunks = chunk_text(article_data["body"])
+    for row in tqdm(df.iter_rows(named=True), total=len(df)):
+        try:
+            full_text = f"{row['title']}\n\n{row['text']}"
 
-    # Generate embeddings for chunks
-    chunk_embeddings = model.encode(
-        chunks,
-        normalize_embeddings=True
-    )
+            embedding = model.encode(full_text).tolist()
 
-    # Compute article-level embedding (mean of chunks)
-    article_embedding = np.mean(chunk_embeddings, axis=0)
+            article_doc = {
+                "title": row["title"],
+                "text": row["text"],
+                "source": SOURCE,
+                "url": row.get("url", ""),
+                "embedding": embedding,
+                "created_at": datetime.utcnow()
+            }
 
-    # Insert article document
-    article_doc = {
-        "title": article_data["title"],
-        "body": article_data["body"],
-        "source": article_data["source"],
-        "publish_date": article_data["publish_date"],
-        "article_embedding": article_embedding.tolist(),
-        "created_at": datetime.utcnow()
-    }
+            articles_collection.insert_one(article_doc)
 
-    article_result = articles_col.insert_one(article_doc)
-    article_id = article_result.inserted_id
+        except Exception as e:
+            print(f"Error processing article: {e}")
 
-    # Insert chunk documents
-    chunk_docs = []
-    for chunk_text, embedding in zip(chunks, chunk_embeddings):
-        chunk_docs.append({
-            "article_id": article_id,
-            "text": chunk_text,
-            "embedding": embedding.tolist()
-        })
+    print("Upload complete.")
 
-    if chunk_docs:
-        chunks_col.insert_many(chunk_docs)
+
+if __name__ == "__main__":
+    upload_articles(INPUT_DF)

@@ -1,37 +1,105 @@
 from pymongo import MongoClient
+from datetime import datetime
+import os
 
+
+MONGO_URI = "mongodb+srv://ashvinkooner24_db_user:akB6uPnlxpogzfnu@news.nsqauzb.mongodb.net/?appName=News"
+DB_NAME = "news_db"
+COLLECTION_NAME = "articles"
+VECTOR_INDEX_NAME = "vector_index"
+
+SIMILARITY_THRESHOLD = 0.88  # tune this (0.85–0.92 typical)
+NUM_CANDIDATES = 50
+SEARCH_LIMIT = 5
+
+# -----------------------------
+# MongoDB Connection
+# -----------------------------
 client = MongoClient(MONGO_URI)
-db = client["news_db"]
-topics = db["topics"]
+db = client[DB_NAME]
+articles = db[COLLECTION_NAME]
 
-SIMILARITY_THRESHOLD = 0.82
+# -----------------------------
+# Generate new topic id
+# -----------------------------
+def create_new_topic_id():
+    return f"topic_{datetime.utcnow().timestamp()}"
 
-def find_best_topic(article_embedding):
+# -----------------------------
+# Assign topic for ONE article
+# -----------------------------
+def assign_topic(article):
+
+    embedding = article["embedding"]
+
     pipeline = [
         {
             "$vectorSearch": {
-                "index": "topic_vector_index",  # name of your Atlas vector index
-                "path": "centroid_embedding",
-                "queryVector": article_embedding,
-                "numCandidates": 50,
-                "limit": 1
+                "index": VECTOR_INDEX_NAME,
+                "path": "embedding",
+                "queryVector": embedding,
+                "numCandidates": NUM_CANDIDATES,
+                "limit": SEARCH_LIMIT
             }
         },
         {
             "$project": {
                 "_id": 1,
-                "title": 1,
+                "topic_id": 1,
                 "score": {"$meta": "vectorSearchScore"}
             }
         }
     ]
 
-    results = list(topics.aggregate(pipeline))
-    return results[0] if results else None
+    results = list(articles.aggregate(pipeline))
 
-best_topic = find_best_topic(article_embedding)
+    # Remove self-match
+    results = [r for r in results if r["_id"] != article["_id"]]
 
-if best_topic and best_topic["score"] > SIMILARITY_THRESHOLD:
-    topic_id = best_topic["_id"]
-else:
-    topic_id = create_new_topic(article_embedding)
+    if results:
+        best_match = results[0]
+        best_score = best_match["score"]
+
+        if (
+            best_score >= SIMILARITY_THRESHOLD
+            and best_match.get("topic_id") is not None
+        ):
+            topic_id = best_match["topic_id"]
+        else:
+            topic_id = create_new_topic_id()
+    else:
+        topic_id = create_new_topic_id()
+
+    # Update article
+    articles.update_one(
+        {"_id": article["_id"]},
+        {
+            "$set": {
+                "topic_id": topic_id,
+                "topic_assigned_at": datetime.utcnow()
+            }
+        }
+    )
+
+    return topic_id
+
+# -----------------------------
+# Assign topics to all unassigned articles
+# -----------------------------
+def run_topic_assignment():
+
+    unassigned_articles = list(
+        articles.find({"topic_id": {"$exists": False}})
+    )
+
+    print(f"Found {len(unassigned_articles)} unassigned articles.")
+
+    for article in unassigned_articles:
+        topic_id = assign_topic(article)
+        print(f"Article {article['_id']} → {topic_id}")
+
+    print("Topic assignment complete.")
+
+
+if __name__ == "__main__":
+    run_topic_assignment()
