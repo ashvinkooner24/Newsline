@@ -172,7 +172,7 @@ def main():
         total_weight = sum([c["objectivity"] for c in article["claims"]]) or 1
         supported = article_support.get(aid, 0)
         contradicted = article_contradiction.get(aid, 0)
-        consistency = (supported - contradicted) / total_weight
+        consistency = (supported - contradicted) / total_weight + 0.5 * article["objectivity"]
         article_scores[aid] = {
             "consistency": round(consistency, 3),
             "objectivity": round(article["objectivity"], 3),
