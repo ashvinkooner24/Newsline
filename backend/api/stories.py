@@ -1,30 +1,39 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
-from ..models import StoryWrapper, User
-from ..data.mockData import mock_stories, mock_users
-from ..utils.slugify import slugify
+
+from ..models import TopicSummary, UserProfile
+from ..data.mockData import mock_topics, mock_users
 
 router = APIRouter()
 
-@router.get("/stories", response_model=List[StoryWrapper])
-def get_stories():
-    return mock_stories
 
-@router.get("/stories/{slug}", response_model=StoryWrapper)
+# ── Stories (TopicSummary) ───────────────────────────────────────────────────
+
+@router.get("/stories", response_model=List[TopicSummary])
+def get_stories():
+    """Return all consolidated stories with scoring metadata."""
+    return mock_topics
+
+
+@router.get("/stories/{slug}", response_model=TopicSummary)
 def get_story(slug: str):
-    for story in mock_stories:
-        if slugify(story.story.heading) == slug:
-            return story
+    """Return a single story by its URL slug."""
+    for topic in mock_topics:
+        if topic.slug == slug:
+            return topic
     raise HTTPException(status_code=404, detail="Story not found")
 
 
-@router.get("/users", response_model=List[User])
+# ── Users ────────────────────────────────────────────────────────────────────
+
+@router.get("/users", response_model=List[UserProfile])
 def get_users():
     return mock_users
 
-@router.get("/user/{username}", response_model=User)
-def get_user(username: str):
+
+@router.get("/user/{user_id}", response_model=UserProfile)
+def get_user(user_id: str):
     for user in mock_users:
-        if user.username == username:
+        if user.id == user_id or user.name == user_id:
             return user
     raise HTTPException(status_code=404, detail="User not found")

@@ -1,16 +1,18 @@
 /**
  * newsApi.ts
  *
- * Data-fetching layer for the HackLDN backend.
+ * Data-fetching layer for The Newsline backend.
  *
  * All requests go through the Vite dev proxy (/api → http://127.0.0.1:8000),
  * so no CORS issues during development.
  *
- * Usage:
- *   import { getTopics, getTopic } from '@/api/newsApi';
+ * The backend serves models defined in ``backend/models.py`` using
+ * **snake_case** field names.  This file declares matching ``Backend*``
+ * interfaces and provides ``transform*`` functions that map them into the
+ * **camelCase** frontend types from ``@/types/news``.
  *
- *   const topics = await getTopics();          // TopicSummary[]
- *   const topic  = await getTopic(0);          // TopicSummary | null
+ * When the backend is unreachable the fetch helpers fall back to
+ * ``@/data/mockNews`` so the frontend can be developed independently.
  */
 
 import type {
@@ -19,330 +21,382 @@ import type {
   Article,
   UserProfile,
   Comment,
+  CommunityNote,
   SummarySection,
   BiasAnalysis,
   CredibilityAssessment,
   BiasLean,
   Citation,
   SectionStats,
+  ToneType,
+  FactCheck,
+  Rating,
 } from '@/types/news';
 import { mockTopics, mockUsers, mockSourceProfiles } from '@/data/mockNews';
 
-// ---------------------------------------------------------------------------
-// Backend response shapes (mirrors Backend/models.py Pydantic models)
-// ---------------------------------------------------------------------------
+// ─────────────────────────────────────────────────────────────────────────────
+// Backend response shapes  (mirror backend/models.py — all snake_case)
+// ─────────────────────────────────────────────────────────────────────────────
 
-export interface BackendNewsProvider {
+export interface BackendNewsSource {
+  id: string;
   name: string;
-  bias_score: number;   // -1 (far-left) → 1 (far-right)
-  trust_score: number;  // 0 (low) → 1 (high)
+  url: string;
+  credibility_score: number;
+  bias_lean: string;
+  country: string;
 }
 
-export interface BackendUser {
-  username: string;
-  email: string;
-  reputation: number;  // 0–100
+export interface BackendToneScore {
+  emotional: number;
+  logical: number;
+}
+
+export interface BackendFactCheck {
+  verdict: string;
+  details: string;
+  missing_context: string[];
+}
+
+export interface BackendArticle {
+  id: string;
+  title: string;
+  url: string;
+  source: BackendNewsSource;
+  published_at: string;
+  excerpt: string;
+  tone: string | null;
+  tone_score: BackendToneScore | null;
+  fact_check: BackendFactCheck | null;
+}
+
+export interface BackendCitation {
+  article_id: string;
+  text: string;
+  bias_level: string | null;
+}
+
+export interface BackendSectionStats {
+  bias_lean: string;
+  lean_score: number;
+  credibility_score: number;
+  source_count: number;
+  agreement: number;
+}
+
+export interface BackendSummarySection {
+  heading: string;
+  content: string;
+  citations: BackendCitation[];
+  stats: BackendSectionStats | null;
+}
+
+export interface BackendBiasAnalysis {
+  overall_lean: string;
+  lean_score: number;
+  left_source_count: number;
+  center_source_count: number;
+  right_source_count: number;
+}
+
+export interface BackendCredibilityAssessment {
+  score: number;
+  article_count: number;
+  avg_source_credibility: number;
+  source_agreement: number;
+  label: string;
 }
 
 export interface BackendComment {
+  id: string;
+  user_id: string;
+  user_name: string;
+  user_reputation: number;
   text: string;
-  like_count: number;
-  dislike_count: number;
-  parent: number | null;
-  user: BackendUser | null;
+  created_at: string;
+  likes: number;
+  dislikes: number;
+  replies: BackendComment[];
 }
 
-export interface BackendSegment {
+export interface BackendCommunityNote {
+  id: string;
+  user_id: string;
+  user_name: string;
   text: string;
-  sources: BackendNewsProvider[];
-  avg_bias: number;
-  avg_truth: number;
-  article_count: number;
-  notes: string | null;
+  helpful_count: number;
+  unhelpful_count: number;
+  created_at: string;
+}
+
+export interface BackendRating {
+  accuracy: number;
+  fairness: number;
+  completeness: number;
+  total_ratings: number;
+}
+
+export interface BackendTopicSummary {
+  id: string;
+  topic: string;
+  slug: string;
+  headline: string;
+  summary: string;
+  sections: BackendSummarySection[];
+  articles: BackendArticle[];
+  bias_analysis: BackendBiasAnalysis;
+  credibility: BackendCredibilityAssessment;
+  updated_at: string;
+  category: string;
+  country: string;
+  subtopic: string | null;
+  is_featured: boolean;
+  is_breaking: boolean;
+  rating: BackendRating | null;
   comments: BackendComment[];
+  community_notes: BackendCommunityNote[];
 }
 
-export interface BackendStory {
-  heading: string;
-  political_bias: number;
-  factual_accuracy: number;
-  sources: BackendNewsProvider[];
-  segments: BackendSegment[];
+export interface BackendUserProfile {
+  id: string;
+  name: string;
+  joined_at: string;
+  articles_read: number;
+  comments_count: number;
+  bias_lean: string;
+  lean_score: number;
+  reputation: number;
+  is_public: boolean;
 }
 
-export interface BackendStoryWrapper {
-  story: BackendStory;
-  comments: BackendComment[];
-}
+// ─────────────────────────────────────────────────────────────────────────────
+// Transformation helpers  (snake_case backend → camelCase frontend)
+// ─────────────────────────────────────────────────────────────────────────────
 
-// ---------------------------------------------------------------------------
-// Transformation helpers
-// ---------------------------------------------------------------------------
-
-/** Convert a -1…1 bias float to a named BiasLean. */
-function biasFloatToLean(score: number): BiasLean {
-  if (score < -0.6) return 'far-left';
-  if (score < -0.3) return 'left';
-  if (score < -0.1) return 'center-left';
-  if (score <= 0.1) return 'center';
-  if (score <= 0.3) return 'center-right';
-  if (score <= 0.6) return 'right';
-  return 'far-right';
-}
-
-/** Convert a 0…1 credibility float to a label. */
-function credibilityLabel(score: number): CredibilityAssessment['label'] {
-  if (score >= 0.8)  return 'High';
-  if (score >= 0.6)  return 'Medium';
-  if (score >= 0.4)  return 'Low';
-  return 'Uncertain';
-}
-
-/** Turn any string into a URL-safe slug. */
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
-
-/**
- * Build a frontend Source from a BackendNewsProvider.
- * Many fields (id, url, country) are not available from the backend yet;
- * they get sensible defaults until the backend model is extended.
- */
-function transformProvider(provider: BackendNewsProvider, index: number): Source {
+function transformSource(src: BackendNewsSource): Source {
   return {
-    id:               slugify(provider.name) || `source-${index}`,
-    name:             provider.name,
-    url:              '#',
-    credibilityScore: Math.round(provider.trust_score * 100),
-    biasLean:         biasFloatToLean(provider.bias_score),
-    country:          'Unknown',
+    id: src.id,
+    name: src.name,
+    url: src.url,
+    credibilityScore: src.credibility_score,
+    biasLean: src.bias_lean as BiasLean,
+    country: src.country,
   };
 }
 
-/**
- * Build a frontend SummarySection from a BackendSegment.
- * Segment index is used to create a fallback heading.
- */
-function transformSegment(segment: BackendSegment, index: number): SummarySection {
-  const sources: Source[] = segment.sources.map(transformProvider);
-
-  const citations: Citation[] = sources.map((src, i) => ({
-    articleId: `seg-${index}-src-${i}`,
-    text:      `Reported by ${src.name}.`,
-    biasLevel: segment.sources[i].bias_score < -0.3
-      ? 'left'
-      : segment.sources[i].bias_score > 0.3
-        ? 'right'
-        : 'neutral',
-  }));
-
-  const stats: SectionStats = {
-    biasLean:         biasFloatToLean(segment.avg_bias),
-    leanScore:        Math.round(segment.avg_bias * 100),
-    credibilityScore: Math.round(segment.avg_truth * 100),
-    sourceCount:      segment.sources.length,
-    agreement:        Math.round(segment.avg_truth * 100),
-  };
-
+function transformArticle(a: BackendArticle): Article {
   return {
-    heading:   segment.notes ?? `Section ${index + 1}`,
-    content:   segment.text,
-    citations,
-    stats,
+    id: a.id,
+    title: a.title,
+    url: a.url,
+    source: transformSource(a.source),
+    publishedAt: a.published_at,
+    excerpt: a.excerpt,
+    tone: (a.tone ?? undefined) as ToneType | undefined,
+    toneScore: a.tone_score ?? undefined,
+    factCheck: a.fact_check
+      ? {
+          verdict: a.fact_check.verdict as FactCheck['verdict'],
+          details: a.fact_check.details,
+          missingContext: a.fact_check.missing_context,
+        }
+      : undefined,
   };
 }
 
-/** Build frontend Comment objects from backend comments. */
-function transformComments(
-  backendComments: BackendComment[],
-  storyIndex: number
-): Comment[] {
-  return backendComments.map((c, i) => ({
-    id:             `story-${storyIndex}-comment-${i}`,
-    userId:         slugify(c.user?.username ?? 'anonymous'),
-    userName:       c.user?.username ?? 'Anonymous',
-    userReputation: 50,
-    text:           c.text,
-    createdAt:      new Date().toISOString(),
-    likes:          c.like_count,
-    dislikes:       c.dislike_count,
-  }));
-}
-
-/**
- * Build a BiasAnalysis from the story's source list.
- * Left = bias_score < -0.1, Right = bias_score > 0.1, else center.
- */
-function buildBiasAnalysis(story: BackendStory): BiasAnalysis {
-  let left = 0, center = 0, right = 0;
-  for (const s of story.sources) {
-    if (s.bias_score < -0.3)      left++;
-    else if (s.bias_score > 0.3)  right++;
-    else                           center++;
-  }
+function transformCitation(c: BackendCitation): Citation {
   return {
-    overallLean:       biasFloatToLean(story.political_bias),
-    leanScore:         Math.round(story.political_bias * 100),
-    leftSourceCount:   left,
-    centerSourceCount: center,
-    rightSourceCount:  right,
+    articleId: c.article_id,
+    text: c.text,
+    biasLevel: (c.bias_level ?? undefined) as Citation['biasLevel'],
   };
 }
 
-/**
- * Build a CredibilityAssessment from the story's metrics.
- * `sourceAgreement` is approximated from the spread of segment bias scores.
- */
-function buildCredibility(story: BackendStory): CredibilityAssessment {
-  const score = Math.round(story.factual_accuracy * 100);
-  const avgSrcCredibility = story.sources.length
-    ? Math.round(
-        (story.sources.reduce((sum, s) => sum + s.trust_score, 0) / story.sources.length) * 100
-      )
-    : 0;
-
-  const articleCount = story.segments.reduce((sum, seg) => sum + seg.article_count, 0);
-
-  // Approximate agreement: invert the std-dev of bias scores (higher spread = lower agreement)
-  const biasScores = story.segments.map((s) => s.avg_bias);
-  const mean = biasScores.reduce((a, b) => a + b, 0) / (biasScores.length || 1);
-  const variance = biasScores.reduce((a, b) => a + (b - mean) ** 2, 0) / (biasScores.length || 1);
-  const sourceAgreement = Math.max(0, Math.round((1 - Math.sqrt(variance)) * 100));
-
+function transformSectionStats(s: BackendSectionStats): SectionStats {
   return {
-    score,
-    articleCount,
-    avgSourceCredibility: avgSrcCredibility,
-    sourceAgreement,
-    label: credibilityLabel(story.factual_accuracy),
+    biasLean: s.bias_lean as BiasLean,
+    leanScore: s.lean_score,
+    credibilityScore: s.credibility_score,
+    sourceCount: s.source_count,
+    agreement: s.agreement,
+  };
+}
+
+function transformSection(sec: BackendSummarySection): SummarySection {
+  return {
+    heading: sec.heading,
+    content: sec.content,
+    citations: sec.citations.map(transformCitation),
+    stats: sec.stats ? transformSectionStats(sec.stats) : undefined,
+  };
+}
+
+function transformBiasAnalysis(ba: BackendBiasAnalysis): BiasAnalysis {
+  return {
+    overallLean: ba.overall_lean as BiasLean,
+    leanScore: ba.lean_score,
+    leftSourceCount: ba.left_source_count,
+    centerSourceCount: ba.center_source_count,
+    rightSourceCount: ba.right_source_count,
+  };
+}
+
+function transformCredibility(c: BackendCredibilityAssessment): CredibilityAssessment {
+  return {
+    score: c.score,
+    articleCount: c.article_count,
+    avgSourceCredibility: c.avg_source_credibility,
+    sourceAgreement: c.source_agreement,
+    label: c.label as CredibilityAssessment['label'],
+  };
+}
+
+function transformComment(c: BackendComment): Comment {
+  return {
+    id: c.id,
+    userId: c.user_id,
+    userName: c.user_name,
+    userReputation: c.user_reputation,
+    text: c.text,
+    createdAt: c.created_at,
+    likes: c.likes,
+    dislikes: c.dislikes,
+    replies: c.replies?.map(transformComment),
+  };
+}
+
+function transformCommunityNote(n: BackendCommunityNote): CommunityNote {
+  return {
+    id: n.id,
+    userId: n.user_id,
+    userName: n.user_name,
+    text: n.text,
+    helpfulCount: n.helpful_count,
+    unhelpfulCount: n.unhelpful_count,
+    createdAt: n.created_at,
+  };
+}
+
+function transformRating(r: BackendRating): Rating {
+  return {
+    accuracy: r.accuracy,
+    fairness: r.fairness,
+    completeness: r.completeness,
+    totalRatings: r.total_ratings,
   };
 }
 
 /**
- * Main transformer: BackendStoryWrapper → TopicSummary.
- * `index` is the position in the /stories array and is used as the topic ID.
+ * Main transformer: BackendTopicSummary → frontend TopicSummary.
  */
-export function transformStory(wrapper: BackendStoryWrapper, index: number): TopicSummary {
-  const { story, comments } = wrapper;
-
-  // Use the first segment's text as a brief summary, fallback to headline
-  const summary = story.segments[0]?.text ?? story.heading;
-
-  // Derive stub Article entries from segment sources so the UI has something to render
-  const articles: Article[] = story.segments.flatMap((seg, sIdx) =>
-    seg.sources.map((provider, pIdx) => ({
-      id:          `story-${index}-seg-${sIdx}-src-${pIdx}`,
-      title:       `${provider.name}: ${story.heading}`,
-      url:         '#',
-      source:      transformProvider(provider, pIdx),
-      publishedAt: new Date().toISOString().split('T')[0],
-      excerpt:     seg.text,
-    }))
-  );
-
+export function transformTopicSummary(t: BackendTopicSummary): TopicSummary {
   return {
-    id:            String(index),
-    topic:         story.heading,
-    slug:          slugify(story.heading),
-    headline:      story.heading,
-    summary,
-    sections:      story.segments.map(transformSegment),
-    articles,
-    biasAnalysis:  buildBiasAnalysis(story),
-    credibility:   buildCredibility(story),
-    updatedAt:     new Date().toISOString(),
-    category:      'General',
-    country:       'Global',
-    comments:      transformComments(comments, index),
-    communityNotes: [],
+    id: t.id,
+    topic: t.topic,
+    slug: t.slug,
+    headline: t.headline,
+    summary: t.summary,
+    sections: t.sections.map(transformSection),
+    articles: t.articles.map(transformArticle),
+    biasAnalysis: transformBiasAnalysis(t.bias_analysis),
+    credibility: transformCredibility(t.credibility),
+    updatedAt: t.updated_at,
+    category: t.category,
+    country: t.country,
+    subtopic: t.subtopic ?? undefined,
+    isFeatured: t.is_featured,
+    isBreaking: t.is_breaking,
+    rating: t.rating ? transformRating(t.rating) : undefined,
+    comments: t.comments.map(transformComment),
+    communityNotes: t.community_notes.map(transformCommunityNote),
   };
 }
 
 /**
- * Transform a BackendUser into a frontend UserProfile.
- * Fields not available from the backend (articlesRead, commentsCount,
- * biasLean, leanScore, isPublic) get sensible defaults until the backend
- * model is extended.
+ * Transform a BackendUserProfile → frontend UserProfile.
  */
-export function transformUser(user: BackendUser): UserProfile {
+export function transformUser(u: BackendUserProfile): UserProfile {
   return {
-    id:            slugify(user.username),
-    name:          user.username,
-    joinedAt:      new Date().toISOString().split('T')[0],
-    articlesRead:  0,
-    commentsCount: 0,
-    biasLean:      'center',
-    leanScore:     0,
-    reputation:    user.reputation,
-    isPublic:      true,
+    id: u.id,
+    name: u.name,
+    joinedAt: u.joined_at,
+    articlesRead: u.articles_read,
+    commentsCount: u.comments_count,
+    biasLean: u.bias_lean as BiasLean,
+    leanScore: u.lean_score,
+    reputation: u.reputation,
+    isPublic: u.is_public,
   };
 }
 
-// ---------------------------------------------------------------------------
+// ─────────────────────────────────────────────────────────────────────────────
 // Fetch functions
-// ---------------------------------------------------------------------------
+// ─────────────────────────────────────────────────────────────────────────────
 
 const API_BASE = '/api';
 
 /**
  * Fetch all stories from the backend and return them as TopicSummary[].
- * Falls back to mockTopics if the backend is unreachable (e.g. during
- * front-end-only development).
+ * Falls back to mockTopics if the backend is unreachable.
  */
 export async function getTopics(): Promise<TopicSummary[]> {
   try {
     const res = await fetch(`${API_BASE}/stories`);
     if (!res.ok) throw new Error(`GET /stories → HTTP ${res.status}`);
-    const data: BackendStoryWrapper[] = await res.json();
-    return data.map((wrapper, index) => transformStory(wrapper, index));  } catch (err) {
+    const data: BackendTopicSummary[] = await res.json();
+    return data.map(transformTopicSummary);
+  } catch (err) {
     console.warn('[newsApi] Backend unavailable, falling back to mock data.', err);
     return mockTopics;
   }
 }
 
-
-
+/**
+ * Fetch a single story by slug.
+ */
 export async function getTopic(slug: string): Promise<TopicSummary | null> {
   try {
     const res = await fetch(`${API_BASE}/stories/${slug}`);
     if (res.status === 404) return null;
     if (!res.ok) throw new Error(`GET /stories/${slug} → HTTP ${res.status}`);
-    const data: BackendStoryWrapper = await res.json();
-    return transformStory(data, 0);
+    const data: BackendTopicSummary = await res.json();
+    return transformTopicSummary(data);
   } catch (err) {
     console.warn(`[newsApi] Backend unavailable for story ${slug}, falling back to mock data.`, err);
     return mockTopics.find(t => t.slug === slug) ?? null;
   }
 }
 
-
+/**
+ * Fetch all users.
+ */
 export async function getUsers(): Promise<UserProfile[]> {
   try {
     const res = await fetch(`${API_BASE}/users`);
     if (!res.ok) throw new Error(`GET /users → HTTP ${res.status}`);
-    const data: BackendUser[] = await res.json();
-    return data.map((user, index) => transformUser(user));  } catch (err) {
+    const data: BackendUserProfile[] = await res.json();
+    return data.map(transformUser);
+  } catch (err) {
     console.warn('[newsApi] Backend unavailable, falling back to mock data.', err);
     return mockUsers;
   }
 }
 
-export async function getUser(username: string): Promise<UserProfile | null> {
+/**
+ * Fetch a single user by id or name.
+ */
+export async function getUser(userId: string): Promise<UserProfile | null> {
   try {
-    const res = await fetch(`${API_BASE}/user/${username}`);
+    const res = await fetch(`${API_BASE}/user/${userId}`);
     if (res.status === 404) return null;
-    if (!res.ok) throw new Error(`GET /user/${username} → HTTP ${res.status}`);
-    const data: BackendUser = await res.json();
+    if (!res.ok) throw new Error(`GET /user/${userId} → HTTP ${res.status}`);
+    const data: BackendUserProfile = await res.json();
     return transformUser(data);
   } catch (err) {
-    console.warn(`[newsApi] Backend unavailable for user ${username}, falling back to mock data.`, err);
-    return mockUsers[0] ?? null;
+    console.warn(`[newsApi] Backend unavailable for user ${userId}, falling back to mock data.`, err);
+    return mockUsers.find(u => u.id === userId) ?? null;
   }
 }
 
-// Re-export the mock helpers so callers can access users / source profiles
-// (the backend doesn't have endpoints for these yet).
+// Re-export mock helpers for callers that need them directly
 export { mockUsers, mockSourceProfiles };
