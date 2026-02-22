@@ -1,5 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { mockTopics } from '@/data/mockNews';
+import { useState, useEffect } from 'react';
+import { getTopic } from '@/api/newsApi';
+import { TopicSummary } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
 import { CitedContent } from '@/components/CitedContent';
@@ -12,7 +14,24 @@ import { Clock, BarChart3, Star } from 'lucide-react';
 
 const TopicDetail = () => {
   const { slug } = useParams();
-  const topic = mockTopics.find((t) => t.slug === slug);
+  const [topic, setTopic] = useState<TopicSummary | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!slug) { setLoading(false); return; }
+    getTopic(slug)
+      .then(data => setTopic(data))
+      .catch(err => console.error('[TopicDetail] Failed to load topic:', err))
+      .finally(() => setLoading(false));
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <span className="font-mono text-muted-foreground">Loading...</span>
+      </div>
+    );
+  }
 
   if (!topic) {
     return (
