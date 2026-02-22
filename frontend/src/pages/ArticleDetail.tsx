@@ -69,9 +69,6 @@ const ArticleDetail = () => {
           <h1 className="font-display text-3xl font-bold text-foreground leading-tight mb-4">
             {article.title}
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed border-b border-border pb-6">
-            {article.excerpt}
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
