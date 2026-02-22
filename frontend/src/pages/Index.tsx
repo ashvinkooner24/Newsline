@@ -1,12 +1,12 @@
 import { useState, useMemo, useEffect } from 'react';
-import { getTopics, getPipelineStatus } from '@/api/newsApi';
+import { getTopics } from '@/api/newsApi';
 import { allCategories, allCountries } from '@/data/mockNews';
 import { TopicSummary } from '@/types/news';
 import { TopicCard } from '@/components/TopicCard';
 import { SearchFilter } from '@/components/SearchFilter';
 import { HeaderBar } from '@/components/HeaderBar';
 import { Link } from 'react-router-dom';
-import { Clock, TrendingUp, Shield, AlertTriangle, CheckCircle, Bookmark, Globe, Landmark, Cpu, HeartPulse, GraduationCap, Banknote, Loader2 } from 'lucide-react';
+import { Clock, TrendingUp, Shield, AlertTriangle, CheckCircle, Bookmark, Globe, Landmark, Cpu, HeartPulse, GraduationCap, Banknote } from 'lucide-react';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
 
@@ -25,38 +25,12 @@ const topicIcons: Record<string, React.ReactNode> = {
 const Index = () => {
   const [topics, setTopics] = useState<TopicSummary[]>([]);
   const [loading, setLoading] = useState(true);
-  const [pipelineRunning, setPipelineRunning] = useState(false);
-  const [pipelineJustDone, setPipelineJustDone] = useState(false);
 
-  // Initial topic load
   useEffect(() => {
     getTopics()
       .then(data => setTopics(data))
       .catch(err => console.error('[Index] Failed to load topics:', err))
       .finally(() => setLoading(false));
-  }, []);
-
-  // Poll pipeline status while it's running; reload topics when it finishes
-  useEffect(() => {
-    let intervalId: ReturnType<typeof setInterval>;
-    const poll = async () => {
-      const status = await getPipelineStatus();
-      if (!status) return;
-      setPipelineRunning(status.running);
-      if (status.done && !status.running) {
-        clearInterval(intervalId);
-        // Reload topics with fresh pipeline data
-        const fresh = await getTopics();
-        if (fresh.length > 0 && fresh[0].id !== 'pipeline-loading') {
-          setTopics(fresh);
-          setPipelineJustDone(true);
-          setTimeout(() => setPipelineJustDone(false), 6000);
-        }
-      }
-    };
-    poll();
-    intervalId = setInterval(poll, 4000);
-    return () => clearInterval(intervalId);
   }, []);
 
   const [search, setSearch] = useState('');
@@ -104,24 +78,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeaderBar />
-
-      {/* Pipeline status banner */}
-      {pipelineRunning && (
-        <div className="bg-primary/10 border-b border-primary/30 text-primary">
-          <div className="container max-w-6xl mx-auto px-4 py-2 flex items-center gap-2 font-mono text-xs">
-            <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0" />
-            <span>Scoring pipeline running — processing articles through sentiment, agreement &amp; credibility analysis…</span>
-          </div>
-        </div>
-      )}
-      {pipelineJustDone && (
-        <div className="bg-credibility-high/10 border-b border-credibility-high/30 text-credibility-high">
-          <div className="container max-w-6xl mx-auto px-4 py-2 flex items-center gap-2 font-mono text-xs">
-            <CheckCircle className="w-3.5 h-3.5 shrink-0" />
-            <span>Pipeline complete — stories updated with live scoring data.</span>
-          </div>
-        </div>
-      )}
 
       {/* Masthead */}
       <div className="border-b border-border">
