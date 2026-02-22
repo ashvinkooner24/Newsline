@@ -17,7 +17,7 @@ headers = {
 }
 
 # Create folder to store articles
-PROVIDER = "nytimes"
+PROVIDER = "usatoday"
 OUTPUT_FILE = f"{PROVIDER}.csv"
 MAX_PAGES_PER_SITE = 100
 
@@ -470,10 +470,44 @@ def main():
     #     "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
     # },
 
+    # {
+    #     "name": "The Washington Post",
+    #     "sites": [
+    #         "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz"
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
+    # }
+
+    # {
+    #     "name": "CNN",
+    #     "sites": [
+    #         "https://www.cnn.com/sitemap/news.xml"
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/football"],  # skip URLs containing these
+    # }
+
     {
-        "name": "The Washington Post",
+        "name": "USA Today",
         "sites": [
-            "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz"
+            "https://www.usatoday.com/news-sitemap.xml"
         ],
         "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
