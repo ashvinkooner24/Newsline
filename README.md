@@ -46,7 +46,7 @@
 # Backend API for News Aggregation Platform
 
 ## Setup
-
+ pray 
 1. Create and activate your Python virtual environment:
    
    python -m venv .venv
