@@ -51,7 +51,7 @@ def get_story(slug: str):
 class IngestRequest(BaseModel):
     articles_dir: str | None = None   # directory of .txt files
     csv_dir: str | None = None        # directory of .csv files (e.g. "backend/scraping")
-    max_topics: int = 30              # max topic groups to process from CSVs
+    max_topics: int = 100              # max topic groups to process from CSVs
 
 
 @router.post("/stories/ingest")

@@ -70,15 +70,45 @@ OUTPUT_SCHEMA = {
 }
 
 
-def load_api_key():
-    # Look for .env at the project root (3 levels up from this script)
+def _load_env():
+    """Load .env from project root, overriding any cached values."""
     env_path = os.path.join(SCRIPT_DIR, "..", "..", ".env")
-    load_dotenv(env_path)
+    load_dotenv(env_path, override=True)
 
+
+def get_llm_provider() -> str:
+    """Return the configured LLM provider: 'gemini' or 'azure'."""
+    _load_env()
+    provider = os.getenv("LLM_PROVIDER", "gemini").strip().lower()
+    return provider
+
+
+def load_api_key():
+    _load_env()
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY not found. Add it to your .env file.")
     return api_key
+
+
+def load_azure_config() -> dict:
+    """Return Azure OpenAI connection details from env vars."""
+    _load_env()
+    endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    key = os.getenv("AZURE_OPENAI_KEY")
+    api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2024-10-21")
+    model_id = os.getenv("AZURE_AI_MODEL_ID", "gpt-5-mini")
+    if not endpoint or not key:
+        raise RuntimeError(
+            "AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY must be set in .env "
+            "when LLM_PROVIDER=azure."
+        )
+    return {
+        "endpoint": endpoint,
+        "key": key,
+        "api_version": api_version,
+        "model": model_id,
+    }
 
 
 def load_articles(articles_dir):
@@ -171,6 +201,67 @@ def call_gemini(api_key, prompt, timeout_seconds: int = 120):
         raise RuntimeError("Gemini returned an empty response.")
     print(f"[gemini] Response received: {len(response.text):,} chars")
     return json.loads(response.text)
+
+
+def call_azure_openai(azure_config: dict, prompt: dict, timeout_seconds: int = 120) -> dict:
+    """Call Azure OpenAI with the same prompt structure used for Gemini."""
+    import concurrent.futures
+    from openai import AzureOpenAI
+
+    client = AzureOpenAI(
+        azure_endpoint=azure_config["endpoint"],
+        api_key=azure_config["key"],
+        api_version=azure_config["api_version"],
+    )
+    model = azure_config["model"]
+
+    system_msg = (
+        "You are a news aggregation assistant. You receive multiple source articles "
+        "and produce a single consolidated, neutral news article in structured JSON.\n"
+        "You MUST respond with valid JSON matching this schema:\n"
+        + json.dumps(OUTPUT_SCHEMA, indent=2)
+    )
+    user_msg = json.dumps(prompt)
+
+    def _call():
+        return client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system_msg},
+                {"role": "user", "content": user_msg},
+            ],
+            response_format={"type": "json_object"},
+        )
+
+    print(f"[azure-openai] Calling {model} at {azure_config['endpoint']} (timeout={timeout_seconds}s)\u2026")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(_call)
+        try:
+            response = future.result(timeout=timeout_seconds)
+        except concurrent.futures.TimeoutError:
+            raise RuntimeError(
+                f"Azure OpenAI call timed out after {timeout_seconds}s \u2014 "
+                f"the prompt may be too large or the API is slow."
+            )
+
+    content = response.choices[0].message.content
+    if not content:
+        raise RuntimeError("Azure OpenAI returned an empty response.")
+    print(f"[azure-openai] Response received: {len(content):,} chars "
+          f"(usage: {response.usage.prompt_tokens}+{response.usage.completion_tokens} tokens)")
+    return json.loads(content)
+
+
+def call_llm(prompt: dict, timeout_seconds: int = 120) -> dict:
+    """Unified LLM call — dispatches to Gemini or Azure OpenAI based on LLM_PROVIDER env var."""
+    provider = get_llm_provider()
+    print(f"[LLM] Provider = {provider!r} (from LLM_PROVIDER env var)")
+    if provider == "azure":
+        cfg = load_azure_config()
+        return call_azure_openai(cfg, prompt, timeout_seconds=timeout_seconds)
+    else:
+        api_key = load_api_key()
+        return call_gemini(api_key, prompt, timeout_seconds=timeout_seconds)
 
 
 # Path to the shared JSON store — relative to this script: ../../data/stories.json

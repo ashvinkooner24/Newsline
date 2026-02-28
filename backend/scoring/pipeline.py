@@ -370,6 +370,7 @@ def _process_topic_group(articles: list[dict]) -> dict:
         load_api_key,
         build_prompt,
         call_gemini,
+        call_llm,
         gemini_to_storywrapper,
     )
 
@@ -438,11 +439,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
         if art.get("source") and art["source"] != "unknown"
     }
 
-    # ── STEP 4: Gemini aggregation ──
+    # ── STEP 4: LLM aggregation (Gemini or Azure OpenAI) ──
     t0 = time.time()
-    print(f"[pipeline]   ── Step 4/4: Gemini API call…")
-    api_key = load_api_key()
-    gemini_articles = [
+    print(f"[pipeline]   ── Step 4/4: LLM API call…")
+    llm_articles = [
         {
             "article_id": art["id"],
             "source": art["source"],
@@ -450,10 +450,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
         }
         for art in articles
     ]
-    prompt = build_prompt(gemini_articles)
-    total_chars = sum(len(a["content"]) for a in gemini_articles)
-    print(f"[pipeline]     Sending {len(gemini_articles)} articles ({total_chars:,} chars) to Gemini…")
-    gemini_result = call_gemini(api_key, prompt)
+    prompt = build_prompt(llm_articles)
+    total_chars = sum(len(a["content"]) for a in llm_articles)
+    print(f"[pipeline]     Sending {len(llm_articles)} articles ({total_chars:,} chars) to LLM…")
+    gemini_result = call_llm(prompt)
     print(f"[pipeline]   ── Step 4 DONE in {time.time()-t0:.1f}s")
 
     story_dict = gemini_to_storywrapper(
