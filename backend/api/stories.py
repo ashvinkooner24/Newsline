@@ -61,6 +61,9 @@ def ingest_story(req: IngestRequest):
     - Provide articles_dir for legacy .txt mode (single topic).
     - Provide csv_dir for multi-topic mode (load CSVs, cluster, process).
     """
+    import time
+    import traceback
+
     try:
         from ..scoring.pipeline import run_pipeline
     except ImportError as e:
@@ -68,6 +71,11 @@ def ingest_story(req: IngestRequest):
 
     if not req.articles_dir and not req.csv_dir:
         raise HTTPException(status_code=400, detail="Provide either articles_dir or csv_dir")
+
+    t0 = time.time()
+    print(f"\n{'='*60}")
+    print(f"[ingest] Starting pipeline: csv_dir={req.csv_dir}, max_topics={req.max_topics}")
+    print(f"{'='*60}")
 
     try:
         results = run_pipeline(
@@ -78,7 +86,16 @@ def ingest_story(req: IngestRequest):
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except RuntimeError as e:
+        traceback.print_exc()
         raise HTTPException(status_code=502, detail=str(e))
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Pipeline error: {e}")
+
+    elapsed = time.time() - t0
+    print(f"\n{'='*60}")
+    print(f"[ingest] Pipeline finished in {elapsed:.1f}s ({elapsed/60:.1f} min) — {len(results)} stories")
+    print(f"{'='*60}")
 
     wrappers = []
     for result in results:

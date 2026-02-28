@@ -10,7 +10,7 @@ import { CommentSection } from '@/components/CommentSection';
 import { CommunityNotes } from '@/components/CommunityNotes';
 import { RatingDisplay } from '@/components/RatingDisplay';
 import { HeaderBar } from '@/components/HeaderBar';
-import { Clock, BarChart3, Star } from 'lucide-react';
+import { Clock, BarChart3, Star, AlertTriangle } from 'lucide-react';
 
 const TopicDetail = () => {
   const { slug } = useParams();
@@ -121,6 +121,39 @@ const TopicDetail = () => {
             <CommunityNotes notes={topic.communityNotes} />
           )}
         </div>
+
+        {/* Cross-Source Contradictions */}
+        {topic.contradictions && topic.contradictions.length > 0 && (
+          <div className="mt-8 animate-fade-in opacity-0" style={{ animationDelay: '320ms' }}>
+            <div className="newspaper-divider mb-4" />
+            <div className="border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-800 p-5 space-y-4">
+              <div className="flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-amber-600" />
+                <h3 className="font-display text-xl font-semibold text-foreground">
+                  Cross-Source Contradictions ({topic.contradictions.length})
+                </h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                The following claims differ between sources covering this topic.
+              </p>
+              <div className="space-y-4">
+                {topic.contradictions.map((c, i) => (
+                  <div key={i} className="border-l-2 border-amber-400 pl-3 space-y-1">
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-semibold text-foreground">{c.wrongSource}</span>:{' '}
+                      <span className="italic">&ldquo;{c.wrongClaim}&rdquo;</span>
+                    </p>
+                    <p className="text-xs text-amber-600 dark:text-amber-400 font-mono uppercase tracking-wider">contradicts</p>
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-semibold text-foreground">{c.correctSource}</span>:{' '}
+                      <span className="italic">&ldquo;{c.correctClaim}&rdquo;</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Sources */}
         <div className="mt-8 animate-fade-in opacity-0" style={{ animationDelay: '350ms' }}>

@@ -24,6 +24,14 @@ class Citation(BaseModel):
     quote: str
     bias_level: str = "neutral"
 
+class ContradictionReport(BaseModel):
+    wrong_article: str
+    wrong_claim: str
+    wrong_source: str = ""
+    correct_article: str
+    correct_claim: str
+    correct_source: str = ""
+
 class ArticleMeta(BaseModel):
     id: str
     title: str
@@ -56,6 +64,8 @@ class Story(BaseModel):
     articles: List[ArticleMeta] = []
     category: str = "General"
     updated_at: str = ""
+    contradiction_reports: List[ContradictionReport] = []
+    missing_context: dict = {}
 
 class StoryWrapper(BaseModel):
     story: Story

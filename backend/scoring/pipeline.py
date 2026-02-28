@@ -16,6 +16,7 @@ import json
 import os
 import re
 import threading
+import time
 from collections import defaultdict
 from datetime import datetime
 
@@ -160,16 +161,18 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
     import polars as pl
 
     all_articles = []
-    for filename in sorted(os.listdir(csv_dir)):
-        if not filename.endswith('.csv'):
-            continue
+    csv_files = sorted(f for f in os.listdir(csv_dir) if f.endswith('.csv'))
+    print(f"[pipeline] Found {len(csv_files)} CSV files in {csv_dir}")
+    for filename in csv_files:
         source_key = filename.replace('.csv', '').lower()
         source_name = SOURCE_DISPLAY_NAMES.get(source_key, source_key.title())
         filepath = os.path.join(csv_dir, filename)
         try:
+            t0 = time.time()
             df = pl.read_csv(filepath)
+            print(f"[pipeline]   {filename}: {len(df)} rows loaded in {time.time()-t0:.1f}s")
         except Exception as e:
-            print(f"[pipeline] Skipping {filename}: {e}")
+            print(f"[pipeline]   Skipping {filename}: {e}")
             continue
 
         count = 0
@@ -197,6 +200,8 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
             })
             count += 1
 
+        print(f"[pipeline]   {filename}: kept {count} usable articles (source={source_name})")
+
     return all_articles
 
 
@@ -206,9 +211,9 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
 
 def group_articles_by_topic(
     articles: list[dict],
-    similarity_threshold: float = 0.55,
+    similarity_threshold: float = 0.45,
     min_group_size: int = 2,
-    max_group_size: int = 8,
+    max_group_size: int = 12,
 ) -> list[list[dict]]:
     """
     Group articles by topic using sentence-transformer embeddings.
@@ -219,10 +224,13 @@ def group_articles_by_topic(
     if len(articles) < 2:
         return [articles] if articles else []
 
+    print(f"[pipeline] Topic grouping: encoding {len(articles)} article titles…")
+    t0 = time.time()
     model = SentenceTransformer('all-MiniLM-L6-v2')
     titles = [a['title'] for a in articles]
     embeddings = model.encode(titles, convert_to_tensor=True)
     sim_matrix = util.cos_sim(embeddings, embeddings)
+    print(f"[pipeline] Topic grouping: embedding + similarity done in {time.time()-t0:.1f}s")
 
     assigned: set[int] = set()
     groups: list[list[dict]] = []
@@ -244,8 +252,15 @@ def group_articles_by_topic(
                 group_sources.add(articles[j]["source"])
 
         if len(group_indices) >= min_group_size and len(group_sources) >= 2:
-            groups.append([articles[idx] for idx in group_indices])
+            group = [articles[idx] for idx in group_indices]
+            groups.append(group)
+            grp_sources = sorted({a['source'] for a in group})
+            print(f"[pipeline]   Group #{len(groups)}: {len(group)} articles from {grp_sources}")
+            for a in group:
+                print(f"[pipeline]     • [{a['source']}] {a['title'][:70]}")
 
+    print(f"[pipeline] Topic grouping: {len(groups)} groups formed, "
+          f"{len(assigned)}/{len(articles)} articles assigned")
     return groups
 
 
@@ -269,23 +284,45 @@ def _process_topic_group(articles: list[dict]) -> dict:
         gemini_to_storywrapper,
     )
 
+    group_t0 = time.time()
+    n = len(articles)
+    src_list = ", ".join(sorted({a['source'] for a in articles}))
+    print(f"[pipeline]   ── Step 0: {n} articles from [{src_list}]")
+
     # Attach reputation scores
     for art in articles:
         src_key = art.get("source", "").lower()
-        art["reputation"] = SOURCE_REPUTATION.get(src_key, 0.5)
+        art["reputation"] = SOURCE_REPUTATION.get(src_key, 0.65)
+        print(f"[pipeline]     #{articles.index(art)+1} [{art['source']}] rep={art['reputation']:.2f} "
+              f"| {art['title'][:60]}")
 
-    # Sentiment scoring
-    for art in articles:
+    # ── STEP 1: Sentiment scoring ──
+    t0 = time.time()
+    print(f"[pipeline]   ── Step 1/4: Sentiment scoring ({n} articles)…")
+    for idx, art in enumerate(articles):
         if "objectivity" not in art:
             truncated = art["text"][:MAX_ARTICLE_CHARS]
+            sent_count = len(truncated.split('. '))
+            art_t0 = time.time()
             obj, subj = score_article(truncated)
             art["objectivity"] = obj
             art["subjectivity"] = subj
+            print(f"[pipeline]     sentiment {idx+1}/{n}: obj={obj:.3f} subj={subj:.3f} "
+                  f"(~{sent_count} sentences, {time.time()-art_t0:.1f}s) "
+                  f"[{art['source']}: {art['title'][:50]}…]")
+    print(f"[pipeline]   ── Step 1 DONE in {time.time()-t0:.1f}s")
 
-    # Agreement scoring
+    # ── STEP 2: Agreement scoring ──
+    t0 = time.time()
+    print(f"[pipeline]   ── Step 2/4: Agreement scoring ({n} articles)…")
     agreement_scores, contradiction_reports, missing_context = compute_agreement(articles)
+    print(f"[pipeline]   ── Step 2 DONE in {time.time()-t0:.1f}s — "
+          f"{len(contradiction_reports)} contradictions, "
+          f"{sum(len(v) for v in missing_context.values()) if isinstance(missing_context, dict) else 0} missing claims")
 
-    # Credibility scoring
+    # ── STEP 3: Credibility scoring ──
+    t0 = time.time()
+    print(f"[pipeline]   ── Step 3/4: Credibility scoring…")
     contradictions_per_article = defaultdict(list)
     for report in contradiction_reports:
         contradictions_per_article[report["wrong_article"]].append(report)
@@ -295,6 +332,7 @@ def _process_topic_group(articles: list[dict]) -> dict:
         credibility_scores[art["id"]] = compute_article_credibility(
             art, agreement_scores, contradictions_per_article, missing_context,
         )
+    print(f"[pipeline]   ── Step 3 DONE in {time.time()-t0:.1f}s")
 
     provider_trust_map: dict[str, float] = {
         art["source"]: credibility_scores[art["id"]]
@@ -302,7 +340,9 @@ def _process_topic_group(articles: list[dict]) -> dict:
         if art.get("source") and art["source"] != "unknown"
     }
 
-    # Gemini aggregation
+    # ── STEP 4: Gemini aggregation ──
+    t0 = time.time()
+    print(f"[pipeline]   ── Step 4/4: Gemini API call…")
     api_key = load_api_key()
     gemini_articles = [
         {
@@ -313,7 +353,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
         for art in articles
     ]
     prompt = build_prompt(gemini_articles)
+    total_chars = sum(len(a["content"]) for a in gemini_articles)
+    print(f"[pipeline]     Sending {len(gemini_articles)} articles ({total_chars:,} chars) to Gemini…")
     gemini_result = call_gemini(api_key, prompt)
+    print(f"[pipeline]   ── Step 4 DONE in {time.time()-t0:.1f}s")
 
     story_dict = gemini_to_storywrapper(
         gemini_result,
@@ -321,8 +364,12 @@ def _process_topic_group(articles: list[dict]) -> dict:
         provider_trust_map=provider_trust_map,
         article_metadata=articles,
         agreement_scores=agreement_scores,
+        contradiction_reports=contradiction_reports,
+        missing_context=missing_context,
     )
 
+    elapsed = time.time() - group_t0
+    print(f"[pipeline]   ✓ Topic group complete in {elapsed:.1f}s")
     return story_dict
 
 
@@ -351,13 +398,16 @@ def run_pipeline(
       - csv_dir      : multi-topic mode — load CSVs, cluster by topic, process each
     """
     if csv_dir:
+        t_load = time.time()
         all_articles = load_articles_from_csv(csv_dir)
         if not all_articles:
             raise FileNotFoundError(f"No usable articles found in CSV files in {csv_dir!r}")
-        print(f"[pipeline] Loaded {len(all_articles)} articles from CSVs")
+        print(f"[pipeline] Loaded {len(all_articles)} articles from CSVs in {time.time()-t_load:.1f}s")
 
+        t_group = time.time()
         topic_groups = group_articles_by_topic(all_articles)
-        print(f"[pipeline] Found {len(topic_groups)} topic groups (processing up to {max_topics})")
+        print(f"[pipeline] Found {len(topic_groups)} topic groups in {time.time()-t_group:.1f}s "
+              f"(processing up to {max_topics})")
 
     elif articles_dir:
         txt_articles = load_articles_from_txt(articles_dir)
@@ -369,18 +419,31 @@ def run_pipeline(
         raise ValueError("Provide either articles_dir or csv_dir")
 
     results = []
+    pipeline_t0 = time.time()
     for i, group in enumerate(topic_groups[:max_topics]):
         titles = [a["title"] for a in group]
+        sources = sorted({a["source"] for a in group})
         print(
-            f"[pipeline] Processing topic {i + 1}/{min(len(topic_groups), max_topics)}: "
-            f"{len(group)} articles — {titles[0][:60]}…"
+            f"\n[pipeline] ═══════════════════════════════════════════════"
+            f"\n[pipeline] Topic {i + 1}/{min(len(topic_groups), max_topics)}: "
+            f"{len(group)} articles from {len(sources)} sources"
+            f"\n[pipeline]   Title: {titles[0][:80]}…"
+            f"\n[pipeline] ═══════════════════════════════════════════════"
         )
         try:
             story_dict = _process_topic_group(group)
             results.append(story_dict)
         except Exception as exc:
+            import traceback
             print(f"[pipeline] ERROR on topic {i + 1}: {exc}")
+            traceback.print_exc()
             continue
+
+    total_elapsed = time.time() - pipeline_t0
+    print(f"\n[pipeline] ═══════════════════════════════════════════════")
+    print(f"[pipeline] ALL TOPICS DONE: {len(results)}/{min(len(topic_groups), max_topics)} "
+          f"succeeded in {total_elapsed:.1f}s ({total_elapsed/60:.1f} min)")
+    print(f"[pipeline] ═══════════════════════════════════════════════")
 
     _save_stories(results)
     return results

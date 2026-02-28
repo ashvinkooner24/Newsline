@@ -66,6 +66,15 @@ export interface FactCheck {
   missingContext: string[];
 }
 
+export interface ContradictionReport {
+  wrongArticle: string;
+  wrongClaim: string;
+  wrongSource: string;
+  correctArticle: string;
+  correctClaim: string;
+  correctSource: string;
+}
+
 export interface Comment {
   id: string;
   userId: string;
@@ -134,4 +143,6 @@ export interface TopicSummary {
   rating?: Rating;
   comments?: Comment[];
   communityNotes?: CommunityNote[];
+  contradictions?: ContradictionReport[];
+  articleMissingContext?: Record<string, string[]>;
 }

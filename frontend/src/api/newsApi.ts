@@ -25,6 +25,8 @@ import type {
   BiasLean,
   Citation,
   SectionStats,
+  FactCheck,
+  ContradictionReport,
 } from '@/types/news';
 import { mockTopics, mockUsers, mockSourceProfiles } from '@/data/mockNews';
 
@@ -81,6 +83,15 @@ export interface BackendSegment {
   comments: BackendComment[];
 }
 
+export interface BackendContradictionReport {
+  wrong_article: string;
+  wrong_claim: string;
+  wrong_source: string;
+  correct_article: string;
+  correct_claim: string;
+  correct_source: string;
+}
+
 export interface BackendStory {
   heading: string;
   slug: string;
@@ -93,6 +104,8 @@ export interface BackendStory {
   articles: BackendArticleMeta[];
   category: string;
   updated_at: string;
+  contradiction_reports?: BackendContradictionReport[];
+  missing_context?: Record<string, string[]>;
 }
 
 export interface BackendStoryWrapper {
@@ -267,6 +280,42 @@ function buildCredibility(story: BackendStory): CredibilityAssessment {
 }
 
 /**
+ * Build a FactCheck for a specific article based on contradiction reports
+ * and missing context from the agreement scoring pipeline.
+ */
+function buildArticleFactCheck(
+  articleId: string,
+  contradictionReports: BackendContradictionReport[],
+  missingCtx: Record<string, string[]>,
+): FactCheck {
+  const artContradictions = contradictionReports.filter(c => c.wrong_article === articleId);
+  const artMissing = missingCtx[articleId] || [];
+
+  if (artContradictions.length === 0 && artMissing.length === 0) {
+    return { verdict: 'verified', details: 'No contradictions or missing context detected across sources.', missingContext: [] };
+  }
+
+  let verdict: FactCheck['verdict'];
+  let details: string;
+
+  if (artContradictions.length > 2) {
+    verdict = 'misleading';
+    details = `${artContradictions.length} claims from this source contradict other sources' reporting.`;
+  } else if (artContradictions.length > 0) {
+    verdict = 'mixed';
+    details = `${artContradictions.length} claim(s) from this source are contradicted by other sources.${artMissing.length > 0 ? ` Also missing ${artMissing.length} key point(s) covered elsewhere.` : ''}`;
+  } else if (artMissing.length > 3) {
+    verdict = 'mixed';
+    details = `This source omits ${artMissing.length} key claims covered by other sources.`;
+  } else {
+    verdict = 'mostly-true';
+    details = `Mostly consistent but omits ${artMissing.length} point(s) covered by other sources.`;
+  }
+
+  return { verdict, details, missingContext: artMissing };
+}
+
+/**
  * Main transformer: BackendStoryWrapper → TopicSummary.
  * Uses real article metadata and citations from the backend.
  */
@@ -285,6 +334,9 @@ export function transformStory(wrapper: BackendStoryWrapper, index: number): Top
       providerMap[p.name] = p;
     }
 
+    const contradictionReports = story.contradiction_reports || [];
+    const missingCtx = story.missing_context || {};
+
     articles = story.articles.map((meta, i) => {
       const provider = providerMap[meta.source];
       return {
@@ -301,6 +353,7 @@ export function transformStory(wrapper: BackendStoryWrapper, index: number): Top
         },
         publishedAt: meta.published_at || new Date().toISOString().split('T')[0],
         excerpt:     meta.excerpt || '',
+        factCheck:   buildArticleFactCheck(meta.id, contradictionReports, missingCtx),
       };
     });
   } else {
@@ -340,6 +393,15 @@ export function transformStory(wrapper: BackendStoryWrapper, index: number): Top
     country:       'Global',
     comments:      transformComments(comments, index),
     communityNotes: [],
+    contradictions: (story.contradiction_reports || []).map(c => ({
+      wrongArticle: c.wrong_article,
+      wrongClaim: c.wrong_claim,
+      wrongSource: c.wrong_source,
+      correctArticle: c.correct_article,
+      correctClaim: c.correct_claim,
+      correctSource: c.correct_source,
+    })),
+    articleMissingContext: story.missing_context || {},
   };
 }
 

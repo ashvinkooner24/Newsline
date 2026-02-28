@@ -137,20 +137,39 @@ def build_prompt(articles):
     }
 
 
-def call_gemini(api_key, prompt):
+def call_gemini(api_key, prompt, timeout_seconds: int = 120):
+    """Call Gemini API with a timeout to prevent hanging."""
+    import concurrent.futures
+
     client = genai.Client(api_key=api_key)
-    response = client.models.generate_content(
-        model=MODEL_NAME,
-        contents=[{"role": "user", "parts": [{"text": json.dumps(prompt)}]}],
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            response_schema=OUTPUT_SCHEMA,
-            temperature=0.3,
-            thinking_config=types.ThinkingConfig(thinking_level="low"),
-        ),
-    )
+
+    def _call():
+        return client.models.generate_content(
+            model=MODEL_NAME,
+            contents=[{"role": "user", "parts": [{"text": json.dumps(prompt)}]}],
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=OUTPUT_SCHEMA,
+                temperature=0.3,
+                thinking_config=types.ThinkingConfig(thinking_level="low"),
+            ),
+        )
+
+    print(f"[gemini] Calling {MODEL_NAME} (timeout={timeout_seconds}s)…")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(_call)
+        try:
+            response = future.result(timeout=timeout_seconds)
+        except concurrent.futures.TimeoutError:
+            raise RuntimeError(
+                f"Gemini API call timed out after {timeout_seconds}s — "
+                f"the prompt may be too large or the API is slow. "
+                f"Try reducing max_per_source or MAX_ARTICLE_CHARS."
+            )
+
     if not response.text:
         raise RuntimeError("Gemini returned an empty response.")
+    print(f"[gemini] Response received: {len(response.text):,} chars")
     return json.loads(response.text)
 
 
@@ -198,16 +217,20 @@ def gemini_to_storywrapper(
     provider_trust_map: dict | None = None,
     article_metadata: list[dict] | None = None,
     agreement_scores: dict | None = None,
+    contradiction_reports: list | None = None,
+    missing_context: dict | None = None,
 ) -> dict:
     """
     Convert the structured JSON returned by call_gemini() into a StoryWrapper-compatible dict.
 
     Args:
-        gemini_result:      Output from call_gemini() — {title, standfirst, body_sections, source_index}.
-        credibility_scores: Optional {article_id: float 0-1} from credibility_scoring.
-        provider_trust_map: Optional {source_name: float 0-1} to pin a known outlet's trust score.
-        article_metadata:   Optional list of article dicts with id, title, url, source, published_at, text.
-        agreement_scores:   Optional {article_id: float 0-1} from agreement_scoring.
+        gemini_result:       Output from call_gemini() — {title, standfirst, body_sections, source_index}.
+        credibility_scores:  Optional {article_id: float 0-1} from credibility_scoring.
+        provider_trust_map:  Optional {source_name: float 0-1} to pin a known outlet's trust score.
+        article_metadata:    Optional list of article dicts with id, title, url, source, published_at, text.
+        agreement_scores:    Optional {article_id: float 0-1} from agreement_scoring.
+        contradiction_reports: Optional list of contradiction dicts from agreement_scoring.
+        missing_context:     Optional {article_id: [claim_strings]} from agreement_scoring.
 
     Returns:
         A plain dict matching the StoryWrapper schema.
@@ -215,6 +238,8 @@ def gemini_to_storywrapper(
     credibility_scores = credibility_scores or {}
     provider_trust_map = provider_trust_map or {}
     agreement_scores = agreement_scores or {}
+    contradiction_reports = contradiction_reports or []
+    missing_context = missing_context or {}
 
     # Registry of NewsProvider dicts, keyed by source name, built as we walk citations.
     # Bias score for a provider is the first bias_level we see for them.
@@ -235,8 +260,11 @@ def gemini_to_storywrapper(
         return provider_registry[source_name]
 
     segments = []
+    n_sections = len(gemini_result.get("body_sections", []))
+    print(f"[gemini]   Building StoryWrapper: {n_sections} body sections, "
+          f"{len(gemini_result.get('source_index', []))} sources")
 
-    for section in gemini_result.get("body_sections", []):
+    for sec_idx, section in enumerate(gemini_result.get("body_sections", [])):
         citations = section.get("citations", [])
 
         seg_providers: dict[str, dict] = {}  # unique providers cited in this section
@@ -281,6 +309,10 @@ def gemini_to_storywrapper(
             "notes": None,
             "comments": [],
         })
+        cited_sources = [c['source'] for c in seg_citations]
+        print(f"[gemini]     Section {sec_idx+1}/{n_sections}: \"{section['heading'][:50]}\" "
+              f"— {len(seg_citations)} citations from {cited_sources}, "
+              f"bias={avg_bias:.2f}, truth={avg_truth:.3f}, agree={avg_agreement:.3f}")
 
     # Ensure every source listed in source_index is in the registry
     # (some may not have appeared in any citation if Gemini omitted them from body_sections)
@@ -336,6 +368,29 @@ def gemini_to_storywrapper(
             latest = max(dates)  # YYYY-MM-DD strings sort lexicographically
             updated_at = latest + "T12:00:00Z"
 
+    # Resolve source names for contradiction reports
+    id_to_source: dict[str, str] = {}
+    if article_metadata:
+        for meta in article_metadata:
+            id_to_source[meta.get("id", meta.get("article_id", ""))] = meta.get("source", "Unknown")
+
+    resolved_contradictions = []
+    for report in contradiction_reports:
+        resolved_contradictions.append({
+            "wrong_article": report["wrong_article"],
+            "wrong_claim": report["wrong_claim"],
+            "wrong_source": id_to_source.get(report["wrong_article"], "Unknown"),
+            "correct_article": report["correct_article"],
+            "correct_claim": report["correct_claim"],
+            "correct_source": id_to_source.get(report["correct_article"], "Unknown"),
+        })
+
+    print(f"[gemini]   StoryWrapper complete: \"{gemini_result['title'][:60]}\"")
+    print(f"[gemini]     category={category}, bias={political_bias:.2f}, "
+          f"accuracy={factual_accuracy:.3f}, agreement={source_agreement:.3f}")
+    print(f"[gemini]     {len(provider_registry)} providers, {len(segments)} segments, "
+          f"{len(articles_list)} articles, {len(resolved_contradictions)} contradictions")
+
     return {
         "story": {
             "heading": gemini_result["title"],
@@ -349,6 +404,8 @@ def gemini_to_storywrapper(
             "articles": articles_list,
             "category": category,
             "updated_at": updated_at,
+            "contradiction_reports": resolved_contradictions,
+            "missing_context": dict(missing_context),
         },
         "comments": [],
     }

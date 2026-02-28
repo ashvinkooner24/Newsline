@@ -1,32 +1,349 @@
 [
   {
     "story": {
-      "heading": "Norway Leads Medal Count as 2026 Winter Olympics Near Conclusion",
-      "slug": "norway-leads-medal-count-as-2026-winter-olympics-near-conclusion",
-      "summary": "As the 2026 Milano Cortina Winter Olympics enter their final days, Norway maintains a significant lead in the overall medal standings, highlighted by record-breaking individual performances in cross-country skiing.",
+      "heading": "Gannett and USA TODAY Network Outline AI Ethics and Operational Policies",
+      "slug": "gannett-and-usa-today-network-outline-ai-ethics-and-operational-policies",
+      "summary": "The USA TODAY Network and Gannett have established comprehensive guidelines for the ethical use of artificial intelligence, alongside updated accessibility features and subscription terms for their digital and print platforms.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.435,
+      "factual_accuracy": 0.598,
+      "source_agreement": 0.866,
       "sources": [
         {
           "name": "USA Today",
           "bias_score": 0.0,
-          "trust_score": 0.265
+          "trust_score": 0.598
+        },
+        {
+          "name": "Usa_Today02_1-5",
+          "bias_score": 0.0,
+          "trust_score": 0.598
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Ethical Framework for Artificial Intelligence",
+          "text": "Gannett and the USA TODAY Network have implemented strict ethical guidelines to govern the use of AI-generated content. Journalists are required to consult with editors and the company's AI Council before utilizing AI tools. The policy emphasizes transparency and accountability, specifically prohibiting the use of AI-generated photo-realistic images in news coverage to maintain journalistic integrity.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.598
+            },
+            {
+              "name": "Usa_Today02_1-5",
+              "bias_score": 0.0,
+              "trust_score": 0.598
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "usa-today",
+              "quote": "Gannett does not use AI-generated photo-realistic images in our news coverage.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "Usa_Today02_1-5",
+              "article_id": "usa-today",
+              "quote": "Journalists must discuss the purpose and production of any AI-generated content with their editor and Gannett’s AI Council before using it.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.598,
+          "avg_agreement": 0.866,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Digital Accessibility and User Support",
+          "text": "The network is enhancing its digital platforms to ensure accessibility for all users. This includes support for screen readers, zoom functionality, and color contrast adjustments on both Windows and OS X systems. Features such as 'Narrator' for Windows and 'Voiceover' for Mac are highlighted as key tools for navigating the desktop and mobile sites.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.598
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "usa-today",
+              "quote": "The USA TODAY NETWORK is committed to making its desktop site, mobile website, and mobile applications accessible for all viewers.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.598,
+          "avg_agreement": 0.866,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Subscription Terms and Delivery Protocols",
+          "text": "Subscription policies for USA TODAY include provisions for non-print days, during which subscribers receive an eNewspaper replica. The terms also detail 'EZ Pay' options to avoid paper statement fees and explain how USPS mail delivery affects print arrival during federal holidays. Digital access remains constant even if print delivery is suspended for vacations.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.598
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "usa-today",
+              "quote": "An eNewspaper edition will be provided on non-print days.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "USA Today",
+              "article_id": "usa-today",
+              "quote": "A printed subscription invoice includes a $5.00 paper statement fee. To avoid this fee, subscribers can choose to set up EZ Pay.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.598,
+          "avg_agreement": 0.866,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "http://cm.usatoday.com/your-privacy-choices/",
+          "source": "USA Today",
+          "published_at": "2026-02-28",
+          "excerpt": "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026"
+        },
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "http://cm.usatoday.com/ethical-conduct/",
+          "source": "USA Today",
+          "published_at": "2026-02-28",
+          "excerpt": "These ethical guidelines and policies aim to ensure that journalists use AI-generated content in a transparent, accurate, fair, and accountable manner. Gannett I USA TODAY I USA TODAY Network journali…"
+        },
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "http://cm.usatoday.com/accessibility/",
+          "source": "USA Today",
+          "published_at": "2026-02-28",
+          "excerpt": "The USA TODAY NETWORK is committed to making its desktop\nsite, mobile website, and mobile applications accessible for all viewers. While\nwe continue to develop and enhance our accessibility features, …"
+        },
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "https://cm.usatoday.com/privacy/",
+          "source": "USA Today",
+          "published_at": "2026-02-28",
+          "excerpt": "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026"
+        },
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "https://cm.usatoday.com/about-your-subscription/",
+          "source": "USA Today",
+          "published_at": "2026-02-28",
+          "excerpt": "Subscription Terms & Conditions for USA TODAY\nFull Access with print edition subscriptions:\nNon-print Days: Non-print days are scheduled throughout the year. There will be no change to subscription ra…"
+        },
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "https://cm.usatoday.com/terms/",
+          "source": "USA Today",
+          "published_at": "2026-02-28",
+          "excerpt": "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026"
+        },
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "http://cm.usatoday.com/your-privacy-choices/",
+          "source": "Usa_Today02_1-5",
+          "published_at": "2026-02-28",
+          "excerpt": "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026"
+        },
+        {
+          "id": "usa-today",
+          "title": "USA TODAY",
+          "url": "http://cm.usatoday.com/ethical-conduct/",
+          "source": "Usa_Today02_1-5",
+          "published_at": "2026-02-28",
+          "excerpt": "These ethical guidelines and policies aim to ensure that journalists use AI-generated content in a transparent, accurate, fair, and accountable manner. Gannett I USA TODAY I USA TODAY Network journali…"
+        }
+      ],
+      "category": "Business",
+      "updated_at": "2026-02-28T12:00:00Z",
+      "contradiction_reports": [
+        {
+          "wrong_article": "usa-today",
+          "wrong_claim": "If you want to stop all future charges, you must cancel your subscription.\\n If you request that we not deliver a print edition for vacation or any other reason, or if we fail to deliver a print edition to you for any reason, your subscription continues, including your full access to our content through our digital platforms.",
+          "wrong_source": "Usa_Today02_1-5",
+          "correct_article": "usa-today",
+          "correct_claim": "Vacation Stop or Other Non-Delivery: If you request that we not deliver a print edition for vacation or any other reason, or if we fail to deliver a print edition to you for any reason, your subscription continues, including your full access to our content through our digital platforms.",
+          "correct_source": "Usa_Today02_1-5"
+        },
+        {
+          "wrong_article": "usa-today",
+          "wrong_claim": "If you want to stop all future charges, you must cancel your subscription.\\n If you request that we not deliver a print edition for vacation or any other reason, or if we fail to deliver a print edition to you for any reason, your subscription continues, including your full access to our content through our digital platforms.",
+          "wrong_source": "Usa_Today02_1-5",
+          "correct_article": "usa-today",
+          "correct_claim": "If you want to stop all future charges, you must cancel your subscription.",
+          "correct_source": "Usa_Today02_1-5"
+        }
+      ],
+      "missing_context": {
+        "usa-today": [
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "Help\nTerms of Service\nPrivacy Policy\nCalifornia Notice at Collection\nYour Privacy Choices\nMobile Apps\n© Copyright Gannett 2026",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "The full list of Non-Print Days is below.",
+          "An eNewspaper edition will be provided on non-print days.",
+          "An eNewspaper edition will be provided on non-print days.",
+          "An eNewspaper edition will be provided on non-print days.",
+          "An eNewspaper edition will be provided on non-print days.",
+          "An eNewspaper edition will be provided on non-print days.",
+          "An eNewspaper edition will be provided on non-print days.",
+          "An eNewspaper edition will be provided on non-print days."
+        ]
+      }
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Overview of Digital News Subscription Benefits",
+      "slug": "overview-of-digital-news-subscription-benefits",
+      "summary": "Digital news subscriptions offer users unlimited access to content across multiple devices alongside exclusive member perks.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.54,
+      "source_agreement": 0.5,
+      "sources": [
+        {
+          "name": "USA Today",
+          "bias_score": 0.0,
+          "trust_score": 0.54
+        },
+        {
+          "name": "Usa_Today02_1-5",
+          "bias_score": 0.0,
+          "trust_score": 0.54
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Access and Content Features",
+          "text": "Subscribers to digital news platforms typically receive unrestricted access to articles on various devices. Additionally, these services often provide exclusive content and specialized newsletters tailored for members.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.54
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "help-center",
+              "quote": "Access unlimited news on all your devices, receive subscriber-only newsletters, exclusive content, and tons of perks.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.54,
+          "avg_agreement": 0.5,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "help-center",
+          "title": "Help Center",
+          "url": "https://help.usatoday.com/",
+          "source": "USA Today",
+          "published_at": "2026-02-28",
+          "excerpt": "Subscriber Benefits\nAccess unlimited news on all your devices, receive subscriber-only newsletters, exclusive content, and tons of perks."
+        },
+        {
+          "id": "help-center",
+          "title": "Help Center",
+          "url": "https://help.usatoday.com/",
+          "source": "Usa_Today02_1-5",
+          "published_at": "2026-02-28",
+          "excerpt": "Subscriber Benefits\nAccess unlimited news on all your devices, receive subscriber-only newsletters, exclusive content, and tons of perks."
+        }
+      ],
+      "category": "Business",
+      "updated_at": "2026-02-28T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "2026 Winter Olympics: Medal Standings and Key Results from February 18-21",
+      "slug": "2026-winter-olympics-medal-standings-and-key-results-from-february-18-21",
+      "summary": "Norway leads the overall medal count at the 2026 Milano Cortina Winter Olympics as the games enter their final days, highlighted by record-breaking performances in cross-country skiing and significant podium finishes in curling and speed skating.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.528,
+      "source_agreement": 0.351,
+      "sources": [
+        {
+          "name": "USA Today",
+          "bias_score": 0.0,
+          "trust_score": 0.401
         },
         {
           "name": "The New York Times",
           "bias_score": 0.0,
-          "trust_score": 0.605
+          "trust_score": 0.654
         }
       ],
       "segments": [
         {
           "heading": "Current Medal Standings",
-          "text": "As of February 18, 2026, Norway leads the international field with a total of 33 medals, including 15 gold. Italy follows in second place with 26 total medals, while the United States holds third place with 24. Other top-performing nations include Japan, Germany, Austria, and France. The competition features athletes from over 90 countries competing across 116 events.",
+          "text": "As of mid-February, Norway maintains a significant lead in the overall medal tally with 33 total medals, including 15 gold. Italy follows in second place with 26 medals, while the United States holds third with 24. Other top-performing nations include Japan, Germany, Austria, and France. The competition features athletes from over 90 countries competing in 116 events.",
           "sources": [
             {
               "name": "USA Today",
               "bias_score": 0.0,
-              "trust_score": 0.265
+              "trust_score": 0.401
             }
           ],
           "citations": [
@@ -44,97 +361,95 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.265,
+          "avg_truth": 0.401,
+          "avg_agreement": 0.05,
           "article_count": 1,
           "notes": null,
           "comments": []
         },
         {
           "heading": "Record-Breaking Performances",
-          "text": "Norwegian cross-country skier Johannes H&oslash;sflot Kl&&aelig;bo achieved a historic milestone by winning six gold medals in a single Winter Olympics, surpassing the previous record held by American Eric Heiden. Meanwhile, American speedskater Jordan Stolz concluded his second Winter Games with two golds and one silver, marking the highest medal count for a U.S. speedskater since 1980.",
+          "text": "Norwegian cross-country skier Johannes H&oslash;sflot Kl&aelig;bo achieved a historic milestone by winning his sixth gold medal of these Games in the 50-kilometer mass start. This marks the most gold medals won by any athlete in a single Winter Olympics, surpassing the previous record held by American Eric Heiden. Meanwhile, American speedskater Jordan Stolz concluded his competition with two golds and a silver, setting Olympic records in the 500-meter and 1,000-meter events.",
           "sources": [
             {
               "name": "The New York Times",
               "bias_score": 0.0,
-              "trust_score": 0.605
+              "trust_score": 0.654
             }
           ],
           "citations": [
             {
               "source": "The New York Times",
               "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
-              "quote": "Kl&&aelig;bo&rsquo;s victory Saturday broke a tie with U.S. speedskater Eric Heiden.",
+              "quote": "The 29-year-old Norwegian’s six gold medals in these Games are the most ever won in a single Olympics.",
               "bias_level": "neutral"
             },
             {
               "source": "The New York Times",
               "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
-              "quote": "two golds and a silver, I&rsquo;m pretty happy with that.",
+              "quote": "two golds and a silver, I’m pretty happy with that.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.605,
+          "avg_truth": 0.654,
+          "avg_agreement": 0.651,
           "article_count": 1,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Recent Results in Curling and Hockey",
-          "text": "In men's curling, Canada secured the gold medal with a 9-6 victory over Great Britain, marking their first title in the event since 2014. Great Britain received the silver medal for the second consecutive Games. In men's ice hockey, Finland earned the bronze medal after a 6-1 win against Slovakia. The men's gold medal game between the United States and Canada is scheduled for Sunday morning.",
+          "heading": "Team Event Results",
+          "text": "In men's curling, Canada secured the gold medal with a 9-6 victory over Great Britain, marking Canada's first title in the event since 2014. Great Britain received the silver medal for the second consecutive Games. In men's ice hockey, Finland earned the bronze medal after defeating Slovakia 6-1. The men's gold medal hockey game between the USA and Canada is scheduled for Sunday morning.",
           "sources": [
             {
               "name": "The New York Times",
               "bias_score": 0.0,
-              "trust_score": 0.605
+              "trust_score": 0.654
             }
           ],
           "citations": [
             {
               "source": "The New York Times",
               "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
-              "quote": "On Saturday, he took out Great Britain 9-6 in a tense and strategic battle to win his second Olympic gold medal and a fourth men&rsquo;s curling title for Canada",
+              "quote": "On Saturday, he took out Great Britain 9-6 in a tense and strategic battle to win his second Olympic gold medal and a fourth men’s curling title for Canada",
               "bias_level": "neutral"
             },
             {
               "source": "The New York Times",
               "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
-              "quote": "Finland put the disappointment of Friday&rsquo;s narrow loss to Canada in the rearview mirror and blitzed Slovakia 6-1 to claim the bronze medal in men&rsquo;s hockey.",
+              "quote": "Finland put the disappointment of Friday’s narrow loss to Canada in the rearview mirror and blitzed Slovakia 6-1 to claim the bronze medal in men’s hockey.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.605,
+          "avg_truth": 0.654,
+          "avg_agreement": 0.651,
           "article_count": 1,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Upcoming Events",
-          "text": "The final days of competition will include medal events in freestyle skiing, ski mountaineering, figure skating, and speed skating. Notable upcoming finals include the Women's Free Skate in figure skating and the Men's and Women's Mass Start in speed skating, leading up to the closing ceremonies on February 22.",
+          "heading": "Upcoming Schedule",
+          "text": "The final days of competition include several high-profile medal events. Scheduled for February 19 through February 21 are the women's ice hockey final, the women's figure skating free skate, and various finals in freestyle skiing, speed skating, and biathlon. The games will also feature the men's and women's curling medal matches and the conclusion of the bobsled events.",
           "sources": [
             {
               "name": "USA Today",
               "bias_score": 0.0,
-              "trust_score": 0.265
+              "trust_score": 0.401
             }
           ],
           "citations": [
             {
               "source": "USA Today",
               "article_id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
-              "quote": "FIGURE SKATING: Women's Free Skate",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "USA Today",
-              "article_id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
-              "quote": "SPEED SKATING: Men's, Women's Mass Start",
+              "quote": "ICE HOCKEY: Women's Final; FIGURE SKATING: Women's Free Skate",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.265,
+          "avg_truth": 0.401,
+          "avg_agreement": 0.05,
           "article_count": 1,
           "notes": null,
           "comments": []
@@ -175,7 +490,447 @@
         }
       ],
       "category": "Sport",
-      "updated_at": "2026-02-21T12:00:00Z"
+      "updated_at": "2026-02-21T12:00:00Z",
+      "contradiction_reports": [
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Germany: 21 Total (5 Gold, 8 Silver, 8 Bronze)\\n\n6.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Norway: 33 Total (15 Gold, 8 Silver, 10 Bronze)\\n\n2.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Norway: 33 Total (15 Gold, 8 Silver, 10 Bronze)\\n\n2.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Netherlands: 15 Total (6 Gold, 7 Silver, 2 Bronze)\\n\n10.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Italy: 26 Total (9 Gold, 5 Silver, 12 Bronze)\\n\n3.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Japan: 22 Total (5 Gold, 6 Silver, 11 Bronze)\\n\n5.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Italy: 26 Total (9 Gold, 5 Silver, 12 Bronze)\\n\n3.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Italy: 26 Total (9 Gold, 5 Silver, 12 Bronze)\\n\n3.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "China: 9 Total (2 Gold, 3 Silver, 4 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Japan: 22 Total (5 Gold, 6 Silver, 11 Bronze)\\n\n5.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Germany: 21 Total (5 Gold, 8 Silver, 8 Bronze)\\n\n6.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Austria: 17 Total (5 Gold, 8 Silver, 4 Bronze)\\n\n6.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "France: 17 Total (6 Gold, 7 Silver, 4 Bronze)\\n\n8.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Canada: 14 Total (4 Gold, 4 Silver, 6 Bronze)\\n\n11.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "China: 9 Total (2 Gold, 3 Silver, 4 Bronze)\\n\n13.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "South Korea: 7 Total (2 Gold, 2 Silver, 3 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "United States: 24 Total (7 Gold, 11 Silver, 6 Bronze)\\n\n4.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Germany: 21 Total (5 Gold, 8 Silver, 8 Bronze)\\n\n6.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Japan: 22 Total (5 Gold, 6 Silver, 11 Bronze)\\n\n5.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Austria: 17 Total (5 Gold, 8 Silver, 4 Bronze)\\n\n6.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Japan: 22 Total (5 Gold, 6 Silver, 11 Bronze)\\n\n5.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Japan: 22 Total (5 Gold, 6 Silver, 11 Bronze)\\n\n5.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Germany: 21 Total (5 Gold, 8 Silver, 8 Bronze)\\n\n6.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Germany: 21 Total (5 Gold, 8 Silver, 8 Bronze)\\n\n6.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Austria: 17 Total (5 Gold, 8 Silver, 4 Bronze)\\n\n6.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "France: 17 Total (6 Gold, 7 Silver, 4 Bronze)\\n\n8.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Sweden: 15 Total (6 Gold, 6 Silver, 3 Bronze)\\n\n8.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "France: 17 Total (6 Gold, 7 Silver, 4 Bronze)\\n\n8.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Netherlands: 15 Total (6 Gold, 7 Silver, 2 Bronze)\\n\n10.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Canada: 14 Total (4 Gold, 4 Silver, 6 Bronze)\\n\n11.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "France: 17 Total (6 Gold, 7 Silver, 4 Bronze)\\n\n8.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "France: 17 Total (6 Gold, 7 Silver, 4 Bronze)\\n\n8.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "France: 17 Total (6 Gold, 7 Silver, 4 Bronze)\\n\n8.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "China: 9 Total (2 Gold, 3 Silver, 4 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Netherlands: 15 Total (6 Gold, 7 Silver, 2 Bronze)\\n\n10.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Sweden: 15 Total (6 Gold, 6 Silver, 3 Bronze)\\n\n8.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Sweden: 15 Total (6 Gold, 6 Silver, 3 Bronze)\\n\n8.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Sweden: 15 Total (6 Gold, 6 Silver, 3 Bronze)\\n\n8.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Netherlands: 15 Total (6 Gold, 7 Silver, 2 Bronze)\\n\n10.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Canada: 14 Total (4 Gold, 4 Silver, 6 Bronze)\\n\n11.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Canada: 14 Total (4 Gold, 4 Silver, 6 Bronze)\\n\n11.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "China: 9 Total (2 Gold, 3 Silver, 4 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Canada: 14 Total (4 Gold, 4 Silver, 6 Bronze)\\n\n11.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "China: 9 Total (2 Gold, 3 Silver, 4 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "South Korea: 7 Total (2 Gold, 2 Silver, 3 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Switzerland: 12 Total (5 Gold, 4 Silver, 3 Bronze)\\n\n12.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "China: 9 Total (2 Gold, 3 Silver, 4 Bronze)\\n\n13.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "South Korea: 7 Total (2 Gold, 2 Silver, 3 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        },
+        {
+          "wrong_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "wrong_claim": "Australia: 6 Total (3 Gold, 2 Silver, 1 Bronze)\\n\n15.",
+          "wrong_source": "USA Today",
+          "correct_article": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "correct_claim": "China: 9 Total (2 Gold, 3 Silver, 4 Bronze)\\n\n13.",
+          "correct_source": "USA Today"
+        }
+      ],
+      "missing_context": {
+        "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18": [
+          "Norway: 33 Total (15 Gold, 8 Silver, 10 Bronze)\\n\n2.",
+          "Norway: 33 Total (15 Gold, 8 Silver, 10 Bronze)\\n\n2.",
+          "Italy: 26 Total (9 Gold, 5 Silver, 12 Bronze)\\n\n3.",
+          "Italy: 26 Total (9 Gold, 5 Silver, 12 Bronze)\\n\n3.",
+          "Austria: 17 Total (5 Gold, 8 Silver, 4 Bronze)\\n\n6.",
+          "Austria: 17 Total (5 Gold, 8 Silver, 4 Bronze)\\n\n6.",
+          "South Korea: 7 Total (2 Gold, 2 Silver, 3 Bronze)\\n\n13.",
+          "South Korea: 7 Total (2 Gold, 2 Silver, 3 Bronze)\\n\n13."
+        ],
+        "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m": [
+          "Norway: 33 Total (15 Gold, 8 Silver, 10 Bronze)\\n\n2.",
+          "Italy: 26 Total (9 Gold, 5 Silver, 12 Bronze)\\n\n3.",
+          "Austria: 17 Total (5 Gold, 8 Silver, 4 Bronze)\\n\n6.",
+          "South Korea: 7 Total (2 Gold, 2 Silver, 3 Bronze)\\n\n13."
+        ]
+      }
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "USA TODAY Access Restrictions in Specific Geographic Regions",
+      "slug": "usa-today-access-restrictions-in-specific-geographic-regions",
+      "summary": "USA TODAY has implemented regional access restrictions for certain website features, affecting users in specific locations.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.792,
+      "source_agreement": 0.95,
+      "sources": [
+        {
+          "name": "USA Today",
+          "bias_score": 0.0,
+          "trust_score": 0.792
+        },
+        {
+          "name": "Usa_Today02_1-5",
+          "bias_score": 0.0,
+          "trust_score": 0.792
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Regional Feature Availability",
+          "text": "Users attempting to access USA TODAY from certain locations are encountering messages indicating that specific features are currently unavailable. The publication has stated it is working to expand access to these features globally.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.792
+            },
+            {
+              "name": "Usa_Today02_1-5",
+              "bias_score": 0.0,
+              "trust_score": 0.792
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "unsupported-eu-page",
+              "quote": "You're visiting this site from a location where this feature is not currently available.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "Usa_Today02_1-5",
+              "article_id": "unsupported-eu-page",
+              "quote": "USA TODAY is always working to expand access to our features.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.792,
+          "avg_agreement": 0.95,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Customer Support for Affected Users",
+          "text": "Subscribers and newsletter recipients who are impacted by these regional restrictions are advised to contact the organization via email or telephone for assistance.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.792
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "unsupported-eu-page",
+              "quote": "If you are a subscriber or have signed up for one of our newsletters and need assistance, please send us an email or give us a call at +1-800-872-0001.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.792,
+          "avg_agreement": 0.95,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "unsupported-eu-page",
+          "title": "Unsupported EU page",
+          "url": "https://www.usatoday.com/live-story/entertainment/celebrities/2026/02/18/nancy-guthrie-savannah-mom-updates-today/88735727007/",
+          "source": "USA Today",
+          "published_at": "2026-02-18",
+          "excerpt": "You're visiting this site from a location where this feature is not currently\navailable. USA TODAY is always working to expand access to our features. We\nappreciate your patience.\nIf you are a subscri…"
+        },
+        {
+          "id": "unsupported-eu-page",
+          "title": "Unsupported EU page",
+          "url": "https://www.usatoday.com/live-story/sports/ncaab/2026/02/01/illinois-vs-nebraska-basketball-live-score-updates-highlights/88463251007/",
+          "source": "Usa_Today02_1-5",
+          "published_at": "2026-02-01",
+          "excerpt": "You're visiting this site from a location where this feature is not currently\navailable. USA TODAY is always working to expand access to our features. We\nappreciate your patience.\nIf you are a subscri…"
+        },
+        {
+          "id": "unsupported-eu-page",
+          "title": "Unsupported EU page",
+          "url": "https://www.usatoday.com/story/special/contributor-content/2026/02/01/shakespeare-ai-alex-gleasons-open-source-alternative-for-ai-web-building/88464569007/",
+          "source": "Usa_Today02_1-5",
+          "published_at": "2026-02-01",
+          "excerpt": "You're visiting this site from a location where this feature is not currently\navailable. USA TODAY is always working to expand access to our features. We\nappreciate your patience.\nIf you are a subscri…"
+        },
+        {
+          "id": "unsupported-eu-page",
+          "title": "Unsupported EU page",
+          "url": "https://www.usatoday.com/story/special/contributor-content/2026/02/01/how-one-father-challenged-the-measure-of-care-and-crafted-a-global-healthcare-solution/88464430007/",
+          "source": "Usa_Today02_1-5",
+          "published_at": "2026-02-01",
+          "excerpt": "You're visiting this site from a location where this feature is not currently\navailable. USA TODAY is always working to expand access to our features. We\nappreciate your patience.\nIf you are a subscri…"
+        }
+      ],
+      "category": "Technology",
+      "updated_at": "2026-02-18T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
     },
     "comments": []
   },
@@ -183,35 +938,36 @@
     "story": {
       "heading": "Pakistan Conducts Airstrikes Against Militant Targets in Afghanistan",
       "slug": "pakistan-conducts-airstrikes-against-militant-targets-in-afghanistan",
-      "summary": "Pakistan has launched a series of airstrikes against militant camps in eastern Afghanistan following a surge in cross-border attacks, leading to reports of civilian casualties and a formal protest from Kabul.",
+      "summary": "Pakistan has launched a series of airstrikes against militant camps in Afghanistan following a surge in cross-border attacks, leading to reports of civilian casualties and a sharp diplomatic rebuke from Kabul.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.754,
+      "factual_accuracy": 0.722,
+      "source_agreement": 0.657,
       "sources": [
         {
           "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.752
+          "trust_score": 0.719
         },
         {
           "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.755
+          "trust_score": 0.724
         }
       ],
       "segments": [
         {
           "heading": "Military Operations and Targeted Groups",
-          "text": "Pakistan's military conducted what it described as \"intelligence-based, selective operations\" targeting seven militant camps across the border. The strikes focused on the Tehrik-e-Taliban Pakistan (TTP), its affiliates, and a group associated with the Islamic State. Islamabad stated it has \"conclusive evidence\" that recent attacks on Pakistani soil, including a suicide bombing at a Shia mosque in Islamabad, were directed by leadership based in Afghanistan.",
+          "text": "Pakistan's military conducted what it described as 'intelligence-based, selective operations' against seven militant camps in Afghanistan. The strikes targeted the Tehrik-e-Taliban Pakistan (TTP), its affiliates, and a group associated with the Islamic State. Islamabad stated the operations were a response to recent deadly attacks on Pakistani soil, including a suicide bombing at a mosque in Islamabad and an attack in the Bajaur district that killed 11 soldiers.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.752
+              "trust_score": 0.719
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.755
+              "trust_score": 0.724
             }
           ],
           "citations": [
@@ -224,29 +980,30 @@
             {
               "source": "The Guardian",
               "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
-              "quote": "Tarar said Pakistan ‘has always strived to maintain peace and stability in the region’, but added that the safety and security of Pakistani citizens remained a top priority.",
+              "quote": "The latest development came days after a suicide bomber, backed by gunmen, rammed an explosives-laden vehicle into the wall of a security post in Bajaur district... killing 11 soldiers and a child.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.754,
+          "avg_truth": 0.722,
+          "avg_agreement": 0.657,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Casualties and Afghan Response",
-          "text": "Afghanistan's Ministry of Defense and local officials reported that the strikes hit civilian areas in Nangarhar and Paktika provinces, including a religious seminary and private homes. Afghan authorities stated that at least 18 people were killed, including women and children. Kabul condemned the action as a \"blatant violation\" of national sovereignty and international law, while accusing Pakistan of using external strikes to mask internal security failures.",
+          "heading": "Casualties and Impact in Afghanistan",
+          "text": "The Afghan Ministry of Defense reported that the strikes occurred in the eastern provinces of Nangarhar and Paktika, hitting civilian homes and a religious seminary. Afghan officials stated that women and children were among the victims, with reports indicating at least 18 people were killed. Rescue efforts continued on Sunday as bodies were recovered from the debris.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.752
+              "trust_score": 0.719
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.755
+              "trust_score": 0.724
             }
           ],
           "citations": [
@@ -259,47 +1016,49 @@
             {
               "source": "The Guardian",
               "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
-              "quote": "Mujahid accused Pakistan’s military of carrying out the strikes to compensate for what he described as security weaknesses inside the country.",
+              "quote": "In a post on X, Mujahid said the strikes targeted civilians in Nangarhar and Paktika provinces, killing and wounding dozens of people, including women and children.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.754,
+          "avg_truth": 0.722,
+          "avg_agreement": 0.657,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Regional Context and Escalating Tensions",
-          "text": "The airstrikes follow a period of increased violence in Pakistan, including a recent attack in Bajaur district that killed 11 soldiers and a child. While a Qatar-mediated ceasefire has been in place since October, relations remain strained. Pakistan has repeatedly urged the Taliban government to prevent militants from using Afghan soil for attacks, a charge that Kabul continues to deny.",
+          "heading": "Diplomatic Tensions and Sovereignty",
+          "text": "The Afghan government condemned the strikes as a 'blatant violation' of national sovereignty and international law. Conversely, Pakistan's information minister, Attaullah Tarar, claimed the country possesses 'conclusive evidence' that recent attacks were directed by leadership based in Afghanistan. Pakistan has urged the international community to pressure the Taliban to prevent Afghan soil from being used for cross-border militancy, a charge Kabul continues to deny.",
           "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.755
-            },
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.752
+              "trust_score": 0.719
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.724
             }
           ],
           "citations": [
             {
-              "source": "The Guardian",
-              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
-              "quote": "Pakistan’s military warned it would not ‘exercise any restraint’ and operations against those responsible would continue ‘irrespective of their location’.",
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "Afghanistan’s Ministry of Defense confirmed the strikes in a statement, calling them a ‘blatant violation of Afghanistan’s national sovereignty’.",
               "bias_level": "neutral"
             },
             {
-              "source": "CNN",
-              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
-              "quote": "Islamabad has long accused Kabul of harboring the TTP, which Kabul denies.",
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "Tarar said Pakistan had ‘conclusive evidence’ that the recent attacks... were carried out by militants acting at the ‘behest of their Afghanistan-based leadership and handlers’.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.754,
+          "avg_truth": 0.722,
+          "avg_agreement": 0.657,
           "article_count": 2,
           "notes": null,
           "comments": []
@@ -319,48 +1078,51 @@
           "title": "Pakistan strikes militant hideouts on Afghan border after surge in attacks",
           "url": "https://www.theguardian.com/world/2026/feb/21/pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
           "source": "The Guardian",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "Pakistan launched multiple airstrikes on Saturday night targeting militants in neighbouring Afghanistan, where the government reported children were among dozens of people killed and wounded.\n\nIslamab…"
         }
       ],
       "category": "Geopolitics",
-      "updated_at": "2026-02-28T12:00:00Z"
+      "updated_at": "2026-02-22T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
     },
     "comments": []
   },
   {
     "story": {
-      "heading": "Northeast Braces for Major Nor'easter and Blizzard Conditions",
-      "slug": "northeast-braces-for-major-nor-easter-and-blizzard-conditions",
-      "summary": "A powerful winter storm is set to impact the Northeast United States, prompting blizzard warnings for major metropolitan areas and states of emergency across several regions as officials warn of life-threatening conditions and significant travel disruptions.",
+      "heading": "Northeast Braces for Significant Nor'easter and Blizzard Conditions",
+      "slug": "northeast-braces-for-significant-nor-easter-and-blizzard-conditions",
+      "summary": "A major winter storm is set to impact the U.S. Northeast starting Sunday, prompting blizzard warnings for major metropolitan areas and states of emergency across several regions.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.689,
+      "factual_accuracy": 0.745,
+      "source_agreement": 0.666,
       "sources": [
         {
           "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.731
+          "trust_score": 0.728
         },
         {
           "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.646
+          "trust_score": 0.762
         }
       ],
       "segments": [
         {
           "heading": "Storm Forecast and Severity",
-          "text": "Meteorologists are tracking a rapidly intensifying 'bomb cyclone' expected to bring heavy snow and strong winds from the Mid-Atlantic to New England. Blizzard warnings have been issued for New York City for the first time since 2017, with snowfall totals predicted to reach between 12 and 20 inches in some areas. Wind gusts could exceed 55 mph, creating treacherous conditions along the coast.",
+          "text": "Meteorologists expect the storm to rapidly intensify into a 'bomb cyclone' as it moves off the Eastern Seaboard. Blizzard warnings have been issued for New York City, Philadelphia, and coastal New England, marking the first such warning for New York City since 2017. Snowfall totals are projected to reach between 12 and 20 inches in the hardest-hit areas, accompanied by wind gusts exceeding 55 mph.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.731
+              "trust_score": 0.728
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.646
+              "trust_score": 0.762
             }
           ],
           "citations": [
@@ -378,24 +1140,25 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.689,
+          "avg_truth": 0.745,
+          "avg_agreement": 0.666,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Emergency Declarations and Public Safety",
-          "text": "Governors in New York and New Jersey have declared states of emergency, while local leaders in Philadelphia and New York City have issued snow emergencies. Officials are prioritizing the safety of unhoused residents by opening warming centers and increasing outreach efforts, particularly following a January cold snap that resulted in multiple hypothermia-related deaths in New York City.",
+          "heading": "Emergency Preparations and Government Response",
+          "text": "Governors in New Jersey and New York have declared states of emergency, while local officials in Philadelphia and Washington, D.C., have activated snow response teams. New York City Mayor Zohran Mamdani warned that conditions may be more hazardous than previous storms this season, leading the city to open over 40 warming centers and increase outreach for the unhoused population.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.731
+              "trust_score": 0.728
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.646
+              "trust_score": 0.762
             }
           ],
           "citations": [
@@ -408,29 +1171,30 @@
             {
               "source": "The Guardian",
               "article_id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
-              "quote": "At least 19 people were found dead outdoors in the city after temperatures plunged on 19 January",
+              "quote": "efforts to get unhoused New Yorkers off the streets and into shelters would begin Saturday afternoon.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.689,
+          "avg_truth": 0.745,
+          "avg_agreement": 0.666,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Impact on Travel and Infrastructure",
-          "text": "The storm is expected to cause major disruptions to Monday morning commutes, with officials advising residents to stay off the roads. Approximately 2,000 flights have already been canceled at major hubs including JFK, LaGuardia, and Boston Logan. Additionally, the combination of heavy, wet snow and high winds raises the risk of power outages and downed tree limbs.",
+          "heading": "Travel and Infrastructure Impacts",
+          "text": "Significant travel disruptions are anticipated, with approximately 2,000 flights already canceled ahead of the storm's peak. Officials have warned that travel may become impossible by Sunday night and Monday morning. Beyond transportation, the combination of heavy, wet snow and high winds is expected to cause power outages and downed tree limbs across the region.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.731
+              "trust_score": 0.728
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.646
+              "trust_score": 0.762
             }
           ],
           "citations": [
@@ -448,7 +1212,8 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.689,
+          "avg_truth": 0.745,
+          "avg_agreement": 0.666,
           "article_count": 2,
           "notes": null,
           "comments": []
@@ -468,12 +1233,14 @@
           "title": "New York City gets first blizzard warning in nine years as area hunkers down",
           "url": "https://www.theguardian.com/us-news/2026/feb/21/new-york-city-blizzard-warning",
           "source": "The Guardian",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "Blizzard warnings were issued Saturday for New York City, New Jersey and coastal communities along the east coast for a late-winter storm set to arrive on Sunday that could dump more than a foot of sn…"
         }
       ],
       "category": "Environment",
-      "updated_at": "2026-02-28T12:00:00Z"
+      "updated_at": "2026-02-21T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
     },
     "comments": []
   },
@@ -481,35 +1248,36 @@
     "story": {
       "heading": "Recovery Operations Conclude Following Deadly Sierra Nevada Avalanche",
       "slug": "recovery-operations-conclude-following-deadly-sierra-nevada-avalanche",
-      "summary": "Authorities have recovered the bodies of nine individuals killed in a Tuesday avalanche near Lake Tahoe, marking the deadliest such incident in the United States in over four decades.",
+      "summary": "Authorities have recovered the bodies of nine individuals killed in a Tuesday avalanche near Lake Tahoe, marking the deadliest such event in the United States in 45 years.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.572,
+      "factual_accuracy": 0.736,
+      "source_agreement": 0.663,
       "sources": [
         {
           "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.612
+          "trust_score": 0.725
         },
         {
           "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.532
+          "trust_score": 0.747
         }
       ],
       "segments": [
         {
           "heading": "Incident Overview and Casualties",
-          "text": "On Tuesday, February 17, 2026, an avalanche approximately the size of a football field struck a group of backcountry skiers in the Tahoe National Forest. The disaster resulted in nine fatalities, including six women from a close-knit group of friends and three professional guides. Six other members of the party survived. Officials noted that the incident is the deadliest avalanche in the region since 1981.",
+          "text": "On Tuesday, February 17, 2026, an avalanche approximately the size of a football field struck a group of backcountry skiers in the Tahoe National Forest. The disaster resulted in nine fatalities, including six women from a close-knit group of friends and three professional guides from Blackbird Mountain Guides. Six other members of the party survived the slide. The victims have been identified as Carrie Atkin, Liz Clabaugh, Danielle Keatley, Kate Morse, Caroline Sekar, Kate Vitt, and guides Andrew Alissandratos, Nicole Choo, and Michael Henry.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.612
+              "trust_score": 0.725
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.532
+              "trust_score": 0.747
             }
           ],
           "citations": [
@@ -522,29 +1290,30 @@
             {
               "source": "The Guardian",
               "article_id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
-              "quote": "The avalanche has been the deadliest since 1981, with experts estimating the slide path was roughly the size of a football field.",
+              "quote": "The sheriff named for the first time the three guides from Blackbird Mountain Company who died: Andrew Alissandratos, 34, Nicole Choo, 42, and Michael Henry, 30.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.572,
+          "avg_truth": 0.736,
+          "avg_agreement": 0.663,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Recovery Efforts and Environmental Conditions",
-          "text": "Search and rescue operations spanned five days, hampered by severe winter weather and heavy snowfall. While six survivors were rescued shortly after the slide, the recovery of the deceased was delayed by a blizzard that dropped 28 inches of snow. The final bodies were recovered on Saturday morning with the assistance of a Black Hawk helicopter and dozens of volunteers from multiple agencies.",
+          "heading": "Search and Recovery Efforts",
+          "text": "The recovery operation spanned five days, hampered by severe winter weather and heavy snowfall. While six survivors were rescued shortly after the incident, the remains of the deceased were recovered in stages, with the final five bodies located on Saturday morning. The operation involved a coordinated effort between the Nevada County Sheriff’s Office, the California Highway Patrol, the National Guard, and dozens of volunteers. Air support, including a Black Hawk helicopter, was utilized once weather conditions permitted.",
           "sources": [
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.532
+              "trust_score": 0.747
             },
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.612
+              "trust_score": 0.725
             }
           ],
           "citations": [
@@ -562,24 +1331,25 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.572,
+          "avg_truth": 0.736,
+          "avg_agreement": 0.663,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Victims and Investigation",
-          "text": "The deceased guides were identified as Andrew Alissandratos, Nicole Choo, and Michael Henry of Blackbird Mountain Guides. The six other victims were identified as Carrie Atkin, Liz Clabaugh, Danielle Keatley, Kate Morse, Caroline Sekar, and Kate Vitt. The Nevada County Sheriff’s Office is currently investigating the incident, including whether criminal negligence played a role, while the affected terrain remains closed to the public until mid-March.",
+          "heading": "Investigation and Access Restrictions",
+          "text": "The Nevada County Sheriff’s Office is currently investigating the circumstances of the avalanche, including whether criminal negligence played a role. The group was on a professionally guided tour and was returning from the Frog Lake Backcountry Huts when the slide occurred during a major winter storm. As a result of the ongoing investigation and safety concerns, the Tahoe National Forest has closed the affected terrain to the public until mid-March.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.612
+              "trust_score": 0.725
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.532
+              "trust_score": 0.747
             }
           ],
           "citations": [
@@ -597,7 +1367,8 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.572,
+          "avg_truth": 0.736,
+          "avg_agreement": 0.663,
           "article_count": 2,
           "notes": null,
           "comments": []
@@ -617,12 +1388,14 @@
           "title": "All nine bodies of skiers killed in California avalanche recovered",
           "url": "https://www.theguardian.com/us-news/2026/feb/21/california-avalanche-bodies-recovered",
           "source": "The Guardian",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "Officials announced on Saturday that the bodies of all nine missing skiers who were killed in a devastating avalanche in California had been recovered, following days of search efforts.\n\nThe avalanche…"
         }
       ],
       "category": "Society",
-      "updated_at": "2026-02-28T12:00:00Z"
+      "updated_at": "2026-02-21T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
     },
     "comments": []
   },
@@ -631,34 +1404,35 @@
       "heading": "Trump Increases Global Tariffs to 15% Following Supreme Court Ruling",
       "slug": "trump-increases-global-tariffs-to-15-following-supreme-court-ruling",
       "summary": "President Donald Trump has announced a 15% global tariff on imports from all countries, a move that follows a Supreme Court decision striking down his previous use of emergency powers to impose trade duties.",
-      "political_bias": 0.056,
-      "factual_accuracy": 0.536,
+      "political_bias": 0.0,
+      "factual_accuracy": 0.559,
+      "source_agreement": 0.255,
       "sources": [
         {
           "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.612
+          "trust_score": 0.68
         },
         {
           "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.416
+          "trust_score": 0.535
         }
       ],
       "segments": [
         {
           "heading": "New Tariff Announcement and Legal Context",
-          "text": "On Saturday, President Trump announced via social media that he would increase global tariffs to 15%, up from a 10% rate he had proposed just a day earlier. This escalation followed a 6-3 Supreme Court ruling on Friday which determined that the president had exceeded his authority by using the International Emergency Economic Powers Act (IEEPA) to impose broad duties. In response, Trump invoked Section 122 of the Trade Act of 1974, a law allowing for temporary 15% duties for up to 150 days without immediate congressional approval.",
+          "text": "On Saturday, President Trump announced via Truth Social that he would increase global tariffs to 15%, up from a 10% rate he had proposed just a day earlier. This escalation followed a 6-3 Supreme Court ruling on Friday, which determined that the president had exceeded his authority by using the International Emergency Economic Powers Act (IEEPA) to impose broad trade duties. In response, Trump invoked Section 122 of the Trade Act of 1974, a law allowing for temporary 15% duties for up to 150 days without immediate congressional approval.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.612
+              "trust_score": 0.68
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.416
+              "trust_score": 0.535
             }
           ],
           "citations": [
@@ -676,24 +1450,25 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.514,
+          "avg_truth": 0.608,
+          "avg_agreement": 0.357,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
           "heading": "Implementation and Economic Impact",
-          "text": "While Trump stated the new 15% rate is effective \"immediately,\" official documentation regarding the exact timing remains unclear. Previous White House guidance suggested a 10% rate would begin at 12:01 a.m. ET on Tuesday, February 24. Economists note that while some countries previously facing much higher \"reciprocal\" duties may see a relative decrease in rates, others like the United Kingdom and Australia will face higher costs. Domestic retailers such as Walmart and Target may benefit from the shift away from higher industry-specific duties, though experts warn that US consumers have historically borne the majority of tariff costs.",
+          "text": "While Trump stated the new 15% rate is effective \"immediately,\" official documentation regarding the exact timing remains unclear. Previous guidance suggested a 10% rate would take effect on Tuesday, February 24. Economists note that while some countries previously facing much higher \"reciprocal\" duties might see a relative decrease in rates, others like the United Kingdom and Australia will face higher costs. Domestically, while some retailers and automakers may benefit from the removal of higher specific duties, experts warn that US consumers and businesses have historically borne the majority of tariff costs.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.612
+              "trust_score": 0.68
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.416
+              "trust_score": 0.535
             }
           ],
           "citations": [
@@ -711,24 +1486,20 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.514,
+          "avg_truth": 0.608,
+          "avg_agreement": 0.357,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
           "heading": "International and Domestic Reactions",
-          "text": "The announcement drew sharp criticism from international leaders and trade officials. Australian Trade Minister Don Farrell stated the government would \"examine all options\" and argued against the \"unjustified tariffs.\" German Chancellor Friedrich Merz expressed concern over the \"poison\" of economic uncertainty, while French President Emmanuel Macron emphasized the importance of the rule of law and judicial counterweights. Domestically, Trump criticized the Supreme Court justices, including his own appointees, calling the ruling \"deeply disappointing.\"",
+          "text": "The announcement has drawn sharp criticism from international leaders and domestic opposition. Australian officials described the tariffs as \"unjustified\" and \"regrettable,\" signaling they would seek exemptions. German Chancellor Friedrich Merz warned that constant tariff uncertainty acts as \"poison\" for the global economy, while French President Emmanuel Macron emphasized the importance of the rule of law and judicial counterweights. Within the US, business associations have already begun seeking refunds for duties previously collected under the now-overturned IEEPA framework.",
           "sources": [
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.416
-            },
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.612
+              "trust_score": 0.535
             }
           ],
           "citations": [
@@ -741,19 +1512,14 @@
             {
               "source": "The Guardian",
               "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
-              "quote": "German chancellor Friedrich Merz said... ‘The biggest poison for the economies of Europe and the US is this constant uncertainty about tariffs.’",
+              "quote": "German chancellor Friedrich Merz said on Saturday... ‘The biggest poison for the economies of Europe and the US is this constant uncertainty about tariffs.’",
               "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
-              "quote": "Trump lashed out at the Supreme Court, calling the ruling ‘deeply disappointing’ and adding that he was ashamed of the justices",
-              "bias_level": "right"
             }
           ],
-          "avg_bias": 0.167,
-          "avg_truth": 0.581,
-          "article_count": 2,
+          "avg_bias": 0.0,
+          "avg_truth": 0.46,
+          "avg_agreement": 0.05,
+          "article_count": 1,
           "notes": null,
           "comments": []
         }
@@ -772,7 +1538,7 @@
           "title": "Australia will ‘examine all options’ to avoid new 15% tariffs announced by Donald Trump",
           "url": "https://www.theguardian.com/australia-news/2026/feb/22/australia-will-examine-all-options-to-avoid-new-15-tariffs-announced-by-donald-trump",
           "source": "The Guardian",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-22",
           "excerpt": "Australia will “examine all options” after the US president Donald Trump announced a temporary 15% tariff would apply to US imports from all countries.\n\nThe US president’s move came less than 24 hours…"
         },
         {
@@ -780,12 +1546,30 @@
           "title": "Trump raises tariffs to 15% on imports from all countries",
           "url": "https://www.theguardian.com/us-news/2026/feb/21/trump-tariffs-15-percent",
           "source": "The Guardian",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "Donald Trump announced on Saturday that he would raise a temporary tariff rate on US imports from all countries from 10% to 15%, less than 24 hours after the US supreme court ruled against the legalit…"
         }
       ],
       "category": "Economy",
-      "updated_at": "2026-02-28T12:00:00Z"
+      "updated_at": "2026-02-22T12:00:00Z",
+      "contradiction_reports": [
+        {
+          "wrong_article": "australia-will-examine-all-options-to-avoid-new-15-tariffs-announced-by-donald-t",
+          "wrong_claim": "It’s expected the new levies will come into effect from 4pm on Tuesday 24 February AEDT, though the White House’s fact sheet has not been updated for the latest levy announcement.",
+          "wrong_source": "The Guardian",
+          "correct_article": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+          "correct_claim": "A White House fact sheet issued on Friday regarding the original 10% tariffs said the levies would go into effect at 12.01am ET on Tuesday, 24 February.",
+          "correct_source": "The Guardian"
+        }
+      ],
+      "missing_context": {
+        "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately": [
+          "A White House fact sheet issued on Friday regarding the original 10% tariffs said the levies would go into effect at 12.01am ET on Tuesday, 24 February."
+        ],
+        "australia-will-examine-all-options-to-avoid-new-15-tariffs-announced-by-donald-t": [
+          "A White House fact sheet issued on Friday regarding the original 10% tariffs said the levies would go into effect at 12.01am ET on Tuesday, 24 February."
+        ]
+      }
     },
     "comments": []
   },
@@ -794,104 +1578,102 @@
       "heading": "Ukraine Condemns Energy Supply Threats from Hungary and Slovakia",
       "slug": "ukraine-condemns-energy-supply-threats-from-hungary-and-slovakia",
       "summary": "Ukraine's Foreign Ministry has denounced threats from Hungary and Slovakia to halt electricity exports as \"blackmail,\" following a dispute over the suspension of Russian oil flows through the Druzhba pipeline.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.651,
+      "political_bias": -0.062,
+      "factual_accuracy": 0.702,
+      "source_agreement": 0.772,
       "sources": [
         {
           "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.547
+          "trust_score": 0.635
         },
         {
           "name": "The Guardian",
-          "bias_score": 0.0,
-          "trust_score": 0.755
+          "bias_score": -0.5,
+          "trust_score": 0.769
         }
       ],
       "segments": [
         {
-          "heading": "The Energy Dispute",
-          "text": "Since January 27, Russian oil shipments to Hungary and Slovakia via the Druzhba pipeline have been suspended. Kyiv attributes the outage to a Russian drone strike on pipeline equipment in Western Ukraine, while Budapest and Bratislava have accused Ukraine of intentionally delaying repairs. In response, Slovak Prime Minister Robert Fico and Hungarian leader Viktor Orban have threatened to cut off emergency electricity supplies to Ukraine, which currently relies on these neighbors for approximately half of its European electricity imports.",
+          "heading": "The Energy Dispute and Pipeline Outage",
+          "text": "Shipments of Russian oil to Hungary and Slovakia via the Druzhba pipeline have been suspended since January 27. Kyiv attributes the outage to a Russian drone strike that damaged pipeline equipment in Western Ukraine. However, Hungary and Slovakia have accused Ukraine of intentionally delaying repairs and the resumption of oil transit. In response, Slovak Prime Minister Robert Fico and Hungarian leader Viktor Orban have threatened to cut off emergency electricity supplies to Ukraine, which currently relies on these neighbors for approximately half of its European electricity imports.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.547
+              "trust_score": 0.635
             },
             {
               "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.755
+              "bias_score": -0.5,
+              "trust_score": 0.769
             }
           ],
           "citations": [
             {
               "source": "CNN",
               "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
-              "quote": "Between them, Hungary and Slovakia have been providing around half of European emergency electricity exports to Ukraine",
+              "quote": "Slovakia and Hungary say Ukraine is to blame for the prolonged outage.",
               "bias_level": "neutral"
             },
             {
               "source": "The Guardian",
               "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
               "quote": "Hungary and Slovakia both accuse Ukraine of delaying the restart, without evidence.",
-              "bias_level": "neutral"
+              "bias_level": "left"
             }
           ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.651,
+          "avg_bias": -0.25,
+          "avg_truth": 0.702,
+          "avg_agreement": 0.772,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
           "heading": "Diplomatic Tensions and Accusations",
-          "text": "The Ukrainian Foreign Ministry described the threats as \"ultimatums and blackmail,\" asserting that such pressure should be directed at the Kremlin rather than Kyiv. The dispute highlights a growing rift between Ukraine and the two EU and NATO members, whose leaders have maintained closer ties with Moscow than most European peers. Additionally, Hungary has reportedly threatened to block a  90 billion Ukrainian war loan, while Slovak Prime Minister Fico accused President Zelenskyy of acting \"maliciously.\"",
+          "text": "The Ukrainian Foreign Ministry issued a statement rejecting what it termed \"ultimatums and blackmail,\" arguing that such pressure should be directed at the Kremlin rather than Kyiv. The dispute highlights a growing rift between Ukraine and the two EU and NATO members, whose leaders have maintained closer ties with Moscow than many of their European counterparts. Slovak Prime Minister Fico has further escalated the rhetoric by accusing Ukrainian President Volodymyr Zelenskyy of acting maliciously toward Slovakia.",
           "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.755
-            },
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.547
+              "trust_score": 0.635
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": -0.5,
+              "trust_score": 0.769
             }
           ],
           "citations": [
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "Ukraine rejects and condemns the ultimatums and blackmail by the governments of Hungary and the Slovak Republic.",
+              "bias_level": "neutral"
+            },
             {
               "source": "The Guardian",
               "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
               "quote": "The Slovak leader, Robert Fico, has accused Ukrainian president Volodymyr Zelenskyy of acting ‘maliciously’ towards his country.",
               "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
-              "quote": "Ukraine rejects and condemns the ultimatums and blackmail by the governments of Hungary and the Slovak Republic",
-              "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.651,
+          "avg_truth": 0.702,
+          "avg_agreement": 0.772,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Proposed Solutions and Ongoing Conflict",
-          "text": "Ukraine has proposed alternative transit routes, including maritime shipments via the Odesa-Brody pipeline, to maintain oil flows while repairs continue. Meanwhile, the broader conflict continues to impact civilian infrastructure, with reports of explosions in Kyiv and Lviv. In Lviv, local authorities reported an \"act of terror\" involving two blasts that killed a policewoman and injured 15 others. Additionally, Ukraine confirmed strikes against a missile factory in Russia's Udmurt Republic using domestically produced cruise missiles.",
+          "heading": "Proposed Solutions and Regional Security",
+          "text": "Ukraine has proposed alternative transit routes to maintain oil flows to Europe during the repair period, including the use of its domestic oil transportation system or maritime routes via the Odesa-Brody pipeline. Kyiv has characterized the threats to its electricity supply as irresponsible actions that jeopardize the energy security of the entire region, especially as Russia continues to target Ukraine's power grid with missile and drone strikes.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.547
-            },
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.755
+              "trust_score": 0.635
             }
           ],
           "citations": [
@@ -900,7 +1682,26 @@
               "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
               "quote": "Ukraine has proposed alternative transit routes to ship oil to Europe while emergency pipeline repair works are under way.",
               "bias_level": "neutral"
-            },
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.635,
+          "avg_agreement": 0.768,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Ongoing Military Developments",
+          "text": "As the conflict nears its fourth anniversary, military activity remains intense. Explosions were reported in Kyiv and Lviv, with the latter resulting in the death of a policewoman and injuries to 15 others. Meanwhile, Ukraine confirmed strikes against a missile factory in Russia's Udmurt Republic using domestically produced cruise missiles, and a strike on a gas plant in Samara.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": -0.5,
+              "trust_score": 0.769
+            }
+          ],
+          "citations": [
             {
               "source": "The Guardian",
               "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
@@ -909,8 +1710,9 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.651,
-          "article_count": 2,
+          "avg_truth": 0.769,
+          "avg_agreement": 0.775,
+          "article_count": 1,
           "notes": null,
           "comments": []
         }
@@ -929,48 +1731,60 @@
           "title": "Ukraine war briefing: Kyiv condemns ‘blackmail’ by Hungary and Slovakia in energy supplies dispute",
           "url": "https://www.theguardian.com/world/2026/feb/22/ukraine-war-briefing-kyiv-condemns-hungary-slovakia-energy-supply-dispute",
           "source": "The Guardian",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-22",
           "excerpt": "Ukraine’s foreign ministry has condemned what it describes as “ultimatums and blackmail” by Hungary and Slovakia on Saturday, after both governments threatened to stop electricity supplies to Ukraine …"
         }
       ],
       "category": "Geopolitics",
-      "updated_at": "2026-02-28T12:00:00Z"
+      "updated_at": "2026-02-22T12:00:00Z",
+      "contradiction_reports": [
+        {
+          "wrong_article": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+          "wrong_claim": "“Ultimatums should ⁠be sent to the Kremlin, and certainly not to Kyiv.”\n\nHungary, Slovakia are key for Ukraine’s electricity imports\n\nBetween them, Hungary and Slovakia have been providing around half ‌of European emergency electricity exports to Ukraine, which Kyiv increasingly relies on ​as Russian attacks have damaged its grid.",
+          "wrong_source": "CNN",
+          "correct_article": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+          "correct_claim": "“Ultimatums should be sent to the Kremlin, and certainly not to Kyiv.”\n\nSlovakia and Hungary are the only two EU countries that still rely on significant amounts of Russian oil shipped via the Soviet-era Druzhba pipeline over Ukraine.",
+          "correct_source": "The Guardian"
+        }
+      ],
+      "missing_context": {}
     },
     "comments": []
   },
   {
     "story": {
-      "heading": "Salsa Legend Willie Colón Dies at 75",
-      "slug": "salsa-legend-willie-col-n-dies-at-75",
-      "summary": "Willie Colón, the influential trombonist, vocalist, and composer who helped define the salsa genre, passed away on Saturday at the age of 75.",
+      "heading": "Willie Colón, Influential Salsa Trombonist and Composer, Dies at 75",
+      "slug": "willie-col-n-influential-salsa-trombonist-and-composer-dies-at-75",
+      "summary": "American salsa legend Willie Colón, a pioneering trombonist, vocalist, and composer who helped define the genre and sold over 30 million albums, has died at the age of 75.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.83,
+      "factual_accuracy": 0.843,
+      "source_agreement": 0.95,
       "sources": [
         {
           "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.793
+          "trust_score": 0.83
         },
         {
           "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.866
+          "trust_score": 0.857
         }
       ],
       "segments": [
         {
-          "heading": "Passing and Legacy",
-          "text": "Willie Colón's family announced his death on Saturday, stating that he passed away peacefully surrounded by his relatives. While the cause of death was not disclosed, his family and colleagues celebrated his extensive musical legacy. Colón is credited with selling over 30 million albums and receiving 11 Grammy and Latin Grammy nominations throughout his career.",
+          "heading": "Death and Family Statement",
+          "text": "Willie Colón passed away peacefully on Saturday morning at the age of 75, surrounded by his family. While the specific cause of death was not disclosed, his family released a statement on his Facebook page expressing their grief and celebrating his musical legacy. His longtime manager, Pietro Carlos, noted that Colón's work expanded and politicized the salsa genre.",
           "sources": [
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.793
+              "trust_score": 0.83
             },
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.866
+              "trust_score": 0.857
             }
           ],
           "citations": [
@@ -988,77 +1802,80 @@
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.83,
+          "avg_truth": 0.843,
+          "avg_agreement": 0.95,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Musical Career and Innovations",
-          "text": "Born in the Bronx to Puerto Rican parents, Colón signed with Fania Records at age 15. His 1967 debut album, 'El Malo', sold over 300,000 copies. His work often blended jazz, rock, and salsa with rhythms from Africa, Brazil, Cuba, and Puerto Rico. Notable collaborations included recordings with Héctor Lavoe and the 1978 album 'Siembra' with Rubén Blades, which remains the highest-selling salsa album of all time.",
+          "heading": "Musical Career and Style",
+          "text": "Born in the Bronx to Puerto Rican parents, Colón signed with Fania Records at age 15 and released his debut album, 'El Malo', in 1967. His music was characterized by a fusion of jazz, rock, and salsa, incorporating rhythms from Cuba, Puerto Rico, Brazil, and Africa. Throughout his career, he recorded dozens of albums, including 'La Gran Fuga' and 'El Juicio'. His 1978 collaboration with Rubén Blades, 'Siembra', remains the highest-selling salsa album of all time.",
           "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.793
-            },
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.866
+              "trust_score": 0.857
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.83
             }
           ],
           "citations": [
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "Colón’s music combined elements of jazz, rock and salsa, incorporating the rhythms of traditional music from Cuba, Puerto Rico, Brazil, and Africa",
+              "bias_level": "neutral"
+            },
             {
               "source": "The Guardian",
               "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
               "quote": "His 1978 album Siembra, recorded with Rubén Blades, includes the hit Pedro Navaja and remains the biggest-selling salsa album of all time.",
               "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
-              "quote": "Colón’s music combined elements of jazz, rock and salsa, incorporating the rhythms of traditional music from Cuba, Puerto Rico, Brazil, and Africa.",
-              "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.83,
+          "avg_truth": 0.843,
+          "avg_agreement": 0.95,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Social Activism and Recognition",
-          "text": "Beyond music, Colón was a dedicated social activist, serving with the Latino Commission on AIDS and the United Nations Immigrant Foundation. His work frequently explored the cultural identity and challenges of Puerto Ricans living in the United States. His contributions earned him a Lifetime Achievement Award from the Latin Academy of Recording Arts and Sciences in 2004, and inductions into both the International Latin Music Hall of Fame and the Latin Songwriters Hall of Fame.",
+          "heading": "Awards and Social Activism",
+          "text": "Colón received numerous accolades, including a lifetime achievement award from the Latin Academy of Recording Arts and Sciences in 2004 and inductions into the International Latin Music Hall of Fame and the Latin Songwriters Hall of Fame. Beyond music, he was a dedicated social activist, serving with the Latino Commission on AIDS, the United Nations Immigrant Foundation, and the Congressional Hispanic Caucus Institute. His work often explored the cultural identity and challenges of Puerto Ricans living in the United States.",
           "sources": [
             {
               "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.866
+              "trust_score": 0.857
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.793
+              "trust_score": 0.83
             }
           ],
           "citations": [
             {
               "source": "CNN",
               "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
-              "quote": "He uses his songs to depict and investigate the problems of living in the U.S. as a Puerto Rican and also to imply the cultural contributions that Puerto Ricans have to offer.",
+              "quote": "A longtime social activist, Colón was a member of the Latino Commission on AIDS and the United Nations Immigrant Foundation",
               "bias_level": "neutral"
             },
             {
               "source": "The Guardian",
               "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
-              "quote": "He was inducted into the International Latin Music Hall of Fame in 2000 and the Latin Songwriters Hall of Fame in 2019.",
+              "quote": "Billboard magazine named the musician as one of the 30 most influential Latin artists of all time in 2015.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.83,
+          "avg_truth": 0.843,
+          "avg_agreement": 0.95,
           "article_count": 2,
           "notes": null,
           "comments": []
@@ -1078,139 +1895,14 @@
           "title": "US salsa legend Willie Colón, vocalist, trombonist and composer, dies aged 75",
           "url": "https://www.theguardian.com/us-news/2026/feb/21/willie-colon-music-salsa-dead-aged-75",
           "source": "The Guardian",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "Willie Colón, the pioneering trombonist, vocalist and composer, died on Saturday aged 75, his family has said.\n\nWith more than 30m albums sold, multiple platinum records and 11 combined Grammy and Lat…"
         }
       ],
       "category": "Entertainment",
-      "updated_at": "2026-02-28T12:00:00Z"
-    },
-    "comments": []
-  },
-  {
-    "story": {
-      "heading": "NASA Faces Technical Delays for Artemis II Moon Mission",
-      "slug": "nasa-faces-technical-delays-for-artemis-ii-moon-mission",
-      "summary": "NASA's Artemis II mission, intended to send four astronauts on a 10-day journey around the moon, faces potential delays following hydrogen fuel leaks and a newly discovered helium flow interruption.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.697,
-      "sources": [
-        {
-          "name": "The Guardian",
-          "bias_score": 0.0,
-          "trust_score": 0.752
-        },
-        {
-          "name": "CNN",
-          "bias_score": 0.0,
-          "trust_score": 0.642
-        }
-      ],
-      "segments": [
-        {
-          "heading": "Technical Challenges and Launch Delays",
-          "text": "The Artemis II mission has encountered several technical setbacks during pre-launch testing. In early February, a wet dress rehearsal was halted due to liquid hydrogen leaks at the launchpad. While NASA briefly targeted March 6 for liftoff after a subsequent fueling test, a new issue involving an interrupted flow of helium in the rocket's interim cryogenic propulsion stage has emerged. This latest discovery may require the Space Launch System rocket and Orion spacecraft to be rolled back to the vehicle assembly building, likely impacting the March launch window.",
-          "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.752
-            },
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.642
-            }
-          ],
-          "citations": [
-            {
-              "source": "The Guardian",
-              "article_id": "nasa-may-roll-back-artemis-ii-rocket-launch-after-helium-flow-discovery",
-              "quote": "The agency observed overnight an interrupted flow of helium in the space launch system rocket’s interim cryogenic propulsion stage.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "artemis-2-launch-how-nasa-s-hydrogen-fuel-struggle-is-already-impacting-the-upco",
-              "quote": "launch controllers found that enough super-chilled liquid hydrogen fuel was leaking at the launchpad to prompt safety concerns.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.697,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "The Complexity of Hydrogen Fuel",
-          "text": "NASA continues to utilize liquid hydrogen as a primary propellant despite its history of leakage, which also affected the Artemis I mission and the Space Shuttle program. Hydrogen is the lightest element and has a very low density, making it difficult to contain. However, it is favored for its high 'specific impulse,' a measure of thrust efficiency. This allows rockets to generate significant power while minimizing the weight of the fuel itself, which is a critical factor in spaceflight performance.",
-          "sources": [
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.642
-            }
-          ],
-          "citations": [
-            {
-              "source": "CNN",
-              "article_id": "artemis-2-launch-how-nasa-s-hydrogen-fuel-struggle-is-already-impacting-the-upco",
-              "quote": "Hydrogen is known to have a very favorable specific impulse because it’s so lightweight — and it packs a considerable punch at liftoff.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.642,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Mission Objectives and Future Goals",
-          "text": "The Artemis II crew consists of Americans Reid Wiseman, Victor Glover, and Christina Koch, and Canadian Jeremy Hansen. Their 10-day mission is designed to fly approximately 4,700 miles beyond the far side of the moon, setting a new distance record for human spaceflight. This mission serves as a critical test of systems before Artemis III, which is currently scheduled for 2028 and aims to return humans to the lunar surface for the first time since 1972.",
-          "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.752
-            }
-          ],
-          "citations": [
-            {
-              "source": "The Guardian",
-              "article_id": "nasa-may-roll-back-artemis-ii-rocket-launch-after-helium-flow-discovery",
-              "quote": "The mission is in preparation for Artemis III, scheduled for 2028, which will be the first human landing on the moon since the final Apollo program flight in December 1972.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.752,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ],
-      "articles": [
-        {
-          "id": "artemis-2-launch-how-nasa-s-hydrogen-fuel-struggle-is-already-impacting-the-upco",
-          "title": "Artemis 2 launch: How NASA’s hydrogen fuel struggle is already impacting the upcoming moon mission",
-          "url": "https://www.cnn.com/2026/02/18/science/artemis-2-nasa-hydrogen-leaks",
-          "source": "CNN",
-          "published_at": "2026-02-18",
-          "excerpt": "If all had gone according to plan, four astronauts might have been returning just this week from a history-making, 10-day slingshot trip around the moon.\n\nInstead, NASA’s engineers have been grappling…"
-        },
-        {
-          "id": "nasa-may-roll-back-artemis-ii-rocket-launch-after-helium-flow-discovery",
-          "title": "Nasa may roll back Artemis II rocket launch after helium flow discovery",
-          "url": "https://www.theguardian.com/us-news/2026/feb/21/nasa-artemis-ii-rocket-launch",
-          "source": "The Guardian",
-          "published_at": "2026-02-28",
-          "excerpt": "Nasa said in a blog post on Saturday it is taking steps to potentially roll back the Artemis II rocket launch after discovering an interrupted flow of helium.\n\nThe agency said it is taking steps to ro…"
-        }
-      ],
-      "category": "Science",
-      "updated_at": "2026-02-28T12:00:00Z"
+      "updated_at": "2026-02-21T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
     },
     "comments": []
   }
