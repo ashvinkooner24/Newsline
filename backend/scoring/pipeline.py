@@ -121,11 +121,24 @@ def load_articles_from_txt(articles_dir: str) -> list[dict]:
 
 
 _DATE_FROM_URL = re.compile(r'/(20\d{2})/(\d{2})/(\d{2})/')
-_DATE_MONTH_NAME = re.compile(r'/(20\d{2})/(january|february|march|april|may|june|july|august|september|october|november|december)/(\d{1,2})', re.IGNORECASE)
+_DATE_MONTH_NAME = re.compile(
+    r'/(20\d{2})/(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?'
+    r'|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/(\d{1,2})',
+    re.IGNORECASE,
+)
 _MONTH_MAP = {
-    "january": "01", "february": "02", "march": "03", "april": "04",
-    "may": "05", "june": "06", "july": "07", "august": "08",
-    "september": "09", "october": "10", "november": "11", "december": "12",
+    "january": "01", "jan": "01",
+    "february": "02", "feb": "02",
+    "march": "03", "mar": "03",
+    "april": "04", "apr": "04",
+    "may": "05",
+    "june": "06", "jun": "06",
+    "july": "07", "jul": "07",
+    "august": "08", "aug": "08",
+    "september": "09", "sep": "09",
+    "october": "10", "oct": "10",
+    "november": "11", "nov": "11",
+    "december": "12", "dec": "12",
 }
 
 

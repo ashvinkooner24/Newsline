@@ -307,11 +307,11 @@ export function transformStory(wrapper: BackendStoryWrapper, index: number): Top
     );
   }
 
-  // Deduplicate articles by source name (keep first occurrence)
-  const seenSources = new Set<string>();
+  // Deduplicate articles by ID (keep first occurrence)
+  const seenIds = new Set<string>();
   const uniqueArticles = articles.filter(a => {
-    if (seenSources.has(a.source.name)) return false;
-    seenSources.add(a.source.name);
+    if (seenIds.has(a.id)) return false;
+    seenIds.add(a.id);
     return true;
   });
 
