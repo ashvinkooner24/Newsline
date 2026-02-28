@@ -615,41 +615,78 @@ def main():
 
     sites = [
 
+#         {
+#         "name": "USA Today",
+#         "sites": [
+#     "https://eu.usatoday.com/sitemap/2026/february/1",
+#     "https://eu.usatoday.com/sitemap/2026/february/2",
+#     "https://eu.usatoday.com/sitemap/2026/february/3",
+#     "https://eu.usatoday.com/sitemap/2026/february/4",
+#     "https://eu.usatoday.com/sitemap/2026/february/5",
+#     "https://eu.usatoday.com/sitemap/2026/february/6",
+#     "https://eu.usatoday.com/sitemap/2026/february/7",
+#     "https://eu.usatoday.com/sitemap/2026/february/8",
+#     "https://eu.usatoday.com/sitemap/2026/february/9",
+#     "https://eu.usatoday.com/sitemap/2026/february/10",
+#     "https://eu.usatoday.com/sitemap/2026/february/11",
+#     "https://eu.usatoday.com/sitemap/2026/february/12",
+#     "https://eu.usatoday.com/sitemap/2026/february/13",
+#     "https://eu.usatoday.com/sitemap/2026/february/14",
+#     "https://eu.usatoday.com/sitemap/2026/february/15",
+#     "https://eu.usatoday.com/sitemap/2026/february/16",
+#     "https://eu.usatoday.com/sitemap/2026/february/17",
+#     "https://eu.usatoday.com/sitemap/2026/february/18",
+#     "https://eu.usatoday.com/sitemap/2026/february/19",
+#     "https://eu.usatoday.com/sitemap/2026/february/20",
+#     "https://eu.usatoday.com/sitemap/2026/february/21",
+#     "https://eu.usatoday.com/sitemap/2026/february/22",
+#     "https://eu.usatoday.com/sitemap/2026/february/23",
+#     "https://eu.usatoday.com/sitemap/2026/february/24",
+#     "https://eu.usatoday.com/sitemap/2026/february/25",
+#     "https://eu.usatoday.com/sitemap/2026/february/26",
+#     "https://eu.usatoday.com/sitemap/2026/february/27",
+#     "https://eu.usatoday.com/sitemap/2026/february/28"
+# ],
+#         "fetch_method": "recursive",  # currently only sitemap is implemented, but could add direct crawling later
+#         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+#         "limit_depth": True,    # whether to limit the depth of the recursive crawl
+#         "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+#         "extraction_method": "article",  # use newspaper3k's article extraction
+#         "extraction_config": [
+#             # could add config options here if needed, e.g. language, fetch_images, etc.
+#         ],
+#         "keep_keywords": [],  # not used for article extraction
+#         "skip_keywords": [],  # not used for article extraction
+#         "url_include": [],  # keep only these
+#         "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+#     },
+    #  {
+    #     "name": "Fox News",
+    #     "sites": [
+    #         "https://www.foxnews.com/sitemap.xml?type=news",
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "limit_depth": False,    # whether to limit the depth of the recursive crawl
+    #     "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    # }
+
         {
-        "name": "USA Today",
+        "name": "AP news",
         "sites": [
-    "https://eu.usatoday.com/sitemap/2026/february/1",
-    "https://eu.usatoday.com/sitemap/2026/february/2",
-    "https://eu.usatoday.com/sitemap/2026/february/3",
-    "https://eu.usatoday.com/sitemap/2026/february/4",
-    "https://eu.usatoday.com/sitemap/2026/february/5",
-    "https://eu.usatoday.com/sitemap/2026/february/6",
-    "https://eu.usatoday.com/sitemap/2026/february/7",
-    "https://eu.usatoday.com/sitemap/2026/february/8",
-    "https://eu.usatoday.com/sitemap/2026/february/9",
-    "https://eu.usatoday.com/sitemap/2026/february/10",
-    "https://eu.usatoday.com/sitemap/2026/february/11",
-    "https://eu.usatoday.com/sitemap/2026/february/12",
-    "https://eu.usatoday.com/sitemap/2026/february/13",
-    "https://eu.usatoday.com/sitemap/2026/february/14",
-    "https://eu.usatoday.com/sitemap/2026/february/15",
-    "https://eu.usatoday.com/sitemap/2026/february/16",
-    "https://eu.usatoday.com/sitemap/2026/february/17",
-    "https://eu.usatoday.com/sitemap/2026/february/18",
-    "https://eu.usatoday.com/sitemap/2026/february/19",
-    "https://eu.usatoday.com/sitemap/2026/february/20",
-    "https://eu.usatoday.com/sitemap/2026/february/21",
-    "https://eu.usatoday.com/sitemap/2026/february/22",
-    "https://eu.usatoday.com/sitemap/2026/february/23",
-    "https://eu.usatoday.com/sitemap/2026/february/24",
-    "https://eu.usatoday.com/sitemap/2026/february/25",
-    "https://eu.usatoday.com/sitemap/2026/february/26",
-    "https://eu.usatoday.com/sitemap/2026/february/27",
-    "https://eu.usatoday.com/sitemap/2026/february/28"
-],
-        "fetch_method": "recursive",  # currently only sitemap is implemented, but could add direct crawling later
+            "https://apnews.com/news-sitemap-content.xml",
+        ],
+        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
-        "limit_depth": True,    # whether to limit the depth of the recursive crawl
+        "limit_depth": False,    # whether to limit the depth of the recursive crawl
         "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
         "extraction_method": "article",  # use newspaper3k's article extraction
         "extraction_config": [
@@ -660,10 +697,68 @@ def main():
         "url_include": [],  # keep only these
         "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
     },
-     {
-        "name": "Fox News",
+
+    {
+        "name": "Washington Post",
         "sites": [
-            "https://www.foxnews.com/sitemap.xml?type=news",
+            "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz",
+        ],
+        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+        "limit_depth": False,    # whether to limit the depth of the recursive crawl
+        "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+        "extraction_method": "article",  # use newspaper3k's article extraction
+        "extraction_config": [
+            # could add config options here if needed, e.g. language, fetch_images, etc.
+        ],
+        "keep_keywords": [],  # not used for article extraction
+        "skip_keywords": [],  # not used for article extraction
+        "url_include": [],  # keep only these
+        "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    },
+
+    {
+        "name": "Snopes",
+        "sites": [
+            "https://media.snopes.com/sitemaps/sitemap-news.xml",
+        ],
+        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+        "limit_depth": False,    # whether to limit the depth of the recursive crawl
+        "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+        "extraction_method": "article",  # use newspaper3k's article extraction
+        "extraction_config": [
+            # could add config options here if needed, e.g. language, fetch_images, etc.
+        ],
+        "keep_keywords": [],  # not used for article extraction
+        "skip_keywords": [],  # not used for article extraction
+        "url_include": [],  # keep only these
+        "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    },
+
+    {
+        "name": "Wall Street Journal",
+        "sites": [
+            "https://www.wsj.com/live_news_sitemap.xml",
+        ],
+        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+        "limit_depth": False,    # whether to limit the depth of the recursive crawl
+        "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+        "extraction_method": "article",  # use newspaper3k's article extraction
+        "extraction_config": [
+            # could add config options here if needed, e.g. language, fetch_images, etc.
+        ],
+        "keep_keywords": [],  # not used for article extraction
+        "skip_keywords": [],  # not used for article extraction
+        "url_include": [],  # keep only these
+        "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    },
+
+    {
+        "name": "New York Post",
+        "sites": [
+            "https://nypost.com/news-sitemap.xml",
         ],
         "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
@@ -678,6 +773,7 @@ def main():
         "url_include": [],  # keep only these
         "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
     }
+
     
     ]
 
