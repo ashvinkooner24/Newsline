@@ -74,9 +74,12 @@ export const CitedContent = ({ sections, articles = [], topicSlug, communityNote
                       const biasClass = citation.biasLevel === 'left' ? 'bias-bg-left' :
                         citation.biasLevel === 'right' ? 'bias-bg-right' : '';
 
+                      // Determine the source name: from matched article, or extract from citation text
+                      const sourceName = article?.source?.name;
+
                       return (
                         <div key={j} className={`py-2 px-3 text-sm leading-relaxed ${biasClass}`}>
-                          <span className="text-foreground">{citation.text}</span>
+                          <span className="text-foreground italic">&ldquo;{citation.text}&rdquo;</span>
                           {article && topicSlug ? (
                             <Link
                               to={`/topic/${topicSlug}/article/${article.id}`}
@@ -84,11 +87,11 @@ export const CitedContent = ({ sections, articles = [], topicSlug, communityNote
                             >
                               — {article.source.name}
                             </Link>
-                          ) : (
+                          ) : sourceName ? (
                             <span className="ml-2 font-mono text-xs text-muted-foreground">
-                              [{citation.articleId}]
+                              — {sourceName}
                             </span>
-                          )}
+                          ) : null}
                         </div>
                       );
                     })}

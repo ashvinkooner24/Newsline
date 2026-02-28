@@ -52,9 +52,27 @@ export interface BackendComment {
   user: BackendUser | null;
 }
 
+export interface BackendCitation {
+  source: string;
+  article_id: string;
+  quote: string;
+  bias_level: string;  // 'left' | 'right' | 'neutral'
+}
+
+export interface BackendArticleMeta {
+  id: string;
+  title: string;
+  url: string;
+  source: string;
+  published_at: string | null;
+  excerpt: string;
+}
+
 export interface BackendSegment {
+  heading: string;
   text: string;
   sources: BackendNewsProvider[];
+  citations: BackendCitation[];
   avg_bias: number;
   avg_truth: number;
   article_count: number;
@@ -64,10 +82,15 @@ export interface BackendSegment {
 
 export interface BackendStory {
   heading: string;
+  slug: string;
+  summary: string;
   political_bias: number;
   factual_accuracy: number;
   sources: BackendNewsProvider[];
   segments: BackendSegment[];
+  articles: BackendArticleMeta[];
+  category: string;
+  updated_at: string;
 }
 
 export interface BackendStoryWrapper {
@@ -124,20 +147,32 @@ function transformProvider(provider: BackendNewsProvider, index: number): Source
 
 /**
  * Build a frontend SummarySection from a BackendSegment.
- * Segment index is used to create a fallback heading.
+ * Uses real citations (with quotes) from the backend when available.
  */
 function transformSegment(segment: BackendSegment, index: number): SummarySection {
-  const sources: Source[] = segment.sources.map(transformProvider);
-
-  const citations: Citation[] = sources.map((src, i) => ({
-    articleId: `seg-${index}-src-${i}`,
-    text:      `Reported by ${src.name}.`,
-    biasLevel: segment.sources[i].bias_score < -0.3
-      ? 'left'
-      : segment.sources[i].bias_score > 0.3
-        ? 'right'
+  // Use real citations from the backend if available
+  let citations: Citation[];
+  if (segment.citations && segment.citations.length > 0) {
+    citations = segment.citations.map((c) => ({
+      articleId: c.article_id,
+      text:      c.quote || `Reported by ${c.source}.`,
+      biasLevel: (c.bias_level === 'left' || c.bias_level === 'right' || c.bias_level === 'neutral')
+        ? c.bias_level
         : 'neutral',
-  }));
+    }));
+  } else {
+    // Fallback for legacy data without real citations
+    const sources: Source[] = segment.sources.map(transformProvider);
+    citations = sources.map((src, i) => ({
+      articleId: `seg-${index}-src-${i}`,
+      text:      `Reported by ${src.name}.`,
+      biasLevel: segment.sources[i].bias_score < -0.3
+        ? 'left' as const
+        : segment.sources[i].bias_score > 0.3
+          ? 'right' as const
+          : 'neutral' as const,
+    }));
+  }
 
   const stats: SectionStats = {
     biasLean:         biasFloatToLean(segment.avg_bias),
@@ -148,7 +183,7 @@ function transformSegment(segment: BackendSegment, index: number): SummarySectio
   };
 
   return {
-    heading:   segment.notes ?? `Section ${index + 1}`,
+    heading:   segment.heading || segment.notes || `Section ${index + 1}`,
     content:   segment.text,
     citations,
     stats,
@@ -223,38 +258,75 @@ function buildCredibility(story: BackendStory): CredibilityAssessment {
 
 /**
  * Main transformer: BackendStoryWrapper → TopicSummary.
- * `index` is the position in the /stories array and is used as the topic ID.
+ * Uses real article metadata and citations from the backend.
  */
 export function transformStory(wrapper: BackendStoryWrapper, index: number): TopicSummary {
   const { story, comments } = wrapper;
 
-  // Use the first segment's text as a brief summary, fallback to headline
-  const summary = story.segments[0]?.text ?? story.heading;
+  // Use the backend summary (standfirst) or fall back to first segment text
+  const summary = story.summary || story.segments[0]?.text || story.heading;
 
-  // Derive stub Article entries from segment sources so the UI has something to render
-  const articles: Article[] = story.segments.flatMap((seg, sIdx) =>
-    seg.sources.map((provider, pIdx) => ({
-      id:          `story-${index}-seg-${sIdx}-src-${pIdx}`,
-      title:       `${provider.name}: ${story.heading}`,
-      url:         '#',
-      source:      transformProvider(provider, pIdx),
-      publishedAt: new Date().toISOString().split('T')[0],
-      excerpt:     seg.text,
-    }))
-  );
+  // Use real article metadata from the backend if available
+  let articles: Article[];
+  if (story.articles && story.articles.length > 0) {
+    // Build a provider lookup for credibility/bias info
+    const providerMap: Record<string, BackendNewsProvider> = {};
+    for (const p of story.sources) {
+      providerMap[p.name] = p;
+    }
+
+    articles = story.articles.map((meta, i) => {
+      const provider = providerMap[meta.source];
+      return {
+        id:          meta.id,
+        title:       meta.title,
+        url:         meta.url || '#',
+        source: {
+          id:               slugify(meta.source) || `source-${i}`,
+          name:             meta.source,
+          url:              meta.url || '#',
+          credibilityScore: provider ? Math.round(provider.trust_score * 100) : 70,
+          biasLean:         provider ? biasFloatToLean(provider.bias_score) : 'center' as const,
+          country:          'Unknown',
+        },
+        publishedAt: meta.published_at || new Date().toISOString().split('T')[0],
+        excerpt:     meta.excerpt || '',
+      };
+    });
+  } else {
+    // Fallback: derive stub Article entries from segment sources
+    articles = story.segments.flatMap((seg, sIdx) =>
+      seg.sources.map((provider, pIdx) => ({
+        id:          `story-${index}-seg-${sIdx}-src-${pIdx}`,
+        title:       `${provider.name}: ${story.heading}`,
+        url:         '#',
+        source:      transformProvider(provider, pIdx),
+        publishedAt: new Date().toISOString().split('T')[0],
+        excerpt:     seg.text,
+      }))
+    );
+  }
+
+  // Deduplicate articles by source name (keep first occurrence)
+  const seenSources = new Set<string>();
+  const uniqueArticles = articles.filter(a => {
+    if (seenSources.has(a.source.name)) return false;
+    seenSources.add(a.source.name);
+    return true;
+  });
 
   return {
     id:            String(index),
     topic:         story.heading,
-    slug:          slugify(story.heading),
+    slug:          story.slug || slugify(story.heading),
     headline:      story.heading,
     summary,
     sections:      story.segments.map(transformSegment),
-    articles,
+    articles:      uniqueArticles,
     biasAnalysis:  buildBiasAnalysis(story),
     credibility:   buildCredibility(story),
-    updatedAt:     new Date().toISOString(),
-    category:      'General',
+    updatedAt:     story.updated_at || new Date().toISOString(),
+    category:      story.category || 'General',
     country:       'Global',
     comments:      transformComments(comments, index),
     communityNotes: [],

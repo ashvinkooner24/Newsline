@@ -1,507 +1,749 @@
 [
   {
     "story": {
-      "heading": "Global Push for AI Safety Standards Intensifies as Nations Draft Competing Frameworks",
-      "political_bias": -0.08,
-      "factual_accuracy": 0.82,
-      "sources": [
-        {"name": "Reuters",           "bias_score":  0.0,  "trust_score": 0.92},
-        {"name": "The Guardian",      "bias_score": -0.3,  "trust_score": 0.82},
-        {"name": "Wall Street Journal","bias_score":  0.3,  "trust_score": 0.87},
-        {"name": "New York Times",    "bias_score": -0.3,  "trust_score": 0.85},
-        {"name": "AP News",           "bias_score":  0.0,  "trust_score": 0.90},
-        {"name": "Fox News",          "bias_score":  0.7,  "trust_score": 0.62}
-      ],
-      "segments": [
-        {
-          "text": "EU Leads with Comprehensive Framework: The European Union has finalized its AI Act enforcement mechanisms, establishing the world's most comprehensive regulatory framework for artificial intelligence. The legislation categorizes AI systems by risk level and imposes strict requirements on high-risk applications.",
-          "sources": [
-            {"name": "Reuters",      "bias_score":  0.0, "trust_score": 0.92},
-            {"name": "The Guardian", "bias_score": -0.3, "trust_score": 0.82}
-          ],
-          "avg_bias": -0.05,
-          "avg_truth": 0.90,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "text": "US Takes Industry-Friendly Approach: The United States has opted for a more industry-collaborative approach, with voluntary commitments from major tech companies supplemented by executive orders. Critics argue this creates insufficient guardrails, while proponents say it fosters innovation.",
-          "sources": [
-            {"name": "Wall Street Journal", "bias_score":  0.3, "trust_score": 0.87},
-            {"name": "New York Times",      "bias_score": -0.3, "trust_score": 0.85}
-          ],
-          "avg_bias": 0.02,
-          "avg_truth": 0.84,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "text": "China's State-Controlled Model: China has implemented strict content-focused AI regulations requiring all generative AI systems to align with socialist values, while simultaneously investing heavily in AI development for economic competitiveness.",
-          "sources": [
-            {"name": "AP News", "bias_score": 0.0, "trust_score": 0.90}
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.86,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "Record-Breaking Temperatures Force Accelerated Climate Action Discussions",
-      "political_bias": -0.22,
-      "factual_accuracy": 0.76,
-      "sources": [
-        {"name": "BBC News",     "bias_score":  0.0,  "trust_score": 0.88},
-        {"name": "Reuters",     "bias_score":  0.0,  "trust_score": 0.92},
-        {"name": "MSNBC",       "bias_score": -0.7,  "trust_score": 0.60},
-        {"name": "Fox News",    "bias_score":  0.7,  "trust_score": 0.62},
-        {"name": "The Guardian","bias_score": -0.3,  "trust_score": 0.82}
-      ],
-      "segments": [
-        {
-          "text": "Temperature Records Broken: 2025 was confirmed as the hottest year on record, exceeding the 1.5°C Paris Agreement threshold for the first time on an annual basis.",
-          "sources": [
-            {"name": "BBC News", "bias_score": 0.0, "trust_score": 0.88},
-            {"name": "Reuters",  "bias_score": 0.0, "trust_score": 0.92}
-          ],
-          "avg_bias": -0.03,
-          "avg_truth": 0.94,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "text": "Political Divide Deepens: Climate policy remains deeply polarized, with progressive leaders calling for emergency measures while conservative voices emphasize economic costs and energy security.",
-          "sources": [
-            {"name": "MSNBC",    "bias_score": -0.7, "trust_score": 0.60},
-            {"name": "Fox News", "bias_score":  0.7, "trust_score": 0.62}
-          ],
-          "avg_bias": -0.05,
-          "avg_truth": 0.68,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "Urban Housing Affordability Hits Historic Low as Policy Responses Diverge",
-      "political_bias": -0.05,
-      "factual_accuracy": 0.88,
-      "sources": [
-        {"name": "New York Times",     "bias_score": -0.3, "trust_score": 0.85},
-        {"name": "AP News",            "bias_score":  0.0, "trust_score": 0.90},
-        {"name": "Wall Street Journal","bias_score":  0.3, "trust_score": 0.87}
-      ],
-      "segments": [
-        {
-          "text": "Crisis by the Numbers: The median home price in major metropolitan areas now exceeds 8x median household income, up from 5x a decade ago. Over 50% of renters in top cities spend more than 30% of income on housing.",
-          "sources": [
-            {"name": "New York Times", "bias_score": -0.3, "trust_score": 0.85},
-            {"name": "AP News",        "bias_score":  0.0, "trust_score": 0.90}
-          ],
-          "avg_bias": -0.03,
-          "avg_truth": 0.91,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "Diplomatic Efforts Intensify as Ceasefire Talks Enter Critical Phase",
-      "political_bias": -0.06,
-      "factual_accuracy": 0.85,
-      "sources": [
-        {"name": "Reuters",        "bias_score":  0.0,  "trust_score": 0.92},
-        {"name": "BBC News",       "bias_score":  0.0,  "trust_score": 0.88},
-        {"name": "Al Jazeera",     "bias_score": -0.3,  "trust_score": 0.75},
-        {"name": "Deutsche Welle", "bias_score":  0.0,  "trust_score": 0.84}
-      ],
-      "segments": [
-        {
-          "text": "Ceasefire Negotiations: Diplomatic envoys from multiple nations have convened in Geneva for what officials describe as the most promising round of ceasefire negotiations since the conflict began. Key sticking points remain territorial sovereignty and security guarantees.",
-          "sources": [
-            {"name": "Reuters",  "bias_score": 0.0, "trust_score": 0.92},
-            {"name": "BBC News", "bias_score": 0.0, "trust_score": 0.88}
-          ],
-          "avg_bias": -0.02,
-          "avg_truth": 0.88,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "text": "Humanitarian Impact: The UN estimates over 14 million people have been displaced, with critical infrastructure damage affecting access to heating, water, and medical care across eastern regions.",
-          "sources": [
-            {"name": "Al Jazeera", "bias_score": -0.3, "trust_score": 0.75}
-          ],
-          "avg_bias": -0.10,
-          "avg_truth": 0.85,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "SEC Unveils Landmark Crypto Framework as Bitcoin Surpasses $150K",
-      "political_bias": 0.15,
-      "factual_accuracy": 0.84,
-      "sources": [
-        {"name": "Reuters",       "bias_score":  0.0, "trust_score": 0.92},
-        {"name": "Wall Street Journal", "bias_score": 0.3, "trust_score": 0.87},
-        {"name": "The Economist", "bias_score":  0.3, "trust_score": 0.89}
-      ],
-      "segments": [
-        {
-          "text": "New Regulatory Framework: The SEC has released a comprehensive framework distinguishing between securities tokens and utility tokens, providing clarity that the industry has long demanded. Compliance deadlines begin in Q3 2026.",
-          "sources": [
-            {"name": "Reuters",             "bias_score": 0.0, "trust_score": 0.92},
-            {"name": "Wall Street Journal", "bias_score": 0.3, "trust_score": 0.87}
-          ],
-          "avg_bias": 0.12,
-          "avg_truth": 0.80,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "Bipartisan Drug Pricing Bill Advances as Pharma Industry Pushes Back",
-      "political_bias": -0.18,
-      "factual_accuracy": 0.78,
-      "sources": [
-        {"name": "AP News",             "bias_score":  0.0,  "trust_score": 0.90},
-        {"name": "New York Times",      "bias_score": -0.3,  "trust_score": 0.85},
-        {"name": "Wall Street Journal", "bias_score":  0.3,  "trust_score": 0.87},
-        {"name": "Jacobin",             "bias_score": -0.7,  "trust_score": 0.65}
-      ],
-      "segments": [
-        {
-          "text": "The Bill's Key Provisions: The proposed legislation would allow Medicare to negotiate prices on 50 additional drugs and cap out-of-pocket costs for seniors at $2,000 annually. Both parties have signaled support for the core framework.",
-          "sources": [
-            {"name": "AP News",        "bias_score":  0.0, "trust_score": 0.90},
-            {"name": "New York Times", "bias_score": -0.3, "trust_score": 0.85}
-          ],
-          "avg_bias": -0.12,
-          "avg_truth": 0.82,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "Border Policy Overhaul Proposed Amid Record Migration Numbers",
-      "political_bias": 0.05,
-      "factual_accuracy": 0.71,
-      "sources": [
-        {"name": "AP News",  "bias_score":  0.0,  "trust_score": 0.90},
-        {"name": "Fox News", "bias_score":  0.7,  "trust_score": 0.62},
-        {"name": "MSNBC",    "bias_score": -0.7,  "trust_score": 0.60},
-        {"name": "ABC News", "bias_score":  0.0,  "trust_score": 0.82}
-      ],
-      "segments": [
-        {
-          "text": "Record Migration Figures: Border encounters exceeded 3 million in 2025, the highest on record. Asylum processing backlogs now stretch over 5 years, leaving millions in legal limbo.",
-          "sources": [
-            {"name": "AP News",  "bias_score":  0.0,  "trust_score": 0.90},
-            {"name": "Fox News", "bias_score":  0.7,  "trust_score": 0.62},
-            {"name": "MSNBC",    "bias_score": -0.7,  "trust_score": 0.60}
-          ],
-          "avg_bias": 0.05,
-          "avg_truth": 0.72,
-          "article_count": 3,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "Artemis III Moon Landing Date Set as Commercial Space Race Accelerates",
-      "political_bias": 0.02,
-      "factual_accuracy": 0.91,
-      "sources": [
-        {"name": "Reuters",       "bias_score": 0.0, "trust_score": 0.92},
-        {"name": "BBC News",      "bias_score": 0.0, "trust_score": 0.88},
-        {"name": "The Economist", "bias_score": 0.3, "trust_score": 0.89}
-      ],
-      "segments": [
-        {
-          "text": "Artemis III Timeline Confirmed: NASA has officially set September 2027 for the Artemis III crewed lunar landing, which will include the first woman and first person of color to walk on the Moon. The Starship lunar lander has completed all key testing milestones.",
-          "sources": [
-            {"name": "Reuters",  "bias_score": 0.0, "trust_score": 0.92},
-            {"name": "BBC News", "bias_score": 0.0, "trust_score": 0.88}
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.92,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "AI Tutoring Revolution Sparks Debate Over Future of Traditional Schooling",
-      "political_bias": -0.12,
-      "factual_accuracy": 0.80,
-      "sources": [
-        {"name": "AP News",        "bias_score":  0.0,  "trust_score": 0.90},
-        {"name": "New York Times", "bias_score": -0.3,  "trust_score": 0.85},
-        {"name": "The Guardian",   "bias_score": -0.3,  "trust_score": 0.82}
-      ],
-      "segments": [
-        {
-          "text": "AI Tutoring Results: A Stanford study found that students using AI tutoring systems for one semester showed learning gains equivalent to two years of traditional instruction in mathematics. The technology is now deployed in over 15,000 US schools.",
-          "sources": [
-            {"name": "AP News",        "bias_score":  0.0, "trust_score": 0.90},
-            {"name": "New York Times", "bias_score": -0.3, "trust_score": 0.85}
-          ],
-          "avg_bias": -0.08,
-          "avg_truth": 0.83,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "New Tariff Escalation Threatens Global Supply Chains as Allies Retaliate",
-      "political_bias": 0.05,
-      "factual_accuracy": 0.81,
-      "sources": [
-        {"name": "Reuters",                 "bias_score":  0.0,  "trust_score": 0.92},
-        {"name": "Fox News",                "bias_score":  0.7,  "trust_score": 0.62},
-        {"name": "New York Times",          "bias_score": -0.3,  "trust_score": 0.85},
-        {"name": "South China Morning Post","bias_score":  0.0,  "trust_score": 0.72},
-        {"name": "Deutsche Welle",          "bias_score":  0.0,  "trust_score": 0.84}
-      ],
-      "segments": [
-        {
-          "text": "Tariff Escalation: The latest round of tariffs affects $500 billion in goods, with retaliatory measures from the EU, China, and Canada. Economists warn of significant GDP impact across all affected economies.",
-          "sources": [
-            {"name": "Reuters",        "bias_score":  0.0,  "trust_score": 0.92},
-            {"name": "Fox News",       "bias_score":  0.7,  "trust_score": 0.62},
-            {"name": "New York Times", "bias_score": -0.3,  "trust_score": 0.85}
-          ],
-          "avg_bias": 0.03,
-          "avg_truth": 0.78,
-          "article_count": 3,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "text": "Supply Chain Disruption: Major manufacturers are scrambling to restructure supply chains as tariffs make established trade routes economically unviable. Southeast Asian nations are emerging as alternative manufacturing hubs.",
-          "sources": [
-            {"name": "South China Morning Post", "bias_score": 0.0, "trust_score": 0.72}
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.86,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ]
-    },
-    "comments": [
-      {"text": "The coverage from Reuters and AP seems most balanced here. Good aggregation.", "like_count": 24, "dislike_count": 2, "parent": null, "user": {"username": "DataDrivenReader", "email": "", "reputation": 87}},
-      {"text": "I think the credibility score might be slightly high given the conflicting narratives between sources.", "like_count": 15, "dislike_count": 5, "parent": null, "user": {"username": "SkepticalObserver", "email": "", "reputation": 72}},
-      {"text": "Would love to see more international sources represented.", "like_count": 8, "dislike_count": 0, "parent": null, "user": {"username": "NewsJunkie42", "email": "", "reputation": 65}}
-    ]
-  },
-  {
-    "story": {
-      "heading": "Digital Platform Accountability Act Moves Forward Amid Debate Over Transparency and Free Speech",
+      "heading": "Pakistan Conducts Airstrikes Against Militant Targets in Afghanistan",
+      "slug": "pakistan-conducts-airstrikes-against-militant-targets-in-afghanistan",
+      "summary": "Pakistan's military has launched intelligence-based operations against militant camps in eastern Afghanistan following a series of deadly attacks on Pakistani soil, leading to reports of civilian casualties and a sharp diplomatic rebuke from Kabul.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.75,
+      "factual_accuracy": 0.754,
       "sources": [
         {
-          "name": "Reuters",
+          "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.75
-        },
-        {
-          "name": "BBC News",
-          "bias_score": 0.0,
-          "trust_score": 0.75
-        },
-        {
-          "name": "Financial Times",
-          "bias_score": 0.0,
-          "trust_score": 0.75
+          "trust_score": 0.752
         },
         {
           "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.75
-        },
-        {
-          "name": "Politico",
-          "bias_score": 0.5,
-          "trust_score": 0.75
-        },
-        {
-          "name": "Al Jazeera",
-          "bias_score": -0.5,
-          "trust_score": 0.75
+          "trust_score": 0.755
         }
       ],
       "segments": [
         {
-          "text": "Legislative Framework and Requirements: The Digital Platform Accountability Act targets social media platforms with more than 20 million domestic users. The legislation requires these companies to submit quarterly reports on political advertising expenditures, content moderation practices, and algorithmic recommendation systems. Additionally, the bill mandates the labeling of AI-generated or synthetic content and requires that anonymized data be provided to independent researchers to monitor election integrity.",
+          "heading": "Military Operations and Targeted Groups",
+          "text": "Pakistan's information ministry confirmed that its military conducted selective airstrikes against seven camps in the border region. The operations targeted the Tehrik-e-Taliban Pakistan (TTP), its affiliates, and a group associated with the Islamic State. Islamabad stated these strikes were based on conclusive evidence that recent domestic attacks were orchestrated by leadership based in Afghanistan.",
           "sources": [
             {
-              "name": "Reuters",
+              "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.75
-            },
-            {
-              "name": "BBC News",
-              "bias_score": 0.0,
-              "trust_score": 0.75
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.75,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "text": "Data on Misinformation and Moderation Impact: Research presented during parliamentary hearings suggests that structured moderation and transparency can reduce the spread of false content. The European Parliamentary Research Service found that such practices reduced the virality of false content by 10–15% during election cycles. Furthermore, Pew Research Center data from 2025 indicated that 59% of users support labeling disputed content, although approximately 18% expressed concerns regarding potential censorship. Simulated models also projected that quarterly reporting could reduce user exposure to disputed posts by 5–8%.",
-          "sources": [
-            {
-              "name": "Financial Times",
-              "bias_score": 0.0,
-              "trust_score": 0.75
+              "trust_score": 0.752
             },
             {
               "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.75
+              "trust_score": 0.755
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "Pakistan’s information ministry said its military conducted ‘intelligence-based, selective operations’ against seven camps belonging to militants it blames for a recent series of deadly attacks on its soil.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "Tarar said Pakistan ‘has always strived to maintain peace and stability in the region’, but added that the safety and security of Pakistani citizens remained a top priority.",
+              "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.75,
+          "avg_truth": 0.754,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "text": "Stakeholder Perspectives and Concerns: While academic experts generally support the bill as a means to provide checks and balances on platform influence, industry representatives and civil liberties groups have raised concerns. Tech companies emphasize the need to protect proprietary code and user privacy, while advocates warn that vague definitions of 'misinformation' could lead to the over-removal of lawful political speech. Some critics have gone further, alleging the bill could be used to manipulate political discourse or silence dissenting opinions.",
+          "heading": "Casualties and Afghan Response",
+          "text": "The Afghan Ministry of Defense and local officials reported that the strikes hit civilian areas in Nangarhar and Paktika provinces, including a religious seminary and private homes. Afghan authorities stated that women and children were among the victims, with death toll estimates reaching at least 18. Kabul has condemned the actions as a violation of national sovereignty and international law.",
           "sources": [
             {
-              "name": "BBC News",
+              "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.75
+              "trust_score": 0.752
             },
             {
-              "name": "Politico",
-              "bias_score": 0.5,
-              "trust_score": 0.75
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.755
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "Women and children were among the 18 people killed, Sayed Tayeb Hamad, a senior police official in Nangarhar, said on Afghan state television.",
+              "bias_level": "neutral"
             },
             {
-              "name": "Al Jazeera",
-              "bias_score": -0.5,
-              "trust_score": 0.75
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "Mujahid accused Pakistan’s military of carrying out the strikes to compensate for what he described as security weaknesses inside the country.",
+              "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.75,
-          "article_count": 3,
+          "avg_truth": 0.754,
+          "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "text": "Implementation and Oversight: To address concerns regarding enforcement and bias, lawmakers are considering the establishment of an independent oversight committee. This body would include academics, industry experts, and civil society representatives to monitor compliance and mediate disputes. Experts like Dr. Raj Patel note that while transparency is a significant step, it must be paired with media literacy campaigns, as misinformation may migrate to smaller, less regulated platforms.",
+          "heading": "Context of Escalating Tensions",
+          "text": "The airstrikes follow a surge in militant violence within Pakistan, including a suicide bombing at a mosque in Islamabad and recent attacks on security posts in the northwest. While Pakistan accuses the Afghan Taliban of harboring TTP militants, Kabul denies these allegations. This escalation threatens a fragile ceasefire that has been in place since October following previous border skirmishes.",
           "sources": [
             {
-              "name": "Financial Times",
+              "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.75
+              "trust_score": 0.755
             },
             {
-              "name": "Reuters",
+              "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.75
+              "trust_score": 0.752
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "The TTP is separate from but closely allied with Afghanistan’s Taliban, who returned to power in 2021. Islamabad accuses the TTP of operating from inside Afghanistan, a charge the group and Kabul deny.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "This new escalation will test the delicate ceasefire that has been in place between the neighboring countries since last October, after they traded their deadliest fire in years.",
+              "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.75,
+          "avg_truth": 0.754,
           "article_count": 2,
           "notes": null,
           "comments": []
         }
-      ]
+      ],
+      "articles": [
+        {
+          "id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+          "title": "Pakistan launches airstrikes against Afghan-based ‘militants’ it blames for cross-border attacks",
+          "url": "https://www.cnn.com/2026/02/22/asia/pakistan-strikes-afghanistan-militant-camps-intl-hnk",
+          "source": "CNN",
+          "published_at": "2026-02-28",
+          "excerpt": "Islamabad —\n\nPakistan said Sunday it carried out airstrikes on militant camps across the border in Afghanistan, in a serious test of an uneasy peace between the neighbors.\n\nPakistan’s information mini…"
+        },
+        {
+          "id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+          "title": "Pakistan strikes militant hideouts on Afghan border after surge in attacks",
+          "url": "https://www.theguardian.com/world/2026/feb/21/pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Pakistan launched multiple airstrikes on Saturday night targeting militants in neighbouring Afghanistan, where the government reported children were among dozens of people killed and wounded.\n\nIslamab…"
+        }
+      ],
+      "category": "General",
+      "updated_at": "2026-02-28T01:05:57.305093Z"
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Northeast Braces for Major Nor'easter and Blizzard Conditions",
+      "slug": "northeast-braces-for-major-nor-easter-and-blizzard-conditions",
+      "summary": "A powerful winter storm is set to impact the Northeast United States starting Sunday, prompting blizzard warnings for major metropolitan areas including New York City and Boston. Officials have declared states of emergency as forecasts predict heavy snowfall, strong winds, and significant travel disruptions through Monday.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.689,
+      "sources": [
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.731
+        },
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.646
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Storm Forecast and Severity",
+          "text": "Meteorologists expect the storm to rapidly intensify into a 'bomb cyclone' as it moves off the Eastern Seaboard. Blizzard warnings have been issued for a corridor stretching from Delaware to southern New England, marking the first such warning for New York City since 2017. Snowfall totals are projected to reach between 12 and 20 inches in the hardest-hit areas, accompanied by wind gusts exceeding 55 mph.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.731
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.646
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "blizzard-warnings-in-new-york-city-northeast-as-snowstorm-takes-aim",
+              "quote": "The storm will rapidly intensify into a bomb cyclone off the Eastern Seaboard beginning on Sunday, meaning we’re just a day away from the arrival of its worst conditions.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
+              "quote": "The National Weather Service increased its assessment of the severity of the storm, saying it anticipated 1ft to 2 ft of snow for New York City, Long Island, southern Connecticut and coastal communities in New Jersey and Delaware.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.689,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Emergency Preparations and Public Safety",
+          "text": "Governors in New York and New Jersey have declared states of emergency, while municipal leaders in Philadelphia and New York City have announced local snow emergencies. In New York City, Mayor Zohran Mamdani emphasized the potential for life-threatening conditions, noting that outreach teams are working to move unhoused residents into warming centers and shelters following a previous cold snap that resulted in 19 deaths.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.731
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.646
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "blizzard-warnings-in-new-york-city-northeast-as-snowstorm-takes-aim",
+              "quote": "New Jersey Gov. Mikie Sherrill declared a state of emergency to start at noon Sunday... Gov. Kathy Hochul announced states of emergency for 22 out of its 62 counties.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
+              "quote": "At least 19 people were found dead outdoors in the city after temperatures plunged on 19 January and remained below freezing for 10 consecutive days.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.689,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Travel and Infrastructure Impacts",
+          "text": "The storm is expected to cause major disruptions to air and ground travel. Approximately 2,000 flights scheduled for Sunday have already been canceled, with significant impacts anticipated at JFK, LaGuardia, and Boston Logan airports. Officials have warned that heavy, wet snow combined with high winds may lead to power outages and downed tree limbs, making travel dangerous or impossible through the Monday morning commute.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.731
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.646
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "blizzard-warnings-in-new-york-city-northeast-as-snowstorm-takes-aim",
+              "quote": "Around 2,000 Sunday flights have been canceled, according to FlightAware . The disruptions are expected to heavily impact New York City-area airports John F. Kennedy Airport and LaGuardia Airport, along with Boston Logan International Airport.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
+              "quote": "The weather service warned that the storm will ‐make travel dangerous, if not impossible. Scattered downed tree limbs and power outages possible due to snow load and strong winds.‐",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.689,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "blizzard-warnings-in-new-york-city-northeast-as-snowstorm-takes-aim",
+          "title": "Blizzard warnings in New York City, Northeast as snowstorm takes aim",
+          "url": "https://www.cnn.com/2026/02/21/weather/blizzard-snowstorm-new-york-northeast-climate",
+          "source": "CNN",
+          "published_at": "2026-02-28",
+          "excerpt": "A high-impact nor’easter is about to crush parts of the Northeast with blizzard conditions, heavy snow and strong winds.\n\nThe forecast has been fraught with uncertainty for days, but has finally homed…"
+        },
+        {
+          "id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
+          "title": "New York City gets first blizzard warning in nine years as area hunkers down",
+          "url": "https://www.theguardian.com/us-news/2026/feb/21/new-york-city-blizzard-warning",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Blizzard warnings were issued Saturday for New York City, New Jersey and coastal communities along the east coast for a late-winter storm set to arrive on Sunday that could dump more than a foot of sn…"
+        }
+      ],
+      "category": "General",
+      "updated_at": "2026-02-28T01:06:09.857350Z"
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Recovery Operations Conclude Following Fatal Sierra Nevada Avalanche",
+      "slug": "recovery-operations-conclude-following-fatal-sierra-nevada-avalanche",
+      "summary": "Authorities have recovered the bodies of nine individuals, including six experienced skiers and three professional guides, following a massive avalanche near Lake Tahoe that marks the deadliest such event in the United States in 45 years.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.572,
+      "sources": [
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.532
+        },
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.612
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Incident Overview and Rescue Efforts",
+          "text": "On Tuesday, February 17, 2026, a group of fifteen people on a guided backcountry tour was struck by a large avalanche near Castle Peak in the Tahoe National Forest. The slide, estimated to be the size of a football field, occurred during a significant winter storm that delivered heavy, unstable snow to the region. While six survivors were rescued shortly after the incident, search and recovery operations for the remaining nine individuals were hampered by severe weather conditions and continued avalanche risks. The recovery mission concluded on Saturday with the assistance of over 40 volunteers and multiple state and federal agencies.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.532
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.612
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
+              "quote": "The avalanche has been the deadliest since 1981, with experts estimating the slide path was roughly the size of a football field",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "california-avalanche-a-group-of-mothers-embarked-on-a-sierra-nevada-backcountry-",
+              "quote": "The first call for help was a silent text message from an emergency beacon, mobilizing a small army of rescuers dispatched from different directions.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.572,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Identification of the Deceased",
+          "text": "The victims included six women from the San Francisco Bay Area, Idaho, and the Lake Tahoe region, along with three guides from Blackbird Mountain Guides. The guides were identified as Andrew Alissandratos, 34; Nicole Choo, 42; and Michael Henry, 30. The six skiers were identified as Carrie Atkin, Liz Clabaugh, Danielle Keatley, Kate Morse, Caroline Sekar, and Kate Vitt. Families described the women as experienced backcountry skiers who were close friends and mothers. One of the victims was also the spouse of a member of the Tahoe Nordic Search and Rescue team.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.532
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.612
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
+              "quote": "The sheriff named for the first time the three guides from Blackbird Mountain Company who died: Andrew Alissandratos, 34, Nicole Choo, 42, and Michael Henry, 30.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "california-avalanche-a-group-of-mothers-embarked-on-a-sierra-nevada-backcountry-",
+              "quote": "A spouse of a Tahoe Nordic Search and Rescue team member – who responded to the disaster – was also among those killed.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.572,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Investigation and Access Restrictions",
+          "text": "The Nevada County Sheriff’s Office has launched an investigation into the incident, which includes examining whether criminal negligence played a role. The families of the victims have expressed that they have many unanswered questions regarding the circumstances of the tour. In the interim, the Tahoe National Forest has closed the affected terrain to the public until mid-March to allow for the completion of the investigation and to ensure safety.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.612
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.532
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "california-avalanche-a-group-of-mothers-embarked-on-a-sierra-nevada-backcountry-",
+              "quote": "The sheriff’s office said it is investigating whether criminal negligence contributed to the incident.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
+              "quote": "The terrain will be off-limits to visitors until mid-March, said Chris Feutrier, forest supervisor for the Tahoe national forest.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.572,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "california-avalanche-a-group-of-mothers-embarked-on-a-sierra-nevada-backcountry-",
+          "title": "California avalanche: A group of mothers embarked on a Sierra Nevada backcountry ski trip but only 2 of them survived",
+          "url": "https://www.cnn.com/2026/02/21/us/avalanche-california-lake-tahoe-victims",
+          "source": "CNN",
+          "published_at": "2026-02-28",
+          "excerpt": "The eight friends found joy in the mountains, skiing together across the untracked powder of the hushed, pristine wilderness of California’s Sierra Nevada – their close friendship standing out against…"
+        },
+        {
+          "id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
+          "title": "All nine bodies of skiers killed in California avalanche recovered",
+          "url": "https://www.theguardian.com/us-news/2026/feb/21/california-avalanche-bodies-recovered",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Officials announced on Saturday that the bodies of all nine missing skiers who were killed in a devastating avalanche in California had been recovered, following days of search efforts.\n\nThe avalanche…"
+        }
+      ],
+      "category": "General",
+      "updated_at": "2026-02-28T01:06:28.720408Z"
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Trump Increases Global Tariffs to 15% Following Supreme Court Ruling",
+      "slug": "trump-increases-global-tariffs-to-15-following-supreme-court-ruling",
+      "summary": "President Donald Trump has announced a 15% global tariff on imports, an increase from a 10% rate proposed just a day earlier, after the U.S. Supreme Court ruled that his previous use of emergency powers to impose duties was an overreach of executive authority.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.536,
+      "sources": [
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.612
+        },
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.416
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Supreme Court Ruling and Executive Response",
+          "text": "On Friday, the U.S. Supreme Court ruled 6-3 that President Trump exceeded his authority by using the International Emergency Economic Powers Act (IEEPA) to impose broad tariffs. The court determined that such actions required congressional approval. In response, the President criticized the justices and announced he would instead utilize Section 122 of the Trade Act of 1974 to implement a 15% tariff, which he described as a 'legally tested' level.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.612
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.416
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "The court on Friday ruled that Trump exceeded his authority with the way he imposed tariffs on trading partners using the International Emergency Economic Powers Act (IEEPA)",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "Trump wrote: ‘I, as President of the United States of America, will be, effective immediately, raising the 10% Worldwide Tariff... to the fully allowed, and legally tested, 15% level.’",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.514,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Legal Framework and Implementation",
+          "text": "Under Section 122, a president may impose temporary tariffs of up to 15% for a period of 150 days, after which congressional approval is required. While the President stated the new rates are effective 'immediately,' official documentation regarding the exact timing remains unconfirmed. Previous guidance suggested a 10% rate would begin Tuesday, February 24. Certain goods, including critical minerals, pharmaceuticals, and products compliant with USMCA from Canada and Mexico, are expected to be exempt.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.416
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.612
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "The law according to section 122 of the Trade Act of 1974 – which has never been used – allows the president to impose a levy of up to 15% for 150 days",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "The White House did not respond to CNN’s request for comment on whether the 15% tariff will take effect on Tuesday.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.514,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "International and Domestic Economic Impact",
+          "text": "The shift to a flat 15% tariff creates a varied economic landscape. Countries previously facing 'reciprocal' duties as high as 50% or 145%, such as Brazil and China, may see their effective rates decrease. Conversely, nations like Australia and the United Kingdom, which had lower or negotiated rates, now face higher duties. Australian officials have labeled the move 'unjustified' and 'regrettable,' while European leaders have warned that constant tariff uncertainty acts as 'poison' for global economies.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.416
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.612
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "australia-will-examine-all-options-to-avoid-new-15-tariffs-announced-by-donald-t",
+              "quote": "The shadow defence minister, James Paterson... said Trump’s announcement was ‘regrettable and unfortunate’.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "German chancellor Friedrich Merz... warned of the ‘poison’ of more uncertainty.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "Brazil, which faced duties as high as 50%... would face lower rates",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.581,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+          "title": "Trump announces global tariffs will increase to 15% from 10% ‘effective immediately’",
+          "url": "https://www.cnn.com/2026/02/21/business/trump-global-tariffs-increase-supreme-court",
+          "source": "CNN",
+          "published_at": "2026-02-28",
+          "excerpt": "President Donald Trump said on Saturday that he will increase the global tariffs he imposed a day earlier to 15% from 10% following an adverse ruling at the Supreme Court.\n\nThe court on Friday ruled t…"
+        },
+        {
+          "id": "australia-will-examine-all-options-to-avoid-new-15-tariffs-announced-by-donald-t",
+          "title": "Australia will ‘examine all options’ to avoid new 15% tariffs announced by Donald Trump",
+          "url": "https://www.theguardian.com/australia-news/2026/feb/22/australia-will-examine-all-options-to-avoid-new-15-tariffs-announced-by-donald-trump",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Australia will “examine all options” after the US president Donald Trump announced a temporary 15% tariff would apply to US imports from all countries.\n\nThe US president’s move came less than 24 hours…"
+        },
+        {
+          "id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+          "title": "Trump raises tariffs to 15% on imports from all countries",
+          "url": "https://www.theguardian.com/us-news/2026/feb/21/trump-tariffs-15-percent",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Donald Trump announced on Saturday that he would raise a temporary tariff rate on US imports from all countries from 10% to 15%, less than 24 hours after the US supreme court ruled against the legalit…"
+        }
+      ],
+      "category": "General",
+      "updated_at": "2026-02-28T01:06:47.288716Z"
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Ukraine Condemns Energy Supply Threats from Hungary and Slovakia",
+      "slug": "ukraine-condemns-energy-supply-threats-from-hungary-and-slovakia",
+      "summary": "Ukraine's Foreign Ministry has rejected what it terms as 'blackmail' following threats from Hungary and Slovakia to halt electricity exports unless Kyiv restores the flow of Russian oil through its territory.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.686,
+      "sources": [
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.547
+        },
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.755
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Dispute Over Oil Transit and Electricity Supplies",
+          "text": "Slovakia and Hungary have threatened to cut off emergency electricity supplies to Ukraine, which currently accounts for approximately half of Ukraine's European electricity imports. The move comes after Russian oil shipments via the Druzhba pipeline were halted on January 27. While Kyiv attributes the outage to a Russian drone strike on pipeline equipment, Bratislava and Budapest have blamed Ukraine for the continued disruption. Slovak Prime Minister Robert Fico stated he would instruct the state-owned company SEPS to stop supplies if oil transit does not resume.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.547
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.755
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "Between them, Hungary and Slovakia have been providing around half of European emergency electricity exports to Ukraine",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "Hungary and Slovakia both accuse Ukraine of delaying the restart, without evidence.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.651,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Diplomatic Tensions and Proposed Alternatives",
+          "text": "The Ukrainian Foreign Ministry described the actions of its neighbors as 'provocative' and 'irresponsible,' suggesting that ultimatums regarding energy should be directed at the Kremlin rather than Kyiv. Amidst the standoff, Ukraine has proposed alternative transit routes, including the Odesa-Brody pipeline, to maintain oil flow to Europe during repairs. The dispute highlights a growing rift between Ukraine and the two EU and NATO members, whose leaders have maintained closer ties with Moscow compared to the broader European consensus.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.547
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.755
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "Ukraine has proposed alternative transit routes to ship oil to Europe while emergency pipeline repair works are under way.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "The Slovak leader, Robert Fico, has accused Ukrainian president Volodymyr Zelenskyy of acting ‘maliciously’ towards his country.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.651,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Broader Conflict Developments",
+          "text": "As the fourth anniversary of the full-scale invasion approaches, military activity continues across the region. Explosions were reported in Kyiv and Lviv, with the latter resulting in the death of a policewoman. Additionally, Ukraine confirmed strikes against a missile factory in Russia's Udmurt Republic using domestically produced cruise missiles. In the international sphere, former UK Prime Minister Boris Johnson suggested deploying non-combat European troops to peaceful regions of Ukraine to signal commitment to the country's independence.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.755
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "Ukraine’s General Staff confirmed it used Ukrainian-made FP-5 ‘Flamingo’ cruise missiles against the Votkinsk plant.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.755,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+          "title": "Ukraine accuses Hungary, Slovakia of ‘blackmail’ over threats to cut electricity",
+          "url": "https://www.cnn.com/2026/02/21/europe/slovakia-ukraine-oil-energy-threat-intl",
+          "source": "CNN",
+          "published_at": "2026-02-28",
+          "excerpt": "Reuters —\n\nUkraine’s Foreign Ministry condemned what it ⁠described as “ultimatums ⁠and blackmail” by the governments of Hungary and Slovakia on Saturday, after they threatened to stop electricity supp…"
+        },
+        {
+          "id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+          "title": "Ukraine war briefing: Kyiv condemns ‘blackmail’ by Hungary and Slovakia in energy supplies dispute",
+          "url": "https://www.theguardian.com/world/2026/feb/22/ukraine-war-briefing-kyiv-condemns-hungary-slovakia-energy-supply-dispute",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Ukraine’s foreign ministry has condemned what it describes as “ultimatums and blackmail” by Hungary and Slovakia on Saturday, after both governments threatened to stop electricity supplies to Ukraine …"
+        }
+      ],
+      "category": "General",
+      "updated_at": "2026-02-28T01:06:59.349872Z"
     },
     "comments": []
   }

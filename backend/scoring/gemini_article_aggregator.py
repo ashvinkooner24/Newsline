@@ -1,5 +1,7 @@
 import json
 import os
+import re
+from datetime import datetime
 
 from dotenv import load_dotenv
 from google import genai
@@ -187,6 +189,7 @@ def gemini_to_storywrapper(
     gemini_result: dict,
     credibility_scores: dict | None = None,
     provider_trust_map: dict | None = None,
+    article_metadata: list[dict] | None = None,
 ) -> dict:
     """
     Convert the structured JSON returned by call_gemini() into a StoryWrapper-compatible dict.
@@ -194,21 +197,11 @@ def gemini_to_storywrapper(
     Args:
         gemini_result:      Output from call_gemini() — {title, standfirst, body_sections, source_index}.
         credibility_scores: Optional {article_id: float 0-1} from credibility_scoring.
-                            Used as avg_truth per segment and as trust_score per provider.
         provider_trust_map: Optional {source_name: float 0-1} to pin a known outlet's trust score.
-                            Takes priority over credibility_scores for trust_score.
+        article_metadata:   Optional list of article dicts with id, title, url, source, published_at, text.
 
     Returns:
-        A plain dict matching the StoryWrapper schema:
-        {
-            "story": {
-                "heading", "political_bias", "factual_accuracy",
-                "sources": [...NewsProvider dicts...],
-                "segments": [...Segment dicts...]
-            },
-            "comments": []
-        }
-        Instantiate with: StoryWrapper(**result)
+        A plain dict matching the StoryWrapper schema.
     """
     credibility_scores = credibility_scores or {}
     provider_trust_map = provider_trust_map or {}
@@ -237,6 +230,7 @@ def gemini_to_storywrapper(
         citations = section.get("citations", [])
 
         seg_providers: dict[str, dict] = {}  # unique providers cited in this section
+        seg_citations: list[dict] = []  # citation objects with quotes
         bias_values: list[float] = []
         truth_values: list[float] = []
 
@@ -244,18 +238,28 @@ def gemini_to_storywrapper(
             source = citation["source"]
             article_id = citation["article_id"]
             bias_level = citation.get("bias_level", "neutral")
+            quote = citation.get("quote", "")
 
             provider = _get_or_create_provider(source, article_id, bias_level)
             seg_providers[source] = provider
             bias_values.append(BIAS_LEVEL_TO_FLOAT.get(bias_level, 0.0))
             truth_values.append(credibility_scores.get(article_id, DEFAULT_TRUST_SCORE))
 
+            seg_citations.append({
+                "source": source,
+                "article_id": article_id,
+                "quote": quote,
+                "bias_level": bias_level,
+            })
+
         avg_bias = round(sum(bias_values) / len(bias_values), 3) if bias_values else 0.0
         avg_truth = round(sum(truth_values) / len(truth_values), 3) if truth_values else DEFAULT_TRUST_SCORE
 
         segments.append({
-            "text": f"{section['heading']}: {section['content']}",
+            "heading": section['heading'],
+            "text": section['content'],
             "sources": list(seg_providers.values()),
+            "citations": seg_citations,
             "avg_bias": avg_bias,
             "avg_truth": avg_truth,
             "article_count": len(seg_providers),
@@ -285,13 +289,37 @@ def gemini_to_storywrapper(
     political_bias = round(sum(all_bias) / len(all_bias), 3) if all_bias else 0.0
     factual_accuracy = round(sum(all_truth) / len(all_truth), 3) if all_truth else DEFAULT_TRUST_SCORE
 
+    # Build article metadata list
+    articles_list = []
+    if article_metadata:
+        for meta in article_metadata:
+            text = meta.get("text", "")
+            articles_list.append({
+                "id": meta.get("id", meta.get("article_id", "")),
+                "title": meta.get("title", ""),
+                "url": meta.get("url", "#"),
+                "source": meta.get("source", "Unknown"),
+                "published_at": meta.get("published_at"),
+                "excerpt": (text[:200] + "\u2026") if len(text) > 200 else text,
+            })
+
+    def _slugify(text: str) -> str:
+        t = text.lower()
+        t = re.sub(r'[^a-z0-9]+', '-', t)
+        return t.strip('-')
+
     return {
         "story": {
             "heading": gemini_result["title"],
+            "slug": _slugify(gemini_result["title"]),
+            "summary": gemini_result.get("standfirst", ""),
             "political_bias": political_bias,
             "factual_accuracy": factual_accuracy,
             "sources": list(provider_registry.values()),
             "segments": segments,
+            "articles": articles_list,
+            "category": "General",
+            "updated_at": datetime.utcnow().isoformat() + "Z",
         },
         "comments": [],
     }

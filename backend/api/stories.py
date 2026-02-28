@@ -41,36 +41,55 @@ def get_stories():
 @router.get("/stories/{slug}", response_model=StoryWrapper)
 def get_story(slug: str):
     for story in _get_stories():
-        if slugify(story.story.heading) == slug:
+        story_slug = story.story.slug or slugify(story.story.heading)
+        if story_slug == slug:
             return story
     raise HTTPException(status_code=404, detail="Story not found")
 
 
 class IngestRequest(BaseModel):
-    articles_dir: str   # absolute or relative path to a folder of .txt files
+    articles_dir: str | None = None   # directory of .txt files
+    csv_dir: str | None = None        # directory of .csv files (e.g. "backend/scraping")
+    max_topics: int = 10              # max topic groups to process from CSVs
 
 
-@router.post("/stories/ingest", response_model=StoryWrapper)
+@router.post("/stories/ingest")
 def ingest_story(req: IngestRequest):
     """
-    Run the full scoring pipeline (sentiment → agreement → credibility → Gemini)
-    for a folder of .txt articles, persist the result, and return it.
+    Run the full scoring pipeline.
+    - Provide articles_dir for legacy .txt mode (single topic).
+    - Provide csv_dir for multi-topic mode (load CSVs, cluster, process).
     """
     try:
         from ..scoring.pipeline import run_pipeline
     except ImportError as e:
         raise HTTPException(status_code=500, detail=f"Import error: {e}")
 
+    if not req.articles_dir and not req.csv_dir:
+        raise HTTPException(status_code=400, detail="Provide either articles_dir or csv_dir")
+
     try:
-        results = run_pipeline(req.articles_dir)
+        results = run_pipeline(
+            articles_dir=req.articles_dir,
+            csv_dir=req.csv_dir,
+            max_topics=req.max_topics,
+        )
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except RuntimeError as e:
         raise HTTPException(status_code=502, detail=str(e))
 
-    wrapper = StoryWrapper(**results[0])
-    add_story(wrapper)
-    return wrapper
+    wrappers = []
+    for result in results:
+        wrapper = StoryWrapper(**result)
+        wrappers.append(wrapper)
+
+    # Update in-memory store so GET /stories returns the new data immediately
+    from ..data.mockData import mock_stories
+    mock_stories.clear()
+    mock_stories.extend(wrappers)
+
+    return wrappers
 
 
 @router.get("/users", response_model=List[User])
