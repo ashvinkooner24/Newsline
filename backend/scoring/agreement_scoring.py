@@ -141,7 +141,7 @@ def has_different_numbers_or_years(claim1, claim2):
 # PUBLIC API
 # ==============================
 
-def compute_agreement(articles):
+def compute_agreement(articles, skip_contradictions: bool = False):
     """
     Given a list of article dicts (each with 'id', 'text', 'objectivity'),
     return:
@@ -150,6 +150,9 @@ def compute_agreement(articles):
       agreement_scores     : dict[article_id -> float 0-1]
       contradiction_reports: list[dict]
       missing_context      : dict[article_id -> list[str]]
+
+    If skip_contradictions is True (e.g. for sports topics), only compute
+    agreement scores — skip the full NLI contradiction / missing context pass.
     """
     embedder = _get_embedder()
 
@@ -191,6 +194,14 @@ def compute_agreement(articles):
         print(f"[agreement]   No claims found — returning neutral scores")
         empty = {a["id"]: 0.5 for a in articles}
         return empty, [], defaultdict(list)
+
+    # Fast path for sports / skip_contradictions: return neutral-ish scores
+    if skip_contradictions:
+        print("[agreement]   skip_contradictions=True — returning neutral scores (no NLI)")
+        scores = {}
+        for article in articles:
+            scores[article["id"]] = round(0.55 + 0.15 * article.get("objectivity", 0.5), 3)
+        return scores, [], {}
 
     # Embed claims
     t0 = time.time()

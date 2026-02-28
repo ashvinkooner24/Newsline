@@ -40,6 +40,7 @@ SOURCE_REPUTATION: dict[str, float] = {
     "associated press": 0.90,
     "ap":               0.90,
     "usa today":        0.72,
+    "fox news":         0.68,
 }
 
 # Display names when the CSV filename is the only source hint
@@ -55,7 +56,22 @@ SOURCE_DISPLAY_NAMES: dict[str, str] = {
     "ap": "Associated Press",
     "usa_today": "USA Today",
     "usatoday": "USA Today",
+    "fox_news": "Fox News",
+    "foxnews": "Fox News",
 }
+
+
+def _normalise_source_key(filename: str) -> str:
+    """Turn a CSV filename into a canonical source key.
+
+    Strips trailing digits/underscores so that e.g.
+      USA_Today02_1-5.csv  →  usa_today
+      Fox_News.csv         →  fox_news
+    """
+    key = filename.replace('.csv', '').lower()
+    # Strip trailing version / batch suffixes like '02_1-5'
+    key = re.sub(r'[\d_-]+$', '', key).rstrip('_')
+    return key or filename.replace('.csv', '').lower()
 
 # Source names for legacy .txt test files
 SOURCE_BY_FILENAME: dict[str, str] = {
@@ -156,26 +172,49 @@ def _extract_date_from_url(url: str) -> str | None:
     return None
 
 
+# URL path segments that indicate non-news content (shopping, deals, lifestyle, etc.)
+_NON_NEWS_URL_SEGMENTS = {
+    'deals', 'shopping', 'lifestyle', 'food-drink', 'food', 'travel',
+    'pets-animals', 'cars', 'graphics', 'nletter', 'weather',
+    'opinion', 'video', 'videos', 'live-story', 'sitemap',
+}
+
+# Titles that should be skipped outright
+_SKIP_TITLES = {
+    'sitemap', 'index', '', 'help center', 'unsupported eu page',
+    'accessibility support', 'site index', 'usa today',
+}
+
+
 def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]:
-    """Load articles from all CSV files in a directory."""
+    """Load articles from all CSV files in a directory.
+
+    - Normalises source keys so multiple CSVs from the same outlet
+      (e.g. USA_Today.csv and USA_Today02_1-5.csv) map to one source.
+    - Filters out non-news content (shopping, deals, opinion, etc.).
+    - Deduplicates articles by title within each source.
+    """
     import polars as pl
 
-    all_articles = []
+    all_articles: list[dict] = []
+    seen_titles: dict[str, set[str]] = defaultdict(set)  # source -> set of lower titles
     csv_files = sorted(f for f in os.listdir(csv_dir) if f.endswith('.csv'))
     print(f"[pipeline] Found {len(csv_files)} CSV files in {csv_dir}")
     for filename in csv_files:
-        source_key = filename.replace('.csv', '').lower()
-        source_name = SOURCE_DISPLAY_NAMES.get(source_key, source_key.title())
+        source_key = _normalise_source_key(filename)
+        source_name = SOURCE_DISPLAY_NAMES.get(source_key, source_key.replace('_', ' ').title())
         filepath = os.path.join(csv_dir, filename)
         try:
             t0 = time.time()
             df = pl.read_csv(filepath)
-            print(f"[pipeline]   {filename}: {len(df)} rows loaded in {time.time()-t0:.1f}s")
+            print(f"[pipeline]   {filename}: {len(df)} rows loaded in {time.time()-t0:.1f}s  (source_key={source_key!r} → {source_name!r})")
         except Exception as e:
             print(f"[pipeline]   Skipping {filename}: {e}")
             continue
 
         count = 0
+        skipped_nonnews = 0
+        skipped_dupe = 0
         for row in df.iter_rows(named=True):
             if count >= max_per_source:
                 break
@@ -184,11 +223,22 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
             url = str(row.get("url", "#")).strip()
             if not text or len(text) < 100 or not title:
                 continue
-            # Skip sitemap / index pages (no real article content)
-            if title.lower() in ("sitemap", "index", ""):
+            # Skip junk titles
+            if title.lower() in _SKIP_TITLES:
                 continue
+            # Skip non-news URL categories
+            url_lower = url.lower()
+            if any(f'/{seg}/' in url_lower or url_lower.endswith(f'/{seg}') for seg in _NON_NEWS_URL_SEGMENTS):
+                skipped_nonnews += 1
+                continue
+            # Deduplicate by title within this source
+            title_key = title.lower().strip()
+            if title_key in seen_titles[source_name]:
+                skipped_dupe += 1
+                continue
+            seen_titles[source_name].add(title_key)
+
             article_id = _slugify(title)[:80] or f"{source_key}_{count}"
-            # Try to extract a published date from the article URL
             published_at = _extract_date_from_url(url) or datetime.utcnow().strftime("%Y-%m-%d")
             all_articles.append({
                 "id": article_id,
@@ -200,8 +250,12 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
             })
             count += 1
 
-        print(f"[pipeline]   {filename}: kept {count} usable articles (source={source_name})")
+        print(f"[pipeline]   {filename}: kept {count} articles, "
+              f"skipped {skipped_dupe} dupes + {skipped_nonnews} non-news (source={source_name})")
 
+    # Final cross-source dedup: if exact same title appears under two sources, keep both
+    # (that's actually desired — same story, different outlets)
+    print(f"[pipeline] Total: {len(all_articles)} unique articles from {len(set(a['source'] for a in all_articles))} sources")
     return all_articles
 
 
@@ -253,8 +307,20 @@ def group_articles_by_topic(
 
         if len(group_indices) >= min_group_size and len(group_sources) >= 2:
             group = [articles[idx] for idx in group_indices]
-            groups.append(group)
+            # Final check: deduplicate articles within the group by title
+            seen = set()
+            deduped = []
+            for a in group:
+                tkey = a['title'].lower().strip()
+                if tkey not in seen:
+                    seen.add(tkey)
+                    deduped.append(a)
+            group = deduped
             grp_sources = sorted({a['source'] for a in group})
+            # After dedup, re-check we still have 2+ sources
+            if len(grp_sources) < 2:
+                continue
+            groups.append(group)
             print(f"[pipeline]   Group #{len(groups)}: {len(group)} articles from {grp_sources}")
             for a in group:
                 print(f"[pipeline]     • [{a['source']}] {a['title'][:70]}")
@@ -270,6 +336,29 @@ def group_articles_by_topic(
 
 MAX_ARTICLE_CHARS = 4000  # truncate article text sent to scoring + Gemini
 STORIES_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "stories.json")
+
+# Keywords in title / URL that indicate a sports story
+_SPORTS_KEYWORDS = re.compile(
+    r'\b(olympic|olympics|medal|nfl|nba|mlb|nhl|nascar|wnba|ncaa|fifa|'
+    r'world cup|premier league|la liga|serie a|bundesliga|'
+    r'touchdown|quarterback|home run|slam dunk|goal scored|'
+    r'batting|cricket|t20|ipl|rugby|tennis|golf|'
+    r'playoff|super bowl|championship|tournament|match|game\s+\d|'
+    r'draft|mock draft|spring training|preseason|postseason|'
+    r'coach|roster|trade|free agent|mvp|'
+    r'soccer|football|basketball|baseball|hockey|boxing|mma|ufc)\b',
+    re.IGNORECASE,
+)
+
+
+def _is_sports_topic(articles: list[dict]) -> bool:
+    """Return True if the majority of articles in this group are about sports."""
+    sports_count = 0
+    for a in articles:
+        text_to_check = a.get('title', '') + ' ' + a.get('url', '')
+        if _SPORTS_KEYWORDS.search(text_to_check):
+            sports_count += 1
+    return sports_count >= len(articles) * 0.5
 
 
 def _process_topic_group(articles: list[dict]) -> dict:
@@ -313,9 +402,14 @@ def _process_topic_group(articles: list[dict]) -> dict:
     print(f"[pipeline]   ── Step 1 DONE in {time.time()-t0:.1f}s")
 
     # ── STEP 2: Agreement scoring ──
+    is_sports = _is_sports_topic(articles)
+    if is_sports:
+        print(f"[pipeline]   ⚽ Sports topic detected — skipping contradiction/missing-context analysis")
     t0 = time.time()
     print(f"[pipeline]   ── Step 2/4: Agreement scoring ({n} articles)…")
-    agreement_scores, contradiction_reports, missing_context = compute_agreement(articles)
+    agreement_scores, contradiction_reports, missing_context = compute_agreement(
+        articles, skip_contradictions=is_sports,
+    )
     print(f"[pipeline]   ── Step 2 DONE in {time.time()-t0:.1f}s — "
           f"{len(contradiction_reports)} contradictions, "
           f"{sum(len(v) for v in missing_context.values()) if isinstance(missing_context, dict) else 0} missing claims")
