@@ -1,5 +1,7 @@
 import json
 import os
+import re
+from datetime import datetime
 
 from dotenv import load_dotenv
 from google import genai
@@ -62,8 +64,9 @@ OUTPUT_SCHEMA = {
                 "required": ["source", "article_id"],
             },
         },
+        "category": {"type": "string"},
     },
-    "required": ["title", "standfirst", "body_sections", "source_index"],
+    "required": ["title", "standfirst", "body_sections", "source_index", "category"],
 }
 
 
@@ -124,24 +127,49 @@ def build_prompt(articles):
                 "Do not pad citations by quoting the same point multiple times."
             ),
             "source_index": "List each source used with its article_id.",
+            "category": (
+                "Assign exactly ONE single-word topic category that best describes the article. "
+                "Choose from: Technology, Environment, Economy, Geopolitics, Finance, Health, "
+                "Politics, Science, Education, Entertainment, Sport, Crime, Society, Business, Defence. "
+                "Use only one word from this list."
+            ),
         },
     }
 
 
-def call_gemini(api_key, prompt):
+def call_gemini(api_key, prompt, timeout_seconds: int = 120):
+    """Call Gemini API with a timeout to prevent hanging."""
+    import concurrent.futures
+
     client = genai.Client(api_key=api_key)
-    response = client.models.generate_content(
-        model=MODEL_NAME,
-        contents=[{"role": "user", "parts": [{"text": json.dumps(prompt)}]}],
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            response_schema=OUTPUT_SCHEMA,
-            temperature=0.3,
-            thinking_config=types.ThinkingConfig(thinking_level="low"),
-        ),
-    )
+
+    def _call():
+        return client.models.generate_content(
+            model=MODEL_NAME,
+            contents=[{"role": "user", "parts": [{"text": json.dumps(prompt)}]}],
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=OUTPUT_SCHEMA,
+                temperature=0.3,
+                thinking_config=types.ThinkingConfig(thinking_level="low"),
+            ),
+        )
+
+    print(f"[gemini] Calling {MODEL_NAME} (timeout={timeout_seconds}s)…")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(_call)
+        try:
+            response = future.result(timeout=timeout_seconds)
+        except concurrent.futures.TimeoutError:
+            raise RuntimeError(
+                f"Gemini API call timed out after {timeout_seconds}s — "
+                f"the prompt may be too large or the API is slow. "
+                f"Try reducing max_per_source or MAX_ARTICLE_CHARS."
+            )
+
     if not response.text:
         raise RuntimeError("Gemini returned an empty response.")
+    print(f"[gemini] Response received: {len(response.text):,} chars")
     return json.loads(response.text)
 
 
@@ -187,31 +215,31 @@ def gemini_to_storywrapper(
     gemini_result: dict,
     credibility_scores: dict | None = None,
     provider_trust_map: dict | None = None,
+    article_metadata: list[dict] | None = None,
+    agreement_scores: dict | None = None,
+    contradiction_reports: list | None = None,
+    missing_context: dict | None = None,
 ) -> dict:
     """
     Convert the structured JSON returned by call_gemini() into a StoryWrapper-compatible dict.
 
     Args:
-        gemini_result:      Output from call_gemini() — {title, standfirst, body_sections, source_index}.
-        credibility_scores: Optional {article_id: float 0-1} from credibility_scoring.
-                            Used as avg_truth per segment and as trust_score per provider.
-        provider_trust_map: Optional {source_name: float 0-1} to pin a known outlet's trust score.
-                            Takes priority over credibility_scores for trust_score.
+        gemini_result:       Output from call_gemini() — {title, standfirst, body_sections, source_index}.
+        credibility_scores:  Optional {article_id: float 0-1} from credibility_scoring.
+        provider_trust_map:  Optional {source_name: float 0-1} to pin a known outlet's trust score.
+        article_metadata:    Optional list of article dicts with id, title, url, source, published_at, text.
+        agreement_scores:    Optional {article_id: float 0-1} from agreement_scoring.
+        contradiction_reports: Optional list of contradiction dicts from agreement_scoring.
+        missing_context:     Optional {article_id: [claim_strings]} from agreement_scoring.
 
     Returns:
-        A plain dict matching the StoryWrapper schema:
-        {
-            "story": {
-                "heading", "political_bias", "factual_accuracy",
-                "sources": [...NewsProvider dicts...],
-                "segments": [...Segment dicts...]
-            },
-            "comments": []
-        }
-        Instantiate with: StoryWrapper(**result)
+        A plain dict matching the StoryWrapper schema.
     """
     credibility_scores = credibility_scores or {}
     provider_trust_map = provider_trust_map or {}
+    agreement_scores = agreement_scores or {}
+    contradiction_reports = contradiction_reports or []
+    missing_context = missing_context or {}
 
     # Registry of NewsProvider dicts, keyed by source name, built as we walk citations.
     # Bias score for a provider is the first bias_level we see for them.
@@ -232,11 +260,15 @@ def gemini_to_storywrapper(
         return provider_registry[source_name]
 
     segments = []
+    n_sections = len(gemini_result.get("body_sections", []))
+    print(f"[gemini]   Building StoryWrapper: {n_sections} body sections, "
+          f"{len(gemini_result.get('source_index', []))} sources")
 
-    for section in gemini_result.get("body_sections", []):
+    for sec_idx, section in enumerate(gemini_result.get("body_sections", [])):
         citations = section.get("citations", [])
 
         seg_providers: dict[str, dict] = {}  # unique providers cited in this section
+        seg_citations: list[dict] = []  # citation objects with quotes
         bias_values: list[float] = []
         truth_values: list[float] = []
 
@@ -244,24 +276,43 @@ def gemini_to_storywrapper(
             source = citation["source"]
             article_id = citation["article_id"]
             bias_level = citation.get("bias_level", "neutral")
+            quote = citation.get("quote", "")
 
             provider = _get_or_create_provider(source, article_id, bias_level)
             seg_providers[source] = provider
             bias_values.append(BIAS_LEVEL_TO_FLOAT.get(bias_level, 0.0))
             truth_values.append(credibility_scores.get(article_id, DEFAULT_TRUST_SCORE))
 
+            seg_citations.append({
+                "source": source,
+                "article_id": article_id,
+                "quote": quote,
+                "bias_level": bias_level,
+            })
+
         avg_bias = round(sum(bias_values) / len(bias_values), 3) if bias_values else 0.0
         avg_truth = round(sum(truth_values) / len(truth_values), 3) if truth_values else DEFAULT_TRUST_SCORE
 
+        # Compute per-segment agreement from the cited articles
+        seg_agree_values = [agreement_scores.get(c["article_id"], 0.5) for c in seg_citations]
+        avg_agreement = round(sum(seg_agree_values) / len(seg_agree_values), 3) if seg_agree_values else 0.5
+
         segments.append({
-            "text": f"{section['heading']}: {section['content']}",
+            "heading": section['heading'],
+            "text": section['content'],
             "sources": list(seg_providers.values()),
+            "citations": seg_citations,
             "avg_bias": avg_bias,
             "avg_truth": avg_truth,
+            "avg_agreement": avg_agreement,
             "article_count": len(seg_providers),
             "notes": None,
             "comments": [],
         })
+        cited_sources = [c['source'] for c in seg_citations]
+        print(f"[gemini]     Section {sec_idx+1}/{n_sections}: \"{section['heading'][:50]}\" "
+              f"— {len(seg_citations)} citations from {cited_sources}, "
+              f"bias={avg_bias:.2f}, truth={avg_truth:.3f}, agree={avg_agreement:.3f}")
 
     # Ensure every source listed in source_index is in the registry
     # (some may not have appeared in any citation if Gemini omitted them from body_sections)
@@ -282,16 +333,79 @@ def gemini_to_storywrapper(
     # Story-level scores: mean of all segment values
     all_bias = [s["avg_bias"] for s in segments]
     all_truth = [s["avg_truth"] for s in segments]
+    all_agreement = [s["avg_agreement"] for s in segments]
     political_bias = round(sum(all_bias) / len(all_bias), 3) if all_bias else 0.0
     factual_accuracy = round(sum(all_truth) / len(all_truth), 3) if all_truth else DEFAULT_TRUST_SCORE
+    source_agreement = round(sum(all_agreement) / len(all_agreement), 3) if all_agreement else 0.5
+
+    # Build article metadata list
+    articles_list = []
+    if article_metadata:
+        for meta in article_metadata:
+            text = meta.get("text", "")
+            articles_list.append({
+                "id": meta.get("id", meta.get("article_id", "")),
+                "title": meta.get("title", ""),
+                "url": meta.get("url", "#"),
+                "source": meta.get("source", "Unknown"),
+                "published_at": meta.get("published_at"),
+                "excerpt": (text[:200] + "\u2026") if len(text) > 200 else text,
+            })
+
+    def _slugify(text: str) -> str:
+        t = text.lower()
+        t = re.sub(r'[^a-z0-9]+', '-', t)
+        return t.strip('-')
+
+    # Category from Gemini (single-word topic)
+    category = gemini_result.get("category", "General").strip().title()
+
+    # updated_at = latest published_at from source articles (fall back to now)
+    updated_at = datetime.utcnow().isoformat() + "Z"
+    if article_metadata:
+        dates = [m.get("published_at", "") for m in article_metadata if m.get("published_at")]
+        if dates:
+            latest = max(dates)  # YYYY-MM-DD strings sort lexicographically
+            updated_at = latest + "T12:00:00Z"
+
+    # Resolve source names for contradiction reports
+    id_to_source: dict[str, str] = {}
+    if article_metadata:
+        for meta in article_metadata:
+            id_to_source[meta.get("id", meta.get("article_id", ""))] = meta.get("source", "Unknown")
+
+    resolved_contradictions = []
+    for report in contradiction_reports:
+        resolved_contradictions.append({
+            "wrong_article": report["wrong_article"],
+            "wrong_claim": report["wrong_claim"],
+            "wrong_source": id_to_source.get(report["wrong_article"], "Unknown"),
+            "correct_article": report["correct_article"],
+            "correct_claim": report["correct_claim"],
+            "correct_source": id_to_source.get(report["correct_article"], "Unknown"),
+        })
+
+    print(f"[gemini]   StoryWrapper complete: \"{gemini_result['title'][:60]}\"")
+    print(f"[gemini]     category={category}, bias={political_bias:.2f}, "
+          f"accuracy={factual_accuracy:.3f}, agreement={source_agreement:.3f}")
+    print(f"[gemini]     {len(provider_registry)} providers, {len(segments)} segments, "
+          f"{len(articles_list)} articles, {len(resolved_contradictions)} contradictions")
 
     return {
         "story": {
             "heading": gemini_result["title"],
+            "slug": _slugify(gemini_result["title"]),
+            "summary": gemini_result.get("standfirst", ""),
             "political_bias": political_bias,
             "factual_accuracy": factual_accuracy,
+            "source_agreement": source_agreement,
             "sources": list(provider_registry.values()),
             "segments": segments,
+            "articles": articles_list,
+            "category": category,
+            "updated_at": updated_at,
+            "contradiction_reports": resolved_contradictions,
+            "missing_context": dict(missing_context),
         },
         "comments": [],
     }

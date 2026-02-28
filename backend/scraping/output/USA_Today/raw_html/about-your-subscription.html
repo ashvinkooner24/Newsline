@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>body{background-color:rgba(255, 255, 255, 1);margin:0;}.overlay{left:50%;opacity:0;position:fixed;top:50%;transform:translate(-50%, -50%);transition:0.25s ease-in;visibility:hidden;z-index:99;}.overlay .overlay-container{align-items:center;display:flex;height:100vh;justify-content:center;overflow:hidden;width:100vw;}.overlay .overlay-container .overlay-shroud{background-color:rgba(0, 0, 0, 0.50);height:100%;left:0;position:fixed;top:0;width:100%;z-index:0;}.overlay .overlay-container .overlay-creative{max-height:530px;position:relative;width:800px;z-index:1;}.overlay .overlay-container .overlay-creative .overlay-close{background:rgb(37, 37, 37);border:4px solid rgb(255, 255, 255);border-radius:50%;cursor:pointer;height:40px;padding:0;position:absolute;right:-20px;top:-20px;width:40px;z-index:2;}.overlay .overlay-container .overlay-creative .overlay-close svg{fill:rgb(255, 255, 255);object-fit:contain;width:24px;}#atoms-nanobar{display:flex;height:80px;position:relative;width:100%;}#atoms-nanobar iframe{height:80px;margin:0 auto;min-width:1025px;width:100%;}@media screen and (max-width: 960px){#atoms-nanobar{display:none;}}iframe{border:0;}form{margin:16px 0;}form button{background-color:rgb(0, 155, 255);border:0 solid #fff;color:#fff;cursor:pointer;font:14px 'Unify Sans', Helvetica, Arial, sans-serif;height:36px;line-height:36px;margin-top:20px;padding:0 30px;text-decoration:none;}form button[disabled]{background-color:rgb(170, 170, 170);cursor:not-allowed;}.float-label{flex-grow:1;margin-bottom:40px;position:relative;}.float-label select{display:none;}.float-label input,.float-label .cm-select{border:0;color:rgba(0, 0, 0, 0.6);font:14px 'Unify Sans', Helvetica, Arial, sans-serif;margin-bottom:2px;padding:18px 0 4px;width:100%;z-index:1;}.float-label input:focus,.float-label .cm-select:focus{outline:none;}.float-label input:focus ~ label.animated-label:after,.float-label .cm-select:focus ~ label.animated-label:after{visibility:visible !important;width:100% !important;}.float-label input:focus ~ label.animated-label,.float-label input.parsley-error ~ label.animated-label,.float-label input.parsley-success ~ label.animated-label,.float-label .cm-select:focus ~ label.animated-label,.float-label .cm-select.parsley-error ~ label.animated-label,.float-label .cm-select.parsley-success ~ label.animated-label{font-size:12px;top:0;}.float-label input.parsley-error ~ label,.float-label .cm-select.parsley-error ~ label{color:red;font-size:12px;left:0;position:absolute;top:42px;}.float-label input.parsley-error ~ label.animated-label:before,.float-label .cm-select.parsley-error ~ label.animated-label:before{background-color:red;height:2px;}.float-label input.parsley-error:focus ~ label.animated-label:after,.float-label .cm-select.parsley-error:focus ~ label.animated-label:after{transition:0.25s;}.float-label .cm-select{background-image:url('http://staticassets.gannettdigital.com/gci-static-assets/assets/global/static-web/select-dropdown.png');background-position:100% 75%;background-repeat:no-repeat;background-size:20px;cursor:pointer;height:22px;}.float-label .cm-select.active ~ label.animated-label,.float-label .cm-select.filled ~ label.animated-label{font-size:12px;top:0;}.float-label .cm-select.active ~ label.animated-label:after{visibility:visible !important;width:100% !important;}.float-label .cm-select-dropdown-menu{background-color:#fff;border:1px solid #d1d1d1;box-shadow:0 3px 5px 0 rgba(0, 0, 0, 0.1);box-sizing:border-box;cursor:pointer;max-height:250px;overflow:scroll;position:absolute;width:100%;z-index:5;}.float-label .cm-select-dropdown-menu div{font-size:16px;padding:15px;}.float-label .cm-select-dropdown-menu div:hover{background-color:#d7e6ff;}.float-label .cm-select-dropdown-menu div.selected{color:#fff;background-color:#009bff !important;}.float-label .cm-select-dropdown-overlay{height:100vh;left:0;position:fixed;top:0;width:100vw;z-index:4;}.float-label label.animated-label{bottom:0;color:rgba(0, 0, 0, 0.6);cursor:text;font-size:14px;left:0;margin:0;pointer-events:none;position:absolute;text-align:left;top:15px;transition:0.25s ease all;width:95%;z-index:2;}.float-label label.animated-label:before,.float-label label.animated-label:after{background-color:rgb(0, 155, 255);bottom:0;content:'';height:2px;left:0;position:absolute;transition:0.25s ease all;visibility:hidden;width:0;}.float-label label.animated-label:before{background-color:rgb(228, 228, 228);height:1px;visibility:visible;width:100%;transition:0s;}footer{background-color:rgb(248, 248, 248);box-shadow:inset 1px 2px 3px rgba(0, 0, 0, 0.05);-moz-box-shadow:inset 1px 2px 3px rgba(0, 0, 0, 0.05);-webkit-box-shadow:inset 1px 2px 3px rgba(0, 0, 0, 0.05);color:rgb(68, 68, 68);display:flex;flex-direction:column;padding:50px 0 76px;text-align:center;}footer .footer-links{font-family:'Unify Sans', Helvetica, Arial, sans-serif;font-size:0.875em;line-height:1.5em;margin-top:0;padding:0 20px;}footer .footer-links a:hover{color:rgb(0, 155, 255);}footer p{font-family:'Unify Sans', Helvetica, Arial, sans-serif;font-size:0.688em;line-height:0.813em;}footer .footer-links li{display:inline;}footer .footer-links li > a{cursor:pointer;}footer .footer-links li:first-child:before{content:'';}footer .footer-links li:before{content:'\2022';margin:0 0.5em 0 0.3em;}footer .footer-links a{text-decoration:none;color:rgb(68, 68, 68);}.cobrand-header{background-color:rgba(255, 255, 255, 1);box-shadow:0 1px 2px 3px rgba(0, 0, 0, 0.05);-moz-box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.05);-webkit-box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.05);left:0;position:absolute;right:0;top:0;}.cobrand-header.redthemedarkmode{background-color:rgba(38, 38, 38, 1);}.cobrand-header.redthemedarkmode .login-container a{color:rgba(255, 255, 255, 1);}.cobrand-header.redthemedarkmode .login-container a span{border-color:rgba(230, 35, 38, 1);}.header-wrapper{display:flex;}.logo-button{float:left;}.logo-image{display:block;height:74px;margin:0 0 0 25px;width:145px;}.login-container{align-items:center;display:inline-flex;font-family:"Unify Sans SemiBold",Helvetica,Arial,sans-serif;font-size:12px;justify-content:flex-end;margin:0 7px 0 15px;width:100%;}.login-container a{color:#222;padding-right:10px;text-decoration:none;}.login-container a span{border-bottom:2px solid #009bff;}.cm-flatpage-card{background:rgb(255, 255, 255);border:none;box-sizing:border-box;display:table;margin:75px auto 30px;max-width:1000px;overflow:hidden;width:80%;}.cm-flatpage-card-message{color:red;font-size:18px;font-family:'Unify Sans SemiBold', Helvetica, Arial, sans-serif;margin:75px auto 0;padding:30px;width:80%;}.page-curtain{background:white url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/subscribe/loading.gif') center center no-repeat;bottom:auto;left:0;opacity:0;position:absolute;right:0;top:0;transition:opacity 0.5s ease;z-index:10;}.page-curtain.present{bottom:0;opacity:1;}.additional-card{margin-top:50px;}.cm-footer{background:inherit;color:rgb(51, 51, 51);display:table-footer-group;font-family:'Helvetica Neue', Helvetica, Arial, san-serif;font-size:14px;margin:0 auto;padding:30px 0;text-align:center;width:80%;}.cm-footer-text{color:rgb(51, 51, 51);font-family:"Unify Sans", "Helvetica", sans-serif;font-size:16px;}.cm-footer-image{max-width:50%;}.cm-footer-image img{max-height:100%;max-width:100%;}.cm-main-content{display:table-cell;font-family:"Unify Sans", "Helvetica", sans-serif;padding:50px;position:relative;vertical-align:middle;width:60%;}.cm-main-content-header{font-family:'Unify Sans SemiBold', Helvetica, Arial, sans-serif;font-size:32px;margin:0 0 25px;}.cm-main-content-text{color:rgb(105, 105, 105);font:16px/22px 'Helvetica Neue', Helvetica, Arial, san-serif;margin:0 35px;}.cm-main-content-button{background-color:rgb(0, 155, 255);color:rgb(255, 255, 255);margin:30px 0;max-width:240px;position:relative;text-decoration:none;}.chunky-btn{padding:12px 20px;width:79%;}.skinny-btn{padding:8px 15px;width:inherit;}.content-button-link{height:100%;left:0;position:absolute;text-decoration:none;top:0;width:100%;}.cm-main-content-image{margin:20px 0;max-width:275px;}.cm-main-content-image img{max-height:100%;max-width:100%;}.cm-main-content-mobile-text{color:rgb(105, 105, 105);font:16px/22px 'Helvetica Neue', Helvetica, Arial, san-serif;margin-bottom:20px;}.cm-main-content-mobile-apps-icons{display:inline-block;}.android-icon,.ios-icon{float:left;}.android-icon{margin-top:-1px;}.ios-icon{margin-right:10px;}.ios-icon img,.android-icon img{height:42px;width:132px;}.cm-main-content-table{padding:30px 0;position:relative;width:100%;}.cm-main-content-table-element{display:inline-block;height:100%;width:32%;}.cm-sidebar-content{background-color:rgb(250, 250, 250);border-left:1px solid rgb(220, 220, 220);box-sizing:border-box;display:table-cell;font-family:"Unify Sans", "Helvetica", sans-serif;padding:50px;position:relative;text-align:center;vertical-align:middle;width:40%;}.cm-sidebar-content-header{font-size:30px;margin-bottom:25px;}.cm-sidebar-content-text{color:rgb(105, 105, 105);font:100 18px "Helvetica", sans-serif;}.cm-sidebar-content-button{border-radius:3px;background-color:rgb(74, 74, 74);color:rgb(255, 255, 255);display:block;font-size:14px;margin:20px auto 0;max-width:215px;padding:12px 20px;position:relative;text-decoration:none;width:79%;}.cm-sidebar-content-image{margin:0 auto 15px;max-width:255px;}.cm-sidebar-content-image img{max-height:100%;max-width:100%;}.white{color:rgb(255, 255, 255) !important;}.transparent-btn{background:none !important;border:2px solid rgb(255, 255, 255) !important;}.center{margin-left:auto !important;margin-right:auto !important;text-align:center !important;}.hidden,[hidden]{display:none !important;}.invisible{visibility:hidden;}.disabled{pointer-events:none;}.white-bg{background-color:rgb(255, 255, 255) !important;}.inline-link{color:rgb(0, 155, 255) !important;text-decoration:none !important;}.chromeless{background-color:rgb(255, 255, 255) !important;border:none !important;margin-top:0 !important;}.divider{border-top:1px solid rgb(220, 220, 220);}.full-width{margin:0 -3000px;overflow-x:hidden;padding:0 3000px;}.desktop{display:block;}.mobile{display:none;}.no-decoration{color:inherit !important;text-decoration:none !important;}.nightMode{background-color:rgba(38, 38, 38, 1);}.nightMode .cobrand-header{background-color:rgba(38, 38, 38, 1);color:rgba(255, 255, 255, 1);}.nightMode footer{background-color:rgba(38, 38, 38, 1);color:rgba(255, 255, 255, 1);}.nightMode footer .footer-links a{color:rgba(255, 255, 255, 1);}@media screen and (max-width: 850px){.float-label{margin-bottom:25px;}.cobrand-header{border-bottom:none;position:relative;}.logo-image{height:54px;margin-left:20px;width:100px;}.cm-flatpage-card{border:none;display:block;text-align:center;width:auto;margin:0 auto 30px;}.additional-card{margin-top:0;}.cm-footer{display:block;padding:0;}.cm-main-content,.cm-main-content-table-element{display:block;float:none;width:auto;}.cm-main-content-button{margin:10px auto;}.cm-main-content-text{max-width:500px;}.cm-main-content-image{margin:20px auto;}.cm-main-content-button{margin:30px auto;}.cm-main-content-table-element{margin:30px 0;}.ios-icon,.android-icon{float:none;margin-right:0;}.cm-sidebar-content{border-left:none;border-top:1px solid rgb(220, 220, 220);display:block;float:none;height:100%;width:auto;}.cm-sidebar-content-header{margin:20px 0;}.cm-sidebar-content-image{margin-top:30px;}.cm-sidebar-content-text{margin:0 auto;max-width:500px;}.vanilla-mobile{background-color:rgb(255, 255, 255) !important;border:none !important;}.desktop{display:none;}.mobile{display:block;}}@font-face{font-family:'Futura Today';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_normal.eot');src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_normal.eot?#iefix') format('embedded-opentype'), url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_normal.woff') format('woff'), url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_normal.ttf') format('truetype');}@font-face{font-family:'Futura Today DemiBold';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_demibold.eot');src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_demibold.eot?#iefix') format('embedded-opentype'), url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_demibold.woff') format('woff'), url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_demibold.ttf') format('truetype');}@font-face{font-family:'Futura Today Light';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_light.eot');src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_light?#iefix') format('embedded-opentype'), url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_light.woff') format('woff'), url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/usf/fonts/futura_today_light.ttf') format('truetype');}@font-face{font-family:'Unify Sans';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/digital-renovation/fonts/UnifySans_W_Rg.woff2') format('woff2');}@font-face{font-family:'Unify Sans SemiBold';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/digital-renovation/fonts/UnifySans_W_SBd.woff2') format('woff2');}@font-face{font-family:'Unify Sans Bold';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/digital-renovation/fonts/UnifySans_W_Bd.woff2') format('woff2');}@font-face{font-family:'Unify Serif';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/digital-renovation/fonts/UnifySerif_W_Rg.woff2') format('woff2');}@font-face{font-family:'Unify Serif SemiBold';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/digital-renovation/fonts/UnifySerif_W_SBd.woff2') format('woff2');}@font-face{font-family:'Unify Serif Bold';font-display:fallback;src:url('https://staticassets.gannettdigital.com/gci-static-assets/assets/global/digital-renovation/fonts/UnifySerif_W_Bd.woff2') format('woff2');}</style>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://www.gannett-cdn.com/sites/usatoday/images/favicon.png">
+	
+    	<title>USA TODAY</title>
+	
+    
+	
+<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/node_modules/whatwg-fetch/dist/fetch.umd.js"></script>
+<script type="text/javascript" src="/node_modules/promise-polyfill/dist/polyfill.min.js"></script>
+<script type="text/javascript" src="/node_modules/custom-event-polyfill/polyfill.js"></script>
+<script type="text/javascript" src="/node_modules/url-search-params/build/url-search-params.js"></script>
+
+
+
+<script type="text/javascript">
+
+window.gciAnalyticsUAID = 'USAT-TEALIUM-CMSP';
+
+</script>
+<script src="https://www.usatoday.com/gcdn/dcjs/prod/main.js" async type="text/javascript"></script>
+
+
+<script>
+	const params = new URLSearchParams(location.search);
+	const stype = params.get('stype');
+
+	t2Data = {
+	    'event-type': 'pageview',
+	    'content-name': window.location.pathname
+	}
+	if (stype !== null) t2Data['page-experience-version'] = stype;
+
+	
+
+	function _triggerPageView() {
+	    
+	        if (window.gciAnalytics && window.user) {
+	            window.gciAnalytics.user = window.user;
+	            t2Data['client-id'] = window.user.response.clientId
+	        }
+	        const params = new URLSearchParams(location.search);
+	        if (params.get('style') !== 'chromeless') {
+	            if (window.gciAnalytics && window.gciAnalytics.isReady) {
+	                gciAnalytics.view(t2Data);
+	            } else {
+	                document.addEventListener('gciAnalyticsReady', function(e) {
+	                    gciAnalytics.view(t2Data);
+	                });
+	            }
+	        }
+	    
+	}
+
+	function trackClickEvent(t) {
+	    
+
+	        var trackData = {
+	            'event-type': 'custom'
+	        }
+			const params = new URLSearchParams(location.search);
+			const stype = params.get('stype');
+			if (stype !== null) trackData['page-experience-version'] = stype;
+	        if (typeof t === 'string' || t instanceof String) {
+	            Object.assign(trackData, {
+	                'client-action': 'cmsp|' + "about-your-subscription" + '|' + t
+	            });
+	        } else {
+	            Object.assign(trackData, t)
+	        }
+	        gciAnalytics.link(trackData);
+	    
+	}
+
+	function trackHeaderSigninEvent() {
+	    trackClickEvent({
+	        'event-category':  null ,
+	        'event-label': 'click',
+	        'event-action': 'login',
+	        'client-action': 'header-signin'
+	    })
+	}
+</script>
+
+
+
+
+
+
+	<script async type="text/javascript" src="https://chat.usatoday.com/api/service"></script>
+
+
+</head>
+<body>
+
+<div class="container">
+    
+    <header>
+        <div class="cobrand-header ">
+            <div class="header-wrapper">
+                <a class="logo-button" href="https://www.usatoday.com/">
+                    
+                        
+                            <img class="logo-image" src="https://www.gannett-cdn.com/gannett-web/properties/usatoday/logos-and-branding/logo-default.svg">
+                        
+                    
+                </a>
+                
+                    <div class="login-container">
+                        <div id="loggedOut" hidden cm-unauthenticated>
+                            
+                                <a class="subscribe" data-client-action-header-subscribe onclick="trackClickEvent('header-subscribe')"><span>Subscribe</span></a>
+                            
+                            
+                                <a id="login" data-client-action-header-signin onclick="trackClickEvent('header-signin')" >Sign In</a>
+                            
+                    </div>
+                        <div id="loggedIn" hidden cm-authenticated>
+                            
+                                <a class="subscribe" cm-no-market-access data-client-action-header-subscribe hidden onclick="trackClickEvent('header-subscribe')"><span>Subscribe</span></a>
+                            
+                            <a id="userSalutation" data-client-action-header-userSalutation onclick="trackClickEvent('header-userSalutation')"><span>Hi, <span class="userName"></span></span></a>
+                            <a id="signOut" data-client-action-header-signOut onclick="trackClickEvent('header-signOut')">Sign Out</a>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+    </header>
+    
+
+    <div class="content">
+        
+        
+    <style scoped> .cm-main-content { font-family: "Unify Sans", sans-serif; font-size: 18px; width: 100%; } .header { font: 20px "Unify Sans SemiBold"; margin-bottom: 10px; text-align: left; } .bold { font-family: "Unify Sans SemiBold"; } .link-list a { color: inherit; text-decoration: none; } .link-list a:hover { color: rgb(0, 155, 255); } button { margin-bottom: 15px; } @media screen and (max-width: 850px) { .cm-flatpage-card { text-align: left; } .cm-main-content { font-size: 16px; padding: 30px; width: auto; } } </style> <div class="cm-flatpage-card"> <div class="cm-main-content"> <div class="header">Subscription Terms & Conditions for USA TODAY </div> <p><span class="bold">Full Access with print edition subscriptions:</span> <ul style="margin: 0px;"> <li><span class="bold">Non-print Days:</span>&nbsp;Non-print days are scheduled throughout the year. There will be no change to subscription rates. As a result, you will still be charged your full subscription rate for the month(s) that include non-publishing day(s). The full list of Non-Print Days is below. Dates are subject to change. An eNewspaper edition will be provided on non-print days.</li> <li><span class="bold">Vacation Stop or Other Non-Delivery:</span>If you request that we not deliver a print edition for vacation or any other reason, or if we fail to deliver a print edition to you for any reason, your subscription continues, including your full access to our content through our digital platforms. As a result, in the event we do not deliver a print edition to you for any reason (whether by your request or otherwise), your subscription will be credited for the delivery portion of your print delivery. If you want to stop all future charges, you must cancel your subscription.</li> <li><span class="bold">EZ Pay: </span>A printed subscription invoice includes a $5.00 paper statement fee. To avoid this fee, subscribers can choose to set up EZ Pay. If you choose EZ Pay, you authorize us to automatically charge the credit card you indicate every month 0 to 14 days prior to the expiration of your then current subscription term, for the duration of your subscription or until you notify us otherwise. Any outstanding balance will be processed with the first EZ Pay charge. </li> <li><span class="bold">USPS Mail Delivery:</span>&nbsp;If you receive your print edition via the US Postal Service, your print edition will be delivered with your mail service. However, when there is no postal delivery, such as federally recognized holidays, your newspaper will be delivered the next day there is postal delivery available.</li> <li><span class="bold">Ad-free access to USA Today Crossword puzzles.</span>&nbsp;Enjoy daily games by visiting puzzles.usatoday.com or through the USA TODAY Crossword app available on your iPhone or Android device.</li> <li>Access to the eNewspaper, an exact digital replica of the print edition. You can access the eNewspaper directly at USA TODAY.&nbsp;</li> <li>Unlimited Full Access every day to USA TODAY.&nbsp;</li> <li>Breaking news alerts and updates on our tablet and smartphone apps. You can personalize your news alerts, swipe, and scroll through stories faster, and bookmark them to save and read later. To unlock unlimited access, sign into your account in the app.</li> <li>Newsletters tailored to specific topics our readers want more of. Newsletters can be sent right to your inbox. Sign up for one (or all of them) today at USA TODAY.&nbsp;</li> <li><span class="bold">California Residents:</span>&nbsp;California law requires we inform you transportation costs are included in your monthly subscription. Sales tax is included and computed to the nearest mil. Per title 18, California code of regulations, section 1628.</li> <li><span class="bold">Florida Residents:</span>&nbsp;Florida law requires we inform you transportation costs are included in your monthly subscription. The transportation fee can be avoided if you choose to pick up your newspaper at one of our distribution centers. To arrange for pick up, please call customer service. </li> <li><span class="bold">Cancellation:</span>&nbsp;If at any time you decide to cancel your subscription, which you can do at any time, you may contact customer service. Payments are non-refundable, and there are no refunds or credits for the unused portion of a subscription that has been cancelled before the end of a billing cycle. We reserve the right, however, to issue refunds or credits at our sole discretion. If we issue a refund or credit in one instance, we are under no obligation to issue the same refund or credit in the future. </li> </ul> </p> <p><span class="bold">Digital Access subscriptions (Subscribed prior to April 1, 2024):</span> <ul style="margin: 0px;"> <li><span class="bold">Unlimited Digital Access subscriptions:</span>&nbsp;Subscriptions do not include print supplements or Crossword.</li> <li>Access to the eNewspaper, an exact digital replica of the print edition. You can access the eNewspaper directly at USA TODAY.&nbsp;</li> <li>Unlimited Full Access every day to USA TODAY.&nbsp;</li> <li>Breaking news alerts and updates on our tablet and smartphone apps. You can personalize your news alerts, swipe, and scroll through stories faster, and bookmark them to save and read later. To unlock unlimited access, sign into your account in the app.&nbsp;</li> <li>Newsletters tailored to specific topics our readers want more of. Newsletters can be sent right to your inbox. Sign up for one (or all of them) today at USA TODAY.&nbsp;</li> <li><span class="bold">EZ Pay: </span>&nbsp;With EZ Pay, you authorize us to automatically charge the credit card you indicate every month 0 to 14 days prior to the expiration of your then current subscription term, for the duration of your subscription or until you notify us otherwise. Any outstanding balance will be processed with the first EZ Pay charge.</li> <li><span class="bold">Cancellation:</span>&nbsp;If at any time you decide to cancel your subscription, which you can do at any time, you may contact customer service. You must cancel your subscription before it automatically renews for a subsequent period to avoid being charged for the next period's subscription fee. If you cancel your subscription, the cancellation will become effective at the end of the then current subscription period. Gannett does not provide credits, refunds, or prorated billing for any subscription cancelled mid-period. In such a circumstance you will continue to have access to your subscription for the remainder of the subscription period. We reserve the right, however, to issue refunds or credits at our sole discretion. If we issue a refund or credit in one instance, we are under no obligation to issue the same refund or credit in the future. </li> </ul> </p> <p><span class="bold">Digital Access subscriptions (Subscribed on or after April 1, 2024):</span> <ul style="margin: 0px;"> <li><span class="bold">Digital Access subscriptions:</span>&nbsp;Subscriptions do not include print supplements, eNewspaper access, or Crossword.</li> <li>Unlimited Full Access every day to USA TODAY.&nbsp;</li> <li>Breaking news alerts and updates on our tablet and smartphone apps. You can personalize your news alerts, swipe, and scroll through stories faster, and bookmark them to save and read later. To unlock unlimited access, sign into your account in the app.&nbsp;</li> <li>Newsletters tailored to specific topics our readers want more of. Newsletters can be sent right to your inbox. Sign up for one (or all of them) today at USA TODAY.&nbsp;</li> <li><span class="bold">EZ Pay:</span>&nbsp;With EZ Pay, you authorize us to automatically charge the credit card you indicate every month 0 to 14 days prior to the expiration of your then current subscription term, for the duration of your subscription or until you notify us otherwise. Any outstanding balance will be processed with the first EZ Pay charge.</li> <li><span class="bold">Cancellation:</span>&nbsp;If at any time you decide to cancel your subscription, which you can do at any time, you may contact customer service. You must cancel your subscription before it automatically renews for a subsequent period to avoid being charged for the next period's subscription fee. If you timely cancel your subscription, the cancellation will become effective at the end of the then current subscription period. Gannett does not provide credits, refunds, or prorated billing for any subscription cancelled mid-period. In such a circumstance you will continue to have access to your subscription for the remainder of the subscription period. We reserve the right, however, to issue refunds or credits at our sole discretion. If we issue a refund or credit in one instance, we are under no obligation to issue the same refund or credit in the future. </li> </ul> </p> <p><span class="bold">eNewspaper subscriptions:</span> <ul style="margin: 0px;"> <li><span class="bold">eNewspaper Access subscriptions:</span>&nbsp;Subscriptions do not include print supplements or Crossword.</li> <li>Unlimited Full Access every day the eNewspaper at USA TODAY/eNewspaper.&nbsp;</li> <li><span class="bold">EZ Pay:</span>&nbsp;With EZ Pay, you authorize us to automatically charge the credit card you indicate every month 0 to 14 days prior to the expiration of your then current subscription term, for the duration of your subscription or until you notify us otherwise. Any outstanding balance will be processed with the first EZ Pay charge.</li> <li><span class="bold">Cancellation:</span>&nbsp;If at any time you decide to cancel your subscription, which you can do at any time, you may contact customer service. You must cancel your subscription before it automatically renews for a subsequent period to avoid being charged for the next period's subscription fee. If you timely cancel your subscription, the cancellation will become effective at the end of the then current subscription period. Gannett does not provide credits, refunds, or prorated billing for any subscription cancelled mid-period. In such a circumstance you will continue to have access to your subscription for the remainder of the subscription period. We reserve the right, however, to issue refunds or credits at our sole discretion. If we issue a refund or credit in one instance, we are under no obligation to issue the same refund or credit in the future. </li> </ul> </p> <p><span class="bold">Customer Service Information</span></p> <p> <ul style="margin: 0px;"> Phone: 1-800-872-0001 <br>Online: help.usatoday.com <p></p> Hours of Operation  <br>Monday - Friday: 8:00am - 7:00pm <br>Saturday: Closed <br>Sunday: Closed<br> </ul> </p> <p><span class="bold">Claims:</span> All claims must be filed within one year. You must bring any claim against USA TODAY within one year of the date you could first bring the claim. If you fail to file your claim against USA TODAY within one year, the claim is permanently barred.</p> <p><span class="bold">Limitation of Liability:</span> You can recover from USA TODAY and its affiliates, resellers, distributors, and vendors only direct damages up to an amount equal to the amount you pay for your subscription for one month. You cannot recover any other damages, including consequential, lost profits, special, indirect, incidental, or punitive damages. The limitations and exclusions apply to anything related to all claims against USA TODAY, including but not limited to claims related to this agreement, USA TODAY, or usatoday.com. The limitations and exclusions also apply if this remedy does not fully compensate you for any losses or fails of its essential purpose or if USA TODAY knew or should have known about the possibility of the damages. This provision applies to all claims that arise under, in connection with, or relate to this agreement or your subscription; that arose under, in connection with, or relate to any previous agreement or subscription or that otherwise arose before these terms went into effect; or that may arise in connection with or after or otherwise relate to the termination of this agreement or your subscription.</p> <p><span class="bold">Waiver of Class Actions: </span>You and the USA TODAY agree that each party may bring disputes against the other party only in an individual capacity, and not as a plaintiff or class member in any purported class or representative proceeding, including, without limitation, a federal or state class action lawsuit. However, nothing in this limits your right or the USA TODAY right to bring a lawsuit against each other as an individual plaintiff. This provision applies to all claims that arise under, in connection with, or relate to this agreement or your subscription; that arose under, in connection with, or relate to any previous agreement or subscription or that otherwise arose before these terms went into effect; or that may arise in connection with or after or otherwise relate to the termination of this agreement or your subscription.</p>  <div class="subsRetentionDates"> <p class="premiumEdition2025"><span class="bold">Premium Editions 2025:</span>&nbsp;1/12, 1/26, 2/9, 2/23, 3/9, 3/23, 4/6, 4/27, 5/4, 5/18, 6/8, 6/22, 7/13, 7/27, 8/10, 8/24, 9/7, 9/21, 10/5, 10/19, 11/9, 12/7, 12/21</p> <p class="nonPrint2025"><span class="bold">Non-Print Days 2025:</span>&nbsp;1/1, 5/26, 7/4, 9/1, 11/27, 12/25</p> <p class="premiumEdition2026"><span class="bold">Premium Editions 2026:</span>&nbsp;1/11, 1/25, 2/8, 2/22, 3/8, 3/22, 4/12, 4/26, 5/10, 5/31, 6/14, 6/28, 7/12, 7/26, 8/09, 8/23, 9/13, 9/27, 10/11, 10/25, 11/08, 11/25, 12/06, 12/20</p> <p class="nonPrint2026"><span class="bold">Non-Print Days 2026:</span>&nbsp;1/1, 5/25, 7/4, 9/7, 11/26, 12/25</p> </div></div> </div> <script> window.addEventListener("userStatusChanged", function () { var subscribeQSP = "?gps-source=CPMENU&itm_medium=onsite&itm_campaign=aboutyoursubscription&itm_source=aboutyoursubscription&itm_content=aboutyoursubscription"; $('.subscribe').attr('href', $('.subscribe').attr('href') + subscribeQSP); }); </script>
+
+    </div>
+
+    
+    <footer class="bg-lightest-gray">
+        <ul class="footer-links">
+            
+				
+				
+					
+						<li><a href="http://help.usatoday.com/">Help</a></li>
+					
+				
+					
+						<li><a href="https://cm.usatoday.com/terms/">Terms of Service</a></li>
+					
+				
+					
+						<li><a href="https://cm.usatoday.com/privacy/">Privacy Policy</a></li>
+					
+				
+					
+						<li><a href="https://cm.usatoday.com/california-collection-notice/">California Notice at Collection</a></li>
+					
+				
+					
+						<li><a href="https://cm.usatoday.com/your-privacy-choices/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 12" style="height:14px;width:auto;top:2px;position:relative;margin-right:4px;"><path fill="#1366FF" d="M19.07 0H5.93A5.93 5.93 0 0 0 0 5.93v.115a5.93 5.93 0 0 0 5.93 5.93h13.14A5.93 5.93 0 0 0 25 6.044v-.116A5.93 5.93 0 0 0 19.07 0Z"></path><path fill="#FFF" d="M6.061 1.022a4.89 4.89 0 0 0-4.875 4.876v.14a4.89 4.89 0 0 0 4.875 4.876h5.298c.03 0 .056-.02.063-.05l2.67-9.758a.065.065 0 0 0-.062-.083H6.062Zm14.947 6.906-1.924-1.96 1.862-1.896a.527.527 0 1 0-.751-.739l-1.849 1.883-1.849-1.883a.527.527 0 1 0-.751.739l1.862 1.896-1.924 1.96a.527.527 0 1 0 .752.738l1.91-1.946 1.911 1.946a.525.525 0 0 0 .745.007.527.527 0 0 0 .007-.745h-.001Z"></path><path fill="#1366FF" d="M6.694 8.673a.527.527 0 0 1-.37-.151L4.358 6.584a.527.527 0 1 1 .74-.75l1.56 1.537 3.25-3.846a.527.527 0 0 1 .805.68L7.096 8.486a.528.528 0 0 1-.38.187h-.023Z"></path></svg>Your Privacy Choices</a></li>
+					
+				
+					
+						<li><a href="http://www.usatoday.com/subscriberguide/#apps">Mobile Apps</a></li>
+					
+				
+            
+        </ul>
+        
+            <p>&copy;&nbsp;Copyright Gannett 2026</p>
+        
+    </footer>
+    
+</div>
+
+    
+<script>
+    (function () {
+        function toggleVisibility(selector, isHidden) {
+            var matchingNodes = document.querySelectorAll(selector);
+            for (var i = 0; i < matchingNodes.length; i++) {
+                matchingNodes[i].hidden = isHidden;
+            }
+        }
+        var userStatusChangedEvent = new CustomEvent("userStatusChanged", {
+            detail: {
+                hasMarketAccess: false
+            }
+        });
+        var fetchUserResponse = function() {
+            new Promise(function (resolve, reject) {
+                var gupasURL = "https:\/\/user.usatoday.com\/USAT-GUP\/user/";
+
+                fetch(gupasURL, {
+                    credentials: 'include'
+                }).then(function (response) {
+                    return response.json().then(function (user) {
+                        if (user && user.meta && user.meta.status === 200) {
+                            resolve(user);
+                        } else {
+                            reject(null);
+                        }
+                    });
+                }).catch(function () {
+                    reject(null);
+                });
+            }).then(function (result) {
+                window.user = result;
+                
+                _triggerPageView();
+                
+
+                if (result.meta && result.meta.status === 200) {
+                    var isLoggedIn = result.meta.isAuthenticatedInCurrentContext;
+                    var isSubscribed = result.response && result.response.user && result.response.user.hasMarketAccess;
+                    var successUrl = encodeURIComponent(window.location.href);
+
+                    var url = window.location.href;
+                    var retParam = "return=";
+                    var queries = url.slice(url.indexOf('?') + 1).split('&');
+                    var foundQSP = queries.find(element => element.includes(retParam));
+                    if (foundQSP)
+                        successUrl = foundQSP.substring(retParam.length);
+
+                    $('.userName').text(result.response.user.welcomeName);
+					$('#login').attr('href', 'https://login.usatoday.com/USAT-GUP/authenticate?success-url=' + successUrl);
+                    $('.subscribe').attr('href', 'https://subscribe.usatoday.com');
+                    $('#signOut').attr('href', 'https://user.usatoday.com/USAT-GUP/user/logout/?return-url=' + successUrl);
+                    $('#userSalutation').attr('href', 'https://account.usatoday.com');
+                    toggleVisibility('[cm-has-market-access]', !isSubscribed);
+                    toggleVisibility('[cm-no-market-access]', isSubscribed);
+                    toggleVisibility('[cm-authenticated]', !isLoggedIn);
+                    toggleVisibility('[cm-unauthenticated]', isLoggedIn);
+                    if (isLoggedIn) {
+                        var event = new CustomEvent("loggedIn", {
+                            detail: {
+                                hasMarketAccess: isSubscribed
+                            }
+                        });
+                        window.dispatchEvent(event);
+
+                        userStatusChangedEvent.detail.hasMarketAccess = isSubscribed;
+
+                        if (!isSubscribed) {
+                            toggleVisibility('[cm-authenticated-no-market-access]', false);
+                        }
+                    }
+                } else {
+                    toggleVisibility('[cm-unauthenticated]', false);
+                }
+
+                window.dispatchEvent(userStatusChangedEvent);
+            }).catch(function () {
+                
+                _triggerPageView();
+                
+                toggleVisibility('[cm-unauthenticated]', false);
+                window.dispatchEvent(userStatusChangedEvent);
+            });
+        }
+        fetchUserResponse();
+        window.addEventListener('updateUserStatus', fetchUserResponse);
+
+    })()
+</script>
+
+
+
+</body>
+</html>

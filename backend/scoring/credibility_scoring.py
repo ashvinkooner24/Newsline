@@ -14,31 +14,42 @@ except ImportError:
 DEFAULT_ARTICLES_DIR = os.path.join(os.path.dirname(__file__), "test")
 
 # Weights for credibility
-WEIGHT_REPUTATION = 0.4
-WEIGHT_OBJECTIVITY = 0.3
-WEIGHT_AGREEMENT = 0.3
+WEIGHT_REPUTATION = 0.30
+WEIGHT_OBJECTIVITY = 0.35
+WEIGHT_AGREEMENT = 0.35
 
 def compute_article_credibility(article, agreement_score, contradictions, missing_context):
     """
     Computes a final credibility score per article.
     Penalizes for contradictions and missing context.
     """
+    aid = article["id"]
+    src = article.get("source", aid)
     rep = article.get("reputation", 0.5)
     obj = article.get("objectivity", 0.5)
-    agree = agreement_score.get(article["id"], 0)
+    agree = agreement_score.get(aid, 0)
 
     # Basic weighted score
     credibility = (WEIGHT_REPUTATION * rep +
                    WEIGHT_OBJECTIVITY * obj +
                    WEIGHT_AGREEMENT * agree)
 
-    # Penalize for contradictions or missing context
-    if article["id"] in contradictions:
-        credibility -= 0.2  # higher penalty for contradictions
-    if article["id"] in missing_context and len(missing_context[article["id"]]) > 0:
-        credibility -= 0.1  # smaller penalty for missing context
+    penalties = []
+    # Penalize for contradictions or missing context (reduced penalties —
+    # NLI models can misclassify minor wording differences as contradictions)
+    if aid in contradictions:
+        credibility -= 0.10
+        penalties.append(f"contradiction(-0.10, {len(contradictions[aid])} reports)")
+    if aid in missing_context and len(missing_context[aid]) > 0:
+        credibility -= 0.05
+        penalties.append(f"missing_ctx(-0.05, {len(missing_context[aid])} claims)")
 
-    return round(max(credibility, 0), 3)  # ensure not negative
+    final = round(max(credibility, 0.1), 3)  # floor at 0.1
+    penalty_str = ", ".join(penalties) if penalties else "none"
+    print(f"[credibility]   [{src}] rep={rep:.2f} + obj={obj:.2f} + agree={agree:.3f} "
+          f"→ base={WEIGHT_REPUTATION*rep + WEIGHT_OBJECTIVITY*obj + WEIGHT_AGREEMENT*agree:.3f} "
+          f"| penalties: {penalty_str} → final={final}")
+    return final
 
 def main():
     import sys

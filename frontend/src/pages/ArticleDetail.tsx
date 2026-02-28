@@ -8,7 +8,7 @@ import { FactCheckDisplay } from '@/components/FactCheckDisplay';
 import { CommentSection } from '@/components/CommentSection';
 import { CommunityNotes } from '@/components/CommunityNotes';
 import { HeaderBar } from '@/components/HeaderBar';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, AlertTriangle } from 'lucide-react';
 
 const ArticleDetail = () => {
   const { slug, articleId } = useParams();
@@ -74,20 +74,50 @@ const ArticleDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Summary */}
+            {/* Analysis Summary */}
             <section className="border border-border bg-card p-5">
-              <h2 className="font-display text-lg font-semibold text-foreground mb-3">Article Summary</h2>
-              <p className="text-secondary-foreground leading-relaxed">
-                This article from {article.source.name} provides coverage of the {topic.topic} topic with a{' '}
-                <span className="font-semibold">{article.source.biasLean}</span> editorial perspective.
-                The reporting style is primarily <span className="font-semibold">{article.tone || 'balanced'}</span>,
-                with {article.toneScore ? `${article.toneScore.logical}% analytical` : 'balanced'} content.
-              </p>
-              <p className="text-secondary-foreground leading-relaxed mt-3">
-                The source has an overall credibility score of {article.source.credibilityScore}%, based on historical accuracy,
-                editorial standards, and transparency practices. This article contributes to the broader coverage of {topic.topic},
-                which includes {topic.articles.length} sources from {new Set(topic.articles.map(a => a.source.country)).size} countries.
-              </p>
+              <h2 className="font-display text-lg font-semibold text-foreground mb-3">Source Analysis</h2>
+              {(() => {
+                const contradictionsForArticle = (topic.contradictions || []).filter(
+                  c => c.wrongArticle === article.id
+                );
+                const missingClaims = topic.articleMissingContext?.[article.id] || [];
+                const credScore = article.source.credibilityScore;
+
+                // Describe the credibility formula accurately
+                const credLabel = credScore >= 80 ? 'high' : credScore >= 60 ? 'moderate' : 'low';
+
+                return (
+                  <>
+                    <p className="text-secondary-foreground leading-relaxed">
+                      Our pipeline scored <span className="font-semibold">{article.source.name}</span>'s
+                      coverage at <span className="font-semibold">{credScore}% credibility</span> ({credLabel}).
+                      This score is derived from three factors:{' '}
+                      <span className="font-semibold">source reputation</span> (based on known outlet reliability),{' '}
+                      <span className="font-semibold">objectivity</span> (measured by running each sentence through
+                      a subjectivity classifier and a sentiment-neutrality model), and{' '}
+                      <span className="font-semibold">cross-source agreement</span> (determined by extracting factual
+                      claims and comparing them across all {topic.articles.length} sources using natural language inference).
+                    </p>
+                    <p className="text-secondary-foreground leading-relaxed mt-3">
+                      {contradictionsForArticle.length > 0
+                        ? `Our NLI analysis detected ${contradictionsForArticle.length} claim${contradictionsForArticle.length > 1 ? 's' : ''} from this source that contradict${contradictionsForArticle.length === 1 ? 's' : ''} reporting by other outlets, which lowered the credibility score.`
+                        : 'No contradictions were detected between this source and other outlets.'}
+                      {' '}
+                      {missingClaims.length > 0
+                        ? `Additionally, ${missingClaims.length} key claim${missingClaims.length > 1 ? 's' : ''} covered by other sources ${missingClaims.length === 1 ? 'is' : 'are'} absent from this article, which also reduced the score.`
+                        : 'This article covers all key claims present across other sources.'}
+                    </p>
+                    <p className="text-secondary-foreground leading-relaxed mt-3">
+                      The source's editorial framing was classified as{' '}
+                      <span className="font-semibold">{article.source.biasLean}</span> based on
+                      our model's assessment of cited quotes. The overall topic draws
+                      from {topic.articles.length} article{topic.articles.length > 1 ? 's' : ''} with
+                      a {topic.credibility.sourceAgreement}% inter-source agreement rate.
+                    </p>
+                  </>
+                );
+              })()}
             </section>
 
             {/* Tone Analysis */}
@@ -103,6 +133,39 @@ const ArticleDetail = () => {
                 <FactCheckDisplay factCheck={article.factCheck} />
               </section>
             )}
+
+            {/* Cross-Source Contradictions */}
+            {(() => {
+              const articleContradictions = (topic.contradictions || []).filter(
+                c => c.wrongArticle === article.id || c.correctArticle === article.id
+              );
+              if (articleContradictions.length === 0) return null;
+              return (
+                <section className="border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-800 p-5 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <AlertTriangle className="w-5 h-5 text-amber-600" />
+                    <h3 className="font-display text-lg font-semibold text-foreground">
+                      Cross-Source Contradictions ({articleContradictions.length})
+                    </h3>
+                  </div>
+                  <div className="space-y-3">
+                    {articleContradictions.map((c, i) => (
+                      <div key={i} className="border-l-2 border-amber-400 pl-3 space-y-1">
+                        <p className="text-sm text-muted-foreground">
+                          <span className="font-semibold text-foreground">{c.wrongSource}</span>:{' '}
+                          <span className="italic">&ldquo;{c.wrongClaim}&rdquo;</span>
+                        </p>
+                        <p className="text-xs text-amber-600 dark:text-amber-400 font-mono uppercase tracking-wider">contradicts</p>
+                        <p className="text-sm text-muted-foreground">
+                          <span className="font-semibold text-foreground">{c.correctSource}</span>:{' '}
+                          <span className="italic">&ldquo;{c.correctClaim}&rdquo;</span>
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              );
+            })()}
           </div>
 
           {/* Sidebar */}

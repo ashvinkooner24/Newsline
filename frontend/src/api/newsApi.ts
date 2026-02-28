@@ -25,6 +25,8 @@ import type {
   BiasLean,
   Citation,
   SectionStats,
+  FactCheck,
+  ContradictionReport,
 } from '@/types/news';
 import { mockTopics, mockUsers, mockSourceProfiles } from '@/data/mockNews';
 
@@ -52,22 +54,58 @@ export interface BackendComment {
   user: BackendUser | null;
 }
 
+export interface BackendCitation {
+  source: string;
+  article_id: string;
+  quote: string;
+  bias_level: string;  // 'left' | 'right' | 'neutral'
+}
+
+export interface BackendArticleMeta {
+  id: string;
+  title: string;
+  url: string;
+  source: string;
+  published_at: string | null;
+  excerpt: string;
+}
+
 export interface BackendSegment {
+  heading: string;
   text: string;
   sources: BackendNewsProvider[];
+  citations: BackendCitation[];
   avg_bias: number;
   avg_truth: number;
+  avg_agreement: number;
   article_count: number;
   notes: string | null;
   comments: BackendComment[];
 }
 
+export interface BackendContradictionReport {
+  wrong_article: string;
+  wrong_claim: string;
+  wrong_source: string;
+  correct_article: string;
+  correct_claim: string;
+  correct_source: string;
+}
+
 export interface BackendStory {
   heading: string;
+  slug: string;
+  summary: string;
   political_bias: number;
   factual_accuracy: number;
+  source_agreement: number;
   sources: BackendNewsProvider[];
   segments: BackendSegment[];
+  articles: BackendArticleMeta[];
+  category: string;
+  updated_at: string;
+  contradiction_reports?: BackendContradictionReport[];
+  missing_context?: Record<string, string[]>;
 }
 
 export interface BackendStoryWrapper {
@@ -124,20 +162,32 @@ function transformProvider(provider: BackendNewsProvider, index: number): Source
 
 /**
  * Build a frontend SummarySection from a BackendSegment.
- * Segment index is used to create a fallback heading.
+ * Uses real citations (with quotes) from the backend when available.
  */
 function transformSegment(segment: BackendSegment, index: number): SummarySection {
-  const sources: Source[] = segment.sources.map(transformProvider);
-
-  const citations: Citation[] = sources.map((src, i) => ({
-    articleId: `seg-${index}-src-${i}`,
-    text:      `Reported by ${src.name}.`,
-    biasLevel: segment.sources[i].bias_score < -0.3
-      ? 'left'
-      : segment.sources[i].bias_score > 0.3
-        ? 'right'
+  // Use real citations from the backend if available
+  let citations: Citation[];
+  if (segment.citations && segment.citations.length > 0) {
+    citations = segment.citations.map((c) => ({
+      articleId: c.article_id,
+      text:      c.quote || `Reported by ${c.source}.`,
+      biasLevel: (c.bias_level === 'left' || c.bias_level === 'right' || c.bias_level === 'neutral')
+        ? c.bias_level
         : 'neutral',
-  }));
+    }));
+  } else {
+    // Fallback for legacy data without real citations
+    const sources: Source[] = segment.sources.map(transformProvider);
+    citations = sources.map((src, i) => ({
+      articleId: `seg-${index}-src-${i}`,
+      text:      `Reported by ${src.name}.`,
+      biasLevel: segment.sources[i].bias_score < -0.3
+        ? 'left' as const
+        : segment.sources[i].bias_score > 0.3
+          ? 'right' as const
+          : 'neutral' as const,
+    }));
+  }
 
   const stats: SectionStats = {
     biasLean:         biasFloatToLean(segment.avg_bias),
@@ -148,7 +198,7 @@ function transformSegment(segment: BackendSegment, index: number): SummarySectio
   };
 
   return {
-    heading:   segment.notes ?? `Section ${index + 1}`,
+    heading:   segment.heading || segment.notes || `Section ${index + 1}`,
     content:   segment.text,
     citations,
     stats,
@@ -194,7 +244,7 @@ function buildBiasAnalysis(story: BackendStory): BiasAnalysis {
 
 /**
  * Build a CredibilityAssessment from the story's metrics.
- * `sourceAgreement` is approximated from the spread of segment bias scores.
+ * Uses real agreement scores computed by the backend agreement_scoring pipeline.
  */
 function buildCredibility(story: BackendStory): CredibilityAssessment {
   const score = Math.round(story.factual_accuracy * 100);
@@ -204,13 +254,21 @@ function buildCredibility(story: BackendStory): CredibilityAssessment {
       )
     : 0;
 
-  const articleCount = story.segments.reduce((sum, seg) => sum + seg.article_count, 0);
+  const articleCount = story.articles?.length || story.segments.reduce((sum, seg) => sum + seg.article_count, 0);
 
-  // Approximate agreement: invert the std-dev of bias scores (higher spread = lower agreement)
-  const biasScores = story.segments.map((s) => s.avg_bias);
-  const mean = biasScores.reduce((a, b) => a + b, 0) / (biasScores.length || 1);
-  const variance = biasScores.reduce((a, b) => a + (b - mean) ** 2, 0) / (biasScores.length || 1);
-  const sourceAgreement = Math.max(0, Math.round((1 - Math.sqrt(variance)) * 100));
+  // Use real agreement score from backend (0-1 float), fall back to segment-level avg
+  let sourceAgreement: number;
+  if (story.source_agreement != null && story.source_agreement > 0) {
+    sourceAgreement = Math.round(story.source_agreement * 100);
+  } else {
+    // Fallback: average segment-level agreement
+    const segAgreements = story.segments
+      .map(s => s.avg_agreement)
+      .filter(v => v != null && v > 0);
+    sourceAgreement = segAgreements.length
+      ? Math.round((segAgreements.reduce((a, b) => a + b, 0) / segAgreements.length) * 100)
+      : 50;
+  }
 
   return {
     score,
@@ -222,42 +280,128 @@ function buildCredibility(story: BackendStory): CredibilityAssessment {
 }
 
 /**
+ * Build a FactCheck for a specific article based on contradiction reports
+ * and missing context from the agreement scoring pipeline.
+ */
+function buildArticleFactCheck(
+  articleId: string,
+  contradictionReports: BackendContradictionReport[],
+  missingCtx: Record<string, string[]>,
+): FactCheck {
+  const artContradictions = contradictionReports.filter(c => c.wrong_article === articleId);
+  const artMissing = missingCtx[articleId] || [];
+
+  if (artContradictions.length === 0 && artMissing.length === 0) {
+    return { verdict: 'verified', details: 'No contradictions or missing context detected across sources.', missingContext: [] };
+  }
+
+  let verdict: FactCheck['verdict'];
+  let details: string;
+
+  if (artContradictions.length > 2) {
+    verdict = 'misleading';
+    details = `${artContradictions.length} claims from this source contradict other sources' reporting.`;
+  } else if (artContradictions.length > 0) {
+    verdict = 'mixed';
+    details = `${artContradictions.length} claim(s) from this source are contradicted by other sources.${artMissing.length > 0 ? ` Also missing ${artMissing.length} key point(s) covered elsewhere.` : ''}`;
+  } else if (artMissing.length > 3) {
+    verdict = 'mixed';
+    details = `This source omits ${artMissing.length} key claims covered by other sources.`;
+  } else {
+    verdict = 'mostly-true';
+    details = `Mostly consistent but omits ${artMissing.length} point(s) covered by other sources.`;
+  }
+
+  return { verdict, details, missingContext: artMissing };
+}
+
+/**
  * Main transformer: BackendStoryWrapper → TopicSummary.
- * `index` is the position in the /stories array and is used as the topic ID.
+ * Uses real article metadata and citations from the backend.
  */
 export function transformStory(wrapper: BackendStoryWrapper, index: number): TopicSummary {
   const { story, comments } = wrapper;
 
-  // Use the first segment's text as a brief summary, fallback to headline
-  const summary = story.segments[0]?.text ?? story.heading;
+  // Use the backend summary (standfirst) or fall back to first segment text
+  const summary = story.summary || story.segments[0]?.text || story.heading;
 
-  // Derive stub Article entries from segment sources so the UI has something to render
-  const articles: Article[] = story.segments.flatMap((seg, sIdx) =>
-    seg.sources.map((provider, pIdx) => ({
-      id:          `story-${index}-seg-${sIdx}-src-${pIdx}`,
-      title:       `${provider.name}: ${story.heading}`,
-      url:         '#',
-      source:      transformProvider(provider, pIdx),
-      publishedAt: new Date().toISOString().split('T')[0],
-      excerpt:     seg.text,
-    }))
-  );
+  // Use real article metadata from the backend if available
+  let articles: Article[];
+  if (story.articles && story.articles.length > 0) {
+    // Build a provider lookup for credibility/bias info
+    const providerMap: Record<string, BackendNewsProvider> = {};
+    for (const p of story.sources) {
+      providerMap[p.name] = p;
+    }
+
+    const contradictionReports = story.contradiction_reports || [];
+    const missingCtx = story.missing_context || {};
+
+    articles = story.articles.map((meta, i) => {
+      const provider = providerMap[meta.source];
+      return {
+        id:          meta.id,
+        title:       meta.title,
+        url:         meta.url || '#',
+        source: {
+          id:               slugify(meta.source) || `source-${i}`,
+          name:             meta.source,
+          url:              meta.url || '#',
+          credibilityScore: provider ? Math.round(provider.trust_score * 100) : 70,
+          biasLean:         provider ? biasFloatToLean(provider.bias_score) : 'center' as const,
+          country:          'Unknown',
+        },
+        publishedAt: meta.published_at || new Date().toISOString().split('T')[0],
+        excerpt:     meta.excerpt || '',
+        factCheck:   buildArticleFactCheck(meta.id, contradictionReports, missingCtx),
+      };
+    });
+  } else {
+    // Fallback: derive stub Article entries from segment sources
+    articles = story.segments.flatMap((seg, sIdx) =>
+      seg.sources.map((provider, pIdx) => ({
+        id:          `story-${index}-seg-${sIdx}-src-${pIdx}`,
+        title:       `${provider.name}: ${story.heading}`,
+        url:         '#',
+        source:      transformProvider(provider, pIdx),
+        publishedAt: new Date().toISOString().split('T')[0],
+        excerpt:     seg.text,
+      }))
+    );
+  }
+
+  // Deduplicate articles by ID (keep first occurrence)
+  const seenIds = new Set<string>();
+  const uniqueArticles = articles.filter(a => {
+    if (seenIds.has(a.id)) return false;
+    seenIds.add(a.id);
+    return true;
+  });
 
   return {
     id:            String(index),
     topic:         story.heading,
-    slug:          slugify(story.heading),
+    slug:          story.slug || slugify(story.heading),
     headline:      story.heading,
     summary,
     sections:      story.segments.map(transformSegment),
-    articles,
+    articles:      uniqueArticles,
     biasAnalysis:  buildBiasAnalysis(story),
     credibility:   buildCredibility(story),
-    updatedAt:     new Date().toISOString(),
-    category:      'General',
+    updatedAt:     story.updated_at || new Date().toISOString(),
+    category:      story.category || 'General',
     country:       'Global',
     comments:      transformComments(comments, index),
     communityNotes: [],
+    contradictions: (story.contradiction_reports || []).map(c => ({
+      wrongArticle: c.wrong_article,
+      wrongClaim: c.wrong_claim,
+      wrongSource: c.wrong_source,
+      correctArticle: c.correct_article,
+      correctClaim: c.correct_claim,
+      correctSource: c.correct_source,
+    })),
+    articleMissingContext: story.missing_context || {},
   };
 }
 
@@ -345,4 +489,27 @@ export async function getUser(username: string): Promise<UserProfile | null> {
 
 // Re-export the mock helpers so callers can access users / source profiles
 // (the backend doesn't have endpoints for these yet).
-export { mockUsers, mockSourceProfiles };
+export { mockUsers };
+
+/**
+ * Fetch source profiles from the backend.
+ * Falls back to mockSourceProfiles if the backend is unreachable.
+ */
+export async function getSourceProfiles(): Promise<import('@/types/news').SourceProfile[]> {
+  try {
+    const res = await fetch(`${API_BASE}/sources`);
+    if (!res.ok) throw new Error(`GET /sources → HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn('[newsApi] Backend unavailable for sources, falling back to mock data.', err);
+    return mockSourceProfiles;
+  }
+}
+
+/**
+ * Fetch a single source profile by ID.
+ */
+export async function getSourceProfile(sourceId: string): Promise<import('@/types/news').SourceProfile | null> {
+  const profiles = await getSourceProfiles();
+  return profiles.find(p => p.source.id === sourceId) ?? null;
+}
