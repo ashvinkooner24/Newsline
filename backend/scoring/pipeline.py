@@ -402,13 +402,17 @@ def _process_topic_group(articles: list[dict]) -> dict:
     print(f"[pipeline]   ── Step 1 DONE in {time.time()-t0:.1f}s")
 
     # ── STEP 2: Agreement scoring ──
+    unique_sources = {a.get("source", "") for a in articles}
     is_sports = _is_sports_topic(articles)
+    skip_agreement = is_sports or len(unique_sources) < 3
     if is_sports:
-        print(f"[pipeline]   ⚽ Sports topic detected — skipping contradiction/missing-context analysis")
+        print(f"[pipeline]   ⚽ Sports topic detected — skipping agreement scoring entirely")
+    elif len(unique_sources) < 3:
+        print(f"[pipeline]   ⚡ Only {len(unique_sources)} source(s) — skipping agreement scoring")
     t0 = time.time()
     print(f"[pipeline]   ── Step 2/4: Agreement scoring ({n} articles)…")
     agreement_scores, contradiction_reports, missing_context = compute_agreement(
-        articles, skip_contradictions=is_sports,
+        articles, skip_contradictions=skip_agreement,
     )
     print(f"[pipeline]   ── Step 2 DONE in {time.time()-t0:.1f}s — "
           f"{len(contradiction_reports)} contradictions, "
