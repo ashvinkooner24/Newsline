@@ -417,4 +417,27 @@ export async function getUser(username: string): Promise<UserProfile | null> {
 
 // Re-export the mock helpers so callers can access users / source profiles
 // (the backend doesn't have endpoints for these yet).
-export { mockUsers, mockSourceProfiles };
+export { mockUsers };
+
+/**
+ * Fetch source profiles from the backend.
+ * Falls back to mockSourceProfiles if the backend is unreachable.
+ */
+export async function getSourceProfiles(): Promise<import('@/types/news').SourceProfile[]> {
+  try {
+    const res = await fetch(`${API_BASE}/sources`);
+    if (!res.ok) throw new Error(`GET /sources → HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn('[newsApi] Backend unavailable for sources, falling back to mock data.', err);
+    return mockSourceProfiles;
+  }
+}
+
+/**
+ * Fetch a single source profile by ID.
+ */
+export async function getSourceProfile(sourceId: string): Promise<import('@/types/news').SourceProfile | null> {
+  const profiles = await getSourceProfiles();
+  return profiles.find(p => p.source.id === sourceId) ?? null;
+}

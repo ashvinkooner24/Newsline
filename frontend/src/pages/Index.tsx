@@ -6,7 +6,7 @@ import { TopicCard } from '@/components/TopicCard';
 import { SearchFilter } from '@/components/SearchFilter';
 import { HeaderBar } from '@/components/HeaderBar';
 import { Link } from 'react-router-dom';
-import { Clock, TrendingUp, Shield, AlertTriangle, CheckCircle, Bookmark, Globe, Landmark, Cpu, HeartPulse, GraduationCap, Banknote } from 'lucide-react';
+import { Clock, TrendingUp, Shield, AlertTriangle, CheckCircle, Bookmark, Globe, Landmark, Cpu, HeartPulse, GraduationCap, Banknote, Scale, Tv, Trophy, ShieldAlert, Users, Briefcase, Swords } from 'lucide-react';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
 
@@ -20,6 +20,12 @@ const topicIcons: Record<string, React.ReactNode> = {
   Politics: <Landmark className="w-4 h-4" />,
   Science: <Globe className="w-4 h-4" />,
   Education: <GraduationCap className="w-4 h-4" />,
+  Entertainment: <Tv className="w-4 h-4" />,
+  Sport: <Trophy className="w-4 h-4" />,
+  Crime: <ShieldAlert className="w-4 h-4" />,
+  Society: <Users className="w-4 h-4" />,
+  Business: <Briefcase className="w-4 h-4" />,
+  Defence: <Swords className="w-4 h-4" />,
 };
 
 const Index = () => {

@@ -303,6 +303,11 @@ export const mockSourceProfiles: SourceProfile[] = Object.values(sources).map(s 
   topTopics: ['AI Regulation', 'Climate Policy', 'Economy'],
 }));
 
-export const allCategories = [...new Set(mockTopics.map(t => t.category))];
+export const allCategories = [
+  'Technology', 'Environment', 'Economy', 'Geopolitics', 'Finance',
+  'Health', 'Politics', 'Science', 'Education', 'Entertainment',
+  'Sport', 'Crime', 'Society', 'Business', 'Defence',
+  ...new Set(mockTopics.map(t => t.category)),
+].filter((v, i, a) => a.indexOf(v) === i);
 export const allCountries = [...new Set(mockTopics.map(t => t.country))];
 export const allSubtopics = [...new Set(mockTopics.filter(t => t.subtopic).map(t => t.subtopic!))];

@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from ..models import StoryWrapper, User
 from ..data.mockData import mock_stories, mock_users, add_story
 from ..utils.slugify import slugify
+from collections import defaultdict
 
 router = APIRouter()
 
@@ -102,3 +103,85 @@ def get_user(username: str):
         if user.username == username:
             return user
     raise HTTPException(status_code=404, detail="User not found")
+
+
+@router.get("/sources")
+def get_sources():
+    """
+    Build source profiles dynamically from the current story data.
+    Returns a list of source profiles with article counts, credibility,
+    bias, and the topics they've contributed to.
+    """
+    stories = _get_stories()
+
+    # Accumulate stats per source name
+    source_stats: dict[str, dict] = defaultdict(lambda: {
+        "name": "",
+        "bias_scores": [],
+        "trust_scores": [],
+        "article_count": 0,
+        "topics": set(),
+        "articles": [],
+    })
+
+    for wrapper in stories:
+        story = wrapper.story
+        category = story.category or 'General'
+
+        # Gather provider-level info
+        provider_map: dict[str, dict] = {}
+        for provider in story.sources:
+            provider_map[provider.name] = {
+                "bias_score": provider.bias_score,
+                "trust_score": provider.trust_score,
+            }
+
+        # Gather per-article info
+        for article in story.articles:
+            src_name = article.source
+            stats = source_stats[src_name]
+            stats["name"] = src_name
+            stats["article_count"] += 1
+            stats["topics"].add(category)
+            stats["articles"].append({
+                "id": article.id,
+                "title": article.title,
+                "url": article.url,
+                "published_at": article.published_at,
+            })
+            # Use provider bias/trust if available
+            if src_name in provider_map:
+                stats["bias_scores"].append(provider_map[src_name]["bias_score"])
+                stats["trust_scores"].append(provider_map[src_name]["trust_score"])
+
+    results = []
+    for src_name, stats in source_stats.items():
+        avg_bias = (sum(stats["bias_scores"]) / len(stats["bias_scores"])) if stats["bias_scores"] else 0.0
+        avg_trust = (sum(stats["trust_scores"]) / len(stats["trust_scores"])) if stats["trust_scores"] else 0.7
+        sid = slugify(src_name)
+
+        # Determine bias lean label
+        if avg_bias < -0.6: bias_lean = "far-left"
+        elif avg_bias < -0.3: bias_lean = "left"
+        elif avg_bias < -0.1: bias_lean = "center-left"
+        elif avg_bias <= 0.1: bias_lean = "center"
+        elif avg_bias <= 0.3: bias_lean = "center-right"
+        elif avg_bias <= 0.6: bias_lean = "right"
+        else: bias_lean = "far-right"
+
+        results.append({
+            "source": {
+                "id": sid,
+                "name": src_name,
+                "url": "#",
+                "credibilityScore": round(avg_trust * 100),
+                "biasLean": bias_lean,
+                "country": "Unknown",
+            },
+            "totalArticles": stats["article_count"],
+            "avgCredibility": round(avg_trust * 100),
+            "biasHistory": [],
+            "topTopics": sorted(stats["topics"]),
+        })
+
+    return results

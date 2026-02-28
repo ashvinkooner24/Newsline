@@ -64,8 +64,9 @@ OUTPUT_SCHEMA = {
                 "required": ["source", "article_id"],
             },
         },
+        "category": {"type": "string"},
     },
-    "required": ["title", "standfirst", "body_sections", "source_index"],
+    "required": ["title", "standfirst", "body_sections", "source_index", "category"],
 }
 
 
@@ -126,6 +127,12 @@ def build_prompt(articles):
                 "Do not pad citations by quoting the same point multiple times."
             ),
             "source_index": "List each source used with its article_id.",
+            "category": (
+                "Assign exactly ONE single-word topic category that best describes the article. "
+                "Choose from: Technology, Environment, Economy, Geopolitics, Finance, Health, "
+                "Politics, Science, Education, Entertainment, Sport, Crime, Society, Business, Defence. "
+                "Use only one word from this list."
+            ),
         },
     }
 
@@ -308,6 +315,17 @@ def gemini_to_storywrapper(
         t = re.sub(r'[^a-z0-9]+', '-', t)
         return t.strip('-')
 
+    # Category from Gemini (single-word topic)
+    category = gemini_result.get("category", "General").strip().title()
+
+    # updated_at = latest published_at from source articles (fall back to now)
+    updated_at = datetime.utcnow().isoformat() + "Z"
+    if article_metadata:
+        dates = [m.get("published_at", "") for m in article_metadata if m.get("published_at")]
+        if dates:
+            latest = max(dates)  # YYYY-MM-DD strings sort lexicographically
+            updated_at = latest + "T12:00:00Z"
+
     return {
         "story": {
             "heading": gemini_result["title"],
@@ -318,8 +336,8 @@ def gemini_to_storywrapper(
             "sources": list(provider_registry.values()),
             "segments": segments,
             "articles": articles_list,
-            "category": "General",
-            "updated_at": datetime.utcnow().isoformat() + "Z",
+            "category": category,
+            "updated_at": updated_at,
         },
         "comments": [],
     }

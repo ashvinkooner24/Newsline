@@ -38,6 +38,7 @@ SOURCE_REPUTATION: dict[str, float] = {
     "cnn":              0.78,
     "associated press": 0.90,
     "ap":               0.90,
+    "usa today":        0.72,
 }
 
 # Display names when the CSV filename is the only source hint
@@ -51,6 +52,8 @@ SOURCE_DISPLAY_NAMES: dict[str, str] = {
     "politico": "Politico",
     "aljazeera": "Al Jazeera",
     "ap": "Associated Press",
+    "usa_today": "USA Today",
+    "usatoday": "USA Today",
 }
 
 # Source names for legacy .txt test files
@@ -117,6 +120,28 @@ def load_articles_from_txt(articles_dir: str) -> list[dict]:
     return articles
 
 
+_DATE_FROM_URL = re.compile(r'/(20\d{2})/(\d{2})/(\d{2})/')
+_DATE_MONTH_NAME = re.compile(r'/(20\d{2})/(january|february|march|april|may|june|july|august|september|october|november|december)/(\d{1,2})', re.IGNORECASE)
+_MONTH_MAP = {
+    "january": "01", "february": "02", "march": "03", "april": "04",
+    "may": "05", "june": "06", "july": "07", "august": "08",
+    "september": "09", "october": "10", "november": "11", "december": "12",
+}
+
+
+def _extract_date_from_url(url: str) -> str | None:
+    """Try to extract a YYYY-MM-DD date from a URL path."""
+    m = _DATE_FROM_URL.search(url)
+    if m:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    m = _DATE_MONTH_NAME.search(url)
+    if m:
+        month_num = _MONTH_MAP.get(m.group(2).lower())
+        if month_num:
+            return f"{m.group(1)}-{month_num}-{int(m.group(3)):02d}"
+    return None
+
+
 def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]:
     """Load articles from all CSV files in a directory."""
     import polars as pl
@@ -143,14 +168,19 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
             url = str(row.get("url", "#")).strip()
             if not text or len(text) < 100 or not title:
                 continue
+            # Skip sitemap / index pages (no real article content)
+            if title.lower() in ("sitemap", "index", ""):
+                continue
             article_id = _slugify(title)[:80] or f"{source_key}_{count}"
+            # Try to extract a published date from the article URL
+            published_at = _extract_date_from_url(url) or datetime.utcnow().strftime("%Y-%m-%d")
             all_articles.append({
                 "id": article_id,
                 "title": title,
                 "text": text,
                 "url": url,
                 "source": source_name,
-                "published_at": datetime.utcnow().strftime("%Y-%m-%d"),
+                "published_at": published_at,
             })
             count += 1
 

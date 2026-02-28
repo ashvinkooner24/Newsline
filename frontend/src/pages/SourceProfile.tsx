@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
-import { getTopics, mockSourceProfiles } from '@/api/newsApi';
+import { getTopics, getSourceProfile } from '@/api/newsApi';
 import { TopicSummary, SourceProfile } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { HeaderBar } from '@/components/HeaderBar';
@@ -9,16 +9,17 @@ import { ExternalLink, FileText } from 'lucide-react';
 const SourceProfilePage = () => {
   const { sourceId } = useParams();
   const [topics, setTopics] = useState<TopicSummary[]>([]);
+  const [profile, setProfile] = useState<SourceProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getTopics()
-      .then(data => setTopics(data))
-      .catch(err => console.error('[SourceProfile] Failed to load topics:', err))
+    Promise.all([
+      getTopics().then(data => setTopics(data)),
+      sourceId ? getSourceProfile(sourceId).then(data => setProfile(data)) : Promise.resolve(),
+    ])
+      .catch(err => console.error('[SourceProfile] Failed to load:', err))
       .finally(() => setLoading(false));
-  }, []);
-
-  const profile = mockSourceProfiles.find(p => p.source.id === sourceId);
+  }, [sourceId]);
 
   const sourceArticles = useMemo(
     () => topics.flatMap(t => t.articles.filter(a => a.source.id === sourceId)),

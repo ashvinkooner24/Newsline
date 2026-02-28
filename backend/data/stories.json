@@ -1,9 +1,189 @@
 [
   {
     "story": {
+      "heading": "Norway Leads Medal Count as 2026 Winter Olympics Near Conclusion",
+      "slug": "norway-leads-medal-count-as-2026-winter-olympics-near-conclusion",
+      "summary": "As the 2026 Milano Cortina Winter Olympics enter their final days, Norway maintains a significant lead in the overall medal standings, highlighted by record-breaking individual performances in cross-country skiing.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.435,
+      "sources": [
+        {
+          "name": "USA Today",
+          "bias_score": 0.0,
+          "trust_score": 0.265
+        },
+        {
+          "name": "The New York Times",
+          "bias_score": 0.0,
+          "trust_score": 0.605
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Current Medal Standings",
+          "text": "As of February 18, 2026, Norway leads the international field with a total of 33 medals, including 15 gold. Italy follows in second place with 26 total medals, while the United States holds third place with 24. Other top-performing nations include Japan, Germany, Austria, and France. The competition features athletes from over 90 countries competing across 116 events.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.265
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+              "quote": "Norway: 33 Total (15 Gold, 8 Silver, 10 Bronze)",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "USA Today",
+              "article_id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+              "quote": "Athletes from more than 90 countries will compete for Winter Olympic medals in 116 events over 16 days",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.265,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Record-Breaking Performances",
+          "text": "Norwegian cross-country skier Johannes H&oslash;sflot Kl&&aelig;bo achieved a historic milestone by winning six gold medals in a single Winter Olympics, surpassing the previous record held by American Eric Heiden. Meanwhile, American speedskater Jordan Stolz concluded his second Winter Games with two golds and one silver, marking the highest medal count for a U.S. speedskater since 1980.",
+          "sources": [
+            {
+              "name": "The New York Times",
+              "bias_score": 0.0,
+              "trust_score": 0.605
+            }
+          ],
+          "citations": [
+            {
+              "source": "The New York Times",
+              "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
+              "quote": "Kl&&aelig;bo&rsquo;s victory Saturday broke a tie with U.S. speedskater Eric Heiden.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The New York Times",
+              "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
+              "quote": "two golds and a silver, I&rsquo;m pretty happy with that.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.605,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Recent Results in Curling and Hockey",
+          "text": "In men's curling, Canada secured the gold medal with a 9-6 victory over Great Britain, marking their first title in the event since 2014. Great Britain received the silver medal for the second consecutive Games. In men's ice hockey, Finland earned the bronze medal after a 6-1 win against Slovakia. The men's gold medal game between the United States and Canada is scheduled for Sunday morning.",
+          "sources": [
+            {
+              "name": "The New York Times",
+              "bias_score": 0.0,
+              "trust_score": 0.605
+            }
+          ],
+          "citations": [
+            {
+              "source": "The New York Times",
+              "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
+              "quote": "On Saturday, he took out Great Britain 9-6 in a tense and strategic battle to win his second Olympic gold medal and a fourth men&rsquo;s curling title for Canada",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The New York Times",
+              "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
+              "quote": "Finland put the disappointment of Friday&rsquo;s narrow loss to Canada in the rearview mirror and blitzed Slovakia 6-1 to claim the bronze medal in men&rsquo;s hockey.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.605,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Upcoming Events",
+          "text": "The final days of competition will include medal events in freestyle skiing, ski mountaineering, figure skating, and speed skating. Notable upcoming finals include the Women's Free Skate in figure skating and the Men's and Women's Mass Start in speed skating, leading up to the closing ceremonies on February 22.",
+          "sources": [
+            {
+              "name": "USA Today",
+              "bias_score": 0.0,
+              "trust_score": 0.265
+            }
+          ],
+          "citations": [
+            {
+              "source": "USA Today",
+              "article_id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+              "quote": "FIGURE SKATING: Women's Free Skate",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "USA Today",
+              "article_id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+              "quote": "SPEED SKATING: Men's, Women's Mass Start",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.265,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "title": "Olympic medals today: What is the medal count at 2026 Winter Games on Feb.18",
+          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/winter-olympics-medal-count-today-feb-18/88735277007/",
+          "source": "USA Today",
+          "published_at": "2026-02-18",
+          "excerpt": "Athletes from more than 90 countries will compete for Winter Olympic medals in 116 events over 16 days, and USA TODAY is keeping a tally of every nation finishing on the podium. Here's a look at the l…"
+        },
+        {
+          "id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "title": "Olympic medals today: What is the medal count at 2026 Winter Games on Feb.18",
+          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/winter-olympics-medal-count-today-feb-18/88735277007/",
+          "source": "USA Today",
+          "published_at": "2026-02-18",
+          "excerpt": "All data accurate as of Wednesday, Feb. 18, 2026, at 3:18 p.m.\nMeet Team USA 2026: Get to know the athletes behind the games\n1. Norway: 33 Total (15 Gold, 8 Silver, 10 Bronze)\\n\n2. Italy: 26 Total (9 …"
+        },
+        {
+          "id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
+          "title": "Olympic medals today: What is the medal count at 2026 Winter Games on Feb.18",
+          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/winter-olympics-medal-count-today-feb-18/88735277007/",
+          "source": "USA Today",
+          "published_at": "2026-02-18",
+          "excerpt": "Feb. 19\nFREESTYLE SKIING: Men's Aerials Final\\n\nSKI MOUNTAINEERING: Women's, Men's Sprint\\n\nNORDIC COMBINED: Team Sprint/Large Hill 2x7.5km\\n\nICE HOCKEY: Women's Final\\n\nSPEED SKATING: Men's 1500m\\n\nF…"
+        },
+        {
+          "id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
+          "title": "Winter Olympics Day 15 recap: Canada wins men’s curling, Klæbo claims sixth gold medal",
+          "url": "https://www.nytimes.com/athletic/7062735/2026/02/21/olympics-recap-canada-curling-gold-klaebo-record/",
+          "source": "The New York Times",
+          "published_at": "2026-02-21",
+          "excerpt": "The Athletic has live coverage of the 2026 Winter Olympics.\n\n​​Brad Jacobs’ Canada teammates called him “a killer” after their 5-4 semifinal win over Norway.\n\nOn Saturday, he took out Great Britain 9-…"
+        }
+      ],
+      "category": "Sport",
+      "updated_at": "2026-02-21T12:00:00Z"
+    },
+    "comments": []
+  },
+  {
+    "story": {
       "heading": "Pakistan Conducts Airstrikes Against Militant Targets in Afghanistan",
       "slug": "pakistan-conducts-airstrikes-against-militant-targets-in-afghanistan",
-      "summary": "Pakistan's military has launched intelligence-based operations against militant camps in eastern Afghanistan following a series of deadly attacks on Pakistani soil, leading to reports of civilian casualties and a sharp diplomatic rebuke from Kabul.",
+      "summary": "Pakistan has launched a series of airstrikes against militant camps in eastern Afghanistan following a surge in cross-border attacks, leading to reports of civilian casualties and a formal protest from Kabul.",
       "political_bias": 0.0,
       "factual_accuracy": 0.754,
       "sources": [
@@ -21,7 +201,7 @@
       "segments": [
         {
           "heading": "Military Operations and Targeted Groups",
-          "text": "Pakistan's information ministry confirmed that its military conducted selective airstrikes against seven camps in the border region. The operations targeted the Tehrik-e-Taliban Pakistan (TTP), its affiliates, and a group associated with the Islamic State. Islamabad stated these strikes were based on conclusive evidence that recent domestic attacks were orchestrated by leadership based in Afghanistan.",
+          "text": "Pakistan's military conducted what it described as \"intelligence-based, selective operations\" targeting seven militant camps across the border. The strikes focused on the Tehrik-e-Taliban Pakistan (TTP), its affiliates, and a group associated with the Islamic State. Islamabad stated it has \"conclusive evidence\" that recent attacks on Pakistani soil, including a suicide bombing at a Shia mosque in Islamabad, were directed by leadership based in Afghanistan.",
           "sources": [
             {
               "name": "CNN",
@@ -56,7 +236,7 @@
         },
         {
           "heading": "Casualties and Afghan Response",
-          "text": "The Afghan Ministry of Defense and local officials reported that the strikes hit civilian areas in Nangarhar and Paktika provinces, including a religious seminary and private homes. Afghan authorities stated that women and children were among the victims, with death toll estimates reaching at least 18. Kabul has condemned the actions as a violation of national sovereignty and international law.",
+          "text": "Afghanistan's Ministry of Defense and local officials reported that the strikes hit civilian areas in Nangarhar and Paktika provinces, including a religious seminary and private homes. Afghan authorities stated that at least 18 people were killed, including women and children. Kabul condemned the action as a \"blatant violation\" of national sovereignty and international law, while accusing Pakistan of using external strikes to mask internal security failures.",
           "sources": [
             {
               "name": "CNN",
@@ -90,8 +270,8 @@
           "comments": []
         },
         {
-          "heading": "Context of Escalating Tensions",
-          "text": "The airstrikes follow a surge in militant violence within Pakistan, including a suicide bombing at a mosque in Islamabad and recent attacks on security posts in the northwest. While Pakistan accuses the Afghan Taliban of harboring TTP militants, Kabul denies these allegations. This escalation threatens a fragile ceasefire that has been in place since October following previous border skirmishes.",
+          "heading": "Regional Context and Escalating Tensions",
+          "text": "The airstrikes follow a period of increased violence in Pakistan, including a recent attack in Bajaur district that killed 11 soldiers and a child. While a Qatar-mediated ceasefire has been in place since October, relations remain strained. Pakistan has repeatedly urged the Taliban government to prevent militants from using Afghan soil for attacks, a charge that Kabul continues to deny.",
           "sources": [
             {
               "name": "The Guardian",
@@ -108,13 +288,13 @@
             {
               "source": "The Guardian",
               "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
-              "quote": "The TTP is separate from but closely allied with Afghanistan’s Taliban, who returned to power in 2021. Islamabad accuses the TTP of operating from inside Afghanistan, a charge the group and Kabul deny.",
+              "quote": "Pakistan’s military warned it would not ‘exercise any restraint’ and operations against those responsible would continue ‘irrespective of their location’.",
               "bias_level": "neutral"
             },
             {
               "source": "CNN",
               "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
-              "quote": "This new escalation will test the delicate ceasefire that has been in place between the neighboring countries since last October, after they traded their deadliest fire in years.",
+              "quote": "Islamabad has long accused Kabul of harboring the TTP, which Kabul denies.",
               "bias_level": "neutral"
             }
           ],
@@ -131,7 +311,7 @@
           "title": "Pakistan launches airstrikes against Afghan-based ‘militants’ it blames for cross-border attacks",
           "url": "https://www.cnn.com/2026/02/22/asia/pakistan-strikes-afghanistan-militant-camps-intl-hnk",
           "source": "CNN",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-22",
           "excerpt": "Islamabad —\n\nPakistan said Sunday it carried out airstrikes on militant camps across the border in Afghanistan, in a serious test of an uneasy peace between the neighbors.\n\nPakistan’s information mini…"
         },
         {
@@ -143,8 +323,8 @@
           "excerpt": "Pakistan launched multiple airstrikes on Saturday night targeting militants in neighbouring Afghanistan, where the government reported children were among dozens of people killed and wounded.\n\nIslamab…"
         }
       ],
-      "category": "General",
-      "updated_at": "2026-02-28T01:05:57.305093Z"
+      "category": "Geopolitics",
+      "updated_at": "2026-02-28T12:00:00Z"
     },
     "comments": []
   },
@@ -152,7 +332,7 @@
     "story": {
       "heading": "Northeast Braces for Major Nor'easter and Blizzard Conditions",
       "slug": "northeast-braces-for-major-nor-easter-and-blizzard-conditions",
-      "summary": "A powerful winter storm is set to impact the Northeast United States starting Sunday, prompting blizzard warnings for major metropolitan areas including New York City and Boston. Officials have declared states of emergency as forecasts predict heavy snowfall, strong winds, and significant travel disruptions through Monday.",
+      "summary": "A powerful winter storm is set to impact the Northeast United States, prompting blizzard warnings for major metropolitan areas and states of emergency across several regions as officials warn of life-threatening conditions and significant travel disruptions.",
       "political_bias": 0.0,
       "factual_accuracy": 0.689,
       "sources": [
@@ -170,7 +350,7 @@
       "segments": [
         {
           "heading": "Storm Forecast and Severity",
-          "text": "Meteorologists expect the storm to rapidly intensify into a 'bomb cyclone' as it moves off the Eastern Seaboard. Blizzard warnings have been issued for a corridor stretching from Delaware to southern New England, marking the first such warning for New York City since 2017. Snowfall totals are projected to reach between 12 and 20 inches in the hardest-hit areas, accompanied by wind gusts exceeding 55 mph.",
+          "text": "Meteorologists are tracking a rapidly intensifying 'bomb cyclone' expected to bring heavy snow and strong winds from the Mid-Atlantic to New England. Blizzard warnings have been issued for New York City for the first time since 2017, with snowfall totals predicted to reach between 12 and 20 inches in some areas. Wind gusts could exceed 55 mph, creating treacherous conditions along the coast.",
           "sources": [
             {
               "name": "CNN",
@@ -187,13 +367,13 @@
             {
               "source": "CNN",
               "article_id": "blizzard-warnings-in-new-york-city-northeast-as-snowstorm-takes-aim",
-              "quote": "The storm will rapidly intensify into a bomb cyclone off the Eastern Seaboard beginning on Sunday, meaning we’re just a day away from the arrival of its worst conditions.",
+              "quote": "The storm will rapidly intensify into a bomb cyclone off the Eastern Seaboard beginning on Sunday",
               "bias_level": "neutral"
             },
             {
               "source": "The Guardian",
               "article_id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
-              "quote": "The National Weather Service increased its assessment of the severity of the storm, saying it anticipated 1ft to 2 ft of snow for New York City, Long Island, southern Connecticut and coastal communities in New Jersey and Delaware.",
+              "quote": "The National Weather Service increased its assessment of the severity of the storm, saying it anticipated 1ft to 2 ft of snow for New York City",
               "bias_level": "neutral"
             }
           ],
@@ -204,8 +384,8 @@
           "comments": []
         },
         {
-          "heading": "Emergency Preparations and Public Safety",
-          "text": "Governors in New York and New Jersey have declared states of emergency, while municipal leaders in Philadelphia and New York City have announced local snow emergencies. In New York City, Mayor Zohran Mamdani emphasized the potential for life-threatening conditions, noting that outreach teams are working to move unhoused residents into warming centers and shelters following a previous cold snap that resulted in 19 deaths.",
+          "heading": "Emergency Declarations and Public Safety",
+          "text": "Governors in New York and New Jersey have declared states of emergency, while local leaders in Philadelphia and New York City have issued snow emergencies. Officials are prioritizing the safety of unhoused residents by opening warming centers and increasing outreach efforts, particularly following a January cold snap that resulted in multiple hypothermia-related deaths in New York City.",
           "sources": [
             {
               "name": "CNN",
@@ -222,13 +402,13 @@
             {
               "source": "CNN",
               "article_id": "blizzard-warnings-in-new-york-city-northeast-as-snowstorm-takes-aim",
-              "quote": "New Jersey Gov. Mikie Sherrill declared a state of emergency to start at noon Sunday... Gov. Kathy Hochul announced states of emergency for 22 out of its 62 counties.",
+              "quote": "New Jersey Gov. Mikie Sherrill declared a state of emergency to start at noon Sunday, as forecasts call for significant snowfall across the region.",
               "bias_level": "neutral"
             },
             {
               "source": "The Guardian",
               "article_id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
-              "quote": "At least 19 people were found dead outdoors in the city after temperatures plunged on 19 January and remained below freezing for 10 consecutive days.",
+              "quote": "At least 19 people were found dead outdoors in the city after temperatures plunged on 19 January",
               "bias_level": "neutral"
             }
           ],
@@ -239,8 +419,8 @@
           "comments": []
         },
         {
-          "heading": "Travel and Infrastructure Impacts",
-          "text": "The storm is expected to cause major disruptions to air and ground travel. Approximately 2,000 flights scheduled for Sunday have already been canceled, with significant impacts anticipated at JFK, LaGuardia, and Boston Logan airports. Officials have warned that heavy, wet snow combined with high winds may lead to power outages and downed tree limbs, making travel dangerous or impossible through the Monday morning commute.",
+          "heading": "Impact on Travel and Infrastructure",
+          "text": "The storm is expected to cause major disruptions to Monday morning commutes, with officials advising residents to stay off the roads. Approximately 2,000 flights have already been canceled at major hubs including JFK, LaGuardia, and Boston Logan. Additionally, the combination of heavy, wet snow and high winds raises the risk of power outages and downed tree limbs.",
           "sources": [
             {
               "name": "CNN",
@@ -257,13 +437,13 @@
             {
               "source": "CNN",
               "article_id": "blizzard-warnings-in-new-york-city-northeast-as-snowstorm-takes-aim",
-              "quote": "Around 2,000 Sunday flights have been canceled, according to FlightAware . The disruptions are expected to heavily impact New York City-area airports John F. Kennedy Airport and LaGuardia Airport, along with Boston Logan International Airport.",
+              "quote": "Around 2,000 Sunday flights have been canceled, according to FlightAware . The disruptions are expected to heavily impact New York City-area airports",
               "bias_level": "neutral"
             },
             {
               "source": "The Guardian",
               "article_id": "new-york-city-gets-first-blizzard-warning-in-nine-years-as-area-hunkers-down",
-              "quote": "The weather service warned that the storm will ‐make travel dangerous, if not impossible. Scattered downed tree limbs and power outages possible due to snow load and strong winds.‐",
+              "quote": "Scattered downed tree limbs and power outages possible due to snow load and strong winds.",
               "bias_level": "neutral"
             }
           ],
@@ -280,7 +460,7 @@
           "title": "Blizzard warnings in New York City, Northeast as snowstorm takes aim",
           "url": "https://www.cnn.com/2026/02/21/weather/blizzard-snowstorm-new-york-northeast-climate",
           "source": "CNN",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "A high-impact nor’easter is about to crush parts of the Northeast with blizzard conditions, heavy snow and strong winds.\n\nThe forecast has been fraught with uncertainty for days, but has finally homed…"
         },
         {
@@ -292,34 +472,69 @@
           "excerpt": "Blizzard warnings were issued Saturday for New York City, New Jersey and coastal communities along the east coast for a late-winter storm set to arrive on Sunday that could dump more than a foot of sn…"
         }
       ],
-      "category": "General",
-      "updated_at": "2026-02-28T01:06:09.857350Z"
+      "category": "Environment",
+      "updated_at": "2026-02-28T12:00:00Z"
     },
     "comments": []
   },
   {
     "story": {
-      "heading": "Recovery Operations Conclude Following Fatal Sierra Nevada Avalanche",
-      "slug": "recovery-operations-conclude-following-fatal-sierra-nevada-avalanche",
-      "summary": "Authorities have recovered the bodies of nine individuals, including six experienced skiers and three professional guides, following a massive avalanche near Lake Tahoe that marks the deadliest such event in the United States in 45 years.",
+      "heading": "Recovery Operations Conclude Following Deadly Sierra Nevada Avalanche",
+      "slug": "recovery-operations-conclude-following-deadly-sierra-nevada-avalanche",
+      "summary": "Authorities have recovered the bodies of nine individuals killed in a Tuesday avalanche near Lake Tahoe, marking the deadliest such incident in the United States in over four decades.",
       "political_bias": 0.0,
       "factual_accuracy": 0.572,
       "sources": [
         {
-          "name": "The Guardian",
-          "bias_score": 0.0,
-          "trust_score": 0.532
-        },
-        {
           "name": "CNN",
           "bias_score": 0.0,
           "trust_score": 0.612
+        },
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.532
         }
       ],
       "segments": [
         {
-          "heading": "Incident Overview and Rescue Efforts",
-          "text": "On Tuesday, February 17, 2026, a group of fifteen people on a guided backcountry tour was struck by a large avalanche near Castle Peak in the Tahoe National Forest. The slide, estimated to be the size of a football field, occurred during a significant winter storm that delivered heavy, unstable snow to the region. While six survivors were rescued shortly after the incident, search and recovery operations for the remaining nine individuals were hampered by severe weather conditions and continued avalanche risks. The recovery mission concluded on Saturday with the assistance of over 40 volunteers and multiple state and federal agencies.",
+          "heading": "Incident Overview and Casualties",
+          "text": "On Tuesday, February 17, 2026, an avalanche approximately the size of a football field struck a group of backcountry skiers in the Tahoe National Forest. The disaster resulted in nine fatalities, including six women from a close-knit group of friends and three professional guides. Six other members of the party survived. Officials noted that the incident is the deadliest avalanche in the region since 1981.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.612
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.532
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "california-avalanche-a-group-of-mothers-embarked-on-a-sierra-nevada-backcountry-",
+              "quote": "Six of the close friends and three guides are among the nine people killed in the avalanche near California’s Lake Tahoe – the nation’s deadliest in 45 years.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
+              "quote": "The avalanche has been the deadliest since 1981, with experts estimating the slide path was roughly the size of a football field.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.572,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Recovery Efforts and Environmental Conditions",
+          "text": "Search and rescue operations spanned five days, hampered by severe winter weather and heavy snowfall. While six survivors were rescued shortly after the slide, the recovery of the deceased was delayed by a blizzard that dropped 28 inches of snow. The final bodies were recovered on Saturday morning with the assistance of a Black Hawk helicopter and dozens of volunteers from multiple agencies.",
           "sources": [
             {
               "name": "The Guardian",
@@ -336,7 +551,7 @@
             {
               "source": "The Guardian",
               "article_id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
-              "quote": "The avalanche has been the deadliest since 1981, with experts estimating the slide path was roughly the size of a football field",
+              "quote": "Saturday’s recovery of the bodies marked the end of a five-day effort to locate nine missing skiers after one of the deadliest avalanches in recent history.",
               "bias_level": "neutral"
             },
             {
@@ -353,43 +568,8 @@
           "comments": []
         },
         {
-          "heading": "Identification of the Deceased",
-          "text": "The victims included six women from the San Francisco Bay Area, Idaho, and the Lake Tahoe region, along with three guides from Blackbird Mountain Guides. The guides were identified as Andrew Alissandratos, 34; Nicole Choo, 42; and Michael Henry, 30. The six skiers were identified as Carrie Atkin, Liz Clabaugh, Danielle Keatley, Kate Morse, Caroline Sekar, and Kate Vitt. Families described the women as experienced backcountry skiers who were close friends and mothers. One of the victims was also the spouse of a member of the Tahoe Nordic Search and Rescue team.",
-          "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.532
-            },
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.612
-            }
-          ],
-          "citations": [
-            {
-              "source": "The Guardian",
-              "article_id": "all-nine-bodies-of-skiers-killed-in-california-avalanche-recovered",
-              "quote": "The sheriff named for the first time the three guides from Blackbird Mountain Company who died: Andrew Alissandratos, 34, Nicole Choo, 42, and Michael Henry, 30.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "california-avalanche-a-group-of-mothers-embarked-on-a-sierra-nevada-backcountry-",
-              "quote": "A spouse of a Tahoe Nordic Search and Rescue team member – who responded to the disaster – was also among those killed.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.572,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Investigation and Access Restrictions",
-          "text": "The Nevada County Sheriff’s Office has launched an investigation into the incident, which includes examining whether criminal negligence played a role. The families of the victims have expressed that they have many unanswered questions regarding the circumstances of the tour. In the interim, the Tahoe National Forest has closed the affected terrain to the public until mid-March to allow for the completion of the investigation and to ensure safety.",
+          "heading": "Victims and Investigation",
+          "text": "The deceased guides were identified as Andrew Alissandratos, Nicole Choo, and Michael Henry of Blackbird Mountain Guides. The six other victims were identified as Carrie Atkin, Liz Clabaugh, Danielle Keatley, Kate Morse, Caroline Sekar, and Kate Vitt. The Nevada County Sheriff’s Office is currently investigating the incident, including whether criminal negligence played a role, while the affected terrain remains closed to the public until mid-March.",
           "sources": [
             {
               "name": "CNN",
@@ -429,7 +609,7 @@
           "title": "California avalanche: A group of mothers embarked on a Sierra Nevada backcountry ski trip but only 2 of them survived",
           "url": "https://www.cnn.com/2026/02/21/us/avalanche-california-lake-tahoe-victims",
           "source": "CNN",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "The eight friends found joy in the mountains, skiing together across the untracked powder of the hushed, pristine wilderness of California’s Sierra Nevada – their close friendship standing out against…"
         },
         {
@@ -441,8 +621,8 @@
           "excerpt": "Officials announced on Saturday that the bodies of all nine missing skiers who were killed in a devastating avalanche in California had been recovered, following days of search efforts.\n\nThe avalanche…"
         }
       ],
-      "category": "General",
-      "updated_at": "2026-02-28T01:06:28.720408Z"
+      "category": "Society",
+      "updated_at": "2026-02-28T12:00:00Z"
     },
     "comments": []
   },
@@ -450,8 +630,8 @@
     "story": {
       "heading": "Trump Increases Global Tariffs to 15% Following Supreme Court Ruling",
       "slug": "trump-increases-global-tariffs-to-15-following-supreme-court-ruling",
-      "summary": "President Donald Trump has announced a 15% global tariff on imports, an increase from a 10% rate proposed just a day earlier, after the U.S. Supreme Court ruled that his previous use of emergency powers to impose duties was an overreach of executive authority.",
-      "political_bias": 0.0,
+      "summary": "President Donald Trump has announced a 15% global tariff on imports from all countries, a move that follows a Supreme Court decision striking down his previous use of emergency powers to impose trade duties.",
+      "political_bias": 0.056,
       "factual_accuracy": 0.536,
       "sources": [
         {
@@ -467,8 +647,8 @@
       ],
       "segments": [
         {
-          "heading": "Supreme Court Ruling and Executive Response",
-          "text": "On Friday, the U.S. Supreme Court ruled 6-3 that President Trump exceeded his authority by using the International Emergency Economic Powers Act (IEEPA) to impose broad tariffs. The court determined that such actions required congressional approval. In response, the President criticized the justices and announced he would instead utilize Section 122 of the Trade Act of 1974 to implement a 15% tariff, which he described as a 'legally tested' level.",
+          "heading": "New Tariff Announcement and Legal Context",
+          "text": "On Saturday, President Trump announced via social media that he would increase global tariffs to 15%, up from a 10% rate he had proposed just a day earlier. This escalation followed a 6-3 Supreme Court ruling on Friday which determined that the president had exceeded his authority by using the International Emergency Economic Powers Act (IEEPA) to impose broad duties. In response, Trump invoked Section 122 of the Trade Act of 1974, a law allowing for temporary 15% duties for up to 150 days without immediate congressional approval.",
           "sources": [
             {
               "name": "CNN",
@@ -491,7 +671,7 @@
             {
               "source": "The Guardian",
               "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
-              "quote": "Trump wrote: ‘I, as President of the United States of America, will be, effective immediately, raising the 10% Worldwide Tariff... to the fully allowed, and legally tested, 15% level.’",
+              "quote": "The law according to section 122 of the Trade Act of 1974 – which has never been used – allows the president to impose a levy of up to 15% for 150 days",
               "bias_level": "neutral"
             }
           ],
@@ -502,31 +682,31 @@
           "comments": []
         },
         {
-          "heading": "Legal Framework and Implementation",
-          "text": "Under Section 122, a president may impose temporary tariffs of up to 15% for a period of 150 days, after which congressional approval is required. While the President stated the new rates are effective 'immediately,' official documentation regarding the exact timing remains unconfirmed. Previous guidance suggested a 10% rate would begin Tuesday, February 24. Certain goods, including critical minerals, pharmaceuticals, and products compliant with USMCA from Canada and Mexico, are expected to be exempt.",
+          "heading": "Implementation and Economic Impact",
+          "text": "While Trump stated the new 15% rate is effective \"immediately,\" official documentation regarding the exact timing remains unclear. Previous White House guidance suggested a 10% rate would begin at 12:01 a.m. ET on Tuesday, February 24. Economists note that while some countries previously facing much higher \"reciprocal\" duties may see a relative decrease in rates, others like the United Kingdom and Australia will face higher costs. Domestic retailers such as Walmart and Target may benefit from the shift away from higher industry-specific duties, though experts warn that US consumers have historically borne the majority of tariff costs.",
           "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.416
-            },
             {
               "name": "CNN",
               "bias_score": 0.0,
               "trust_score": 0.612
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.416
             }
           ],
           "citations": [
             {
-              "source": "The Guardian",
-              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
-              "quote": "The law according to section 122 of the Trade Act of 1974 – which has never been used – allows the president to impose a levy of up to 15% for 150 days",
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "The 15% duties would make this year’s effective tariff rate 6%, according to Erica York, vice president of federal tax policy at the Tax Foundation.",
               "bias_level": "neutral"
             },
             {
-              "source": "CNN",
-              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
-              "quote": "The White House did not respond to CNN’s request for comment on whether the 15% tariff will take effect on Tuesday.",
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "studies show that the vast majority of that sum – 90% – has been paid by US businesses and consumers.",
               "bias_level": "neutral"
             }
           ],
@@ -537,8 +717,8 @@
           "comments": []
         },
         {
-          "heading": "International and Domestic Economic Impact",
-          "text": "The shift to a flat 15% tariff creates a varied economic landscape. Countries previously facing 'reciprocal' duties as high as 50% or 145%, such as Brazil and China, may see their effective rates decrease. Conversely, nations like Australia and the United Kingdom, which had lower or negotiated rates, now face higher duties. Australian officials have labeled the move 'unjustified' and 'regrettable,' while European leaders have warned that constant tariff uncertainty acts as 'poison' for global economies.",
+          "heading": "International and Domestic Reactions",
+          "text": "The announcement drew sharp criticism from international leaders and trade officials. Australian Trade Minister Don Farrell stated the government would \"examine all options\" and argued against the \"unjustified tariffs.\" German Chancellor Friedrich Merz expressed concern over the \"poison\" of economic uncertainty, while French President Emmanuel Macron emphasized the importance of the rule of law and judicial counterweights. Domestically, Trump criticized the Supreme Court justices, including his own appointees, calling the ruling \"deeply disappointing.\"",
           "sources": [
             {
               "name": "The Guardian",
@@ -555,23 +735,23 @@
             {
               "source": "The Guardian",
               "article_id": "australia-will-examine-all-options-to-avoid-new-15-tariffs-announced-by-donald-t",
-              "quote": "The shadow defence minister, James Paterson... said Trump’s announcement was ‘regrettable and unfortunate’.",
+              "quote": "The shadow defence minister, James Paterson, told Sky News on Sunday that Trump’s announcement was ‘regrettable and unfortunate’.",
               "bias_level": "neutral"
             },
             {
               "source": "The Guardian",
               "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
-              "quote": "German chancellor Friedrich Merz... warned of the ‘poison’ of more uncertainty.",
+              "quote": "German chancellor Friedrich Merz said... ‘The biggest poison for the economies of Europe and the US is this constant uncertainty about tariffs.’",
               "bias_level": "neutral"
             },
             {
               "source": "CNN",
               "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
-              "quote": "Brazil, which faced duties as high as 50%... would face lower rates",
-              "bias_level": "neutral"
+              "quote": "Trump lashed out at the Supreme Court, calling the ruling ‘deeply disappointing’ and adding that he was ashamed of the justices",
+              "bias_level": "right"
             }
           ],
-          "avg_bias": 0.0,
+          "avg_bias": 0.167,
           "avg_truth": 0.581,
           "article_count": 2,
           "notes": null,
@@ -584,7 +764,7 @@
           "title": "Trump announces global tariffs will increase to 15% from 10% ‘effective immediately’",
           "url": "https://www.cnn.com/2026/02/21/business/trump-global-tariffs-increase-supreme-court",
           "source": "CNN",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "President Donald Trump said on Saturday that he will increase the global tariffs he imposed a day earlier to 15% from 10% following an adverse ruling at the Supreme Court.\n\nThe court on Friday ruled t…"
         },
         {
@@ -604,8 +784,8 @@
           "excerpt": "Donald Trump announced on Saturday that he would raise a temporary tariff rate on US imports from all countries from 10% to 15%, less than 24 hours after the US supreme court ruled against the legalit…"
         }
       ],
-      "category": "General",
-      "updated_at": "2026-02-28T01:06:47.288716Z"
+      "category": "Economy",
+      "updated_at": "2026-02-28T12:00:00Z"
     },
     "comments": []
   },
@@ -613,9 +793,9 @@
     "story": {
       "heading": "Ukraine Condemns Energy Supply Threats from Hungary and Slovakia",
       "slug": "ukraine-condemns-energy-supply-threats-from-hungary-and-slovakia",
-      "summary": "Ukraine's Foreign Ministry has rejected what it terms as 'blackmail' following threats from Hungary and Slovakia to halt electricity exports unless Kyiv restores the flow of Russian oil through its territory.",
+      "summary": "Ukraine's Foreign Ministry has denounced threats from Hungary and Slovakia to halt electricity exports as \"blackmail,\" following a dispute over the suspension of Russian oil flows through the Druzhba pipeline.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.686,
+      "factual_accuracy": 0.651,
       "sources": [
         {
           "name": "CNN",
@@ -630,8 +810,8 @@
       ],
       "segments": [
         {
-          "heading": "Dispute Over Oil Transit and Electricity Supplies",
-          "text": "Slovakia and Hungary have threatened to cut off emergency electricity supplies to Ukraine, which currently accounts for approximately half of Ukraine's European electricity imports. The move comes after Russian oil shipments via the Druzhba pipeline were halted on January 27. While Kyiv attributes the outage to a Russian drone strike on pipeline equipment, Bratislava and Budapest have blamed Ukraine for the continued disruption. Slovak Prime Minister Robert Fico stated he would instruct the state-owned company SEPS to stop supplies if oil transit does not resume.",
+          "heading": "The Energy Dispute",
+          "text": "Since January 27, Russian oil shipments to Hungary and Slovakia via the Druzhba pipeline have been suspended. Kyiv attributes the outage to a Russian drone strike on pipeline equipment in Western Ukraine, while Budapest and Bratislava have accused Ukraine of intentionally delaying repairs. In response, Slovak Prime Minister Robert Fico and Hungarian leader Viktor Orban have threatened to cut off emergency electricity supplies to Ukraine, which currently relies on these neighbors for approximately half of its European electricity imports.",
           "sources": [
             {
               "name": "CNN",
@@ -665,8 +845,43 @@
           "comments": []
         },
         {
-          "heading": "Diplomatic Tensions and Proposed Alternatives",
-          "text": "The Ukrainian Foreign Ministry described the actions of its neighbors as 'provocative' and 'irresponsible,' suggesting that ultimatums regarding energy should be directed at the Kremlin rather than Kyiv. Amidst the standoff, Ukraine has proposed alternative transit routes, including the Odesa-Brody pipeline, to maintain oil flow to Europe during repairs. The dispute highlights a growing rift between Ukraine and the two EU and NATO members, whose leaders have maintained closer ties with Moscow compared to the broader European consensus.",
+          "heading": "Diplomatic Tensions and Accusations",
+          "text": "The Ukrainian Foreign Ministry described the threats as \"ultimatums and blackmail,\" asserting that such pressure should be directed at the Kremlin rather than Kyiv. The dispute highlights a growing rift between Ukraine and the two EU and NATO members, whose leaders have maintained closer ties with Moscow than most European peers. Additionally, Hungary has reportedly threatened to block a  90 billion Ukrainian war loan, while Slovak Prime Minister Fico accused President Zelenskyy of acting \"maliciously.\"",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.755
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.547
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "The Slovak leader, Robert Fico, has accused Ukrainian president Volodymyr Zelenskyy of acting ‘maliciously’ towards his country.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "Ukraine rejects and condemns the ultimatums and blackmail by the governments of Hungary and the Slovak Republic",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.651,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Proposed Solutions and Ongoing Conflict",
+          "text": "Ukraine has proposed alternative transit routes, including maritime shipments via the Odesa-Brody pipeline, to maintain oil flows while repairs continue. Meanwhile, the broader conflict continues to impact civilian infrastructure, with reports of explosions in Kyiv and Lviv. In Lviv, local authorities reported an \"act of terror\" involving two blasts that killed a policewoman and injured 15 others. Additionally, Ukraine confirmed strikes against a missile factory in Russia's Udmurt Republic using domestically produced cruise missiles.",
           "sources": [
             {
               "name": "CNN",
@@ -689,37 +904,13 @@
             {
               "source": "The Guardian",
               "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
-              "quote": "The Slovak leader, Robert Fico, has accused Ukrainian president Volodymyr Zelenskyy of acting ‘maliciously’ towards his country.",
+              "quote": "Ukraine’s General Staff confirmed it used Ukrainian-made FP-5 ‘Flamingo’ cruise missiles against the Votkinsk plant.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
           "avg_truth": 0.651,
           "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Broader Conflict Developments",
-          "text": "As the fourth anniversary of the full-scale invasion approaches, military activity continues across the region. Explosions were reported in Kyiv and Lviv, with the latter resulting in the death of a policewoman. Additionally, Ukraine confirmed strikes against a missile factory in Russia's Udmurt Republic using domestically produced cruise missiles. In the international sphere, former UK Prime Minister Boris Johnson suggested deploying non-combat European troops to peaceful regions of Ukraine to signal commitment to the country's independence.",
-          "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.755
-            }
-          ],
-          "citations": [
-            {
-              "source": "The Guardian",
-              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
-              "quote": "Ukraine’s General Staff confirmed it used Ukrainian-made FP-5 ‘Flamingo’ cruise missiles against the Votkinsk plant.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.755,
-          "article_count": 1,
           "notes": null,
           "comments": []
         }
@@ -730,7 +921,7 @@
           "title": "Ukraine accuses Hungary, Slovakia of ‘blackmail’ over threats to cut electricity",
           "url": "https://www.cnn.com/2026/02/21/europe/slovakia-ukraine-oil-energy-threat-intl",
           "source": "CNN",
-          "published_at": "2026-02-28",
+          "published_at": "2026-02-21",
           "excerpt": "Reuters —\n\nUkraine’s Foreign Ministry condemned what it ⁠described as “ultimatums ⁠and blackmail” by the governments of Hungary and Slovakia on Saturday, after they threatened to stop electricity supp…"
         },
         {
@@ -742,8 +933,284 @@
           "excerpt": "Ukraine’s foreign ministry has condemned what it describes as “ultimatums and blackmail” by Hungary and Slovakia on Saturday, after both governments threatened to stop electricity supplies to Ukraine …"
         }
       ],
-      "category": "General",
-      "updated_at": "2026-02-28T01:06:59.349872Z"
+      "category": "Geopolitics",
+      "updated_at": "2026-02-28T12:00:00Z"
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Salsa Legend Willie Colón Dies at 75",
+      "slug": "salsa-legend-willie-col-n-dies-at-75",
+      "summary": "Willie Colón, the influential trombonist, vocalist, and composer who helped define the salsa genre, passed away on Saturday at the age of 75.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.83,
+      "sources": [
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.793
+        },
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.866
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Passing and Legacy",
+          "text": "Willie Colón's family announced his death on Saturday, stating that he passed away peacefully surrounded by his relatives. While the cause of death was not disclosed, his family and colleagues celebrated his extensive musical legacy. Colón is credited with selling over 30 million albums and receiving 11 Grammy and Latin Grammy nominations throughout his career.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.793
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.866
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "He passed away peacefully this morning surrounded by his beloved family.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "The cause of death was not disclosed.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.83,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Musical Career and Innovations",
+          "text": "Born in the Bronx to Puerto Rican parents, Colón signed with Fania Records at age 15. His 1967 debut album, 'El Malo', sold over 300,000 copies. His work often blended jazz, rock, and salsa with rhythms from Africa, Brazil, Cuba, and Puerto Rico. Notable collaborations included recordings with Héctor Lavoe and the 1978 album 'Siembra' with Rubén Blades, which remains the highest-selling salsa album of all time.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.793
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.866
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "His 1978 album Siembra, recorded with Rubén Blades, includes the hit Pedro Navaja and remains the biggest-selling salsa album of all time.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "Colón’s music combined elements of jazz, rock and salsa, incorporating the rhythms of traditional music from Cuba, Puerto Rico, Brazil, and Africa.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.83,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Social Activism and Recognition",
+          "text": "Beyond music, Colón was a dedicated social activist, serving with the Latino Commission on AIDS and the United Nations Immigrant Foundation. His work frequently explored the cultural identity and challenges of Puerto Ricans living in the United States. His contributions earned him a Lifetime Achievement Award from the Latin Academy of Recording Arts and Sciences in 2004, and inductions into both the International Latin Music Hall of Fame and the Latin Songwriters Hall of Fame.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.866
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.793
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "He uses his songs to depict and investigate the problems of living in the U.S. as a Puerto Rican and also to imply the cultural contributions that Puerto Ricans have to offer.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "He was inducted into the International Latin Music Hall of Fame in 2000 and the Latin Songwriters Hall of Fame in 2019.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.83,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+          "title": "Willie Colón, American salsa legend and pioneering trombonist, dies at age 75",
+          "url": "https://www.cnn.com/2026/02/21/entertainment/willie-colon-death",
+          "source": "CNN",
+          "published_at": "2026-02-21",
+          "excerpt": "Reuters —\n\nAmerican salsa legend Willie Colón, the pioneering trombonist, vocalist and composer, died on Saturday at age 75, his family said in a statement.\n\n“While we grieve his absence, we also rejo…"
+        },
+        {
+          "id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+          "title": "US salsa legend Willie Colón, vocalist, trombonist and composer, dies aged 75",
+          "url": "https://www.theguardian.com/us-news/2026/feb/21/willie-colon-music-salsa-dead-aged-75",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Willie Colón, the pioneering trombonist, vocalist and composer, died on Saturday aged 75, his family has said.\n\nWith more than 30m albums sold, multiple platinum records and 11 combined Grammy and Lat…"
+        }
+      ],
+      "category": "Entertainment",
+      "updated_at": "2026-02-28T12:00:00Z"
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "NASA Faces Technical Delays for Artemis II Moon Mission",
+      "slug": "nasa-faces-technical-delays-for-artemis-ii-moon-mission",
+      "summary": "NASA's Artemis II mission, intended to send four astronauts on a 10-day journey around the moon, faces potential delays following hydrogen fuel leaks and a newly discovered helium flow interruption.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.697,
+      "sources": [
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.752
+        },
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.642
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Technical Challenges and Launch Delays",
+          "text": "The Artemis II mission has encountered several technical setbacks during pre-launch testing. In early February, a wet dress rehearsal was halted due to liquid hydrogen leaks at the launchpad. While NASA briefly targeted March 6 for liftoff after a subsequent fueling test, a new issue involving an interrupted flow of helium in the rocket's interim cryogenic propulsion stage has emerged. This latest discovery may require the Space Launch System rocket and Orion spacecraft to be rolled back to the vehicle assembly building, likely impacting the March launch window.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.752
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.642
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "nasa-may-roll-back-artemis-ii-rocket-launch-after-helium-flow-discovery",
+              "quote": "The agency observed overnight an interrupted flow of helium in the space launch system rocket’s interim cryogenic propulsion stage.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "artemis-2-launch-how-nasa-s-hydrogen-fuel-struggle-is-already-impacting-the-upco",
+              "quote": "launch controllers found that enough super-chilled liquid hydrogen fuel was leaking at the launchpad to prompt safety concerns.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.697,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "The Complexity of Hydrogen Fuel",
+          "text": "NASA continues to utilize liquid hydrogen as a primary propellant despite its history of leakage, which also affected the Artemis I mission and the Space Shuttle program. Hydrogen is the lightest element and has a very low density, making it difficult to contain. However, it is favored for its high 'specific impulse,' a measure of thrust efficiency. This allows rockets to generate significant power while minimizing the weight of the fuel itself, which is a critical factor in spaceflight performance.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.642
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "artemis-2-launch-how-nasa-s-hydrogen-fuel-struggle-is-already-impacting-the-upco",
+              "quote": "Hydrogen is known to have a very favorable specific impulse because it’s so lightweight — and it packs a considerable punch at liftoff.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.642,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Mission Objectives and Future Goals",
+          "text": "The Artemis II crew consists of Americans Reid Wiseman, Victor Glover, and Christina Koch, and Canadian Jeremy Hansen. Their 10-day mission is designed to fly approximately 4,700 miles beyond the far side of the moon, setting a new distance record for human spaceflight. This mission serves as a critical test of systems before Artemis III, which is currently scheduled for 2028 and aims to return humans to the lunar surface for the first time since 1972.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.752
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "nasa-may-roll-back-artemis-ii-rocket-launch-after-helium-flow-discovery",
+              "quote": "The mission is in preparation for Artemis III, scheduled for 2028, which will be the first human landing on the moon since the final Apollo program flight in December 1972.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.752,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "artemis-2-launch-how-nasa-s-hydrogen-fuel-struggle-is-already-impacting-the-upco",
+          "title": "Artemis 2 launch: How NASA’s hydrogen fuel struggle is already impacting the upcoming moon mission",
+          "url": "https://www.cnn.com/2026/02/18/science/artemis-2-nasa-hydrogen-leaks",
+          "source": "CNN",
+          "published_at": "2026-02-18",
+          "excerpt": "If all had gone according to plan, four astronauts might have been returning just this week from a history-making, 10-day slingshot trip around the moon.\n\nInstead, NASA’s engineers have been grappling…"
+        },
+        {
+          "id": "nasa-may-roll-back-artemis-ii-rocket-launch-after-helium-flow-discovery",
+          "title": "Nasa may roll back Artemis II rocket launch after helium flow discovery",
+          "url": "https://www.theguardian.com/us-news/2026/feb/21/nasa-artemis-ii-rocket-launch",
+          "source": "The Guardian",
+          "published_at": "2026-02-28",
+          "excerpt": "Nasa said in a blog post on Saturday it is taking steps to potentially roll back the Artemis II rocket launch after discovering an interrupted flow of helium.\n\nThe agency said it is taking steps to ro…"
+        }
+      ],
+      "category": "Science",
+      "updated_at": "2026-02-28T12:00:00Z"
     },
     "comments": []
   }
