@@ -265,24 +265,25 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
 
 def group_articles_by_topic(
     articles: list[dict],
-    similarity_threshold: float = 0.45,
+    similarity_threshold: float = 0.62,
     min_group_size: int = 2,
     max_group_size: int = 12,
 ) -> list[list[dict]]:
     """
     Group articles by topic using sentence-transformer embeddings.
     Returns groups of 2+ articles from different sources about the same story.
+    Uses title + first 200 chars of body for richer semantic matching.
     """
     from sentence_transformers import SentenceTransformer, util
 
     if len(articles) < 2:
         return [articles] if articles else []
 
-    print(f"[pipeline] Topic grouping: encoding {len(articles)} article titles…")
+    print(f"[pipeline] Topic grouping: encoding {len(articles)} articles (title+lead)…")
     t0 = time.time()
     model = SentenceTransformer('all-MiniLM-L6-v2')
-    titles = [a['title'] for a in articles]
-    embeddings = model.encode(titles, convert_to_tensor=True)
+    texts = [a['title'] + '. ' + a.get('text', '')[:200] for a in articles]
+    embeddings = model.encode(texts, convert_to_tensor=True)
     sim_matrix = util.cos_sim(embeddings, embeddings)
     print(f"[pipeline] Topic grouping: embedding + similarity done in {time.time()-t0:.1f}s")
 

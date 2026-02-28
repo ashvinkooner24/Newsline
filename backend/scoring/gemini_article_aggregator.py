@@ -144,7 +144,7 @@ def build_prompt(articles):
             "title": "Create a neutral article title based on source material.",
             "standfirst": "Write a concise summary paragraph.",
             "body_sections": (
-                "Split the body into thematic sections. "
+                "Split the body into 2-4 thematic sections. "
                 "Each section must have a 'citations' array of objects. "
                 "Each citation must contain: "
                 "'source' (the outlet name), "
