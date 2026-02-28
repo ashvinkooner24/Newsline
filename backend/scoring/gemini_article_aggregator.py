@@ -197,6 +197,7 @@ def gemini_to_storywrapper(
     credibility_scores: dict | None = None,
     provider_trust_map: dict | None = None,
     article_metadata: list[dict] | None = None,
+    agreement_scores: dict | None = None,
 ) -> dict:
     """
     Convert the structured JSON returned by call_gemini() into a StoryWrapper-compatible dict.
@@ -206,12 +207,14 @@ def gemini_to_storywrapper(
         credibility_scores: Optional {article_id: float 0-1} from credibility_scoring.
         provider_trust_map: Optional {source_name: float 0-1} to pin a known outlet's trust score.
         article_metadata:   Optional list of article dicts with id, title, url, source, published_at, text.
+        agreement_scores:   Optional {article_id: float 0-1} from agreement_scoring.
 
     Returns:
         A plain dict matching the StoryWrapper schema.
     """
     credibility_scores = credibility_scores or {}
     provider_trust_map = provider_trust_map or {}
+    agreement_scores = agreement_scores or {}
 
     # Registry of NewsProvider dicts, keyed by source name, built as we walk citations.
     # Bias score for a provider is the first bias_level we see for them.
@@ -262,6 +265,10 @@ def gemini_to_storywrapper(
         avg_bias = round(sum(bias_values) / len(bias_values), 3) if bias_values else 0.0
         avg_truth = round(sum(truth_values) / len(truth_values), 3) if truth_values else DEFAULT_TRUST_SCORE
 
+        # Compute per-segment agreement from the cited articles
+        seg_agree_values = [agreement_scores.get(c["article_id"], 0.5) for c in seg_citations]
+        avg_agreement = round(sum(seg_agree_values) / len(seg_agree_values), 3) if seg_agree_values else 0.5
+
         segments.append({
             "heading": section['heading'],
             "text": section['content'],
@@ -269,6 +276,7 @@ def gemini_to_storywrapper(
             "citations": seg_citations,
             "avg_bias": avg_bias,
             "avg_truth": avg_truth,
+            "avg_agreement": avg_agreement,
             "article_count": len(seg_providers),
             "notes": None,
             "comments": [],
@@ -293,8 +301,10 @@ def gemini_to_storywrapper(
     # Story-level scores: mean of all segment values
     all_bias = [s["avg_bias"] for s in segments]
     all_truth = [s["avg_truth"] for s in segments]
+    all_agreement = [s["avg_agreement"] for s in segments]
     political_bias = round(sum(all_bias) / len(all_bias), 3) if all_bias else 0.0
     factual_accuracy = round(sum(all_truth) / len(all_truth), 3) if all_truth else DEFAULT_TRUST_SCORE
+    source_agreement = round(sum(all_agreement) / len(all_agreement), 3) if all_agreement else 0.5
 
     # Build article metadata list
     articles_list = []
@@ -333,6 +343,7 @@ def gemini_to_storywrapper(
             "summary": gemini_result.get("standfirst", ""),
             "political_bias": political_bias,
             "factual_accuracy": factual_accuracy,
+            "source_agreement": source_agreement,
             "sources": list(provider_registry.values()),
             "segments": segments,
             "articles": articles_list,

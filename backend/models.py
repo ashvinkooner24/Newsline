@@ -39,6 +39,7 @@ class Segment(BaseModel):
     citations: List[Citation] = []
     avg_bias: float
     avg_truth: float
+    avg_agreement: float = 0.5
     article_count: int
     notes: Optional[str] = None
     comments: List[Comment] = []
@@ -49,6 +50,7 @@ class Story(BaseModel):
     summary: str = ""
     political_bias: float
     factual_accuracy: float
+    source_agreement: float = 0.5
     sources: List[NewsProvider]
     segments: List[Segment]
     articles: List[ArticleMeta] = []

@@ -39,7 +39,7 @@ headers = {
 
 # Create folder to store articles
 OUTPUT_DIR = Path(__file__).parent / "output"
-MAX_PAGES_PER_SITE = 100000
+MAX_PAGES_PER_SITE = 1000
 
 def get_cached_html(url, output_dir, site_metadata=None):
     """
@@ -614,83 +614,60 @@ def crawl_site(site):
 def main():
 
     sites = [
-    # {
-    #     "name": "International Alliance ALS MND Association",  # used for folder naming
-    #     "sites": [
-    #         "https://www.als-mnd.org/page.xml"
-    #     ],
-    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
-    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
-    #     "extraction_method": "article",  # use newspaper3k's article extraction
-    #     "extraction_config": [
-    #         # could add config options here if needed, e.g. language, fetch_images, etc.
-    #     ],
-    #     "keep_keywords": [],  # not used for article extraction
-    #     "skip_keywords": [],  # not used for article extraction
-    #     "url_include": ["/support-for-pals-cals/", "/support-for-health-professionals/"],  # keep only these
-    #     "url_exclude": [],  # skip URLs containing these
-    # },
-
-    # {
-    #     "name": "Your ALS Guide",  
-    #     "sites": [
-    #         "https://www.youralsguide.com/sitemap.xml"
-    #     ],
-    #     "fetch_method": "sitemap",
-    #     "use_selenium": False,  
-    #     "extraction_method": "class_based",  
-    #     "extraction_config": ["paragraph"],  # for class_based, this would be a list of class names to try for extraction
-    #     "keep_keywords": [],  # if any of these keywords appear in the extracted text, keep the article
-    #     "skip_keywords": ["newsletter", "coping with the diagnosis", "copyright", "privacy policy"],  # if any of these keywords appear in the extracted text, skip the section
-    #     "url_include": [],  
-    #     "url_exclude": ["/our-story", "/mynas-story", "/newsletter", "/testimonials", "/licensing", "/contact-us"]    
-    # },
-
-    # {
-    #     "name": "ALS Canada",  
-    #     "sites": [
-    #         "https://als.ca/page-sitemap.xml",
-    #         "https://als.ca/resource-sitemap.xml"
-    #     ],
-    #     "fetch_method": "sitemap",
-    #     "use_selenium": False,
-    #     "extraction_method": "paragraphs",  
-    #     "extraction_config": [],
-    #     "keep_keywords": [],  
-    #     "skip_keywords": ["Did you find this resource helpful?", "Share this resource", "Copyright", "Privacy Policy"], 
-    #     "url_include": ["/what-is-als/", "/managing-als/", "/resource/"],  
-    #     "url_exclude": []    
-    # },
-
-    # {
-    #     "name": "IMNDA",  
-    #     "sites": [
-    #         "https://www.imnda.ie/about-mnd",
-    #         "https://www.imnda.ie/just-diagnosed",
-    #         "https://www.imnda.ie/living-with-mnd"
-    #     ],
-    #     "fetch_method": "recursive",
-    #     "use_selenium": True,  # this site has some JS-heavy pages where links are generated dynamically, so we will use Selenium as a fallback for those pages
-    #     "extraction_method": "article",  
-    #     "extraction_config": [],
-    #     "keep_keywords": [],  
-    #     "skip_keywords": [], 
-    #     "url_include": ["/about-mnd/", "/just-diagnosed/", "/living-with-mnd/"],  
-    #     "url_exclude": []    
-    # },
 
         {
         "name": "USA Today",
         "sites": [
-            "https://eu.usatoday.com/sitemap/2026/february/18",
-            "https://eu.usatoday.com/sitemap/2026/february/19",
-            "https://eu.usatoday.com/sitemap/2026/february/20",
-            "https://eu.usatoday.com/sitemap/2026/february/21",
-            "https://eu.usatoday.com/sitemap/2026/february/22",
-        ],
+    "https://eu.usatoday.com/sitemap/2026/february/1",
+    "https://eu.usatoday.com/sitemap/2026/february/2",
+    "https://eu.usatoday.com/sitemap/2026/february/3",
+    "https://eu.usatoday.com/sitemap/2026/february/4",
+    "https://eu.usatoday.com/sitemap/2026/february/5",
+    "https://eu.usatoday.com/sitemap/2026/february/6",
+    "https://eu.usatoday.com/sitemap/2026/february/7",
+    "https://eu.usatoday.com/sitemap/2026/february/8",
+    "https://eu.usatoday.com/sitemap/2026/february/9",
+    "https://eu.usatoday.com/sitemap/2026/february/10",
+    "https://eu.usatoday.com/sitemap/2026/february/11",
+    "https://eu.usatoday.com/sitemap/2026/february/12",
+    "https://eu.usatoday.com/sitemap/2026/february/13",
+    "https://eu.usatoday.com/sitemap/2026/february/14",
+    "https://eu.usatoday.com/sitemap/2026/february/15",
+    "https://eu.usatoday.com/sitemap/2026/february/16",
+    "https://eu.usatoday.com/sitemap/2026/february/17",
+    "https://eu.usatoday.com/sitemap/2026/february/18",
+    "https://eu.usatoday.com/sitemap/2026/february/19",
+    "https://eu.usatoday.com/sitemap/2026/february/20",
+    "https://eu.usatoday.com/sitemap/2026/february/21",
+    "https://eu.usatoday.com/sitemap/2026/february/22",
+    "https://eu.usatoday.com/sitemap/2026/february/23",
+    "https://eu.usatoday.com/sitemap/2026/february/24",
+    "https://eu.usatoday.com/sitemap/2026/february/25",
+    "https://eu.usatoday.com/sitemap/2026/february/26",
+    "https://eu.usatoday.com/sitemap/2026/february/27",
+    "https://eu.usatoday.com/sitemap/2026/february/28"
+],
         "fetch_method": "recursive",  # currently only sitemap is implemented, but could add direct crawling later
         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
         "limit_depth": True,    # whether to limit the depth of the recursive crawl
+        "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+        "extraction_method": "article",  # use newspaper3k's article extraction
+        "extraction_config": [
+            # could add config options here if needed, e.g. language, fetch_images, etc.
+        ],
+        "keep_keywords": [],  # not used for article extraction
+        "skip_keywords": [],  # not used for article extraction
+        "url_include": [],  # keep only these
+        "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    },
+     {
+        "name": "Fox News",
+        "sites": [
+            "https://www.foxnews.com/sitemap.xml?type=news",
+        ],
+        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+        "limit_depth": False,    # whether to limit the depth of the recursive crawl
         "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
         "extraction_method": "article",  # use newspaper3k's article extraction
         "extraction_config": [

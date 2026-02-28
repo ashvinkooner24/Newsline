@@ -320,6 +320,7 @@ def _process_topic_group(articles: list[dict]) -> dict:
         credibility_scores=credibility_scores,
         provider_trust_map=provider_trust_map,
         article_metadata=articles,
+        agreement_scores=agreement_scores,
     )
 
     return story_dict

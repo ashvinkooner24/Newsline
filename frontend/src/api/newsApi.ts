@@ -75,6 +75,7 @@ export interface BackendSegment {
   citations: BackendCitation[];
   avg_bias: number;
   avg_truth: number;
+  avg_agreement: number;
   article_count: number;
   notes: string | null;
   comments: BackendComment[];
@@ -86,6 +87,7 @@ export interface BackendStory {
   summary: string;
   political_bias: number;
   factual_accuracy: number;
+  source_agreement: number;
   sources: BackendNewsProvider[];
   segments: BackendSegment[];
   articles: BackendArticleMeta[];
@@ -229,7 +231,7 @@ function buildBiasAnalysis(story: BackendStory): BiasAnalysis {
 
 /**
  * Build a CredibilityAssessment from the story's metrics.
- * `sourceAgreement` is approximated from the spread of segment bias scores.
+ * Uses real agreement scores computed by the backend agreement_scoring pipeline.
  */
 function buildCredibility(story: BackendStory): CredibilityAssessment {
   const score = Math.round(story.factual_accuracy * 100);
@@ -239,13 +241,21 @@ function buildCredibility(story: BackendStory): CredibilityAssessment {
       )
     : 0;
 
-  const articleCount = story.segments.reduce((sum, seg) => sum + seg.article_count, 0);
+  const articleCount = story.articles?.length || story.segments.reduce((sum, seg) => sum + seg.article_count, 0);
 
-  // Approximate agreement: invert the std-dev of bias scores (higher spread = lower agreement)
-  const biasScores = story.segments.map((s) => s.avg_bias);
-  const mean = biasScores.reduce((a, b) => a + b, 0) / (biasScores.length || 1);
-  const variance = biasScores.reduce((a, b) => a + (b - mean) ** 2, 0) / (biasScores.length || 1);
-  const sourceAgreement = Math.max(0, Math.round((1 - Math.sqrt(variance)) * 100));
+  // Use real agreement score from backend (0-1 float), fall back to segment-level avg
+  let sourceAgreement: number;
+  if (story.source_agreement != null && story.source_agreement > 0) {
+    sourceAgreement = Math.round(story.source_agreement * 100);
+  } else {
+    // Fallback: average segment-level agreement
+    const segAgreements = story.segments
+      .map(s => s.avg_agreement)
+      .filter(v => v != null && v > 0);
+    sourceAgreement = segAgreements.length
+      ? Math.round((segAgreements.reduce((a, b) => a + b, 0) / segAgreements.length) * 100)
+      : 50;
+  }
 
   return {
     score,
