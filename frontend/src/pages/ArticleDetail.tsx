@@ -111,7 +111,7 @@ const ArticleDetail = () => {
                     <p className="text-secondary-foreground leading-relaxed mt-3">
                       The source's editorial framing was classified as{' '}
                       <span className="font-semibold">{article.source.biasLean}</span> based on
-                      Gemini's assessment of cited quotes. The overall topic draws
+                      our model's assessment of cited quotes. The overall topic draws
                       from {topic.articles.length} article{topic.articles.length > 1 ? 's' : ''} with
                       a {topic.credibility.sourceAgreement}% inter-source agreement rate.
                     </p>
