@@ -1,185 +1,62 @@
 [
   {
     "story": {
-      "heading": "Supreme Court Rules Against Presidential Tariff Authority as Trump Floats New Nominations",
-      "slug": "supreme-court-rules-against-presidential-tariff-authority-as-trump-floats-new-nominations",
-      "summary": "The Supreme Court has struck down President Donald Trump's global tariff policy, ruling that the executive branch lacks the authority to impose such trade penalties under current emergency laws. Following the decision, the President criticized the judiciary while suggesting Senator Ted Cruz as a potential future Supreme Court nominee.",
-      "political_bias": 0.083,
-      "factual_accuracy": 0.68,
-      "source_agreement": 0.648,
+      "heading": "Search Continues for Nancy Guthrie in Arizona Catalina Foothills",
+      "slug": "search-continues-for-nancy-guthrie-in-arizona-catalina-foothills",
+      "summary": "Authorities continue to search for 84-year-old Nancy Guthrie, mother of NBC's Savannah Guthrie, who was last seen Jan. 31 at her Catalina Foothills home. Investigators are reviewing video footage, DNA results and neighborhood leads while officials say the family is not considered a suspect.",
+      "political_bias": -0.278,
+      "factual_accuracy": 0.731,
+      "source_agreement": 0.666,
       "sources": [
         {
           "name": "CNN",
-          "bias_score": 0.0,
-          "trust_score": 0.694
-        },
-        {
-          "name": "Fox News",
-          "bias_score": 0.0,
-          "trust_score": 0.69
-        }
-      ],
-      "segments": [
-        {
-          "heading": "Supreme Court Ruling on Tariffs",
-          "text": "In a significant legal setback for the administration, the Supreme Court ruled that the International Emergency Economic Powers Act does not grant the President the power to impose global tariffs. Chief Justice John Roberts, writing for the majority, emphasized that the power to tax and impose tariffs is constitutionally reserved for Congress. The ruling nullified a signature economic policy that had generated billions in revenue but was also linked to market volatility and increased costs for U.S. consumers.",
-          "sources": [
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.694
-            }
-          ],
-          "citations": [
-            {
-              "source": "CNN",
-              "article_id": "john-roberts-ends-trump-s-big-supreme-court-winning-streak",
-              "quote": "Fulfilling that role, we hold that (the International Emergency Economic Powers Act) does not authorize the President to impose tariffs.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "supreme-court-gives-trump-and-the-rest-of-the-gop-a-political-gift",
-              "quote": "The justices, including two of the president’s appointees, struck down Trump’s signature economic policy: his global tariffs.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.675,
-          "avg_agreement": 0.643,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Executive Response and Economic Context",
-          "text": "President Trump reacted to the decision with sharp criticism of the court, specifically targeting his own appointees, Justices Gorsuch and Barrett. Despite the ruling, the President signaled he would pursue tariffs through alternative legal avenues, such as Section 122 of the Trade Act of 1974. The legal defeat comes amid reports of slowing economic growth, with the GDP rising at a 1.4% annualized rate in the fourth quarter of 2025.",
-          "sources": [
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.694
-            }
-          ],
-          "citations": [
-            {
-              "source": "CNN",
-              "article_id": "john-roberts-ends-trump-s-big-supreme-court-winning-streak",
-              "quote": "He reserved particular wrath for two of his appointees, Justices Neil Gorsuch and Amy Coney Barrett, calling them an ’embarrassment to their families.’",
-              "bias_level": "right"
-            },
-            {
-              "source": "CNN",
-              "article_id": "supreme-court-gives-trump-and-the-rest-of-the-gop-a-political-gift",
-              "quote": "the Bureau of Economic Analysis announced the gross domestic product had grown at just a 1.4% annualized rate in the fourth quarter.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.25,
-          "avg_truth": 0.675,
-          "avg_agreement": 0.643,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Potential Supreme Court Vacancies and Foreign Policy",
-          "text": "During a visit to Corpus Christi, Texas, President Trump discussed the possibility of nominating Senator Ted Cruz to the Supreme Court. The President joked that Cruz would receive unanimous bipartisan support because lawmakers would want him out of the Senate. Additionally, the President addressed tensions with Iran, noting that while military strikes remain an option, he would prefer a peaceful resolution to the ongoing nuclear capability concerns.",
-          "sources": [
-            {
-              "name": "Fox News",
-              "bias_score": 0.0,
-              "trust_score": 0.69
-            }
-          ],
-          "citations": [
-            {
-              "source": "Fox News",
-              "article_id": "trump-floats-ted-cruz-for-supreme-court-jokes-he-d-get-100-bipartisan-vote-to-ge",
-              "quote": "I'm thinking about putting him in the Supreme Court. … Getting these nominations through is very tough, and he's the only guy I know who'll get 100% of the Democrat vote, 100% of the Republican vote. They want to get him out of there.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "Fox News",
-              "article_id": "trump-floats-ted-cruz-for-supreme-court-jokes-he-d-get-100-bipartisan-vote-to-ge",
-              "quote": "Trump told reporters earlier Friday he had not yet decided if he would launch military strikes on Iran, but he voiced his unhappiness with recent negotiations.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.69,
-          "avg_agreement": 0.659,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ],
-      "articles": [
-        {
-          "id": "trump-floats-ted-cruz-for-supreme-court-jokes-he-d-get-100-bipartisan-vote-to-ge",
-          "title": "Trump floats Ted Cruz for Supreme Court, jokes he’d get ‘100%’ bipartisan vote to ‘get him out of there’",
-          "url": "https://www.foxnews.com/politics/trump-floats-ted-cruz-supreme-court-jokes-hed-get-100-bipartisan-vote-get-him-out-there",
-          "source": "Fox News",
-          "published_at": "2026-02-28",
-          "excerpt": "NEW You can now listen to Fox News articles!\nNEW\nPresident Donald Trump on Friday floated the idea of putting Sen. Ted Cruz, R-Texas, on the Supreme Court, joking he is the only nominee who would rece…"
-        },
-        {
-          "id": "supreme-court-gives-trump-and-the-rest-of-the-gop-a-political-gift",
-          "title": "Supreme Court gives Trump and the rest of the GOP a political gift",
-          "url": "https://www.cnn.com/2026/02/21/politics/tariffs-ruling-supreme-court-trump-gop",
-          "source": "CNN",
-          "published_at": "2026-02-21",
-          "excerpt": "The Supreme Court on Friday dealt President Donald Trump perhaps the most significant rebuke of his second term. The justices, including two of the president’s appointees, struck down Trump’s signatur…"
-        },
-        {
-          "id": "john-roberts-ends-trump-s-big-supreme-court-winning-streak",
-          "title": "John Roberts ends Trump’s big Supreme Court winning streak",
-          "url": "https://www.cnn.com/2026/02/21/politics/chief-justice-john-roberts-tariffs-analysis",
-          "source": "CNN",
-          "published_at": "2026-02-21",
-          "excerpt": "Chief Justice John Roberts brought the drama Friday as he ascended the courtroom bench to declare — at long last — President Donald Trump’s tariffs unlawful.\n\nFor 10 gripping minutes, he methodically …"
-        }
-      ],
-      "category": "Politics",
-      "updated_at": "2026-02-28T12:00:00Z",
-      "contradiction_reports": [],
-      "missing_context": {}
-    },
-    "comments": []
-  },
-  {
-    "story": {
-      "heading": "Investigation Continues into Disappearance of Nancy Guthrie in Arizona",
-      "slug": "investigation-continues-into-disappearance-of-nancy-guthrie-in-arizona",
-      "summary": "Authorities in Tucson, Arizona, are entering the third week of an intensive search for 84-year-old Nancy Guthrie, who was reported missing from her home on January 31 under circumstances investigators believe involve abduction.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.719,
-      "source_agreement": 0.662,
-      "sources": [
-        {
-          "name": "CNN",
-          "bias_score": 0.0,
+          "bias_score": -0.5,
           "trust_score": 0.756
         },
         {
           "name": "Fox News",
-          "bias_score": 0.0,
+          "bias_score": 0.5,
           "trust_score": 0.644
         }
       ],
       "segments": [
         {
-          "heading": "Disappearance and Initial Evidence",
-          "text": "Nancy Guthrie was last seen on January 31 at her home in the Catalina Foothills. Evidence suggests she was removed from the residence against her will, leaving behind her mobile phone and essential medications. Investigators have identified a masked individual on doorbell camera footage tampering with security equipment while carrying an Ozark-brand backpack. Additionally, neighbors have provided Ring camera footage that may show vehicles on a route leading away from the crime scene.",
+          "heading": "Disappearance and initial search",
+          "text": "Nancy Guthrie, 84, was last seen on January 31 at her secluded home in the Catalina Foothills. Authorities say she disappeared from the residence without her phone or required medications, and the case has prompted an intensive, ongoing search and public appeals for information.",
           "sources": [
             {
               "name": "CNN",
-              "bias_score": 0.0,
+              "bias_score": -0.5,
+              "trust_score": 0.756
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
+              "quote": "Nancy Guthrie was last seen on January 31, before she was apparently kidnapped, disappearing from her secluded home in Arizona\u0002s Catalina Foothills without her phone \u001a or critical medications.",
+              "bias_level": "left"
+            }
+          ],
+          "avg_bias": -0.5,
+          "avg_truth": 0.756,
+          "avg_agreement": 0.673,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Evidence and investigative activity",
+          "text": "Investigators have reviewed video footage and physical evidence from the area. Law enforcement described video showing a masked person tampering with the home's doorbell camera and noted the individual carried an Ozark backpack. DNA testing on gloves found roughly two miles from the home did not match national databases or DNA recovered inside the house. Authorities and the FBI are canvassing the neighborhood and reviewing thousands of hours of additional surveillance video.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": -0.5,
               "trust_score": 0.756
             },
             {
               "name": "Fox News",
-              "bias_score": 0.0,
+              "bias_score": 0.5,
               "trust_score": 0.644
             }
           ],
@@ -187,66 +64,67 @@
             {
               "source": "CNN",
               "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
-              "quote": "Nancy Guthrie was last seen on January 31, before she was apparently kidnapped, disappearing from her secluded home in Arizona’s Catalina Foothills without her phone – or critical medications.",
-              "bias_level": "neutral"
+              "quote": "video of an armed, masked person tampering with the doorbell camera at her Tucson home.",
+              "bias_level": "left"
+            },
+            {
+              "source": "CNN",
+              "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
+              "quote": "DNA on gloves found 2 miles from the home did not return any matches in the national database known as CODIS, and doesn\u0002t match DNA found the house, either, Nanos said.",
+              "bias_level": "left"
             },
             {
               "source": "Fox News",
               "article_id": "fox-news-true-crime-newsletter-new-nancy-guthrie-video-caleb-flynn-s-charges-mis",
-              "quote": "Nancy Guthrie neighbors' Ring camera captures vehicles on possible route from crime scene",
-              "bias_level": "neutral"
+              "quote": "NEIGHBOR EXCLUSIVE: Nancy Guthrie neighbors' Ring camera captures vehicles on possible route from crime scene",
+              "bias_level": "right"
             }
           ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.7,
-          "avg_agreement": 0.657,
+          "avg_bias": -0.167,
+          "avg_truth": 0.719,
+          "avg_agreement": 0.663,
           "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Forensic Analysis and Investigative Leads",
-          "text": "The Pima County Sheriff's Department and the FBI are currently analyzing DNA evidence. While DNA was recovered from the Guthrie home, a separate sample found on gloves two miles away did not match the national CODIS database or the evidence found at the residence. Law enforcement officials are also reviewing thousands of hours of surveillance footage from the Tucson area. A suspicious individual was reportedly seen by a neighbor walking near the property two weeks prior to the disappearance.",
+          "heading": "Neighborhood leads and public response",
+          "text": "Neighbors have reported suspicious activity and some residents have shared tips and footage with investigators. Media accounts describe local online communities exchanging theories and leads, with some people organizing informal searches and tip-sharing.",
           "sources": [
             {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.756
-            },
-            {
               "name": "Fox News",
-              "bias_score": 0.0,
+              "bias_score": 0.5,
               "trust_score": 0.644
             }
           ],
           "citations": [
             {
-              "source": "CNN",
-              "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
-              "quote": "DNA on gloves found 2 miles from the home did not return any matches in the national database known as CODIS, and doesn’t match DNA found the house, either",
-              "bias_level": "neutral"
+              "source": "Fox News",
+              "article_id": "fox-news-true-crime-newsletter-new-nancy-guthrie-video-caleb-flynn-s-charges-mis",
+              "quote": "FOOTHILLS PHANTOM: Nancy Guthrie's neighbor saw suspicious man walking nearby 2 weeks before suspected abduction",
+              "bias_level": "right"
             },
             {
               "source": "Fox News",
               "article_id": "fox-news-true-crime-newsletter-new-nancy-guthrie-video-caleb-flynn-s-charges-mis",
-              "quote": "Nancy Guthrie's neighbor saw suspicious man walking nearby 2 weeks before suspected abduction",
-              "bias_level": "neutral"
+              "quote": "DIGITAL VIGILANTES: Nancy Guthrie disappearance fuels rise of \u0002mom detectives\u0002 swapping tips and losing sleep",
+              "bias_level": "right"
             }
           ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.7,
-          "avg_agreement": 0.657,
-          "article_count": 2,
+          "avg_bias": 0.5,
+          "avg_truth": 0.644,
+          "avg_agreement": 0.642,
+          "article_count": 1,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Scope of the Search",
-          "text": "The investigation has extended to the U.S.-Mexico border due to Tucson's proximity to the region. However, Mexican officials in the state of Sonora have stated there is currently no evidence suggesting Guthrie was transported across the border. Within the U.S., the Pima County Sheriff has explicitly stated that Guthrie's adult children are not considered suspects in the case. While ransom notes have been reported, authorities have not yet established a definitive motive.",
+          "heading": "Family status and official statements",
+          "text": "Authorities have said Guthrie's adult children and their spouses are not considered suspects and cautioned against suggesting otherwise. Officials have declined to release some investigative details as the probe continues.",
           "sources": [
             {
               "name": "CNN",
-              "bias_score": 0.0,
+              "bias_score": -0.5,
               "trust_score": 0.756
             }
           ],
@@ -254,17 +132,73 @@
             {
               "source": "CNN",
               "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
-              "quote": "The FBI informed us that they currently have no leads to suggest that this woman could be in Mexico",
-              "bias_level": "neutral"
+              "quote": "Nancy Guthrie\u0002s adult children and their spouses are not suspects in her February 1 disappearance, the sheriff says, calling any suggestion otherwise \u0002cruel.\u0002",
+              "bias_level": "left"
             },
             {
               "source": "CNN",
               "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
-              "quote": "Nancy Guthrie’s adult children and their spouses are not suspects in her February 1 disappearance",
-              "bias_level": "neutral"
+              "quote": "Detectives and agents were back in Nancy Guthrie\u0002s neighborhood on Saturday canvassing the area as part of their investigation, according to the Pima County Sheriff\u0002s Department. \u0002No additional details will be provided,\u0002 the agency said.",
+              "bias_level": "left"
             }
           ],
-          "avg_bias": 0.0,
+          "avg_bias": -0.5,
+          "avg_truth": 0.756,
+          "avg_agreement": 0.673,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Cross-border checks and outstanding questions",
+          "text": "Mexican officials have said there is currently no indication Guthrie was taken into Mexico, and investigators have not announced a leading theory about motive. Authorities have not ruled out the involvement of more than one person, and several investigative avenues remain open.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": -0.5,
+              "trust_score": 0.756
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
+              "quote": "Mexican officials say there is currently no indication Guthrie was brought into Mexico.",
+              "bias_level": "left"
+            },
+            {
+              "source": "CNN",
+              "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
+              "quote": "They have not ruled out the possibility more than one person may have been involved, the sheriff said Friday.",
+              "bias_level": "left"
+            }
+          ],
+          "avg_bias": -0.5,
+          "avg_truth": 0.756,
+          "avg_agreement": 0.673,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "How the public can provide information",
+          "text": "Authorities have asked anyone with information to contact investigative tip lines or submit information to official channels.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": -0.5,
+              "trust_score": 0.756
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "nancy-guthrie-case-timeline-of-key-developments-in-the-search-for-for-savannah-g",
+              "quote": "If you have information that could help investigators, you can call 1-800-CALL-FBI or 520-351-4900. You can also submit information at tips.fbi.gov.",
+              "bias_level": "left"
+            }
+          ],
+          "avg_bias": -0.5,
           "avg_truth": 0.756,
           "avg_agreement": 0.673,
           "article_count": 1,
@@ -299,477 +233,29 @@
   },
   {
     "story": {
-      "heading": "U.S. Deploys F-22 Stealth Fighters to Israel Amid Rising Tensions with Iran",
-      "slug": "u-s-deploys-f-22-stealth-fighters-to-israel-amid-rising-tensions-with-iran",
-      "summary": "The United States has stationed F-22 Raptor stealth fighters in Israel for the first time, a move intended to enhance regional deterrence as the Trump administration weighs its options regarding Iran's nuclear and missile programs.",
-      "political_bias": 0.062,
-      "factual_accuracy": 0.708,
-      "source_agreement": 0.661,
-      "sources": [
-        {
-          "name": "Fox News",
-          "bias_score": 0.0,
-          "trust_score": 0.716
-        },
-        {
-          "name": "CNN",
-          "bias_score": 0.0,
-          "trust_score": 0.7
-        }
-      ],
-      "segments": [
-        {
-          "heading": "Strategic Deployment of F-22 Raptors",
-          "text": "Eleven U.S. Air Force F-22 Raptors have arrived at Israel's Ovda Air Base. This marks the first operational deployment of these advanced combat aircraft to Israel. Military officials describe the F-22 as a critical asset for establishing air superiority and suppressing enemy air defenses, which would be essential in any potential strike scenario against hardened targets in Iran.",
-          "sources": [
-            {
-              "name": "Fox News",
-              "bias_score": 0.0,
-              "trust_score": 0.716
-            }
-          ],
-          "citations": [
-            {
-              "source": "Fox News",
-              "article_id": "us-positions-f-22-stealth-fighters-in-israel-puts-almost-any-target-in-iran-at-r",
-              "quote": "Eleven U.S. Air Force F-22 Raptor stealth fighters have arrived at Israel’s Ovda Air Base in the country’s south, Fox News reported, marking the first-ever operational deployment of American combat aircraft to Israel.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "Fox News",
-              "article_id": "us-positions-f-22-stealth-fighters-in-israel-puts-almost-any-target-in-iran-at-r",
-              "quote": "The F-22 is indeed the most air-to-air capable fighter in the world; nothing comes close to it in the air-to-air role.",
-              "bias_level": "right"
-            }
-          ],
-          "avg_bias": 0.25,
-          "avg_truth": 0.716,
-          "avg_agreement": 0.669,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "U.S. Policy and Regional Objectives",
-          "text": "The Trump administration has indicated that while diplomacy is the preferred path, military force remains an option. The deployment is viewed by some military analysts as a way to expand presidential options and provide a 'clear deterrent signal.' Basing the aircraft in Israel is noted for offering fewer political constraints compared to some Gulf state bases, providing U.S. planners with greater freedom of action.",
-          "sources": [
-            {
-              "name": "Fox News",
-              "bias_score": 0.0,
-              "trust_score": 0.716
-            }
-          ],
-          "citations": [
-            {
-              "source": "Fox News",
-              "article_id": "us-positions-f-22-stealth-fighters-in-israel-puts-almost-any-target-in-iran-at-r",
-              "quote": "Trump signaled Friday that diplomacy remains his preference but did not rule out force.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "Fox News",
-              "article_id": "us-positions-f-22-stealth-fighters-in-israel-puts-almost-any-target-in-iran-at-r",
-              "quote": "Unlike some Gulf bases, where operational restrictions can apply, Israel offers fewer political constraints.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.716,
-          "avg_agreement": 0.669,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Iran's Retaliatory Capabilities",
-          "text": "Iran maintains a variety of options to respond to a potential strike, including a large inventory of ballistic missiles and drones capable of reaching U.S. bases and Israel. Despite being weakened by previous strikes and domestic issues, Tehran has demonstrated its ability to bypass sophisticated air defenses, as seen in past engagements. U.S. officials acknowledge that Iran's asymmetric capabilities make a decisive strike more complex.",
-          "sources": [
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.7
-            }
-          ],
-          "citations": [
-            {
-              "source": "CNN",
-              "article_id": "how-iran-could-strike-back-if-trump-attacks",
-              "quote": "Iran is believed to have thousands of missiles and drones within range of US troops based in a number of countries in the Middle East.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "how-iran-could-strike-back-if-trump-attacks",
-              "quote": "Tehran’s military capabilities, even if far outnumbered and much older than modern US systems, make a decisive US strike on the country far more difficult.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.7,
-          "avg_agreement": 0.652,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Proxy Networks and Regional Stability",
-          "text": "Iran's regional network of proxies, including groups in Iraq and Lebanon's Hezbollah, have pledged support to the Islamic Republic in the event of an attack. However, these groups face significant constraints following recent conflicts with Israel. Analysts suggest that Iran's response would likely depend on whether it perceives a conflict as a limited strike or an existential threat to the regime.",
-          "sources": [
-            {
-              "name": "CNN",
-              "bias_score": 0.0,
-              "trust_score": 0.7
-            }
-          ],
-          "citations": [
-            {
-              "source": "CNN",
-              "article_id": "how-iran-could-strike-back-if-trump-attacks",
-              "quote": "Iraqi groups like Kataeb Hezbollah and Harakat al-Nujaba — militias that have targeted US forces in the past — as well as Lebanon’s Hezbollah, have said they will come to Iran’s aid if it is attacked.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "CNN",
-              "article_id": "how-iran-could-strike-back-if-trump-attacks",
-              "quote": "The regime has a lot of capabilities to use if they see this as an existential war.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.7,
-          "avg_agreement": 0.652,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ],
-      "articles": [
-        {
-          "id": "us-positions-f-22-stealth-fighters-in-israel-puts-almost-any-target-in-iran-at-r",
-          "title": "US positions F-22 stealth fighters in Israel, puts 'almost any target in Iran at risk'",
-          "url": "https://www.foxnews.com/world/us-positions-f-22-stealth-fighters-israel-puts-almost-any-target-iran-risk",
-          "source": "Fox News",
-          "published_at": "2026-02-28",
-          "excerpt": "NEW You can now listen to Fox News articles!\nNEW\nAs the Trump administration weighs its next move on Iran, one of the most advanced aircraft in the U.S. arsenal has taken up position closer to Tehran.…"
-        },
-        {
-          "id": "how-iran-could-strike-back-if-trump-attacks",
-          "title": "How Iran could strike back if Trump attacks",
-          "url": "https://www.cnn.com/2026/01/29/middleeast/iran-response-options-trump-threat-intl",
-          "source": "CNN",
-          "published_at": "2026-01-29",
-          "excerpt": "For nearly half a century, Iran has prepared for a war with the United States. Unable to match America’s military power, Tehran has instead focused on ways to impose heavy costs that could shake the M…"
-        }
-      ],
-      "category": "Defence",
-      "updated_at": "2026-02-28T12:00:00Z",
-      "contradiction_reports": [],
-      "missing_context": {}
-    },
-    "comments": []
-  },
-  {
-    "story": {
-      "heading": "Trump Considers Military Strikes on Iran Amid Tariff Escalation and Legal Challenges",
-      "slug": "trump-considers-military-strikes-on-iran-amid-tariff-escalation-and-legal-challenges",
-      "summary": "President Donald Trump has expressed dissatisfaction with nuclear negotiations with Iran, weighing potential military strikes while simultaneously increasing global import tariffs to 15% following a Supreme Court ruling against his previous trade policy.",
+      "heading": "Final Day Schedule and Key Events at the 2026 Milano Cortina Winter Olympics",
+      "slug": "final-day-schedule-and-key-events-at-the-2026-milano-cortina-winter-olympics",
+      "summary": "The Milano Cortina Games conclude with a set of medal-deciding events and the closing ceremony. Broadcast coverage continues across NBC networks and Peacock; highlights on the final competition day include the men’s ice hockey final, women’s freestyle halfpipe, a historic 50km women’s cross-country race and medal rounds in bobsled and curling.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.741,
-      "source_agreement": 0.665,
+      "factual_accuracy": 0.743,
+      "source_agreement": 0.667,
       "sources": [
-        {
-          "name": "Fox News",
-          "bias_score": 0.0,
-          "trust_score": 0.693
-        },
-        {
-          "name": "The Guardian",
-          "bias_score": 0.0,
-          "trust_score": 0.75
-        }
-      ],
-      "segments": [
-        {
-          "heading": "Iran Negotiations and Potential Military Action",
-          "text": "President Trump stated on Friday that he is dissatisfied with the progress of nuclear negotiations with Iran, noting that the country has not yet agreed to U.S. demands. While the president has not made a final decision regarding military strikes, he acknowledged the risk of a long-term conflict in the Middle East. Concurrently, the State Department authorized non-essential employees at the U.S. Embassy in Jerusalem to depart due to regional tensions, and Iran's foreign minister indicated a nuclear counterproposal is being prepared.",
-          "sources": [
-            {
-              "name": "Fox News",
-              "bias_score": 0.0,
-              "trust_score": 0.693
-            },
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.75
-            }
-          ],
-          "citations": [
-            {
-              "source": "Fox News",
-              "article_id": "trump-not-happy-with-iran-talks-hasn-t-made-final-decision-on-us-strikes",
-              "quote": "President Donald Trump told reporters on Friday that he is 'not happy' with the way Iran is negotiating.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "The Guardian",
-              "article_id": "trump-news-at-a-glance-president-condemns-anti-american-decision-and-pursues-new",
-              "quote": "Iran’s foreign minister has said he expects to have a draft counterproposal ready within days after nuclear talks with the US this week",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.722,
-          "avg_agreement": 0.663,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Tariff Increases and Supreme Court Ruling",
-          "text": "Following a 6-3 Supreme Court ruling that limited the president's authority to impose tariffs under the 1977 International Emergency Economic Powers Act, Trump announced an increase in global import duties to 15%. The administration is utilizing an alternative legal avenue to implement these levies, which are scheduled to take effect on February 24. Business associations have responded by requesting refunds for approximately $133 billion in previously collected tariffs affected by the court's decision.",
-          "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.75
-            }
-          ],
-          "citations": [
-            {
-              "source": "The Guardian",
-              "article_id": "trump-news-at-a-glance-president-condemns-anti-american-decision-and-pursues-new",
-              "quote": "Trump raised the global duty on imports into the US to 15% on Saturday, doubling down on his promise to maintain his aggressive tariff policy a day after the supreme court ruled much of it illegal.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.75,
-          "avg_agreement": 0.666,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "International and Domestic Reactions",
-          "text": "European leaders, including German Chancellor Friedrich Merz and French President Emmanuel Macron, have expressed concern over the economic uncertainty and emphasized the need for reciprocity. Domestically, the administration faces criticism over the use of presidential imagery on federal buildings, while also managing local issues such as a federal emergency declaration for a sewage spill in the Potomac River.",
-          "sources": [
-            {
-              "name": "The Guardian",
-              "bias_score": 0.0,
-              "trust_score": 0.75
-            }
-          ],
-          "citations": [
-            {
-              "source": "The Guardian",
-              "article_id": "trump-news-at-a-glance-president-condemns-anti-american-decision-and-pursues-new",
-              "quote": "German chancellor, Friedrich Merz, said he would travel to Washington with a coordinated European position, and warned of the ‘poison’ of more uncertainty.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.75,
-          "avg_agreement": 0.666,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ],
-      "articles": [
-        {
-          "id": "trump-not-happy-with-iran-talks-hasn-t-made-final-decision-on-us-strikes",
-          "title": "Trump 'not happy' with Iran talks, hasn't made 'final decision' on US strikes",
-          "url": "https://www.foxnews.com/politics/trump-not-happy-iran-talks-hasnt-made-final-decision-us-strikes",
-          "source": "Fox News",
-          "published_at": "2026-02-28",
-          "excerpt": "NEW You can now listen to Fox News articles!\nNEW\nPresident Donald Trump told reporters on Friday that he is \"not happy\" with the way Iran is negotiating.\n\"I'm not happy with the fact that they're not …"
-        },
-        {
-          "id": "trump-news-at-a-glance-president-condemns-anti-american-decision-and-pursues-new",
-          "title": "Trump news at a glance: President condemns ‘anti-American decision’ and pursues new tariffs avenue",
-          "url": "https://www.theguardian.com/us-news/2026/feb/22/trump-administration-news-updates-today",
-          "source": "The Guardian",
-          "published_at": "2026-02-22",
-          "excerpt": "Donald Trump raised the global duty on imports into the US to 15% on Saturday, doubling down on his promise to maintain his aggressive tariff policy a day after the supreme court ruled much of it ille…"
-        }
-      ],
-      "category": "Politics",
-      "updated_at": "2026-02-28T12:00:00Z",
-      "contradiction_reports": [],
-      "missing_context": {}
-    },
-    "comments": []
-  },
-  {
-    "story": {
-      "heading": "China Claims Gold and Bronze in Women's Aerials at 2026 Winter Olympics",
-      "slug": "china-claims-gold-and-bronze-in-women-s-aerials-at-2026-winter-olympics",
-      "summary": "China's Xu Mengtao and Shao Qi secured podium finishes in the women's aerials competition in Livigno, while American favorites Kaila Kuhn and Winter Vinecki finished fifth and sixth after unsuccessful landings in the final round.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.712,
-      "source_agreement": 0.662,
-      "sources": [
-        {
-          "name": "USA Today",
-          "bias_score": 0.0,
-          "trust_score": 0.709
-        },
-        {
-          "name": "The New York Times",
-          "bias_score": 0.0,
-          "trust_score": 0.726
-        }
-      ],
-      "segments": [
-        {
-          "heading": "Competition Results and Performance",
-          "text": "The women's aerials final at the Livigno Aerials & Moguls Park saw China's Xu Mengtao take the gold medal with a score of 112.90. Australia's Danielle Scott earned silver with 102.17, and China's Shao Qi took the bronze with 101.90. The final round utilized a format where previous scores were discarded, leaving the six finalists to compete for medals based on a single jump.",
-          "sources": [
-            {
-              "name": "USA Today",
-              "bias_score": 0.0,
-              "trust_score": 0.709
-            }
-          ],
-          "citations": [
-            {
-              "source": "USA Today",
-              "article_id": "aerials-is-a-breathtaking-beautiful-yet-cruel-olympic-competition",
-              "quote": "China’s Xu Mengtao won gold with a 112.90 (up from 107.75), while Australia’s Danielle Scott (102.17) took silver, and China’s Shao Qi (101.90) the bronze.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.709,
-          "avg_agreement": 0.662,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "U.S. Team Performance and Strategy",
-          "text": "Three Americans reached the 12-skier final field, with Kaila Kuhn and Winter Vinecki advancing to the final six. Both Kuhn and Vinecki attempted high-difficulty 'back-full-full-full' triple jumps in the medal round but failed to stick their landings. Kuhn finished in fifth place with a score of 99.16, while Vinecki finished sixth with 90.58. Tasia Tanner, who balances training with a full-time career as an IT manager, finished 11th.",
-          "sources": [
-            {
-              "name": "USA Today",
-              "bias_score": 0.0,
-              "trust_score": 0.709
-            }
-          ],
-          "citations": [
-            {
-              "source": "USA Today",
-              "article_id": "aerials-is-a-breathtaking-beautiful-yet-cruel-olympic-competition",
-              "quote": "Vinecki’s final score of 90.58 (down from 107.75) meant a sixth-place finish, with Kuhn’s 99.16 (down from 109.90) one spot ahead of her in fifth.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "USA Today",
-              "article_id": "aerials-is-a-breathtaking-beautiful-yet-cruel-olympic-competition",
-              "quote": "Tanner said she works full-time as an IT manager for Hilton Hotels, working at the Waldorf Astoria in Park City, Utah.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.709,
-          "avg_agreement": 0.662,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Olympic Context and Future Games",
-          "text": "The 2026 Winter Games are concluding with ceremonies approaching. Future Olympic hosts have already been designated, including Utah in the United States, the French Alps, Brisbane, and Los Angeles. The women's aerials event in Livigno faced scheduling challenges earlier in the week due to heavy snowfall, which forced qualifying and finals to be held on the same day.",
-          "sources": [
-            {
-              "name": "The New York Times",
-              "bias_score": 0.0,
-              "trust_score": 0.726
-            },
-            {
-              "name": "USA Today",
-              "bias_score": 0.0,
-              "trust_score": 0.709
-            }
-          ],
-          "citations": [
-            {
-              "source": "The New York Times",
-              "article_id": "connections-sports-edition-today-hints-and-answers-for-olympics-themed-puzzle-no",
-              "quote": "Future Olympic hosts: BRISBANE, FRENCH ALPS, LOS ANGELES, UTAH",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "USA Today",
-              "article_id": "aerials-is-a-breathtaking-beautiful-yet-cruel-olympic-competition",
-              "quote": "This women's aerials competition was postponed by heavy snow this week in Livigno, with qualifying moved to the same day as the finals.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.718,
-          "avg_agreement": 0.661,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        }
-      ],
-      "articles": [
-        {
-          "id": "aerials-is-a-breathtaking-beautiful-yet-cruel-olympic-competition",
-          "title": "Aerials is a breathtaking beautiful, yet cruel, Olympic competition",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/kaila-kuhn-winter-vinecki-usa-ski-snowboard-winter-olympics/88676988007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nPeak Moments from Day 6 of Olympics\nUSAT's Sam Cardona-Norberg and Jordan Mendoza break down the women's short program, as Amber Glenn falls in rankings and Alysa Liu is in p…"
-        },
-        {
-          "id": "connections-sports-edition-today-hints-and-answers-for-olympics-themed-puzzle-no",
-          "title": "Connections: Sports Edition today: Hints and answers for Olympics-themed puzzle No. 517 on Feb. 22",
-          "url": "https://www.nytimes.com/athletic/7062353/2026/02/22/connections-sports-edition-hints-answers-feb-22-2026/",
-          "source": "The New York Times",
-          "published_at": "2026-02-22",
-          "excerpt": "Need help with today’s Connections: Sports Edition puzzle? You’ve come to the right place.\n\nWelcome to Connections: Sports Edition Coach — a spot to gather clues and discuss (and share) scores.\n\nWe’re…"
-        }
-      ],
-      "category": "Sport",
-      "updated_at": "2026-02-22T12:00:00Z",
-      "contradiction_reports": [],
-      "missing_context": {}
-    },
-    "comments": []
-  },
-  {
-    "story": {
-      "heading": "2026 Milano Cortina Winter Olympics Conclude with Historic Performances",
-      "slug": "2026-milano-cortina-winter-olympics-conclude-with-historic-performances",
-      "summary": "The 2026 Winter Games in Italy have reached their final stage, marked by record-breaking achievements in cross-country skiing and speed skating, alongside the conclusion of major team tournaments in hockey and curling.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.722,
-      "source_agreement": 0.66,
-      "sources": [
-        {
-          "name": "The New York Times",
-          "bias_score": 0.0,
-          "trust_score": 0.704
-        },
         {
           "name": "USA Today",
           "bias_score": 0.0,
           "trust_score": 0.706
+        },
+        {
+          "name": "The New York Times",
+          "bias_score": 0.0,
+          "trust_score": 0.751
         }
       ],
       "segments": [
         {
-          "heading": "Record-Breaking Individual Achievements",
-          "text": "Norway's Johannes H sflot Kl&bo made history by winning six gold medals in a single Winter Olympics, surpassing the previous record held by American Eric Heiden. Meanwhile, 21-year-old American speed skater Jordan Stolz concluded his campaign with two gold medals and one silver, setting Olympic records in the 500m and 1,000m events.",
+          "heading": "Broadcast and coverage",
+          "text": "NBC is handling the primary U.S. broadcast coverage for the final competition day, with replays and highlights airing on its linear networks and live competitions available on the Peacock streaming service.",
           "sources": [
-            {
-              "name": "The New York Times",
-              "bias_score": 0.0,
-              "trust_score": 0.704
-            },
             {
               "name": "USA Today",
               "bias_score": 0.0,
@@ -778,76 +264,170 @@
           ],
           "citations": [
             {
-              "source": "The New York Times",
-              "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
-              "quote": "The 29-year-old Norwegian’s six gold medals in these Games are the most ever won in a single Olympics.",
+              "source": "USA Today",
+              "article_id": "olympics-schedule-tonight-what-s-on-in-primetime-in-milan-on-feb-18",
+              "quote": "The broadcast coverage of the 2026 Milano Cortina Winter Olympics continues on Wednesday, Feb. 18 with NBC airing a number of replays featuring Team USA's athletes and the day's biggest moments.",
               "bias_level": "neutral"
             },
             {
               "source": "USA Today",
-              "article_id": "when-does-jordan-stolz-skate-again-at-2026-winter-olympics",
-              "quote": "Stolz will attempt to become the first U.S. speed skater since Eric Heiden in 1980 to win four gold medals in the same Olympics",
+              "article_id": "olympics-schedule-tonight-what-s-on-in-primetime-in-milan-on-feb-18",
+              "quote": "The games are exclusively airing across NBC's suite of networks with many competitions airing live on its streaming service, Peacock, which you can sign up for here .",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.688,
-          "avg_agreement": 0.649,
-          "article_count": 2,
+          "avg_truth": 0.703,
+          "avg_agreement": 0.66,
+          "article_count": 1,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Men's Ice Hockey and Curling Results",
-          "text": "In men's ice hockey, the United States and Canada advanced to the gold medal game after the U.S. defeated Sweden in the quarterfinals and Canada secured the top seed through a goal differential tiebreaker. Finland secured the bronze medal with a 6-1 victory over Slovakia. In curling, Brad Jacobs led Canada to its first men's gold since 2014 by defeating Great Britain 9-6.",
-          "sources": [
-            {
-              "name": "USA Today",
-              "bias_score": 0.0,
-              "trust_score": 0.706
-            },
-            {
-              "name": "The New York Times",
-              "bias_score": 0.0,
-              "trust_score": 0.704
-            }
-          ],
-          "citations": [
-            {
-              "source": "USA Today",
-              "article_id": "when-is-the-men-s-hockey-gold-medal-game-at-2026-winter-olympics",
-              "quote": "Canada received the top overall seed thanks to winning a tiebreaker against the United States for a better goal differential.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "The New York Times",
-              "article_id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
-              "quote": "Finland put the disappointment of Friday’s narrow loss to Canada in the rearview mirror and blitzed Slovakia 6-1 to claim the bronze medal in men’s hockey.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.726,
-          "avg_agreement": 0.663,
-          "article_count": 2,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Final Day Events and Gender Equality Milestones",
-          "text": "The final day of competition features the women's 50-kilometer mass start in cross-country skiing, the first time women have competed at this distance in the Olympics to promote gender balance. Other concluding events include the women's freestyle skiing halfpipe final, where Eileen Gu seeks to defend her title, and the women's curling gold medal match between Sweden and Switzerland.",
+          "heading": "Men’s ice hockey final: United States vs. Canada",
+          "text": "The men’s gold medal game pits the United States against Canada. The match is scheduled for the final competition day and will be available on Peacock. Prior women’s finals between the two nations drew large television audiences in the U.S., a point of context for expected viewership.",
           "sources": [
             {
               "name": "The New York Times",
               "bias_score": 0.0,
-              "trust_score": 0.704
+              "trust_score": 0.751
             }
           ],
           "citations": [
             {
               "source": "The New York Times",
               "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
-              "quote": "This is the first time women will compete in the Olympics at 50km — a staple distance for the men — in support of making the 2026 Games what the International Olympic Committee has called ‘the most gender-balanced Olympic Winter Games in history.’",
+              "quote": "Ice hockey: United States vs. Canada in men\u0019s gold medal game\n\nTimes: 8:10 a.m. ET, 2:10 p.m. in Italy\n\nTV: Peacock",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "The women\u0019s hockey gold medal game between these same two nations had the largest U.S. TV audience for a women\u0019s hockey game on record, with an average of 5.3 million viewers.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.751,
+          "avg_agreement": 0.669,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Freestyle skiing — Women’s halfpipe",
+          "text": "The women’s halfpipe final, delayed by weather, features defending champion Eileen Gu among the finalists. Gu, who represents China, qualified fifth for the final and is aiming to add to her previous Olympic medals.",
+          "sources": [
+            {
+              "name": "The New York Times",
+              "bias_score": 0.0,
+              "trust_score": 0.751
+            }
+          ],
+          "citations": [
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "What to watch for: Snow in Livigno led to the postponement of the final scheduled for Saturday night.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "Eileen Gu, the 22-year-old who was born in San Francisco, attends Stanford and competes for China, is the defending gold medalist and qualified fifth for the final.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.751,
+          "avg_agreement": 0.669,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Cross-country skiing — Historic women’s 50-kilometre race",
+          "text": "For the first time in Olympic history women are competing in a 50km cross-country event at the Winter Games. The distance is longer than a marathon and is part of the IOC\u0019s effort to increase gender balance across event programs. The race marks the final Olympic appearance for U.S. skier Jessie Diggins.",
+          "sources": [
+            {
+              "name": "The New York Times",
+              "bias_score": 0.0,
+              "trust_score": 0.751
+            }
+          ],
+          "citations": [
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "This is the first time women will compete in the Olympics at 50km \u0014 a staple distance for the men \u0014 in support of making the 2026 Games what the International Olympic Committee has called \u001cthe most gender-balanced Olympic Winter Games in history.\u001d",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "The race will be the final Olympic appearance for the United States\u0019 Jessie Diggins, who earned silver in 2022 in the 30km freestyle, which was the longest women\u0019s race at the time.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.751,
+          "avg_agreement": 0.669,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Bobsled and curling medal rounds",
+          "text": "In four-man bobsled competition, German crews led after early heats while the top U.S. sled sat outside medal contention through two heats. The women\u0019s curling final features Sweden and Switzerland, with Sweden bidding for another Olympic medal and Switzerland seeking its first Olympic gold in the event.",
+          "sources": [
+            {
+              "name": "The New York Times",
+              "bias_score": 0.0,
+              "trust_score": 0.751
+            }
+          ],
+          "citations": [
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "German teams have the three fastest combined times through two heats.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "Curling: Sweden vs. Switzerland in women\u0019s gold medal game\n\nWhat to watch for: Sweden will collect its sixth consecutive Olympic medal and is hunting for its fourth gold in the last six Olympics.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.751,
+          "avg_agreement": 0.669,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Closing day context and notable moments from the Games",
+          "text": "The final day concludes a Games that produced a range of memorable and unusual moments alongside the sporting competition. The day wraps up with medal finals and the closing ceremony.",
+          "sources": [
+            {
+              "name": "The New York Times",
+              "bias_score": 0.0,
+              "trust_score": 0.751
+            }
+          ],
+          "citations": [
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "Well, this is it. The Milan Cortina Olympics wrap up Sunday with five events, all of which determine gold medals, followed by the closing ceremony.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The New York Times",
+              "article_id": "what-to-watch-on-day-16-of-the-winter-olympics-men-s-hockey-final-eileen-gu-in-p",
+              "quote": "Among them: a dog loping down the homestretch during the women\u0019s cross-country skiing team sprint qualifying, the biathlete who confessed on television to cheating on his girlfriend and a skier who walked off into the woods after missing a gate on his final run.",
               "bias_level": "neutral"
             }
           ],
@@ -861,28 +441,12 @@
       ],
       "articles": [
         {
-          "id": "olympic-medals-today-what-is-the-medal-count-at-2026-winter-games-on-feb-18",
-          "title": "Olympic medals today: What is the medal count at 2026 Winter Games on Feb.18",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/winter-olympics-medal-count-today-feb-18/88735277007/",
+          "id": "olympics-schedule-tonight-what-s-on-in-primetime-in-milan-on-feb-18",
+          "title": "Olympics schedule tonight: What's on in primetime in Milan on Feb. 18",
+          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/nbc-olympics-primetime-wednesday-tv-streaming-schedule/88723690007/",
           "source": "USA Today",
           "published_at": "2026-02-18",
-          "excerpt": "Athletes from more than 90 countries will compete for Winter Olympic medals in 116 events over 16 days, and USA TODAY is keeping a tally of every nation finishing on the podium. Here's a look at the l…"
-        },
-        {
-          "id": "when-does-jordan-stolz-skate-again-at-2026-winter-olympics",
-          "title": "When does Jordan Stolz skate again at 2026 Winter Olympics?",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/jordan-stolz-race-again-winter-olympics-events-schedule-speed-skating/88717329007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nSpeed skating legend Bonnie Blair on Jordan Stolz's quest for more gold medals\nOlympic gold medalist Bonnie Blair joins Milan Magic to talk about the power of the men's speed…"
-        },
-        {
-          "id": "when-is-the-men-s-hockey-gold-medal-game-at-2026-winter-olympics",
-          "title": "When is the men's hockey gold medal game at 2026 Winter Olympics?",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/mens-hockey-gold-medal-game-dates-time-winter-olympics-2026/88719750007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nTeam USA men's hockey move on to semifinals and play Slovakia\nUSAT's Helene St. James breaks down the thriller overtime victory for Team USA over Sweden at Olympics, where th…"
+          "excerpt": "The broadcast coverage of the 2026 Milano Cortina Winter Olympics continues on Wednesday, Feb. 18 with NBC airing a number of replays featuring Team USA's athletes and the day's biggest moments. The g…"
         },
         {
           "id": "winter-olympics-schedule-today-every-event-happening-on-feb-18",
@@ -899,14 +463,6 @@
           "source": "The New York Times",
           "published_at": "2026-02-22",
           "excerpt": "Well, this is it. The Milan Cortina Olympics wrap up Sunday with five events, all of which determine gold medals, followed by the closing ceremony.\n\nIn addition to the elation and disappointment that …"
-        },
-        {
-          "id": "winter-olympics-day-15-recap-canada-wins-men-s-curling-kl-bo-claims-sixth-gold-m",
-          "title": "Winter Olympics Day 15 recap: Canada wins men’s curling, Klæbo claims sixth gold medal",
-          "url": "https://www.nytimes.com/athletic/7062735/2026/02/21/olympics-recap-canada-curling-gold-klaebo-record/",
-          "source": "The New York Times",
-          "published_at": "2026-02-21",
-          "excerpt": "The Athletic has live coverage of the 2026 Winter Olympics.\n\n​​Brad Jacobs’ Canada teammates called him “a killer” after their 5-4 semifinal win over Norway.\n\nOn Saturday, he took out Great Britain 9-…"
         }
       ],
       "category": "Sport",
@@ -918,435 +474,171 @@
   },
   {
     "story": {
-      "heading": "Finland Secures Bronze as Men's Hockey Tournament Concludes at 2026 Winter Olympics",
-      "slug": "finland-secures-bronze-as-men-s-hockey-tournament-concludes-at-2026-winter-olympics",
-      "summary": "The 2026 Winter Olympics men's ice hockey tournament saw Finland claim the bronze medal with a 6-1 victory over Slovakia, following a dramatic quarterfinal round where the United States, Canada, and Finland all advanced through overtime wins.",
+      "heading": "Pakistan carries out airstrikes on Afghan border targets; Afghanistan reports civilian casualties",
+      "slug": "pakistan-carries-out-airstrikes-on-afghan-border-targets-afghanistan-reports-civilian-casualties",
+      "summary": "Pakistan says its military conducted \"intelligence-based, selective operations\" against militant camps in Afghanistan after a string of deadly attacks in Pakistan. Afghan authorities called the strikes a violation of sovereignty and reported civilian casualties, including children; casualty figures and some details differ between Pakistani and Afghan accounts.",
       "political_bias": 0.0,
-      "factual_accuracy": 0.71,
-      "source_agreement": 0.659,
+      "factual_accuracy": 0.722,
+      "source_agreement": 0.657,
       "sources": [
         {
-          "name": "USA Today",
+          "name": "CNN",
           "bias_score": 0.0,
-          "trust_score": 0.776
+          "trust_score": 0.719
         },
         {
-          "name": "The New York Times",
+          "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.683
+          "trust_score": 0.724
         }
       ],
       "segments": [
         {
-          "heading": "Quarterfinal Results and Overtime Drama",
-          "text": "The men's quarterfinals on February 18 featured three games decided in overtime. The United States advanced after Quinn Hughes scored the winning goal against Sweden in a 3-2 victory. Canada also moved forward with a 4-3 overtime win against Czechia, despite losing captain Sidney Crosby to an injury during the second period. Finland secured its place in the semifinals by overcoming a 2-0 deficit to defeat Switzerland 3-2 in extra time, while Slovakia advanced by defeating Germany 6-2.",
+          "heading": "What Pakistan says it did and why",
+          "text": "Pakistan's information ministry said the military carried out targeted airstrikes against militant hideouts across the border in Afghanistan, describing the operations as \"intelligence-based, selective\" and saying they struck seven camps belonging to the Pakistani Taliban (TTP), affiliated groups and an Islamic State-linked group. Islamabad framed the strikes as a response to a recent series of deadly attacks inside Pakistan and said it had evidence linking those attacks to militants with Afghanistan-based leadership and handlers.",
           "sources": [
             {
-              "name": "USA Today",
+              "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.776
+              "trust_score": 0.719
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.724
             }
           ],
           "citations": [
             {
-              "source": "USA Today",
-              "article_id": "olympic-men-s-hockey-scores-today-usa-canada-finland-win-in-ot",
-              "quote": "Four games. Three went to overtime, including the USA beating Sweden.",
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "Pakistan\u000federal\nnd provincial information ministries said its military conducted \u001eintelligence-based, selective operations\u001f against seven camps belonging to militants it blames for a recent series of deadly attacks on its soil.",
               "bias_level": "neutral"
             },
             {
-              "source": "USA Today",
-              "article_id": "olympic-men-s-hockey-scores-today-usa-canada-finland-win-in-ot",
-              "quote": "Canada captain Sidney Crosby hobbled off the ice and down the tunnel after a hard hit by Radko Gudas... He eventually went to the dressing room and didn't return.",
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "Tarar said Pakistan had \u001bconclusive evidence\u001c that the recent attacks ... were carried out by militants acting at the \u001bbehest of their Afghanistan-based leadership and handlers\u001c.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.735,
-          "avg_agreement": 0.672,
-          "article_count": 1,
+          "avg_truth": 0.722,
+          "avg_agreement": 0.657,
+          "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Finland Claims Bronze Medal",
-          "text": "After losing to Canada in the semifinals, Finland rebounded to defeat Slovakia 6-1 in the bronze-medal game. Sebastian Aho and Erik Haula provided early goals, and despite a second-period response from Slovak captain Tom\u0001š Tatar, Finland scored four unanswered goals in the third period to secure the win. This victory marks Finland's fifth medal in the last six Olympics featuring NHL players, a record that exceeds other major hockey nations like Canada and the United States during that span.",
+          "heading": "Afghan response and reported civilian toll",
+          "text": "Afghanistan's Ministry of Defense confirmed strikes inside Afghan territory and described them as a breach of sovereignty and international law. Afghan officials and state media reported civilian casualties; accounts vary, with an Afghan police official cited by CNN saying 18 people were killed, including women and children, while The Guardian reported that Afghan authorities said children were among dozens killed and wounded.",
           "sources": [
             {
-              "name": "The New York Times",
+              "name": "CNN",
               "bias_score": 0.0,
-              "trust_score": 0.683
+              "trust_score": 0.719
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.724
             }
           ],
           "citations": [
             {
-              "source": "The New York Times",
-              "article_id": "as-finland-claims-bronze-medal-in-olympic-men-s-hockey-slovakia-faces-disappoint",
-              "quote": "A 6-1 victory over upstart Slovakia that was closer than the final score suggests Saturday put the Finns where they always seem to be: on the Olympic podium.",
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "Afghanistan\n\refense ministry confirmed the strikes in a statement, calling them a \u001cblatant violation of Afghanistan\u001fs national sovereignty\u001d and a \u001cclear breach\u001d of international law.",
               "bias_level": "neutral"
             },
             {
-              "source": "The New York Times",
-              "article_id": "as-finland-claims-bronze-medal-in-olympic-men-s-hockey-slovakia-faces-disappoint",
-              "quote": "This was Finland’s fifth medal in six Olympics with NHL participation — more than Canada, more than Sweden, more than the United States, more than anybody.",
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "Women and children were among the 18 people killed, Sayed Tayeb Hamad, a senior police official in Nangarhar, said on Afghan state television.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "where the government reported children were among dozens of people killed and wounded.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.683,
-          "avg_agreement": 0.643,
-          "article_count": 1,
+          "avg_truth": 0.721,
+          "avg_agreement": 0.658,
+          "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "Scheduling Conflicts for U.S. Viewers",
-          "text": "Olympic broadcasting in the United States faced a notable scheduling overlap on Thursday, February 19. The women's ice hockey gold-medal game between the U.S. and Canada was scheduled to take place simultaneously with the women's figure skating finals. In figure skating, Alysa Liu entered the final in third place, representing the primary American hope for a medal in that event.",
+          "heading": "Details, limits and competing accounts",
+          "text": "Pakistan described the operations as limited and intelligence-driven but did not provide precise strike locations; Afghan statements said the strikes hit civilian areas in the eastern provinces of Nangarhar and Paktika and damaged homes and a religious seminary. The two sides' accounts differ on the scale of casualties and the characterization of targets, with Kabul calling the strikes a violation of sovereignty and Islamabad saying it was targeting militant camps responsible for attacks inside Pakistan.",
           "sources": [
             {
-              "name": "USA Today",
+              "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.776
+              "trust_score": 0.724
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.719
             }
           ],
           "citations": [
             {
-              "source": "USA Today",
-              "article_id": "olympic-figure-skating-hockey-finals-at-same-time-how-to-watch-both",
-              "quote": "on Thursday, Feb. 19 the finals for women's ice hockey and women's figure skating take place at the same time during the 2026 Milano Cortina Winter Olympics.",
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "Islamabad did not say precisely where the strikes were carried out or provide other details.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "The strikes took place in civilian areas in the eastern Afghan provinces of Nangarhar and Paktika, targeting a religious seminary and \u001cmultiple civilian homes,\u001d the ministry said.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.711,
-          "avg_agreement": 0.663,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ],
-      "articles": [
-        {
-          "id": "usa-vs-sweden-predictions-who-advances-to-men-s-hockey-semifinals",
-          "title": "USA vs Sweden predictions: Who advances to men's hockey semifinals?",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/usa-sweden-predictions-mens-hockey-quarterfinals/88727560007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nUSA men's hockey fitted in Ralph Lauren for Olympics\nThe U.S. men's hockey team just arrived in Milan, Italy for the 2026 Winter Games. But before they could hit the ice, pla…"
-        },
-        {
-          "id": "where-to-watch-usa-vs-sweden-men-s-hockey-time-channel-live-stream",
-          "title": "Where to watch USA vs. Sweden men's hockey: Time, channel, live stream",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/olympics-mens-hockey-usa-sweden/88720113007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Where to watch USA vs. Sweden men's hockey: Time, channel, live stream What time does Team USA play Sweden today? Here's where to watch men's hockey quarterfinal at the 2026 Olympics, including channe…"
-        },
-        {
-          "id": "olympic-figure-skating-hockey-finals-at-same-time-how-to-watch-both",
-          "title": "Olympic figure skating, hockey finals at same time: How to watch both",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/olympic-womens-hockey-figure-skating-finals-time-how-to-watch/88734621007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nPeak Moments from Day 6 of Olympics\nUSAT's Sam Cardona-Norberg and Jordan Mendoza break down the women's short program, as Amber Glenn falls in rankings and Alysa Liu is in p…"
-        },
-        {
-          "id": "olympic-men-s-hockey-scores-today-usa-canada-finland-win-in-ot",
-          "title": "Olympic men's hockey scores today: USA, Canada, Finland win in OT",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/olympic-mens-hockey-live-scores-today/88727357007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nUSA men's hockey fitted in Ralph Lauren for Olympics\nThe U.S. men's hockey team just arrived in Milan, Italy for the 2026 Winter Games. But before they could hit the ice, pla…"
-        },
-        {
-          "id": "bracket-schedule-where-to-watch-olympic-men-s-hockey-quarterfinals",
-          "title": "Bracket, schedule, where to watch Olympic men's hockey quarterfinals",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/olympic-mens-hockey-quarterfinals-bracket-schedule-where-to-watch/88720171007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nUSA men's hockey GM Bill Guerin on leadership, fighting and bonding\nUSA men's hockey general manager Bill Guerin, Feb. 7, 2026 in Milan.\nThe men’s hockey quarterfinals charge…"
-        },
-        {
-          "id": "as-finland-claims-bronze-medal-in-olympic-men-s-hockey-slovakia-faces-disappoint",
-          "title": "As Finland claims bronze medal in Olympic men’s hockey, Slovakia faces disappointment",
-          "url": "https://www.nytimes.com/athletic/7062927/2026/02/21/finland-slovakia-olympic-hockey-bronze-medal/",
-          "source": "The New York Times",
-          "published_at": "2026-02-21",
-          "excerpt": "MILAN — It was quiet back at the Olympic village Friday night. Finland had just squandered a literal golden opportunity, letting a two-goal lead slip away against mighty Canada in the semifinals, and …"
-        }
-      ],
-      "category": "Sport",
-      "updated_at": "2026-02-21T12:00:00Z",
-      "contradiction_reports": [],
-      "missing_context": {}
-    },
-    "comments": []
-  },
-  {
-    "story": {
-      "heading": "Sports Schedule Overview for February 18 and February 21, 2026",
-      "slug": "sports-schedule-overview-for-february-18-and-february-21-2026",
-      "summary": "A summary of upcoming sports broadcasts including the 2026 Winter Olympics, NCAA basketball schedules for February 18, and a professional basketball matchup between Houston and New York on February 21.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.75,
-      "source_agreement": 0.674,
-      "sources": [
-        {
-          "name": "USA Today",
-          "bias_score": 0.0,
-          "trust_score": 0.774
-        },
-        {
-          "name": "The New York Times",
-          "bias_score": 0.0,
-          "trust_score": 0.772
-        }
-      ],
-      "segments": [
-        {
-          "heading": "2026 Winter Olympics Coverage",
-          "text": "The 2026 Milano Cortina Winter Olympics continue on Wednesday, February 18. NBC will broadcast replays of Team USA performances and key events from the day. Live coverage of the competitions is available through the Peacock streaming service.",
-          "sources": [
-            {
-              "name": "USA Today",
-              "bias_score": 0.0,
-              "trust_score": 0.774
-            }
-          ],
-          "citations": [
-            {
-              "source": "USA Today",
-              "article_id": "olympics-schedule-tonight-what-s-on-in-primetime-in-milan-on-feb-18",
-              "quote": "The broadcast coverage of the 2026 Milano Cortina Winter Olympics continues on Wednesday, Feb. 18 with NBC airing a number of replays featuring Team USA's athletes and the day's biggest moments.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.703,
-          "avg_agreement": 0.66,
-          "article_count": 1,
+          "avg_truth": 0.722,
+          "avg_agreement": 0.657,
+          "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "NCAA Basketball Schedule",
-          "text": "Full schedules for both men's and women's NCAA college basketball games are available for February 18. These schedules include game times and viewing options, with additional tools provided to filter games by specific teams or conferences.",
+          "heading": "Context and potential implications",
+          "text": "Analysts and officials view the strikes against the backdrop of rising militant attacks in Pakistan in recent weeks and a fragile, Qatar-mediated ceasefire between Islamabad and Kabul since October. Pakistan has warned it would not \"exercise any restraint\" in pursuing those it holds responsible, and the latest action will test the ceasefire and relations between the neighbouring countries, which have experienced deadly border clashes in recent months.",
           "sources": [
             {
-              "name": "USA Today",
+              "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.774
+              "trust_score": 0.724
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.719
             }
           ],
           "citations": [
             {
-              "source": "USA Today",
-              "article_id": "men-s-college-basketball-games-today-schedule-times-how-to-watch-for-feb-18",
-              "quote": "Here is the full NCAA men's basketball schedule for Feb. 18 and how to watch all the games.",
+              "source": "The Guardian",
+              "article_id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+              "quote": "After Saturday\u001fs violence, Pakistan\u001fs military warned it would not \u001cexercise any restraint\u001d and operations against those responsible would continue \u001cirrespective of their location\u001d.",
               "bias_level": "neutral"
             },
             {
-              "source": "USA Today",
-              "article_id": "women-s-college-basketball-games-today-schedule-times-how-to-watch-for-feb-18",
-              "quote": "Or see our sortable college basketball schedule to filter by team or conference.",
+              "source": "CNN",
+              "article_id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+              "quote": "This new escalation will test the delicate ceasefire that has been in place between the neighboring countries since last October, after they traded their deadliest fire in years.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.774,
-          "avg_agreement": 0.686,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "NBA Matchup: Rockets vs. Knicks",
-          "text": "On February 21, 2026, the Houston Rockets (34-20) will face the New York Knicks (35-21) at Madison Square Garden. The game is scheduled for 8:30 p.m. ET and will be broadcast on ABC and streamed on Fubo. Both teams face roster challenges due to injuries: the Knicks will be without Miles McBride (ankle), while the Rockets have lost Fred VanVleet (ACL) and Steven Adams (ankle) for the remainder of the season.",
-          "sources": [
-            {
-              "name": "The New York Times",
-              "bias_score": 0.0,
-              "trust_score": 0.772
-            }
-          ],
-          "citations": [
-            {
-              "source": "The New York Times",
-              "article_id": "how-to-watch-rockets-vs-knicks-tv-channel-and-streaming-options-for-february-21",
-              "quote": "The Houston Rockets (34-20) will attempt to build on a five-game road winning streak when they square off against the New York Knicks (35-21) on Feb. 21, 2026 at Madison Square Garden.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "The New York Times",
-              "article_id": "how-to-watch-rockets-vs-knicks-tv-channel-and-streaming-options-for-february-21",
-              "quote": "Fred VanVleet: Out For Season (ACL), Steven Adams: Out For Season (Ankle)",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.772,
-          "avg_agreement": 0.677,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        }
-      ],
-      "articles": [
-        {
-          "id": "olympics-schedule-tonight-what-s-on-in-primetime-in-milan-on-feb-18",
-          "title": "Olympics schedule tonight: What's on in primetime in Milan on Feb. 18",
-          "url": "https://www.usatoday.com/story/sports/olympics/2026/02/18/nbc-olympics-primetime-wednesday-tv-streaming-schedule/88723690007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "The broadcast coverage of the 2026 Milano Cortina Winter Olympics continues on Wednesday, Feb. 18 with NBC airing a number of replays featuring Team USA's athletes and the day's biggest moments. The g…"
-        },
-        {
-          "id": "men-s-college-basketball-games-today-schedule-times-how-to-watch-for-feb-18",
-          "title": "Men's college basketball games today: Schedule, times, how to watch for Feb. 18",
-          "url": "https://www.usatoday.com/story/sports/ncaab/2026/02/18/mens-college-basketball-games-today-schedule-times-tv-2026-02-18/88734623007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Here is the full NCAA men's basketball schedule for Feb. 18 and how to watch all the games. Or see our sortable college basketball schedule to filter by team or conference."
-        },
-        {
-          "id": "women-s-college-basketball-games-today-schedule-times-how-to-watch-for-feb-18",
-          "title": "Women's college basketball games today: Schedule, times, how to watch for Feb. 18",
-          "url": "https://www.usatoday.com/story/sports/ncaaw/2026/02/18/womens-college-basketball-games-today-schedule-times-tv-2026-02-18-00-00-00/88734622007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Here is the full NCAA women's basketball schedule for Feb. 18 and how to watch all the games. Or see our sortable college basketball schedule to filter by team or conference."
-        },
-        {
-          "id": "how-to-watch-rockets-vs-knicks-tv-channel-and-streaming-options-for-february-21",
-          "title": "How to watch Rockets vs. Knicks: TV channel and streaming options for February 21",
-          "url": "https://www.nytimes.com/athletic/7062596/2026/02/21/how-to-watch-rockets-vs-knicks-tv-channel-and-streaming-options-for-february-21/",
-          "source": "The New York Times",
-          "published_at": "2026-02-21",
-          "excerpt": "The Houston Rockets (34-20) will attempt to build on a five-game road winning streak when they square off against the New York Knicks (35-21) on Feb. 21, 2026 at Madison Square Garden.\n\nHow to watch H…"
-        }
-      ],
-      "category": "Sport",
-      "updated_at": "2026-02-21T12:00:00Z",
-      "contradiction_reports": [],
-      "missing_context": {}
-    },
-    "comments": []
-  },
-  {
-    "story": {
-      "heading": "Duke Defeats Michigan as NCAA Tournament Field Takes Shape",
-      "slug": "duke-defeats-michigan-as-ncaa-tournament-field-takes-shape",
-      "summary": "No. 3 Duke secured a significant victory over No. 1 Michigan led by freshman Cameron Boozer, while the broader college basketball landscape shifts toward the Big Ten ahead of the upcoming NCAA Tournament.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.671,
-      "source_agreement": 0.643,
-      "sources": [
-        {
-          "name": "The New York Times",
-          "bias_score": 0.0,
-          "trust_score": 0.66
-        },
-        {
-          "name": "USA Today",
-          "bias_score": 0.0,
-          "trust_score": 0.681
-        }
-      ],
-      "segments": [
-        {
-          "heading": "Duke Secures Top-Ranked Victory",
-          "text": "In a highly anticipated matchup between two of the nation's top programs, No. 3 Duke defeated No. 1 Michigan with a 68-63 victory at Capital One Arena. Despite foul trouble that sidelined him for a portion of the second half, Duke freshman Cameron Boozer led his team with 18 points, 10 rebounds, and seven assists. The Blue Devils' defense held Michigan to 28.6 percent shooting in the second half, preventing the Wolverines from capitalizing when Boozer was on the bench.",
-          "sources": [
-            {
-              "name": "The New York Times",
-              "bias_score": 0.0,
-              "trust_score": 0.66
-            }
-          ],
-          "citations": [
-            {
-              "source": "The New York Times",
-              "article_id": "cameron-boozer-takes-over-as-no-3-duke-tops-no-1-michigan-in-slugfest-of-elite-t",
-              "quote": "Boozer led Duke in points (18), rebounds (10) and assists (seven) against the top-ranked team in the sport",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "The New York Times",
-              "article_id": "cameron-boozer-takes-over-as-no-3-duke-tops-no-1-michigan-in-slugfest-of-elite-t",
-              "quote": "overall defensive effort that held a top-10 offense to 28.6 percent shooting in the second half",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.66,
-          "avg_agreement": 0.635,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "NCAA Tournament Outlook and Conference Trends",
-          "text": "As the 2025-26 season approaches its conclusion, the Big Ten has emerged as a dominant force in the national picture, contrasting with the SEC's performance in the previous year. Current projections place Georgia, UCLA, Ohio State, and TCU among the last four teams to qualify for the tournament field. Conversely, teams such as New Mexico, California, Missouri, and Santa Clara are currently positioned just outside the qualifying bracket as conference tournaments begin.",
-          "sources": [
-            {
-              "name": "USA Today",
-              "bias_score": 0.0,
-              "trust_score": 0.681
-            }
-          ],
-          "citations": [
-            {
-              "source": "USA Today",
-              "article_id": "march-madness-bracket-tracker-who-s-in-out-on-ncaa-tournament-bubble",
-              "quote": "That conference has taken a step back this year, with the Big Ten emerging as the conference to watch.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "USA Today",
-              "article_id": "march-madness-bracket-tracker-who-s-in-out-on-ncaa-tournament-bubble",
-              "quote": "Georgia, UCLA, Ohio State, TCU are the last four teams in the tourney, through Tuesday, Feb. 17.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.681,
-          "avg_agreement": 0.652,
-          "article_count": 1,
-          "notes": null,
-          "comments": []
-        },
-        {
-          "heading": "Impact of Freshman Talent",
-          "text": "The current college basketball season has been defined by a standout class of freshmen. Cameron Boozer has established himself as a front-runner for the Wooden Award, recording 15 games with at least 15 points and 10 rebounds. Other notable freshmen expected to impact the national tournament include Darryn Peterson and AJ Dybantsa, who remain high-level prospects for professional scouts.",
-          "sources": [
-            {
-              "name": "The New York Times",
-              "bias_score": 0.0,
-              "trust_score": 0.66
-            },
-            {
-              "name": "USA Today",
-              "bias_score": 0.0,
-              "trust_score": 0.681
-            }
-          ],
-          "citations": [
-            {
-              "source": "The New York Times",
-              "article_id": "cameron-boozer-takes-over-as-no-3-duke-tops-no-1-michigan-in-slugfest-of-elite-t",
-              "quote": "Saturday was Boozer’s 15th game this season with at least 15 points and 10 rebounds, the most of any high-major player in America.",
-              "bias_level": "neutral"
-            },
-            {
-              "source": "USA Today",
-              "article_id": "march-madness-bracket-tracker-who-s-in-out-on-ncaa-tournament-bubble",
-              "quote": "As March Madness approaches, a standout freshman class is already shaping the tournament picture.",
-              "bias_level": "neutral"
-            }
-          ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.671,
-          "avg_agreement": 0.643,
+          "avg_truth": 0.722,
+          "avg_agreement": 0.657,
           "article_count": 2,
           "notes": null,
           "comments": []
@@ -1354,24 +646,24 @@
       ],
       "articles": [
         {
-          "id": "march-madness-bracket-tracker-who-s-in-out-on-ncaa-tournament-bubble",
-          "title": "March Madness bracket tracker: Who's in, out on NCAA Tournament bubble",
-          "url": "https://www.usatoday.com/story/sports/ncaab/2026/02/18/march-madness-bracket-bubble-tracker-feb-18/88721916007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Show Caption\nHide Caption\nTop freshman college basketball players to watch ahead of March Madness\nAs March Madness approaches, a standout freshman class is already shaping the tournament picture. Here…"
+          "id": "pakistan-launches-airstrikes-against-afghan-based-militants-it-blames-for-cross-",
+          "title": "Pakistan launches airstrikes against Afghan-based ‘militants’ it blames for cross-border attacks",
+          "url": "https://www.cnn.com/2026/02/22/asia/pakistan-strikes-afghanistan-militant-camps-intl-hnk",
+          "source": "CNN",
+          "published_at": "2026-02-22",
+          "excerpt": "Islamabad —\n\nPakistan said Sunday it carried out airstrikes on militant camps across the border in Afghanistan, in a serious test of an uneasy peace between the neighbors.\n\nPakistan’s information mini…"
         },
         {
-          "id": "cameron-boozer-takes-over-as-no-3-duke-tops-no-1-michigan-in-slugfest-of-elite-t",
-          "title": "Cameron Boozer takes over as No. 3 Duke tops No. 1 Michigan in slugfest of elite teams",
-          "url": "https://www.nytimes.com/athletic/7063068/2026/02/21/no-3-duke-blue-devils-upset-no-1-michigan-wolverines-basketball-2026/",
-          "source": "The New York Times",
+          "id": "pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+          "title": "Pakistan strikes militant hideouts on Afghan border after surge in attacks",
+          "url": "https://www.theguardian.com/world/2026/feb/21/pakistan-strikes-militant-hideouts-on-afghan-border-after-surge-in-attacks",
+          "source": "The Guardian",
           "published_at": "2026-02-21",
-          "excerpt": "WASHINGTON — By the time the janitorial staff cleaning Capital One Arena broke out their leafblowers, at 9:41 p.m. local, almost everyone was gone.\n\nThe 20,000-plus fans who came to witness a Final Fo…"
+          "excerpt": "Pakistan launched multiple airstrikes on Saturday night targeting militants in neighbouring Afghanistan, where the government reported children were among dozens of people killed and wounded.\n\nIslamab…"
         }
       ],
-      "category": "Sport",
-      "updated_at": "2026-02-21T12:00:00Z",
+      "category": "Geopolitics",
+      "updated_at": "2026-02-22T12:00:00Z",
       "contradiction_reports": [],
       "missing_context": {}
     },
@@ -1379,78 +671,196 @@
   },
   {
     "story": {
-      "heading": "Supreme Court Rules Against Presidential Tariffs as Trump Hosts Governors",
-      "slug": "supreme-court-rules-against-presidential-tariffs-as-trump-hosts-governors",
-      "summary": "The U.S. Supreme Court has ruled that President Donald Trump's signature tariffs are unlawful, citing constitutional limits on executive power, while the President simultaneously hosted the National Governors Association amid partisan tensions.",
-      "political_bias": 0.0,
-      "factual_accuracy": 0.716,
-      "source_agreement": 0.659,
+      "heading": "Middle Eastern and Muslim-majority states condemn US ambassador's comments supporting broad Israeli territorial claims",
+      "slug": "middle-eastern-and-muslim-majority-states-condemn-us-ambassador-s-comments-supporting-broad-israeli-territorial-claims",
+      "summary": "US ambassador to Israel Mike Huckabee told an interview that \"it would be fine\" if Israel took control of a large swathe of territory referenced in a biblical passage. His remarks prompted a joint denunciation from multiple Arab and Islamic states and responses from individual governments, while US officials were sought for comment.",
+      "political_bias": 0.05,
+      "factual_accuracy": 0.739,
+      "source_agreement": 0.665,
       "sources": [
         {
           "name": "CNN",
+          "bias_score": 0.5,
+          "trust_score": 0.724
+        },
+        {
+          "name": "The Guardian",
           "bias_score": 0.0,
-          "trust_score": 0.707
+          "trust_score": 0.763
         }
       ],
       "segments": [
         {
-          "heading": "Supreme Court Ruling on Executive Tariff Authority",
-          "text": "In a significant judicial decision, Chief Justice John Roberts announced that the International Emergency Economic Powers Act does not grant the President the authority to impose tariffs. The ruling, which spanned a 21-page opinion, emphasized that the power to tax resides with Congress rather than the executive branch. Roberts referenced historical precedent from 1824 to support the court's stance on the separation of powers, while noting that the court had previously rejected initiatives from the Biden administration as well.",
+          "heading": "Huckabee's remarks in recorded interview",
+          "text": "In an interview on Tucker Carlson's podcast, US ambassador to Israel Mike Huckabee discussed a biblical passage sometimes interpreted as extending Israel's borders to lands between the Nile and the Euphrates. When pressed on whether Israel had a right to that territory, Huckabee said \"it would be fine if they took it all,\" and described the idea elsewhere in the exchange as a large or \"hyperbolic\" claim rather than a detailed policy proposal.",
           "sources": [
             {
               "name": "CNN",
+              "bias_score": 0.5,
+              "trust_score": 0.724
+            },
+            {
+              "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.707
+              "trust_score": 0.763
             }
           ],
           "citations": [
             {
               "source": "CNN",
-              "article_id": "february-20-2026-trump-administration-news-scotus-tariffs-ruling-us-iran-negotia",
-              "quote": "Fulfilling that role, we hold that (the International Emergency Economic Powers Act) does not authorize the President to impose tariffs.",
-              "bias_level": "neutral"
+              "article_id": "middle-east-states-condemn-us-envoy-s-comments-appearing-to-support-expansionist",
+              "quote": "\"It would be fine if they took it all,\" Huckabee responded",
+              "bias_level": "right"
             },
             {
-              "source": "CNN",
-              "article_id": "february-20-2026-trump-administration-news-scotus-tariffs-ruling-us-iran-negotia",
-              "quote": "Two centuries ago, in 1824, Marshall had deemed the authority to impose tariffs ‘a branch of the taxing power,’ which is firmly the domain of Congress.",
+              "source": "The Guardian",
+              "article_id": "huckabee-s-israel-land-remarks-condemned-as-dangerous-as-controversy-rumbles-on",
+              "quote": "he continued that Israel was \"not asking to take all of that\", adding: \"It was somewhat of a hyperbolic statement.\"",
               "bias_level": "neutral"
             }
           ],
-          "avg_bias": 0.0,
-          "avg_truth": 0.707,
-          "avg_agreement": 0.655,
-          "article_count": 1,
+          "avg_bias": 0.25,
+          "avg_truth": 0.744,
+          "avg_agreement": 0.666,
+          "article_count": 2,
           "notes": null,
           "comments": []
         },
         {
-          "heading": "National Governors Association Dinner and Partisan Boycott",
-          "text": "President Trump addressed state leaders during the National Governors Association (NGA) dinner on Saturday, praising the work of the governors in attendance. However, the event was marked by a boycott from eighteen Democratic governors. This tension followed a dispute regarding invitations to a White House working breakfast; the administration initially invited only Republican governors before reversing course and inviting all state leaders, a move the administration described as a scheduling misunderstanding.",
+          "heading": "Joint condemnation by Arab and Islamic states",
+          "text": "A joint statement led by the United Arab Emirates and supported by several Arab and Muslim-majority countries denounced Huckabee's comments, calling them inflammatory and contrary to international law. The statement was issued by multiple states and regional organisations.",
           "sources": [
             {
               "name": "CNN",
+              "bias_score": 0.5,
+              "trust_score": 0.724
+            },
+            {
+              "name": "The Guardian",
               "bias_score": 0.0,
-              "trust_score": 0.707
+              "trust_score": 0.763
             }
           ],
           "citations": [
             {
               "source": "CNN",
-              "article_id": "february-21-2026-trump-administration-updates",
-              "quote": "Eighteen Democratic governors said they were boycotting Saturday’s dinner, and some also said they wouldn’t go to the Friday morning meeting.",
+              "article_id": "middle-east-states-condemn-us-envoy-s-comments-appearing-to-support-expansionist",
+              "quote": "A statement led by the United Arab Emirates and backed by Saudi Arabia, Egypt, Jordan, Qatar and others denounced Huckabee's comments as \"dangerous and inflammatory.\"",
               "bias_level": "neutral"
             },
             {
-              "source": "CNN",
-              "article_id": "february-21-2026-trump-administration-updates",
-              "quote": "President Trump said this was always his intention, and we have addressed the misunderstanding in scheduling.",
+              "source": "The Guardian",
+              "article_id": "huckabee-s-israel-land-remarks-condemned-as-dangerous-as-controversy-rumbles-on",
+              "quote": "was signed by the UAE, Egypt, Jordan, Indonesia, Pakistan, Turkey, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain, Lebanon, Syria and the State of Palestine, as well as the Organization of Islamic Cooperation, the Arab League and the Gulf Cooperation Council.",
               "bias_level": "neutral"
             }
           ],
           "avg_bias": 0.0,
-          "avg_truth": 0.726,
-          "avg_agreement": 0.662,
+          "avg_truth": 0.744,
+          "avg_agreement": 0.666,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Individual government reactions and legal concerns",
+          "text": "Several governments issued specific condemnations, describing the comments as violations of international law, threats to regional sovereignty, or likely to inflame violence. Saudi Arabia called the remarks \"reckless\" and \"irresponsible,\" Jordan termed them \"an assault on the sovereignty of the countries of the region,\" and Egypt reaffirmed that Israel has no sovereignty over occupied Palestinian territory or other Arab lands. Palestinian and other officials said the remarks contradict stated US positions against annexation of occupied territory.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.763
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.5,
+              "trust_score": 0.724
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "huckabee-s-israel-land-remarks-condemned-as-dangerous-as-controversy-rumbles-on",
+              "quote": "Saudi Arabia described the ambassador's words as \"reckless\" and \"irresponsible\", while Jordan said it was \"an assault on the sovereignty of the countries of the region\".",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "middle-east-states-condemn-us-envoy-s-comments-appearing-to-support-expansionist",
+              "quote": "the comments were a \"flagrant violation of international law\"",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.744,
+          "avg_agreement": 0.666,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Context: Huckabee's previous statements and US policy",
+          "text": "The remarks came amid existing debate over annexation of occupied territories. After his nomination as ambassador, Huckabee had said he supported Israeli annexation of the occupied West Bank and pledged to carry out presidential policy. President Donald Trump has previously said he would not allow Israel to annex the West Bank. Huckabee later posted clarifications on X but did not directly address the biblical-border remark.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.5,
+              "trust_score": 0.724
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.763
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "middle-east-states-condemn-us-envoy-s-comments-appearing-to-support-expansionist",
+              "quote": "shortly after Trump announced Huckabee as his pick for ambassador to Israel, Huckabee made clear that he supports Israel's annexation of the occupied West Bank.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "middle-east-states-condemn-us-envoy-s-comments-appearing-to-support-expansionist",
+              "quote": "But last September Trump said: \"I will not allow Israel to annex the West Bank. Nope, I will not allow it. It's not going to happen.\"",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "huckabee-s-israel-land-remarks-condemned-as-dangerous-as-controversy-rumbles-on",
+              "quote": "On Saturday, Huckabee published two posts on X further clarifying his position on other topics touched upon in the interview, but did not address his remark about the biblical verse.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.737,
+          "avg_agreement": 0.664,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Requests for US government comment",
+          "text": "News organisations sought comment from US officials about the ambassador's remarks and the regional responses.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.5,
+              "trust_score": 0.724
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "middle-east-states-condemn-us-envoy-s-comments-appearing-to-support-expansionist",
+              "quote": "CNN has reached out to the State Department for comment on Huckabee's remarks.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.724,
+          "avg_agreement": 0.661,
           "article_count": 1,
           "notes": null,
           "comments": []
@@ -1458,32 +868,691 @@
       ],
       "articles": [
         {
-          "id": "horoscopes-today-february-18-2026",
-          "title": "Horoscopes Today, February 18, 2026",
-          "url": "https://www.usatoday.com/story/life/horoscopes/2026/02/18/horoscopes-today/88734631007/",
-          "source": "USA Today",
-          "published_at": "2026-02-18",
-          "excerpt": "Here are the horoscopes for today, Wednesday, February 18, 2026.\nFor full daily and monthly horoscopes as well as expert readings, see our full Horoscopes experience.\nWhat is your zodiac sign? A guide…"
+          "id": "middle-east-states-condemn-us-envoy-s-comments-appearing-to-support-expansionist",
+          "title": "Middle East states condemn US envoy’s comments appearing to support ‘expansionist’ Israel",
+          "url": "https://www.cnn.com/2026/02/21/middleeast/huckabee-israel-us-land-intl",
+          "source": "CNN",
+          "published_at": "2026-02-21",
+          "excerpt": "The US ambassador to Israel Mike Huckabee has said it would be “fine” if Israel took control of a vast swathe of the Middle East, drawing a swift rebuke from regional and other majority-Muslim states.…"
         },
         {
-          "id": "february-21-2026-trump-administration-updates",
-          "title": "February 21, 2026 — Trump administration updates",
-          "url": "https://www.cnn.com/us/live-news/trump-administration-tariffs-iran-news-02-21-26",
-          "source": "CNN",
-          "published_at": "2026-02-28",
-          "excerpt": "President Donald Trump speaks during the National Governors Association Evening Dinner and Reception in the White House on Saturday. Al Drago/Getty Images\n\nPresident Donald Trump praised state leaders…"
-        },
-        {
-          "id": "february-20-2026-trump-administration-news-scotus-tariffs-ruling-us-iran-negotia",
-          "title": "February 20, 2026 — Trump administration news, SCOTUS tariffs ruling, US-Iran negotiations",
-          "url": "https://www.cnn.com/us/live-news/trump-administration-us-iran-02-20-26",
-          "source": "CNN",
-          "published_at": "2026-02-28",
-          "excerpt": "Chief Justice John Roberts brought the drama Friday as he ascended the courtroom bench to declare — at long last — President Donald Trump’s tariffs unlawful.\n\nFor 10 gripping minutes, he methodically …"
+          "id": "huckabee-s-israel-land-remarks-condemned-as-dangerous-as-controversy-rumbles-on",
+          "title": "Huckabee’s Israel land remarks condemned as ‘dangerous’ as controversy rumbles on",
+          "url": "https://www.theguardian.com/us-news/2026/feb/22/mike-huckabee-israel-comments-condemned-arab-muslim-countries",
+          "source": "The Guardian",
+          "published_at": "2026-02-22",
+          "excerpt": "Arab and Islamic countries jointly condemned remarks by the US ambassador to Israel, Mike Huckabee, who suggested Israel had a biblical right to a vast swath of the Middle East.\n\nHuckabee, a former Ba…"
         }
       ],
-      "category": "Politics",
-      "updated_at": "2026-02-28T12:00:00Z",
+      "category": "Geopolitics",
+      "updated_at": "2026-02-22T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Trump Announces Increase of Global Tariffs to 15% After Supreme Court Ruling",
+      "slug": "trump-announces-increase-of-global-tariffs-to-15-after-supreme-court-ruling",
+      "summary": "President Donald Trump said he would raise a previously announced 10% global tariff to 15% effective immediately, citing alternative trade authorities after the US Supreme Court limited his prior use of emergency powers. The move and its timing have drawn legal, economic and international responses while questions remain about implementation and refunds.",
+      "political_bias": 0.05,
+      "factual_accuracy": 0.739,
+      "source_agreement": 0.665,
+      "sources": [
+        {
+          "name": "The Guardian",
+          "bias_score": 0.5,
+          "trust_score": 0.75
+        },
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.73
+        }
+      ],
+      "segments": [
+        {
+          "heading": "What the administration announced",
+          "text": "President Trump announced on social media that he would raise a temporary global tariff rate from 10% to 15% and said the change would be effective immediately. The announcement followed the administration’s more recent statement that it would impose a 10% worldwide tariff under a different legal authority.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.5,
+              "trust_score": 0.75
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.73
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "I, as President of the United States of America, will be, effective immediately, raising the 10% Worldwide Tariff on Countries, many of which have been ‘ripping’ the U.S. off for decades, without retribution (until I came along!), to the fully allowed, and legally tested, 15% level.",
+              "bias_level": "right"
+            },
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "President Donald Trump said on Saturday that he will increase the global tariffs he imposed a day earlier to 15% from 10% following an adverse ruling at the Supreme Court.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.25,
+          "avg_truth": 0.74,
+          "avg_agreement": 0.665,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Legal basis and recent court decision",
+          "text": "The Supreme Court ruled that the prior use of the International Emergency Economic Powers Act (IEEPA) to impose broad tariffs exceeded the president’s authority. Administration officials have pointed to Section 122 of the Trade Act of 1974 as an alternative legal route that allows a temporary tariff of up to 15% for 150 days, subject to subsequent congressional approval.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.73
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.5,
+              "trust_score": 0.75
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "The court on Friday ruled that Trump exceeded his authority with the way he imposed tariffs on trading partners using the International Emergency Economic Powers Act (IEEPA), a law from 1977 reserved for national emergencies.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "The law according to section 122 of the Trade Act of 1974 \u0003 which has never been used \u0003 allows the president to impose a levy of up to 15% for 150 days, although it could face legal challenges.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.74,
+          "avg_agreement": 0.665,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Scope, exemptions and other trade authorities",
+          "text": "The announced temporary 15% rate is described as applying to imports from all countries, with some product exemptions noted. Separately, the administration has used and could use other statutory authorities to impose industry-specific duties.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.5,
+              "trust_score": 0.75
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.73
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "Some products will be exempted from the temporary tariffs including critical minerals, metals and pharmaceuticals. Other exemptions include USMCA-compliant goods from Canada and Mexico.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "The administration has already used Section 232 investigations to impose across-the-board duties on steel, aluminum, copper, lumber, furniture, cars and car parts.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "The administration could also use Section 301 to investigate countries that potentially violate other nations\u0002 trade agreements or practices in a way that is 'unjustifiable' and 'burdens or restricts' US business.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.737,
+          "avg_agreement": 0.664,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Economic effects and reactions",
+          "text": "Analysts and officials said effects would vary by country and sector. Some countries that had been subject to higher, industry-specific rates would face lower levies under a uniform 15% rate, while other countries that had been spared under earlier arrangements could face higher duties. Business groups have sought refunds of tariffs collected under the IEEPA ruling, and European leaders urged an end to tariff-related uncertainty.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.73
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.5,
+              "trust_score": 0.75
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "The 15% duties would make this year\u0002s effective tariff rate 6%, according to Erica York, vice president of federal tax policy at the Tax Foundation.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "For many countries, a 15% duty is better than the rates faced under the IEEPA tariffs.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "trump-news-at-a-glance-president-condemns-anti-american-decision-and-pursues-new",
+              "quote": "The US Chamber of Commerce, too, called for swift return of an estimated $133bn in collected tariffs covered by the ruling.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "The biggest poison for the economies of Europe and the US is this constant uncertainty about tariffs. And this uncertainty must end,",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.74,
+          "avg_agreement": 0.665,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Timing and implementation questions",
+          "text": "Although the president said the increase would be effective immediately, published reports noted uncertainty about whether required official documents had been signed and when changes would take effect. Officials and analysts also flagged questions about eligibility for refunds of duties already collected.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.5,
+              "trust_score": 0.75
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.73
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+              "quote": "While Trump\u0002s announcement claimed that the new tariffs would take effect 'immediately,' it was unclear whether any official documents had been signed confirming the timing.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+              "quote": "Consumers who paid higher prices on many items may not benefit from lower tariffs, and there\u0002s a lack of certainty about refunds for individual importers.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.74,
+          "avg_agreement": 0.665,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "trump-announces-global-tariffs-will-increase-to-15-from-10-effective-immediately",
+          "title": "Trump announces global tariffs will increase to 15% from 10% ‘effective immediately’",
+          "url": "https://www.cnn.com/2026/02/21/business/trump-global-tariffs-increase-supreme-court",
+          "source": "CNN",
+          "published_at": "2026-02-21",
+          "excerpt": "President Donald Trump said on Saturday that he will increase the global tariffs he imposed a day earlier to 15% from 10% following an adverse ruling at the Supreme Court.\n\nThe court on Friday ruled t…"
+        },
+        {
+          "id": "trump-news-at-a-glance-president-condemns-anti-american-decision-and-pursues-new",
+          "title": "Trump news at a glance: President condemns ‘anti-American decision’ and pursues new tariffs avenue",
+          "url": "https://www.theguardian.com/us-news/2026/feb/22/trump-administration-news-updates-today",
+          "source": "The Guardian",
+          "published_at": "2026-02-22",
+          "excerpt": "Donald Trump raised the global duty on imports into the US to 15% on Saturday, doubling down on his promise to maintain his aggressive tariff policy a day after the supreme court ruled much of it ille…"
+        },
+        {
+          "id": "trump-raises-tariffs-to-15-on-imports-from-all-countries",
+          "title": "Trump raises tariffs to 15% on imports from all countries",
+          "url": "https://www.theguardian.com/us-news/2026/feb/21/trump-tariffs-15-percent",
+          "source": "The Guardian",
+          "published_at": "2026-02-21",
+          "excerpt": "Donald Trump announced on Saturday that he would raise a temporary tariff rate on US imports from all countries from 10% to 15%, less than 24 hours after the US supreme court ruled against the legalit…"
+        }
+      ],
+      "category": "Economy",
+      "updated_at": "2026-02-22T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Ukraine Condemns Hungary and Slovakia Over Threats to Cut Emergency Electricity Supplies",
+      "slug": "ukraine-condemns-hungary-and-slovakia-over-threats-to-cut-emergency-electricity-supplies",
+      "summary": "Ukraine's foreign ministry called recent demands from Hungary and Slovakia 'ultimatums and blackmail' after the two neighbours threatened to halt emergency electricity exports unless Kyiv restarts transit of Russian oil. The dispute follows a January pipeline outage and occurs amid continued strikes on Ukraine's energy infrastructure.",
+      "political_bias": -0.229,
+      "factual_accuracy": 0.71,
+      "source_agreement": 0.654,
+      "sources": [
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.694
+        },
+        {
+          "name": "The Guardian",
+          "bias_score": -0.5,
+          "trust_score": 0.728
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Dispute over energy supplies",
+          "text": "Ukraine's foreign ministry publicly rejected and condemned what it described as ultimatums and blackmail from Hungary and Slovakia after both governments said they would stop emergency electricity supplies unless Kyiv resumed transit of Russian oil. Slovakia and Hungary say Ukraine is responsible for the prolonged outage of oil shipments; Kyiv disputes that and urged that demands be directed at Russia.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.694
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": -0.5,
+              "trust_score": 0.728
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "Ukraine rejects and condemns the ultimatums and blackmail by the governments of Hungary and the Slovak Republic regarding energy supplies between our countries",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "Slovakia and Hungary both accuse Ukraine of delaying the restart, without evidence.",
+              "bias_level": "left"
+            }
+          ],
+          "avg_bias": -0.25,
+          "avg_truth": 0.711,
+          "avg_agreement": 0.654,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Cause and transit options for oil shipments",
+          "text": "Shipments of Russian oil to Hungary and Slovakia have been suspended since 27 January after Kyiv said a Russian drone strike hit pipeline equipment in western Ukraine. Ukraine has proposed alternative transit routes while emergency pipeline repairs continue, including use of its oil transportation system or maritime routes such as the Odesa-Brody pipeline.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": -0.5,
+              "trust_score": 0.728
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.694
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "Shipments of Russian oil to Hungary and Slovakia have been cut off since 27 January, when Kyiv says a Russian drone strike hit pipeline equipment in western Ukraine.",
+              "bias_level": "left"
+            },
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "proposed shipments through Ukraine's oil transportation system or a maritime route, potentially including the Odesa-Brody pipeline linking Ukraine's main Black Sea port to the EU.",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": -0.25,
+          "avg_truth": 0.711,
+          "avg_agreement": 0.654,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Threats to electricity supplies and wider political pressure",
+          "text": "Slovakia's prime minister said he would ask the state electricity operator to stop emergency electricity supplies to Ukraine if oil transit was not resumed, and Hungary has made similar threats. The two countries have been significant providers of emergency electricity exports to Ukraine. Separately, Hungary has reportedly also threatened to block a large Ukrainian war loan, a move Kyiv cited alongside the energy dispute.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.694
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": -0.5,
+              "trust_score": 0.728
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "If oil supplies to Slovakia are not resumed on Monday, I will ask SEPS, the state-owned joint-stock company, to stop emergency electricity supplies to Ukraine",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "Between them, Hungary and Slovakia have been providing around half of European emergency electricity exports to Ukraine",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "Hungary has also threatened to block a \nc90bn Ukrainian war loan.",
+              "bias_level": "left"
+            }
+          ],
+          "avg_bias": -0.167,
+          "avg_truth": 0.705,
+          "avg_agreement": 0.653,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Security context and energy infrastructure damage",
+          "text": "The dispute comes as Ukraine's energy system has been subject to intensified drone and missile attacks in recent months, which Kyiv says have damaged infrastructure and caused widespread blackouts. Separately, there were reports of explosions and air-defence activity in and around Kyiv and attacks in other Ukrainian cities in the same reporting period.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.694
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": -0.5,
+              "trust_score": 0.728
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+              "quote": "Since October last year, Russia has intensified its drone and missile attacks on the Ukrainian energy system, knocking out electricity and heat and plunging millions of Ukrainians into long blackouts during bitterly cold winter temperatures.",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+              "quote": "Powerful explosions shook Ukraine's capital Kyiv early on Sunday, after officials warned of a possible ballistic missile attack and ordered residents into shelters.",
+              "bias_level": "left"
+            }
+          ],
+          "avg_bias": -0.25,
+          "avg_truth": 0.711,
+          "avg_agreement": 0.654,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "ukraine-accuses-hungary-slovakia-of-blackmail-over-threats-to-cut-electricity",
+          "title": "Ukraine accuses Hungary, Slovakia of ‘blackmail’ over threats to cut electricity",
+          "url": "https://www.cnn.com/2026/02/21/europe/slovakia-ukraine-oil-energy-threat-intl",
+          "source": "CNN",
+          "published_at": "2026-02-21",
+          "excerpt": "Reuters —\n\nUkraine’s Foreign Ministry condemned what it ⁠described as “ultimatums ⁠and blackmail” by the governments of Hungary and Slovakia on Saturday, after they threatened to stop electricity supp…"
+        },
+        {
+          "id": "ukraine-war-briefing-kyiv-condemns-blackmail-by-hungary-and-slovakia-in-energy-s",
+          "title": "Ukraine war briefing: Kyiv condemns ‘blackmail’ by Hungary and Slovakia in energy supplies dispute",
+          "url": "https://www.theguardian.com/world/2026/feb/22/ukraine-war-briefing-kyiv-condemns-hungary-slovakia-energy-supply-dispute",
+          "source": "The Guardian",
+          "published_at": "2026-02-22",
+          "excerpt": "Ukraine’s foreign ministry has condemned what it describes as “ultimatums and blackmail” by Hungary and Slovakia on Saturday, after both governments threatened to stop electricity supplies to Ukraine …"
+        }
+      ],
+      "category": "Geopolitics",
+      "updated_at": "2026-02-22T12:00:00Z",
+      "contradiction_reports": [],
+      "missing_context": {}
+    },
+    "comments": []
+  },
+  {
+    "story": {
+      "heading": "Willie Colón, Pioneering Salsa Trombonist and Composer, Dies at 75",
+      "slug": "willie-col-n-pioneering-salsa-trombonist-and-composer-dies-at-75",
+      "summary": "Willie Colón, a Bronx-born trombonist, vocalist and composer who helped shape salsa music and sold millions of records, died at 75, his family said. Colón recorded landmark albums including El Malo and Siembra, received industry honors and was active in Latino social causes.",
+      "political_bias": 0.0,
+      "factual_accuracy": 0.744,
+      "source_agreement": 0.666,
+      "sources": [
+        {
+          "name": "CNN",
+          "bias_score": 0.0,
+          "trust_score": 0.76
+        },
+        {
+          "name": "The Guardian",
+          "bias_score": 0.0,
+          "trust_score": 0.728
+        }
+      ],
+      "segments": [
+        {
+          "heading": "Announcement of death",
+          "text": "Willie Colón died on Saturday at age 75, according to a family statement posted on his Facebook page. The family asked for privacy as they mourned. The cause of death was not disclosed in the statements released.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.76
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.728
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "\"While we grieve his absence, we also rejoice in the timeless gift of his music and the cherished memories he created that will live on forever,\"",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "\"He passed away peacefully this morning surrounded by his beloved family.\"",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.744,
+          "avg_agreement": 0.666,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Early life and musical style",
+          "text": "Born in the Bronx to Puerto Rican parents, Colón signed with Fania Records as a teenager and released his first album, El Malo, in 1967. His work blended jazz, rock and salsa and drew on rhythms from Cuba, Puerto Rico, Brazil and Africa; critics and biographers have noted recurring themes in his music about Puerto Rican identity and life in the United States.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.76
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "\"Born in the Bronx to Puerto Rican parents\"",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "\"Colón’s music combined elements of jazz, rock and salsa, incorporating the rhythms of traditional music from Cuba, Puerto Rico, Brazil, and Africa,\"",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.76,
+          "avg_agreement": 0.674,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Notable recordings and commercial success",
+          "text": "Colón recorded dozens of albums across his career, including La Gran Fuga (1970), El Juicio (1972) and El Malo (1967). His 1978 collaboration with Rubén Blades, Siembra, which includes the song \"Pedro Navaja,\" has been described as the biggest-selling salsa album of all time. Media accounts attribute tens of millions of album sales and multiple industry nominations and awards to Colón.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.728
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "\"His 1978 album Siembra, recorded with Rubén Blades, includes the hit Pedro Navaja and remains the biggest-selling salsa album of all time.\"",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "\"With more than 30m albums sold, multiple platinum records and 11 combined Grammy and Latin Grammy nominations, Colón is among the most successful salsa artists of all time.\"",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.728,
+          "avg_agreement": 0.658,
+          "article_count": 1,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Recognition and public roles",
+          "text": "Colón received industry honors over his career, including a 2004 lifetime achievement award from the Latin Academy of Recording Arts and Sciences. He was also inducted into halls of fame and recognized by outlets and industry groups for his influence on Latin music.",
+          "sources": [
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.76
+            },
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.728
+            }
+          ],
+          "citations": [
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "\"In 2004, he received a lifetime achievement award from the Latin Academy of Recording Arts and Sciences.\"",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "\"Billboard magazine named the musician as one of the 30 most influential Latin artists of all time in 2015.\"",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.744,
+          "avg_agreement": 0.666,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        },
+        {
+          "heading": "Influence, reactions and activism",
+          "text": "Colón was widely credited by colleagues and his record label with expanding the reach and scope of salsa music. Managers and industry figures described his work as politically engaged and influential. He also participated in civic and health organizations, serving on bodies that addressed Latino issues and immigrant concerns.",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "bias_score": 0.0,
+              "trust_score": 0.728
+            },
+            {
+              "name": "CNN",
+              "bias_score": 0.0,
+              "trust_score": 0.76
+            }
+          ],
+          "citations": [
+            {
+              "source": "The Guardian",
+              "article_id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+              "quote": "\"Willie didn't just change salsa. He expanded it, politicized it, clothed it in urban chronicles and took it to stages where it hadn't been before.\"",
+              "bias_level": "neutral"
+            },
+            {
+              "source": "CNN",
+              "article_id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+              "quote": "\"A longtime social activist, Colón was a member of the Latino Commission on AIDS and the United Nations Immigrant Foundation and was a board member at the Congressional Hispanic Caucus Institute,\"",
+              "bias_level": "neutral"
+            }
+          ],
+          "avg_bias": 0.0,
+          "avg_truth": 0.744,
+          "avg_agreement": 0.666,
+          "article_count": 2,
+          "notes": null,
+          "comments": []
+        }
+      ],
+      "articles": [
+        {
+          "id": "willie-col-n-american-salsa-legend-and-pioneering-trombonist-dies-at-age-75",
+          "title": "Willie Colón, American salsa legend and pioneering trombonist, dies at age 75",
+          "url": "https://www.cnn.com/2026/02/21/entertainment/willie-colon-death",
+          "source": "CNN",
+          "published_at": "2026-02-21",
+          "excerpt": "Reuters —\n\nAmerican salsa legend Willie Colón, the pioneering trombonist, vocalist and composer, died on Saturday at age 75, his family said in a statement.\n\n“While we grieve his absence, we also rejo…"
+        },
+        {
+          "id": "us-salsa-legend-willie-col-n-vocalist-trombonist-and-composer-dies-aged-75",
+          "title": "US salsa legend Willie Colón, vocalist, trombonist and composer, dies aged 75",
+          "url": "https://www.theguardian.com/us-news/2026/feb/21/willie-colon-music-salsa-dead-aged-75",
+          "source": "The Guardian",
+          "published_at": "2026-02-21",
+          "excerpt": "Willie Colón, the pioneering trombonist, vocalist and composer, died on Saturday aged 75, his family has said.\n\nWith more than 30m albums sold, multiple platinum records and 11 combined Grammy and Lat…"
+        }
+      ],
+      "category": "Entertainment",
+      "updated_at": "2026-02-21T12:00:00Z",
       "contradiction_reports": [],
       "missing_context": {}
     },

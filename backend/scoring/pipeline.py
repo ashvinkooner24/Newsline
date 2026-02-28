@@ -265,24 +265,25 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
 
 def group_articles_by_topic(
     articles: list[dict],
-    similarity_threshold: float = 0.45,
+    similarity_threshold: float = 0.62,
     min_group_size: int = 2,
     max_group_size: int = 12,
 ) -> list[list[dict]]:
     """
     Group articles by topic using sentence-transformer embeddings.
     Returns groups of 2+ articles from different sources about the same story.
+    Uses title + first 200 chars of body for richer semantic matching.
     """
     from sentence_transformers import SentenceTransformer, util
 
     if len(articles) < 2:
         return [articles] if articles else []
 
-    print(f"[pipeline] Topic grouping: encoding {len(articles)} article titles…")
+    print(f"[pipeline] Topic grouping: encoding {len(articles)} articles (title+lead)…")
     t0 = time.time()
     model = SentenceTransformer('all-MiniLM-L6-v2')
-    titles = [a['title'] for a in articles]
-    embeddings = model.encode(titles, convert_to_tensor=True)
+    texts = [a['title'] + '. ' + a.get('text', '')[:200] for a in articles]
+    embeddings = model.encode(texts, convert_to_tensor=True)
     sim_matrix = util.cos_sim(embeddings, embeddings)
     print(f"[pipeline] Topic grouping: embedding + similarity done in {time.time()-t0:.1f}s")
 
@@ -370,6 +371,7 @@ def _process_topic_group(articles: list[dict]) -> dict:
         load_api_key,
         build_prompt,
         call_gemini,
+        call_llm,
         gemini_to_storywrapper,
     )
 
@@ -402,13 +404,17 @@ def _process_topic_group(articles: list[dict]) -> dict:
     print(f"[pipeline]   ── Step 1 DONE in {time.time()-t0:.1f}s")
 
     # ── STEP 2: Agreement scoring ──
+    unique_sources = {a.get("source", "") for a in articles}
     is_sports = _is_sports_topic(articles)
+    skip_agreement = is_sports or len(unique_sources) < 3
     if is_sports:
-        print(f"[pipeline]   ⚽ Sports topic detected — skipping contradiction/missing-context analysis")
+        print(f"[pipeline]   ⚽ Sports topic detected — skipping agreement scoring entirely")
+    elif len(unique_sources) < 3:
+        print(f"[pipeline]   ⚡ Only {len(unique_sources)} source(s) — skipping agreement scoring")
     t0 = time.time()
     print(f"[pipeline]   ── Step 2/4: Agreement scoring ({n} articles)…")
     agreement_scores, contradiction_reports, missing_context = compute_agreement(
-        articles, skip_contradictions=is_sports,
+        articles, skip_contradictions=skip_agreement,
     )
     print(f"[pipeline]   ── Step 2 DONE in {time.time()-t0:.1f}s — "
           f"{len(contradiction_reports)} contradictions, "
@@ -434,11 +440,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
         if art.get("source") and art["source"] != "unknown"
     }
 
-    # ── STEP 4: Gemini aggregation ──
+    # ── STEP 4: LLM aggregation (Gemini or Azure OpenAI) ──
     t0 = time.time()
-    print(f"[pipeline]   ── Step 4/4: Gemini API call…")
-    api_key = load_api_key()
-    gemini_articles = [
+    print(f"[pipeline]   ── Step 4/4: LLM API call…")
+    llm_articles = [
         {
             "article_id": art["id"],
             "source": art["source"],
@@ -446,10 +451,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
         }
         for art in articles
     ]
-    prompt = build_prompt(gemini_articles)
-    total_chars = sum(len(a["content"]) for a in gemini_articles)
-    print(f"[pipeline]     Sending {len(gemini_articles)} articles ({total_chars:,} chars) to Gemini…")
-    gemini_result = call_gemini(api_key, prompt)
+    prompt = build_prompt(llm_articles)
+    total_chars = sum(len(a["content"]) for a in llm_articles)
+    print(f"[pipeline]     Sending {len(llm_articles)} articles ({total_chars:,} chars) to LLM…")
+    gemini_result = call_llm(prompt)
     print(f"[pipeline]   ── Step 4 DONE in {time.time()-t0:.1f}s")
 
     story_dict = gemini_to_storywrapper(
