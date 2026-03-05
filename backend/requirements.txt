@@ -4,3 +4,5 @@ python-dotenv>=1.0.1
 fastapi
 pydantic
 uvicorn
+pymongo>=4.3.0
+dnspython>=2.3.0

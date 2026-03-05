@@ -679,10 +679,125 @@ def main():
     #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
     # }
 
-        {
-        "name": "AP news",
+    #     {
+    #     "name": "AP news",
+    #     "sites": [
+    #         "https://apnews.com/news-sitemap-content.xml",
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "limit_depth": False,    # whether to limit the depth of the recursive crawl
+    #     "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    # },
+
+    # {
+    #     "name": "Washington Post",
+    #     "sites": [
+    #         "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz",
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "limit_depth": False,    # whether to limit the depth of the recursive crawl
+    #     "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    # },
+
+    # {
+    #     "name": "Snopes",
+    #     "sites": [
+    #         "https://media.snopes.com/sitemaps/sitemap-news.xml",
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "limit_depth": False,    # whether to limit the depth of the recursive crawl
+    #     "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    # },
+
+    # {
+    #     "name": "Wall Street Journal",
+    #     "sites": [
+    #         "https://www.wsj.com/live_news_sitemap.xml",
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "limit_depth": False,    # whether to limit the depth of the recursive crawl
+    #     "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    # },
+
+    # {
+    #     "name": "New York Post",
+    #     "sites": [
+    #         "https://nypost.com/news-sitemap.xml",
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "limit_depth": False,    # whether to limit the depth of the recursive crawl
+    #     "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    # }
+
+    # {
+    #     "name": "MS NOW",
+    #     "sites": [
+    #         "https://www.ms.now/post-sitemap101.xml",
+    #         "https://www.ms.now/post-sitemap100.xml",
+    #     ],
+    #     "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
+    #     "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
+    #     "limit_depth": False,    # whether to limit the depth of the recursive crawl
+    #     "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
+    #     "extraction_method": "article",  # use newspaper3k's article extraction
+    #     "extraction_config": [
+    #         # could add config options here if needed, e.g. language, fetch_images, etc.
+    #     ],
+    #     "keep_keywords": [],  # not used for article extraction
+    #     "skip_keywords": [],  # not used for article extraction
+    #     "url_include": [],  # keep only these
+    #     "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
+    # },
+
+    {
+        "name": "The Onion",
         "sites": [
-            "https://apnews.com/news-sitemap-content.xml",
+            "https://theonion.com/post-sitemap58.xml",
         ],
         "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
@@ -699,9 +814,10 @@ def main():
     },
 
     {
-        "name": "Washington Post",
+        "name": "The Gateway Pundit",
         "sites": [
-            "https://www.washingtonpost.com/sitemaps/news-sitemap.xml.gz",
+            "https://www.thegatewaypundit.com/news-sitemap.xml",
+            "https://www.thegatewaypundit.com/post-sitemap182.xml"
         ],
         "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
@@ -717,10 +833,19 @@ def main():
         "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
     },
 
-    {
-        "name": "Snopes",
+     {
+        "name": "Daily mail",
         "sites": [
-            "https://media.snopes.com/sitemaps/sitemap-news.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-28.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-27.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-26.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-25.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-24.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-23.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-22.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-21.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-20.xml",
+            "https://www.dailymail.co.uk/sitemap-articles-day~2026-02-19.xml",
         ],
         "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
         "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
@@ -735,45 +860,6 @@ def main():
         "url_include": [],  # keep only these
         "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
     },
-
-    {
-        "name": "Wall Street Journal",
-        "sites": [
-            "https://www.wsj.com/live_news_sitemap.xml",
-        ],
-        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
-        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
-        "limit_depth": False,    # whether to limit the depth of the recursive crawl
-        "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
-        "extraction_method": "article",  # use newspaper3k's article extraction
-        "extraction_config": [
-            # could add config options here if needed, e.g. language, fetch_images, etc.
-        ],
-        "keep_keywords": [],  # not used for article extraction
-        "skip_keywords": [],  # not used for article extraction
-        "url_include": [],  # keep only these
-        "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
-    },
-
-    {
-        "name": "New York Post",
-        "sites": [
-            "https://nypost.com/news-sitemap.xml",
-        ],
-        "fetch_method": "sitemap",  # currently only sitemap is implemented, but could add direct crawling later
-        "use_selenium": False,  # whether to use Selenium for JS-heavy pages (not implemented in this version, but could add later)
-        "limit_depth": False,    # whether to limit the depth of the recursive crawl
-        "max_depth": 1,         # depth 0 = start URL, 1 = links on start URL, 2 = links on those pages
-        "extraction_method": "article",  # use newspaper3k's article extraction
-        "extraction_config": [
-            # could add config options here if needed, e.g. language, fetch_images, etc.
-        ],
-        "keep_keywords": [],  # not used for article extraction
-        "skip_keywords": [],  # not used for article extraction
-        "url_include": [],  # keep only these
-        "url_exclude": ["/sport/", "/sports/", "/football", "/terms", "/about-your-subscription", "/index", "/privacy", "/sitemap"],  # skip URLs containing these
-    }
-
     
     ]
 

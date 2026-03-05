@@ -5,11 +5,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from .models import StoryWrapper, Story, Segment, NewsProvider, User, Comment
 from .api.stories import router as stories_router
+from .db import ping as db_ping, close as db_close
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    yield  # nothing to do on startup — pipeline is triggered manually
+    # ── startup ──
+    if db_ping():
+        print("[main] MongoDB connection verified ✓")
+    else:
+        print("[main] ⚠ MongoDB is unreachable — some endpoints may fail")
+    yield
+    # ── shutdown ──
+    db_close()
 
 
 app = FastAPI(lifespan=lifespan)
