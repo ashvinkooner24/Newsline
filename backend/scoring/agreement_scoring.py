@@ -22,10 +22,10 @@ except ImportError:
 # ==============================
 SIMILARITY_THRESHOLD = 0.82          # Higher bar — only very similar claims get NLI compared
 CLAIM_OBJECTIVITY_THRESHOLD = 0.6
-MISSING_CONTEXT_SIM_THRESHOLD = 0.85  # Higher bar — must be very clearly the same claim
+MISSING_CONTEXT_SIM_THRESHOLD = 0.7  # Higher bar — must be very clearly the same claim
 MIN_CLAIM_WORDS = 8                   # Skip very short or list-like sentences
-MIN_SOURCES_FOR_CONTRADICTIONS = 3    # Don't flag contradictions with <3 sources
-MIN_SOURCES_FOR_MISSING_CTX = 3       # Don't flag missing context with <3 sources
+MIN_SOURCES_FOR_CONTRADICTIONS = 2    # Don't flag contradictions with <3 sources
+MIN_SOURCES_FOR_MISSING_CTX = 2       # Don't flag missing context with <3 sources
 DEFAULT_REPUTATION = 0.65
 
 # ==============================
@@ -166,7 +166,7 @@ def compute_agreement(articles, skip_contradictions: bool = False):
     embedder = _get_embedder()
 
     # Extract high-objectivity claims (capped to prevent O(n²) explosion)
-    MAX_CLAIMS_PER_ARTICLE = 15
+    MAX_CLAIMS_PER_ARTICLE = 30
     t0 = time.time()
     for idx, article in enumerate(articles):
         n_sentences = len(nltk.sent_tokenize(article["text"]))

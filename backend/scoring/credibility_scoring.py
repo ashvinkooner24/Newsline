@@ -14,9 +14,9 @@ except ImportError:
 DEFAULT_ARTICLES_DIR = os.path.join(os.path.dirname(__file__), "test")
 
 # Weights for credibility
-WEIGHT_REPUTATION = 0.30
-WEIGHT_OBJECTIVITY = 0.35
-WEIGHT_AGREEMENT = 0.35
+WEIGHT_REPUTATION = 0.2
+WEIGHT_OBJECTIVITY = 0.4
+WEIGHT_AGREEMENT = 0.4
 
 def compute_article_credibility(article, agreement_score, contradictions, missing_context):
     """
