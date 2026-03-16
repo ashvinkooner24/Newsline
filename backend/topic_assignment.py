@@ -1,10 +1,8 @@
-from pymongo import MongoClient
 from datetime import datetime
 import os
 
+from .db import get_client, articles_collection as _articles_collection, MONGO_URI, MONGO_DB_NAME
 
-MONGO_URI = "mongodb+srv://ashvinkooner24_db_user:akB6uPnlxpogzfnu@news.nsqauzb.mongodb.net/?appName=News"
-DB_NAME = "news_db"
 COLLECTION_NAME = "articles"
 VECTOR_INDEX_NAME = "vector_index"
 
@@ -13,11 +11,9 @@ NUM_CANDIDATES = 50
 SEARCH_LIMIT = 5
 
 # -----------------------------
-# MongoDB Connection
+# MongoDB Connection (centralised)
 # -----------------------------
-client = MongoClient(MONGO_URI)
-db = client[DB_NAME]
-articles = db[COLLECTION_NAME]
+articles = _articles_collection()
 
 # -----------------------------
 # Generate new topic id

@@ -2,18 +2,72 @@ from fastapi import APIRouter, HTTPException
 from typing import List
 from pydantic import BaseModel
 from ..models import StoryWrapper, User
-from ..data.mockData import mock_stories, mock_users, add_story
+from ..data.mockData import mock_users
+from ..db import stories_collection, users_collection
 from ..utils.slugify import slugify
 from collections import defaultdict
+import os
 
 router = APIRouter()
 
 
+# ---------------------------------------------------------------------------
+# MongoDB helpers
+# ---------------------------------------------------------------------------
+
+def _save_stories_to_db(wrappers: list[StoryWrapper]) -> int:
+    """Replace all documents in the stories collection with the given wrappers."""
+    docs: list[dict] = []
+    for w in wrappers:
+        doc = w.model_dump()
+        doc["_slug"] = w.story.slug or slugify(w.story.heading)
+        docs.append(doc)
+
+    # If MongoDB usage is disabled, skip writes (fast local mode)
+    if os.getenv("MONGO_DISABLED", "true").lower() in ("1", "true", "yes"):
+        print(f"[stories] MONGO_DISABLED set — skipping DB write, {len(docs)} docs not persisted")
+        return 0
+
+    # Try to persist to MongoDB but don't raise on failure — return 0 and
+    # let the caller continue serving the results from memory/json.
+    try:
+        coll = stories_collection()
+        coll.delete_many({})       # clear old stories
+        if docs:
+            coll.insert_many(docs)
+        return len(docs)
+    except Exception as exc:
+        print(f"[stories] WARNING: Failed to save stories to MongoDB: {exc}")
+        return 0
+
+
+def _upsert_story_to_db(wrapper: StoryWrapper) -> None:
+    """Insert or update a single story keyed by slug."""
+    coll = stories_collection()
+    slug = wrapper.story.slug or slugify(wrapper.story.heading)
+    doc = wrapper.model_dump()
+    doc["_slug"] = slug
+    coll.replace_one({"_slug": slug}, doc, upsert=True)
+
+
 def _get_stories() -> list[StoryWrapper]:
     """
-    Return stories from the pipeline cache when available,
-    falling back to mock_stories (seeded from stories.json on startup).
+    1. Try the pipeline in-memory cache (hot data from a running ingest).
+    2. Fall back to MongoDB stories collection.
+    3. Last resort: seed DB from stories.json if it exists.
     """
+    # If explicitly disabled, skip MongoDB entirely and serve from stories.json
+    if os.getenv("MONGO_DISABLED", "true").lower() in ("1", "true", "yes"):
+        try:
+            from ..data.mockData import _load_json_stories
+            json_stories = _load_json_stories()
+            if json_stories:
+                print(f"[stories] MONGO_DISABLED set — serving {len(json_stories)} stories from stories.json")
+                return json_stories
+        except Exception:
+            return []
+
+    # 1. Pipeline cache
     try:
         from ..scoring.pipeline import get_cached_stories
         cached = get_cached_stories()
@@ -21,7 +75,32 @@ def _get_stories() -> list[StoryWrapper]:
             return [StoryWrapper(**s) if isinstance(s, dict) else s for s in cached]
     except Exception:
         pass
-    return mock_stories
+
+    # 2. MongoDB
+    try:
+        coll = stories_collection()
+        docs = list(coll.find({}, {"_id": 0}))
+        if docs:
+            return [StoryWrapper(**d) for d in docs]
+    except Exception as exc:
+        print(f"[stories] MongoDB read failed: {exc}")
+
+    # 3. Seed from stories.json (one-time migration)
+    try:
+        from ..data.mockData import _load_json_stories
+        json_stories = _load_json_stories()
+        if json_stories:
+            # Try to seed MongoDB, but don't fail if it's unreachable
+            try:
+                _save_stories_to_db(json_stories)
+                print(f"[stories] Seeded {len(json_stories)} stories from stories.json → MongoDB")
+            except Exception:
+                print(f"[stories] Serving {len(json_stories)} stories from stories.json (MongoDB unavailable)")
+            return json_stories
+    except Exception:
+        pass
+
+    return []
 
 
 @router.get("/pipeline/status")
@@ -51,7 +130,11 @@ def get_story(slug: str):
 class IngestRequest(BaseModel):
     articles_dir: str | None = None   # directory of .txt files
     csv_dir: str | None = None        # directory of .csv files (e.g. "backend/scraping")
-    max_topics: int = 100              # max topic groups to process from CSVs
+    max_topics: int = 300              # max topic groups to process from CSVs
+    similarity_threshold: float | None = None
+    min_group_size: int | None = None
+    max_group_size: int | None = None
+    min_sources: int | None = None
 
 
 @router.post("/stories/ingest")
@@ -82,6 +165,10 @@ def ingest_story(req: IngestRequest):
             articles_dir=req.articles_dir,
             csv_dir=req.csv_dir,
             max_topics=req.max_topics,
+            similarity_threshold=req.similarity_threshold,
+            min_group_size=req.min_group_size,
+            max_group_size=req.max_group_size,
+            min_sources=req.min_sources,
         )
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
@@ -102,20 +189,34 @@ def ingest_story(req: IngestRequest):
         wrapper = StoryWrapper(**result)
         wrappers.append(wrapper)
 
-    # Update in-memory store so GET /stories returns the new data immediately
-    from ..data.mockData import mock_stories
-    mock_stories.clear()
-    mock_stories.extend(wrappers)
+    # Persist to MongoDB so GET /stories returns the new data immediately
+    saved = _save_stories_to_db(wrappers)
+    print(f"[ingest] Saved {saved} stories to MongoDB")
 
     return wrappers
 
 
 @router.get("/users", response_model=List[User])
 def get_users():
+    try:
+        coll = users_collection()
+        docs = list(coll.find({}, {"_id": 0}))
+        if docs:
+            return [User(**d) for d in docs]
+    except Exception:
+        pass
     return mock_users
+
 
 @router.get("/user/{username}", response_model=User)
 def get_user(username: str):
+    try:
+        coll = users_collection()
+        doc = coll.find_one({"username": username}, {"_id": 0})
+        if doc:
+            return User(**doc)
+    except Exception:
+        pass
     for user in mock_users:
         if user.username == username:
             return user

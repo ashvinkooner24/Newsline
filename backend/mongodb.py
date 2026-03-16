@@ -1,18 +1,17 @@
 import polars as pl
-from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
 from datetime import datetime
 from tqdm import tqdm
 
+from .db import get_client, articles_collection, MONGO_URI, MONGO_DB_NAME
+
 SOURCE = "nytimes"
-MONGO_URI = "mongodb+srv://ashvinkooner24_db_user:akB6uPnlxpogzfnu@news.nsqauzb.mongodb.net/?appName=News"
 INPUT_DF = f"scraping/{SOURCE}.csv"
 
 model = SentenceTransformer("all-mpnet-base-v2")
 
-mongo_client = MongoClient(MONGO_URI)
-db = mongo_client["news_db"]
-articles_collection = db["articles"]
+# Use the centralised connection
+articles_col = articles_collection()
 
 
 # ---------------------------
@@ -37,7 +36,7 @@ def upload_articles(csv_path):
                 "created_at": datetime.utcnow()
             }
 
-            articles_collection.insert_one(article_doc)
+            articles_col.insert_one(article_doc)
 
         except Exception as e:
             print(f"Error processing article: {e}")

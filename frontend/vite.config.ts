@@ -13,7 +13,8 @@ export default defineConfig(({ mode }) => ({
     },
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8000',
+        // Allow overriding backend port via BACKEND_PORT env var (defaults to 8000).
+        target: `http://127.0.0.1:${process.env.BACKEND_PORT || 8001}`,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

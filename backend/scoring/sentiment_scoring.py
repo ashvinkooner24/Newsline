@@ -68,6 +68,8 @@ def score_sentence(sentence: str):
     # Blend: 60% subjectivity model, 40% sentiment neutrality
     # High neutrality boosts objectivity for factual articles about emotional topics
     objectivity = 0.6 * raw_objectivity + 0.4 * neutrality
+    # 10% tolerance: up to 10% subjectivity is treated as perfect objectivity
+    objectivity = min(1.0, objectivity / 0.9)
     return objectivity, 1 - objectivity
 
 
@@ -127,6 +129,8 @@ def score_article(text: str):
     raw_objectivity = 1 - avg_subjectivity
     # Blend: 60% subjectivity model, 40% sentiment neutrality
     objectivity = 0.6 * raw_objectivity + 0.4 * avg_neutrality
+    # 10% tolerance: up to 10% subjectivity is treated as perfect objectivity
+    objectivity = min(1.0, objectivity / 0.9)
     subjectivity = 1 - objectivity
 
     return objectivity, subjectivity

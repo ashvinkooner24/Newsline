@@ -167,7 +167,7 @@ def build_prompt(articles):
     }
 
 
-def call_gemini(api_key, prompt, timeout_seconds: int = 120):
+def call_gemini(api_key, prompt, timeout_seconds: int = 60):
     """Call Gemini API with a timeout to prevent hanging."""
     import concurrent.futures
 
@@ -203,7 +203,7 @@ def call_gemini(api_key, prompt, timeout_seconds: int = 120):
     return json.loads(response.text)
 
 
-def call_azure_openai(azure_config: dict, prompt: dict, timeout_seconds: int = 120) -> dict:
+def call_azure_openai(azure_config: dict, prompt: dict, timeout_seconds: int = 60) -> dict:
     """Call Azure OpenAI with the same prompt structure used for Gemini."""
     import concurrent.futures
     from openai import AzureOpenAI
@@ -252,7 +252,7 @@ def call_azure_openai(azure_config: dict, prompt: dict, timeout_seconds: int = 1
     return json.loads(content)
 
 
-def call_llm(prompt: dict, timeout_seconds: int = 120) -> dict:
+def call_llm(prompt: dict, timeout_seconds: int = 60) -> dict:
     """Unified LLM call — dispatches to Gemini or Azure OpenAI based on LLM_PROVIDER env var."""
     provider = get_llm_provider()
     print(f"[LLM] Provider = {provider!r} (from LLM_PROVIDER env var)")

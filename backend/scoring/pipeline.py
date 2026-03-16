@@ -186,7 +186,7 @@ _SKIP_TITLES = {
 }
 
 
-def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]:
+def load_articles_from_csv(csv_dir: str, max_per_source: int = 1000) -> list[dict]:
     """Load articles from all CSV files in a directory.
 
     - Normalises source keys so multiple CSVs from the same outlet
@@ -265,9 +265,10 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 50) -> list[dict]
 
 def group_articles_by_topic(
     articles: list[dict],
-    similarity_threshold: float = 0.62,
+    similarity_threshold: float = 0.75,
     min_group_size: int = 2,
     max_group_size: int = 12,
+    min_sources: int = 3,
 ) -> list[list[dict]]:
     """
     Group articles by topic using sentence-transformer embeddings.
@@ -306,7 +307,7 @@ def group_articles_by_topic(
                 assigned.add(j)
                 group_sources.add(articles[j]["source"])
 
-        if len(group_indices) >= min_group_size and len(group_sources) >= 2:
+        if len(group_indices) >= min_group_size and len(group_sources) >= min_sources:
             group = [articles[idx] for idx in group_indices]
             # Final check: deduplicate articles within the group by title
             seen = set()
@@ -318,8 +319,8 @@ def group_articles_by_topic(
                     deduped.append(a)
             group = deduped
             grp_sources = sorted({a['source'] for a in group})
-            # After dedup, re-check we still have 2+ sources
-            if len(grp_sources) < 2:
+            # After dedup, re-check we still have min_sources+ sources
+            if len(grp_sources) < min_sources:
                 continue
             groups.append(group)
             print(f"[pipeline]   Group #{len(groups)}: {len(group)} articles from {grp_sources}")
@@ -406,10 +407,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
     # ── STEP 2: Agreement scoring ──
     unique_sources = {a.get("source", "") for a in articles}
     is_sports = _is_sports_topic(articles)
-    skip_agreement = is_sports or len(unique_sources) < 3
+    skip_agreement = is_sports or len(unique_sources) < 2
     if is_sports:
         print(f"[pipeline]   ⚽ Sports topic detected — skipping agreement scoring entirely")
-    elif len(unique_sources) < 3:
+    elif len(unique_sources) < 2:
         print(f"[pipeline]   ⚡ Only {len(unique_sources)} source(s) — skipping agreement scoring")
     t0 = time.time()
     print(f"[pipeline]   ── Step 2/4: Agreement scoring ({n} articles)…")
@@ -473,11 +474,30 @@ def _process_topic_group(articles: list[dict]) -> dict:
 
 
 def _save_stories(stories: list[dict], json_path: str = STORIES_JSON_PATH) -> None:
-    """Write the full story list to disk, replacing existing content."""
+    """Write the full story list to disk AND to MongoDB."""
+    # 1. Save to JSON (local backup)
     os.makedirs(os.path.dirname(json_path), exist_ok=True)
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(stories, f, indent=2, ensure_ascii=False)
     print(f"[pipeline] Saved {len(stories)} stories → {json_path}")
+
+    # 2. Save to MongoDB
+    try:
+        from ..db import stories_collection
+        from ..utils.slugify import slugify
+        coll = stories_collection()
+        docs = []
+        for s in stories:
+            doc = dict(s)
+            slug = doc.get("story", {}).get("slug", "") or slugify(doc.get("story", {}).get("heading", ""))
+            doc["_slug"] = slug
+            docs.append(doc)
+        coll.delete_many({})
+        if docs:
+            coll.insert_many(docs)
+        print(f"[pipeline] Saved {len(docs)} stories → MongoDB (stories collection)")
+    except Exception as exc:
+        print(f"[pipeline] WARNING: MongoDB save failed: {exc}")
 
 
 # ---------------------------------------------------------------------------
@@ -488,6 +508,10 @@ def run_pipeline(
     articles_dir: str | None = None,
     csv_dir: str | None = None,
     max_topics: int = 10,
+    similarity_threshold: float | None = None,
+    min_group_size: int | None = None,
+    max_group_size: int | None = None,
+    min_sources: int | None = None,
 ) -> list:
     """
     Full scoring pipeline.
@@ -503,8 +527,22 @@ def run_pipeline(
             raise FileNotFoundError(f"No usable articles found in CSV files in {csv_dir!r}")
         print(f"[pipeline] Loaded {len(all_articles)} articles from CSVs in {time.time()-t_load:.1f}s")
 
+        # Resolve grouping parameters from args or environment (env takes precedence when arg is None)
+        import os
+        sim_thresh = float(os.getenv("TOPIC_SIMILARITY_THRESHOLD", "0.68")) if similarity_threshold is None else float(similarity_threshold)
+        min_gs = int(os.getenv("TOPIC_MIN_GROUP_SIZE", "2")) if min_group_size is None else int(min_group_size)
+        max_gs = int(os.getenv("TOPIC_MAX_GROUP_SIZE", "20")) if max_group_size is None else int(max_group_size)
+        min_srcs = int(os.getenv("TOPIC_MIN_SOURCES", "3")) if min_sources is None else int(min_sources)
+
         t_group = time.time()
-        topic_groups = group_articles_by_topic(all_articles)
+        print(f"[pipeline] Grouping params: similarity_threshold={sim_thresh}, min_group_size={min_gs}, max_group_size={max_gs}, min_sources={min_srcs}")
+        topic_groups = group_articles_by_topic(
+            all_articles,
+            similarity_threshold=sim_thresh,
+            min_group_size=min_gs,
+            max_group_size=max_gs,
+            min_sources=min_srcs,
+        )
         print(f"[pipeline] Found {len(topic_groups)} topic groups in {time.time()-t_group:.1f}s "
               f"(processing up to {max_topics})")
 
