@@ -1,14 +1,15 @@
 import { useState, useMemo, useEffect } from 'react';
 import { getTopics } from '@/api/newsApi';
 import { allCategories, allCountries } from '@/data/mockNews';
-import { TopicSummary } from '@/types/news';
-import { TopicCard } from '@/components/TopicCard';
+import { StorySummary } from '@/types/news';
+import { StoryCard } from '@/components/StoryCard';
 import { SearchFilter } from '@/components/SearchFilter';
 import { HeaderBar } from '@/components/HeaderBar';
 import { Link } from 'react-router-dom';
 import { Clock, TrendingUp, Shield, AlertTriangle, CheckCircle, Bookmark, Globe, Landmark, Cpu, HeartPulse, GraduationCap, Banknote, Scale, Tv, Trophy, ShieldAlert, Users, Briefcase, Swords } from 'lucide-react';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
+import { getArticleCount, getSourceCount, getUniqueSourceCount } from '@/lib/storyMetrics';
 
 const topicIcons: Record<string, React.ReactNode> = {
   Technology: <Cpu className="w-4 h-4" />,
@@ -29,13 +30,13 @@ const topicIcons: Record<string, React.ReactNode> = {
 };
 
 const Index = () => {
-  const [topics, setTopics] = useState<TopicSummary[]>([]);
+  const [stories, setStories] = useState<StorySummary[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTopics()
-      .then(data => setTopics(data))
-      .catch(err => console.error('[Index] Failed to load topics:', err))
+      .then(data => setStories(data))
+      .catch(err => console.error('[Index] Failed to load stories:', err))
       .finally(() => setLoading(false));
   }, []);
 
@@ -48,7 +49,7 @@ const Index = () => {
   const [followedTopics, setFollowedTopics] = useState<string[]>(['Technology', 'Geopolitics', 'Economy']);
 
   const filtered = useMemo(() => {
-    return topics.filter(t => {
+    return stories.filter(t => {
       if (search && !t.headline.toLowerCase().includes(search.toLowerCase()) && !t.topic.toLowerCase().includes(search.toLowerCase())) return false;
       if (selectedCategory && t.category !== selectedCategory) return false;
       if (selectedCountry && t.country !== selectedCountry) return false;
@@ -63,7 +64,7 @@ const Index = () => {
       if (selectedCredibility && t.credibility.label !== selectedCredibility) return false;
       return true;
     });
-  }, [topics, search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
+  }, [stories, search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
 
   const sortedFiltered = useMemo(() => {
     const arr = [...filtered];
@@ -71,7 +72,7 @@ const Index = () => {
     const [key, dir] = (sortValue || '').split(':');
     const multiplier = dir === 'asc' ? 1 : -1;
 
-    const getLatest = (t: TopicSummary) => {
+    const getLatest = (t: StorySummary) => {
       try {
         if (t.articles && t.articles.length) {
           const times = t.articles.map(a => new Date(a.publishedAt).getTime()).filter(Boolean);
@@ -94,7 +95,7 @@ const Index = () => {
         arr.sort((a, b) => (a.biasAnalysis.leanScore - b.biasAnalysis.leanScore) * multiplier);
         break;
       case 'sources':
-        arr.sort((a, b) => (a.articles.length - b.articles.length) * multiplier);
+        arr.sort((a, b) => (getSourceCount(a) - getSourceCount(b)) * multiplier);
         break;
       default:
         break;
@@ -109,7 +110,7 @@ const Index = () => {
 
   // Credibility tiers
   const hasAnyFilter = Boolean(selectedCategory || selectedCountry || selectedBias || selectedCredibility);
-  const sourceForCredibility = hasAnyFilter ? sortedFiltered : topics;
+  const sourceForCredibility = hasAnyFilter ? sortedFiltered : stories;
   const sortedByCredibility = [...sourceForCredibility].sort((a, b) => a.credibility.score - b.credibility.score);
   const lowCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Low' || t.credibility.score < 65).slice(0, 3);
   const midCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Medium').slice(0, 3);
@@ -123,6 +124,8 @@ const Index = () => {
   };
 
   const isListView = Boolean(search) || Boolean(sortValue);
+  const totalArticleCount = stories.reduce((sum, story) => sum + getArticleCount(story), 0);
+  const totalSourceCount = getUniqueSourceCount(stories.flatMap(story => story.articles));
 
   return (
     <div className="min-h-screen bg-background">
@@ -148,9 +151,9 @@ const Index = () => {
         <div className="container max-w-6xl mx-auto px-4 py-2 flex items-center gap-6 text-xs font-mono text-muted-foreground">
           <div className="flex items-center gap-1.5">
             <TrendingUp className="w-3.5 h-3.5 text-primary" />
-            <span>{topics.length} active topics</span>
+            <span>{stories.length} active stories</span>
           </div>
-          <div>{topics.reduce((sum, t) => sum + t.articles.length, 0)} sources analyzed</div>
+          <div>{totalArticleCount} articles from {totalSourceCount} sources analyzed</div>
           <div className="ml-auto">
             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
           </div>
@@ -181,11 +184,11 @@ const Index = () => {
               <div className="flex items-center gap-2 mb-3">
                 <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Results</span>
                 <div className="flex-1 border-t border-foreground" />
-                <span className="font-mono text-xs text-muted-foreground">{sortedFiltered.length} topics</span>
+                <span className="font-mono text-xs text-muted-foreground">{sortedFiltered.length} stories</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sortedFiltered.map((topic, i) => (
-                  <TopicCard key={topic.id} topic={topic} index={i} />
+                  <StoryCard key={topic.id} story={topic} index={i} />
                 ))}
               </div>
             </section>
@@ -211,7 +214,7 @@ const Index = () => {
                       <p className="text-muted-foreground leading-relaxed text-lg">{heroTopic.summary}</p>
                       <div className="flex items-center gap-4 pt-2">
                         <span className="font-mono text-xs text-primary uppercase tracking-wider">{heroTopic.category}</span>
-                        <span className="font-mono text-xs text-muted-foreground">{heroTopic.articles.length} sources</span>
+                        <span className="font-mono text-xs text-muted-foreground">{getArticleCount(heroTopic)} articles · {getSourceCount(heroTopic)} sources</span>
                         <CredibilityGauge credibility={heroTopic.credibility} compact />
                       </div>
                       <div className="max-w-xs pt-1">
@@ -229,7 +232,7 @@ const Index = () => {
                           </h3>
                           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{topic.summary}</p>
                           <div className="flex items-center gap-3">
-                            <span className="font-mono text-xs text-muted-foreground">{topic.articles.length} sources</span>
+                            <span className="font-mono text-xs text-muted-foreground">{getArticleCount(topic)} articles · {getSourceCount(topic)} sources</span>
                             <CredibilityGauge credibility={topic.credibility} compact />
                           </div>
                         </article>
@@ -270,7 +273,7 @@ const Index = () => {
           {myTopics.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {myTopics.slice(0, 6).map((topic, i) => (
-                <TopicCard key={topic.id} topic={topic} index={i} />
+                <StoryCard key={topic.id} story={topic} index={i} />
               ))}
             </div>
           ) : (
@@ -302,7 +305,7 @@ const Index = () => {
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="font-mono text-xs text-credibility-high font-bold">{t.credibility.score}%</span>
-                      <span className="font-mono text-xs text-muted-foreground">{t.articles.length} sources</span>
+                      <span className="font-mono text-xs text-muted-foreground">{getArticleCount(t)} articles · {getSourceCount(t)} sources</span>
                     </div>
                   </div>
                 </Link>
@@ -320,7 +323,7 @@ const Index = () => {
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="font-mono text-xs text-credibility-medium font-bold">{t.credibility.score}%</span>
-                      <span className="font-mono text-xs text-muted-foreground">{t.articles.length} sources</span>
+                      <span className="font-mono text-xs text-muted-foreground">{getArticleCount(t)} articles · {getSourceCount(t)} sources</span>
                     </div>
                   </div>
                 </Link>
@@ -338,12 +341,12 @@ const Index = () => {
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="font-mono text-xs text-credibility-low font-bold">{t.credibility.score}%</span>
-                      <span className="font-mono text-xs text-muted-foreground">{t.articles.length} sources</span>
+                      <span className="font-mono text-xs text-muted-foreground">{getArticleCount(t)} articles · {getSourceCount(t)} sources</span>
                     </div>
                   </div>
                 </Link>
               )) : (
-                <p className="font-mono text-xs text-muted-foreground py-4">No low credibility topics currently.</p>
+                <p className="font-mono text-xs text-muted-foreground py-4">No low credibility stories currently.</p>
               )}
             </div>
           </div>
@@ -360,7 +363,7 @@ const Index = () => {
             <div className="flex-1 border-t border-rule" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[...(hasAnyFilter ? sortedFiltered : topics)].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
+            {[...(hasAnyFilter ? sortedFiltered : stories)].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
               <Link key={t.id} to={`/topic/${t.slug}`} className="group flex gap-4 border border-border bg-card p-4 hover:bg-accent/30 transition-colors">
                 <div className="flex-1">
                   <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t.headline}</h4>
@@ -382,14 +385,14 @@ const Index = () => {
           <div className="flex items-center gap-2 mb-4">
             <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">All Coverage</span>
             <div className="flex-1 border-t border-rule" />
-            <span className="font-mono text-xs text-muted-foreground">{restTopics.length} topics</span>
+            <span className="font-mono text-xs text-muted-foreground">{restTopics.length} stories</span>
           </div>
           {restTopics.length === 0 && (
-            <p className="text-center text-muted-foreground py-12 font-mono text-sm">No topics match your filters.</p>
+            <p className="text-center text-muted-foreground py-12 font-mono text-sm">No stories match your filters.</p>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {restTopics.map((topic, i) => (
-              <TopicCard key={topic.id} topic={topic} index={i} />
+              <StoryCard key={topic.id} story={topic} index={i} />
             ))}
           </div>
         </section>

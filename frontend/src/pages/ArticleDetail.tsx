@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTopic } from '@/api/newsApi';
-import { TopicSummary } from '@/types/news';
+import { StorySummary } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { ToneAnalysis } from '@/components/ToneAnalysis';
 import { FactCheckDisplay } from '@/components/FactCheckDisplay';
@@ -9,10 +9,11 @@ import { CommentSection } from '@/components/CommentSection';
 import { CommunityNotes } from '@/components/CommunityNotes';
 import { HeaderBar } from '@/components/HeaderBar';
 import { ExternalLink, AlertTriangle } from 'lucide-react';
+import { getSourceCount } from '@/lib/storyMetrics';
 
 const ArticleDetail = () => {
   const { slug, articleId } = useParams();
-  const [topic, setTopic] = useState<TopicSummary | null>(null);
+  const [topic, setTopic] = useState<StorySummary | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const ArticleDetail = () => {
   }, [slug]);
 
   const article = topic?.articles.find(a => a.id === articleId);
+  const sourceCount = topic ? getSourceCount(topic) : 0;
 
   if (loading) {
     return (
@@ -97,7 +99,7 @@ const ArticleDetail = () => {
                       <span className="font-semibold">objectivity</span> (measured by running each sentence through
                       a subjectivity classifier and a sentiment-neutrality model), and{' '}
                       <span className="font-semibold">cross-source agreement</span> (determined by extracting factual
-                      claims and comparing them across all {topic.articles.length} sources using natural language inference).
+                      claims and comparing them across all {sourceCount} sources using natural language inference).
                     </p>
                     <p className="text-secondary-foreground leading-relaxed mt-3">
                       {contradictionsForArticle.length > 0
@@ -111,8 +113,8 @@ const ArticleDetail = () => {
                     <p className="text-secondary-foreground leading-relaxed mt-3">
                       The source's editorial framing was classified as{' '}
                       <span className="font-semibold">{article.source.biasLean}</span> based on
-                      our model's assessment of cited quotes. The overall topic draws
-                      from {topic.articles.length} article{topic.articles.length > 1 ? 's' : ''} with
+                      our model's assessment of cited quotes. The overall story draws
+                      from {topic.articles.length} article{topic.articles.length > 1 ? 's' : ''} across {sourceCount} source{sourceCount > 1 ? 's' : ''} with
                       a {topic.credibility.sourceAgreement}% inter-source agreement rate.
                     </p>
                   </>

@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTopic } from '@/api/newsApi';
-import { TopicSummary } from '@/types/news';
+import { StorySummary } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
 import { CitedContent } from '@/components/CitedContent';
@@ -11,10 +11,11 @@ import { CommunityNotes } from '@/components/CommunityNotes';
 import { RatingDisplay } from '@/components/RatingDisplay';
 import { HeaderBar } from '@/components/HeaderBar';
 import { Clock, BarChart3, Star, AlertTriangle } from 'lucide-react';
+import { getArticleCount, getSourceCount } from '@/lib/storyMetrics';
 
 const TopicDetail = () => {
   const { slug } = useParams();
-  const [topic, setTopic] = useState<TopicSummary | null>(null);
+  const [topic, setTopic] = useState<StorySummary | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const TopicDetail = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
-          <h2 className="font-display text-2xl text-foreground">Topic not found</h2>
+          <h2 className="font-display text-2xl text-foreground">Story not found</h2>
           <Link to="/" className="text-primary font-mono text-sm hover:underline">← Back to The Newsline</Link>
         </div>
       </div>
@@ -134,7 +135,7 @@ const TopicDetail = () => {
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
-                The following claims differ between sources covering this topic.
+                The following claims differ between sources covering this story.
               </p>
               <div className="space-y-4">
                 {topic.contradictions.map((c, i) => (
@@ -159,7 +160,7 @@ const TopicDetail = () => {
         <div className="mt-8 animate-fade-in opacity-0" style={{ animationDelay: '350ms' }}>
           <div className="newspaper-divider mb-4" />
           <h2 className="font-display text-xl font-semibold text-foreground mb-4">
-            Sources ({topic.articles.length})
+            Articles ({getArticleCount(topic)}) from Sources ({getSourceCount(topic)})
           </h2>
           <SourceList articles={topic.articles} topicSlug={topic.slug} />
         </div>
