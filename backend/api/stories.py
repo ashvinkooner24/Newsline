@@ -6,7 +6,6 @@ from ..data.mockData import mock_users
 from ..db import stories_collection, users_collection
 from ..utils.slugify import slugify
 from collections import defaultdict
-import os
 
 router = APIRouter()
 
@@ -23,12 +22,7 @@ def _save_stories_to_db(wrappers: list[StoryWrapper]) -> int:
         doc["_slug"] = w.story.slug or slugify(w.story.heading)
         docs.append(doc)
 
-    # If MongoDB usage is disabled, skip writes (fast local mode)
-    if os.getenv("MONGO_DISABLED", "true").lower() in ("1", "true", "yes"):
-        print(f"[stories] MONGO_DISABLED set — skipping DB write, {len(docs)} docs not persisted")
-        return 0
-
-    # Try to persist to MongoDB but don't raise on failure — return 0 and
+    # Try to persist to active DB backend (MongoDB or SQLite) but don't raise — return 0 and
     # let the caller continue serving the results from memory/json.
     try:
         coll = stories_collection()
@@ -56,17 +50,6 @@ def _get_stories() -> list[StoryWrapper]:
     2. Fall back to MongoDB stories collection.
     3. Last resort: seed DB from stories.json if it exists.
     """
-    # If explicitly disabled, skip MongoDB entirely and serve from stories.json
-    if os.getenv("MONGO_DISABLED", "true").lower() in ("1", "true", "yes"):
-        try:
-            from ..data.mockData import _load_json_stories
-            json_stories = _load_json_stories()
-            if json_stories:
-                print(f"[stories] MONGO_DISABLED set — serving {len(json_stories)} stories from stories.json")
-                return json_stories
-        except Exception:
-            return []
-
     # 1. Pipeline cache
     try:
         from ..scoring.pipeline import get_cached_stories
