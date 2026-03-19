@@ -1,20 +1,20 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
-import { getTopics, getSourceProfile } from '@/api/newsApi';
-import { TopicSummary, SourceProfile } from '@/types/news';
+import { getStories, getSourceProfile } from '@/api/newsApi';
+import { StorySummary, SourceProfile } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { HeaderBar } from '@/components/HeaderBar';
 import { ExternalLink, FileText } from 'lucide-react';
 
 const SourceProfilePage = () => {
   const { sourceId } = useParams();
-  const [topics, setTopics] = useState<TopicSummary[]>([]);
+  const [stories, setStories] = useState<StorySummary[]>([]);
   const [profile, setProfile] = useState<SourceProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
-      getTopics().then(data => setTopics(data)),
+      getStories().then(data => setStories(data)),
       sourceId ? getSourceProfile(sourceId).then(data => setProfile(data)) : Promise.resolve(),
     ])
       .catch(err => console.error('[SourceProfile] Failed to load:', err))
@@ -22,8 +22,8 @@ const SourceProfilePage = () => {
   }, [sourceId]);
 
   const sourceArticles = useMemo(
-    () => topics.flatMap(t => t.articles.filter(a => a.source.id === sourceId)),
-    [topics, sourceId]
+    () => stories.flatMap(story => story.articles.filter(a => a.source.id === sourceId)),
+    [stories, sourceId]
   );
 
   if (loading) {
@@ -72,7 +72,7 @@ const SourceProfilePage = () => {
               <div><span className="font-mono text-xs text-muted-foreground">Total Articles</span><div className="font-mono text-lg font-bold text-foreground">{profile.totalArticles}</div></div>
               <div><span className="font-mono text-xs text-muted-foreground">Avg Credibility</span><div className="font-mono text-lg font-bold text-foreground">{profile.avgCredibility}%</div></div>
               <div><span className="font-mono text-xs text-muted-foreground">Bias Lean</span><div className="font-mono text-lg font-bold text-foreground capitalize">{profile.source.biasLean}</div></div>
-              <div><span className="font-mono text-xs text-muted-foreground">Top Topics</span><div className="font-mono text-sm text-foreground">{profile.topTopics.slice(0, 2).join(', ')}</div></div>
+              <div><span className="font-mono text-xs text-muted-foreground">Top Story Labels</span><div className="font-mono text-sm text-foreground">{profile.topTopics.slice(0, 2).join(', ')}</div></div>
             </div>
           </div>
 
@@ -110,11 +110,11 @@ const SourceProfilePage = () => {
             </h2>
             <div className="divide-y divide-border">
               {sourceArticles.map(article => {
-                const topic = topics.find(t => t.articles.some(a => a.id === article.id));
+                const story = stories.find(s => s.articles.some(a => a.id === article.id));
                 return (
                   <div key={article.id} className="py-3">
-                    {topic && (
-                      <Link to={`/topic/${topic.slug}/article/${article.id}`} className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
+                    {story && (
+                      <Link to={`/story/${story.slug}/article/${article.id}`} className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
                         {article.title}
                       </Link>
                     )}

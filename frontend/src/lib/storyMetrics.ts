@@ -1,4 +1,4 @@
-import { Article, TopicSummary } from '@/types/news';
+import { Article, StorySummary } from '@/types/news';
 
 export function getUniqueSourceCount(articles: Article[]): number {
   const unique = new Set(
@@ -9,10 +9,10 @@ export function getUniqueSourceCount(articles: Article[]): number {
   return unique.size;
 }
 
-export function getArticleCount(story: TopicSummary): number {
+export function getArticleCount(story: StorySummary): number {
   return story.articles?.length || 0;
 }
 
-export function getSourceCount(story: TopicSummary): number {
+export function getSourceCount(story: StorySummary): number {
   return getUniqueSourceCount(story.articles || []);
 }

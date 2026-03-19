@@ -20,6 +20,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/story/:slug" element={<TopicDetail />} />
+          <Route path="/story/:slug/article/:articleId" element={<ArticleDetail />} />
+          {/* Backward-compatible legacy routes */}
           <Route path="/topic/:slug" element={<TopicDetail />} />
           <Route path="/topic/:slug/article/:articleId" element={<ArticleDetail />} />
           <Route path="/user/:userId" element={<UserProfile />} />

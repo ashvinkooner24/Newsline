@@ -113,7 +113,7 @@ def get_story(slug: str):
 class IngestRequest(BaseModel):
     articles_dir: str | None = None   # directory of .txt files
     csv_dir: str | None = None        # directory of .csv files (e.g. "backend/scraping")
-    max_topics: int = 300              # max topic groups to process from CSVs
+    max_story_groups: int = 300        # max story groups to process from CSVs
     similarity_threshold: float | None = None
     min_group_size: int | None = None
     max_group_size: int | None = None
@@ -124,8 +124,8 @@ class IngestRequest(BaseModel):
 def ingest_story(req: IngestRequest):
     """
     Run the full scoring pipeline.
-    - Provide articles_dir for legacy .txt mode (single topic).
-    - Provide csv_dir for multi-topic mode (load CSVs, cluster, process).
+    - Provide articles_dir for legacy .txt mode (single story group).
+    - Provide csv_dir for multi-story mode (load CSVs, cluster, process).
     """
     import time
     import traceback
@@ -140,14 +140,14 @@ def ingest_story(req: IngestRequest):
 
     t0 = time.time()
     print(f"\n{'='*60}")
-    print(f"[ingest] Starting pipeline: csv_dir={req.csv_dir}, max_topics={req.max_topics}")
+    print(f"[ingest] Starting pipeline: csv_dir={req.csv_dir}, max_story_groups={req.max_story_groups}")
     print(f"{'='*60}")
 
     try:
         results = run_pipeline(
             articles_dir=req.articles_dir,
             csv_dir=req.csv_dir,
-            max_topics=req.max_topics,
+            max_story_groups=req.max_story_groups,
             similarity_threshold=req.similarity_threshold,
             min_group_size=req.min_group_size,
             max_group_size=req.max_group_size,
@@ -209,9 +209,9 @@ def get_user(username: str):
 @router.get("/sources")
 def get_sources():
     """
-    Build source profiles dynamically from the current story data.
+    Build source profiles dynamically from the current stories.
     Returns a list of source profiles with article counts, credibility,
-    bias, and the topics they've contributed to.
+    bias, and the story categories they've contributed to.
     """
     stories = _get_stories()
 

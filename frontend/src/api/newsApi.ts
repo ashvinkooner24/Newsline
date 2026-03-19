@@ -7,14 +7,14 @@
  * so no CORS issues during development.
  *
  * Usage:
- *   import { getTopics, getTopic } from '@/api/newsApi';
+ *   import { getStories, getStory } from '@/api/newsApi';
  *
- *   const topics = await getTopics();          // TopicSummary[]
- *   const topic  = await getTopic(0);          // TopicSummary | null
+ *   const stories = await getStories();        // StorySummary[]
+ *   const story   = await getStory('slug');    // StorySummary | null
  */
 
 import type {
-  TopicSummary,
+  StorySummary,
   Source,
   Article,
   UserProfile,
@@ -28,7 +28,7 @@ import type {
   FactCheck,
   ContradictionReport,
 } from '@/types/news';
-import { mockTopics, mockUsers, mockSourceProfiles } from '@/data/mockNews';
+import { mockStories, mockUsers, mockSourceProfiles } from '@/data/mockNews';
 
 // ---------------------------------------------------------------------------
 // Backend response shapes (mirrors Backend/models.py Pydantic models)
@@ -316,10 +316,10 @@ function buildArticleFactCheck(
 }
 
 /**
- * Main transformer: BackendStoryWrapper → TopicSummary.
+ * Main transformer: BackendStoryWrapper → StorySummary.
  * Uses real article metadata and citations from the backend.
  */
-export function transformStory(wrapper: BackendStoryWrapper, index: number): TopicSummary {
+export function transformStory(wrapper: BackendStoryWrapper, index: number): StorySummary {
   const { story, comments } = wrapper;
 
   // Use the backend summary (standfirst) or fall back to first segment text
@@ -432,24 +432,24 @@ export function transformUser(user: BackendUser): UserProfile {
 const API_BASE = '/api';
 
 /**
- * Fetch all stories from the backend and return them as TopicSummary[].
- * Falls back to mockTopics if the backend is unreachable (e.g. during
+ * Fetch all stories from the backend and return them as StorySummary[].
+ * Falls back to mock stories if the backend is unreachable (e.g. during
  * front-end-only development).
  */
-export async function getTopics(): Promise<TopicSummary[]> {
+export async function getStories(): Promise<StorySummary[]> {
   try {
     const res = await fetch(`${API_BASE}/stories`);
     if (!res.ok) throw new Error(`GET /stories → HTTP ${res.status}`);
     const data: BackendStoryWrapper[] = await res.json();
     return data.map((wrapper, index) => transformStory(wrapper, index));  } catch (err) {
     console.warn('[newsApi] Backend unavailable, falling back to mock data.', err);
-    return mockTopics;
+    return mockStories;
   }
 }
 
 
 
-export async function getTopic(slug: string): Promise<TopicSummary | null> {
+export async function getStory(slug: string): Promise<StorySummary | null> {
   try {
     const res = await fetch(`${API_BASE}/stories/${slug}`);
     if (res.status === 404) return null;
@@ -458,9 +458,13 @@ export async function getTopic(slug: string): Promise<TopicSummary | null> {
     return transformStory(data, 0);
   } catch (err) {
     console.warn(`[newsApi] Backend unavailable for story ${slug}, falling back to mock data.`, err);
-    return mockTopics.find(t => t.slug === slug) ?? null;
+    return mockStories.find(t => t.slug === slug) ?? null;
   }
 }
+
+// Backward-compatible aliases during migration.
+export const getTopics = getStories;
+export const getTopic = getStory;
 
 
 export async function getUsers(): Promise<UserProfile[]> {

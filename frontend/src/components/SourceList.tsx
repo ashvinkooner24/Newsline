@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 interface SourceListProps {
   articles: Article[];
-  topicSlug?: string;
+  storySlug?: string;
 }
 
 const biasColors: Record<string, string> = {
@@ -12,7 +12,7 @@ const biasColors: Record<string, string> = {
   'center-right': 'text-bias-right', 'right': 'text-bias-right', 'far-right': 'text-bias-right',
 };
 
-export const SourceList = ({ articles, topicSlug }: SourceListProps) => {
+export const SourceList = ({ articles, storySlug }: SourceListProps) => {
   return (
     <div className="space-y-0 divide-y divide-border border border-border">
       {articles.map((article) => (
@@ -29,8 +29,8 @@ export const SourceList = ({ articles, topicSlug }: SourceListProps) => {
                 <span className="font-mono text-xs text-muted-foreground">· {article.source.credibilityScore}%</span>
                 {article.tone && <span className="font-mono text-xs text-muted-foreground">· {article.tone}</span>}
               </div>
-              {topicSlug ? (
-                <Link to={`/topic/${topicSlug}/article/${article.id}`} className="text-sm font-semibold text-foreground hover:text-primary transition-colors leading-snug block">
+              {storySlug ? (
+                <Link to={`/story/${storySlug}/article/${article.id}`} className="text-sm font-semibold text-foreground hover:text-primary transition-colors leading-snug block">
                   {article.title}
                 </Link>
               ) : (

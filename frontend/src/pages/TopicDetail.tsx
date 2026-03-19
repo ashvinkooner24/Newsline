@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getTopic } from '@/api/newsApi';
+import { getStory } from '@/api/newsApi';
 import { StorySummary } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
@@ -20,9 +20,9 @@ const TopicDetail = () => {
 
   useEffect(() => {
     if (!slug) { setLoading(false); return; }
-    getTopic(slug)
+    getStory(slug)
       .then(data => setTopic(data))
-      .catch(err => console.error('[TopicDetail] Failed to load topic:', err))
+      .catch(err => console.error('[TopicDetail] Failed to load story:', err))
       .finally(() => setLoading(false));
   }, [slug]);
 
@@ -74,7 +74,7 @@ const TopicDetail = () => {
             <CitedContent
               sections={topic.sections}
               articles={topic.articles}
-              topicSlug={topic.slug}
+              storySlug={topic.slug}
               communityNotes={topic.communityNotes}
             />
           </div>
@@ -162,7 +162,7 @@ const TopicDetail = () => {
           <h2 className="font-display text-xl font-semibold text-foreground mb-4">
             Articles ({getArticleCount(topic)}) from Sources ({getSourceCount(topic)})
           </h2>
-          <SourceList articles={topic.articles} topicSlug={topic.slug} />
+          <SourceList articles={topic.articles} storySlug={topic.slug} />
         </div>
 
         {/* Comments */}

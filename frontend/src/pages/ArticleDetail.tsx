@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getTopic } from '@/api/newsApi';
+import { getStory } from '@/api/newsApi';
 import { StorySummary } from '@/types/news';
 import { BiasMeter } from '@/components/BiasMeter';
 import { ToneAnalysis } from '@/components/ToneAnalysis';
@@ -18,7 +18,7 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     if (!slug) return;
-    getTopic(slug).then(data => {
+    getStory(slug).then(data => {
       setTopic(data);
       setLoading(false);
     });
@@ -54,7 +54,7 @@ const ArticleDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <HeaderBar backLink={`/topic/${topic.slug}`} backLabel={`Back to ${topic.topic}`} />
+      <HeaderBar backLink={`/story/${topic.slug}`} backLabel={`Back to ${topic.topic}`} />
 
       <main className="container max-w-4xl mx-auto px-4 py-8">
         {/* Article header */}

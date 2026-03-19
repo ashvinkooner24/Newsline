@@ -17,7 +17,7 @@ export const StoryCard = ({ story, index }: StoryCardProps) => {
 
   return (
     <Link
-      to={`/topic/${story.slug}`}
+      to={`/story/${story.slug}`}
       className="block card-hover"
       style={{ animationDelay: `${index * 80}ms` }}
     >

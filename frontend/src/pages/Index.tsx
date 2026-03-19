@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { getTopics } from '@/api/newsApi';
+import { getStories } from '@/api/newsApi';
 import { allCategories, allCountries } from '@/data/mockNews';
 import { StorySummary } from '@/types/news';
 import { StoryCard } from '@/components/StoryCard';
@@ -34,7 +34,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getTopics()
+    getStories()
       .then(data => setStories(data))
       .catch(err => console.error('[Index] Failed to load stories:', err))
       .finally(() => setLoading(false));
@@ -203,7 +203,7 @@ const Index = () => {
                   <div className="flex-1 border-t border-foreground" />
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                  <Link to={`/topic/${heroTopic.slug}`} className="lg:col-span-3 group">
+                  <Link to={`/story/${heroTopic.slug}`} className="lg:col-span-3 group">
                     <article className="space-y-3">
                       {heroTopic.isBreaking && (
                         <span className="inline-block font-mono text-xs font-bold text-destructive uppercase tracking-widest">● Breaking</span>
@@ -224,7 +224,7 @@ const Index = () => {
                   </Link>
                   <div className="lg:col-span-2 space-y-4 lg:border-l lg:border-border lg:pl-6">
                     {secondaryFeatured.map(topic => (
-                      <Link key={topic.id} to={`/topic/${topic.slug}`} className="block group">
+                      <Link key={topic.id} to={`/story/${topic.slug}`} className="block group">
                         <article className="space-y-2 pb-4 border-b border-border last:border-0">
                           <span className="font-mono text-xs text-primary uppercase tracking-wider">{topic.category}</span>
                           <h3 className="font-display text-lg font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">
@@ -300,7 +300,7 @@ const Index = () => {
                 <span className="font-mono text-xs font-bold text-credibility-high uppercase tracking-wider">High Credibility</span>
               </div>
               {highCredibility.map(t => (
-                <Link key={t.id} to={`/topic/${t.slug}`} className="block group">
+                <Link key={t.id} to={`/story/${t.slug}`} className="block group">
                   <div className="border-l-2 border-credibility-high pl-3 py-1">
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
@@ -318,7 +318,7 @@ const Index = () => {
                 <span className="font-mono text-xs font-bold text-credibility-medium uppercase tracking-wider">Medium Credibility</span>
               </div>
               {midCredibility.map(t => (
-                <Link key={t.id} to={`/topic/${t.slug}`} className="block group">
+                <Link key={t.id} to={`/story/${t.slug}`} className="block group">
                   <div className="border-l-2 border-credibility-medium pl-3 py-1">
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
@@ -336,7 +336,7 @@ const Index = () => {
                 <span className="font-mono text-xs font-bold text-credibility-low uppercase tracking-wider">Low Credibility</span>
               </div>
               {lowCredibility.length > 0 ? lowCredibility.map(t => (
-                <Link key={t.id} to={`/topic/${t.slug}`} className="block group">
+                <Link key={t.id} to={`/story/${t.slug}`} className="block group">
                   <div className="border-l-2 border-credibility-low pl-3 py-1">
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
@@ -364,7 +364,7 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[...(hasAnyFilter ? sortedFiltered : stories)].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
-              <Link key={t.id} to={`/topic/${t.slug}`} className="group flex gap-4 border border-border bg-card p-4 hover:bg-accent/30 transition-colors">
+              <Link key={t.id} to={`/story/${t.slug}`} className="group flex gap-4 border border-border bg-card p-4 hover:bg-accent/30 transition-colors">
                 <div className="flex-1">
                   <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t.headline}</h4>
                   <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{t.summary}</p>
