@@ -108,7 +108,9 @@ const Index = () => {
   const restTopics = sortedFiltered.filter(t => t.id !== heroTopic?.id && !secondaryFeatured.find(f => f.id === t.id));
 
   // Credibility tiers
-  const sortedByCredibility = [...topics].sort((a, b) => a.credibility.score - b.credibility.score);
+  const hasAnyFilter = Boolean(selectedCategory || selectedCountry || selectedBias || selectedCredibility);
+  const sourceForCredibility = hasAnyFilter ? sortedFiltered : topics;
+  const sortedByCredibility = [...sourceForCredibility].sort((a, b) => a.credibility.score - b.credibility.score);
   const lowCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Low' || t.credibility.score < 65).slice(0, 3);
   const midCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Medium').slice(0, 3);
   const highCredibility = [...sortedByCredibility].reverse().filter(t => t.credibility.label === 'High').slice(0, 3);
@@ -241,7 +243,8 @@ const Index = () => {
         <div className="newspaper-divider mb-6" />
 
         {/* Your Topics */}
-        <section className="mb-8">
+        {!selectedCategory && (
+          <section className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Bookmark className="w-4 h-4 text-primary" />
             <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Your Topics</span>
@@ -273,12 +276,14 @@ const Index = () => {
           ) : (
             <p className="text-center text-muted-foreground py-6 font-mono text-sm">Select topics above to see personalized stories.</p>
           )}
-        </section>
+          </section>
+        )}
 
         <div className="newspaper-divider mb-6" />
 
         {/* Credibility Tiers */}
-        <section className="mb-8">
+        {!selectedCredibility && (
+          <section className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Shield className="w-4 h-4 text-primary" />
             <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">By Credibility</span>
@@ -342,7 +347,8 @@ const Index = () => {
               )}
             </div>
           </div>
-        </section>
+          </section>
+        )}
 
         <div className="newspaper-divider mb-6" />
 
@@ -354,7 +360,7 @@ const Index = () => {
             <div className="flex-1 border-t border-rule" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[...topics].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
+            {[...(hasAnyFilter ? sortedFiltered : topics)].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
               <Link key={t.id} to={`/topic/${t.slug}`} className="group flex gap-4 border border-border bg-card p-4 hover:bg-accent/30 transition-colors">
                 <div className="flex-1">
                   <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t.headline}</h4>
