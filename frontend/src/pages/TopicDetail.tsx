@@ -10,7 +10,7 @@ import { CommentSection } from '@/components/CommentSection';
 import { CommunityNotes } from '@/components/CommunityNotes';
 import { RatingDisplay } from '@/components/RatingDisplay';
 import { HeaderBar } from '@/components/HeaderBar';
-import { Clock, BarChart3, Star, AlertTriangle } from 'lucide-react';
+import { Clock, BarChart3, Star, AlertTriangle, Info } from 'lucide-react';
 import { getArticleCount, getSourceCount } from '@/lib/storyMetrics';
 
 const TopicDetail = () => {
@@ -159,10 +159,29 @@ const TopicDetail = () => {
         {/* Sources */}
         <div className="mt-8 animate-fade-in opacity-0" style={{ animationDelay: '350ms' }}>
           <div className="newspaper-divider mb-4" />
-          <h2 className="font-display text-xl font-semibold text-foreground mb-4">
-            Articles ({getArticleCount(topic)}) from Sources ({getSourceCount(topic)})
-          </h2>
-          <SourceList articles={topic.articles} storySlug={topic.slug} />
+          {/* Inline header with counts */}
+          {(() => {
+            const totalMissing = Object.values(topic.articleMissingContext || {}).reduce((s, arr) => s + (arr?.length || 0), 0);
+            const totalContradictions = (topic.contradictions || []).length;
+            return (
+              <h2 className="font-display text-xl font-semibold text-foreground mb-4 flex items-baseline gap-4">
+                <span>Articles ({getArticleCount(topic)}) from Sources ({getSourceCount(topic)})</span>
+                {totalMissing > 0 && (
+                  <span className="font-mono text-sm" style={{ color: '#8B5A2B' }}>Missing context: <span className="font-semibold">{totalMissing}</span></span>
+                )}
+                {totalContradictions > 0 && (
+                  <span className="font-mono text-sm" style={{ color: '#5C4033' }}>Contradictions: <span className="font-semibold">{totalContradictions}</span></span>
+                )}
+              </h2>
+            );
+          })()}
+
+          <SourceList
+            articles={topic.articles}
+            storySlug={topic.slug}
+            contradictions={topic.contradictions}
+            articleMissingContext={topic.articleMissingContext}
+          />
         </div>
 
         {/* Comments */}
