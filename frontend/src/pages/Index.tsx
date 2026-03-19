@@ -120,6 +120,8 @@ const Index = () => {
     setFollowedTopics(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
   };
 
+  const isListView = Boolean(search) || Boolean(sortValue);
+
   return (
     <div className="min-h-screen bg-background">
       <HeaderBar />
@@ -170,54 +172,71 @@ const Index = () => {
         </div>
       )}
 
-      <main className="container max-w-6xl mx-auto px-4 py-6">
-        {/* Hero + Secondary Featured */}
-        {heroTopic && (
-          <section className="mb-8">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Top Stories</span>
-              <div className="flex-1 border-t border-foreground" />
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <Link to={`/topic/${heroTopic.slug}`} className="lg:col-span-3 group">
-                <article className="space-y-3">
-                  {heroTopic.isBreaking && (
-                    <span className="inline-block font-mono text-xs font-bold text-destructive uppercase tracking-widest">● Breaking</span>
-                  )}
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
-                    {heroTopic.headline}
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed text-lg">{heroTopic.summary}</p>
-                  <div className="flex items-center gap-4 pt-2">
-                    <span className="font-mono text-xs text-primary uppercase tracking-wider">{heroTopic.category}</span>
-                    <span className="font-mono text-xs text-muted-foreground">{heroTopic.articles.length} sources</span>
-                    <CredibilityGauge credibility={heroTopic.credibility} compact />
-                  </div>
-                  <div className="max-w-xs pt-1">
-                    <BiasMeter leanScore={heroTopic.biasAnalysis.leanScore} overallLean={heroTopic.biasAnalysis.overallLean} compact />
-                  </div>
-                </article>
-              </Link>
-              <div className="lg:col-span-2 space-y-4 lg:border-l lg:border-border lg:pl-6">
-                {secondaryFeatured.map(topic => (
-                  <Link key={topic.id} to={`/topic/${topic.slug}`} className="block group">
-                    <article className="space-y-2 pb-4 border-b border-border last:border-0">
-                      <span className="font-mono text-xs text-primary uppercase tracking-wider">{topic.category}</span>
-                      <h3 className="font-display text-lg font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">
-                        {topic.headline}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{topic.summary}</p>
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs text-muted-foreground">{topic.articles.length} sources</span>
-                        <CredibilityGauge credibility={topic.credibility} compact />
+        {/* If user is searching or sorting show list-only results */}
+        {isListView ? (
+          <main className="container max-w-6xl mx-auto px-4 py-6">
+            <section className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Results</span>
+                <div className="flex-1 border-t border-foreground" />
+                <span className="font-mono text-xs text-muted-foreground">{sortedFiltered.length} topics</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {sortedFiltered.map((topic, i) => (
+                  <TopicCard key={topic.id} topic={topic} index={i} />
+                ))}
+              </div>
+            </section>
+          </main>
+        ) : (
+          <main className="container max-w-6xl mx-auto px-4 py-6">
+            {/* Hero + Secondary Featured */}
+            {heroTopic && (
+              <section className="mb-8">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Top Stories</span>
+                  <div className="flex-1 border-t border-foreground" />
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                  <Link to={`/topic/${heroTopic.slug}`} className="lg:col-span-3 group">
+                    <article className="space-y-3">
+                      {heroTopic.isBreaking && (
+                        <span className="inline-block font-mono text-xs font-bold text-destructive uppercase tracking-widest">● Breaking</span>
+                      )}
+                      <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
+                        {heroTopic.headline}
+                      </h2>
+                      <p className="text-muted-foreground leading-relaxed text-lg">{heroTopic.summary}</p>
+                      <div className="flex items-center gap-4 pt-2">
+                        <span className="font-mono text-xs text-primary uppercase tracking-wider">{heroTopic.category}</span>
+                        <span className="font-mono text-xs text-muted-foreground">{heroTopic.articles.length} sources</span>
+                        <CredibilityGauge credibility={heroTopic.credibility} compact />
+                      </div>
+                      <div className="max-w-xs pt-1">
+                        <BiasMeter leanScore={heroTopic.biasAnalysis.leanScore} overallLean={heroTopic.biasAnalysis.overallLean} compact />
                       </div>
                     </article>
                   </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+                  <div className="lg:col-span-2 space-y-4 lg:border-l lg:border-border lg:pl-6">
+                    {secondaryFeatured.map(topic => (
+                      <Link key={topic.id} to={`/topic/${topic.slug}`} className="block group">
+                        <article className="space-y-2 pb-4 border-b border-border last:border-0">
+                          <span className="font-mono text-xs text-primary uppercase tracking-wider">{topic.category}</span>
+                          <h3 className="font-display text-lg font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">
+                            {topic.headline}
+                          </h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{topic.summary}</p>
+                          <div className="flex items-center gap-3">
+                            <span className="font-mono text-xs text-muted-foreground">{topic.articles.length} sources</span>
+                            <CredibilityGauge credibility={topic.credibility} compact />
+                          </div>
+                        </article>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
 
         <div className="newspaper-divider mb-6" />
 
@@ -368,7 +387,10 @@ const Index = () => {
             ))}
           </div>
         </section>
-      </main>
+
+        </main>
+
+        )}
 
       <footer className="border-t-2 border-foreground mt-12">
         <div className="container max-w-6xl mx-auto px-4 py-6 text-center text-xs text-muted-foreground font-mono">
