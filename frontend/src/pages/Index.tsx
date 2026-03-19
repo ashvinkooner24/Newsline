@@ -5,7 +5,7 @@ import { StorySummary } from '@/types/news';
 import { StoryCard } from '@/components/StoryCard';
 import { SearchFilter } from '@/components/SearchFilter';
 import { HeaderBar } from '@/components/HeaderBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Clock, TrendingUp, Shield, AlertTriangle, CheckCircle, Bookmark, Globe, Landmark, Cpu, HeartPulse, GraduationCap, Banknote, Scale, Tv, Trophy, ShieldAlert, Users, Briefcase, Swords } from 'lucide-react';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
@@ -38,6 +38,21 @@ const Index = () => {
       .then(data => setStories(data))
       .catch(err => console.error('[Index] Failed to load stories:', err))
       .finally(() => setLoading(false));
+  }, []);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = (_e: Event) => {
+      setSearch('');
+      setSelectedCategory('');
+      setSelectedCountry('');
+      setSelectedBias('');
+      setSelectedCredibility('');
+      setSortValue('');
+    };
+    window.addEventListener('resetFilters', handler as EventListener);
+    return () => window.removeEventListener('resetFilters', handler as EventListener);
   }, []);
 
   const [search, setSearch] = useState('');
@@ -135,7 +150,10 @@ const Index = () => {
       <div className="border-b border-border">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="text-center py-4">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-foreground tracking-tight">
+            <h1
+              className="font-display text-5xl md:text-6xl font-bold text-foreground tracking-tight cursor-pointer"
+              onClick={() => { window.dispatchEvent(new CustomEvent('resetFilters')); navigate('/'); }}
+            >
               The Newsline
             </h1>
             <p className="font-mono text-xs text-muted-foreground mt-1 tracking-widest uppercase">

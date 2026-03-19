@@ -38,7 +38,7 @@ export const HeaderBar = ({ backLink, backLabel }: { backLink?: string; backLabe
           </div>
         )}
 
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2" onClick={() => window.dispatchEvent(new CustomEvent('resetFilters'))}>
           <Newspaper className="w-4 h-4 text-primary" />
           <span className="font-display text-lg font-bold text-foreground">The Newsline</span>
         </Link>
