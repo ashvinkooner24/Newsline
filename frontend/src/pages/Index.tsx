@@ -44,6 +44,7 @@ const Index = () => {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedBias, setSelectedBias] = useState('');
   const [selectedCredibility, setSelectedCredibility] = useState('');
+  const [sortValue, setSortValue] = useState('');
   const [followedTopics, setFollowedTopics] = useState<string[]>(['Technology', 'Geopolitics', 'Economy']);
 
   const filtered = useMemo(() => {
@@ -64,10 +65,47 @@ const Index = () => {
     });
   }, [topics, search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
 
-  const heroTopic = filtered.find(t => t.isBreaking) || filtered.find(t => t.isFeatured) || filtered[0];
-  const _featuredSecondary = filtered.filter(t => t.isFeatured && t.id !== heroTopic?.id).slice(0, 2);
-  const secondaryFeatured = _featuredSecondary.length > 0 ? _featuredSecondary : filtered.filter(t => t.id !== heroTopic?.id).slice(0, 2);
-  const restTopics = filtered.filter(t => t.id !== heroTopic?.id && !secondaryFeatured.find(f => f.id === t.id));
+  const sortedFiltered = useMemo(() => {
+    const arr = [...filtered];
+    if (!sortValue) return arr;
+    const [key, dir] = (sortValue || '').split(':');
+    const multiplier = dir === 'asc' ? 1 : -1;
+
+    const getLatest = (t: TopicSummary) => {
+      try {
+        if (t.articles && t.articles.length) {
+          const times = t.articles.map(a => new Date(a.publishedAt).getTime()).filter(Boolean);
+          if (times.length) return Math.max(...times);
+        }
+      } catch (e) {
+        // ignore
+      }
+      return new Date(t.updatedAt || 0).getTime();
+    };
+
+    switch (key) {
+      case 'published':
+        arr.sort((a, b) => (getLatest(a) - getLatest(b)) * multiplier);
+        break;
+      case 'credibility':
+        arr.sort((a, b) => (a.credibility.score - b.credibility.score) * multiplier);
+        break;
+      case 'lean':
+        arr.sort((a, b) => (a.biasAnalysis.leanScore - b.biasAnalysis.leanScore) * multiplier);
+        break;
+      case 'sources':
+        arr.sort((a, b) => (a.articles.length - b.articles.length) * multiplier);
+        break;
+      default:
+        break;
+    }
+    return arr;
+  }, [filtered, sortValue]);
+
+  const heroTopic = sortedFiltered.find(t => t.isBreaking) || sortedFiltered.find(t => t.isFeatured) || sortedFiltered[0];
+  const _featuredSecondary = sortedFiltered.filter(t => t.isFeatured && t.id !== heroTopic?.id).slice(0, 2);
+  const secondaryFeatured = _featuredSecondary.length > 0 ? _featuredSecondary : sortedFiltered.filter(t => t.id !== heroTopic?.id).slice(0, 2);
+  const restTopics = sortedFiltered.filter(t => t.id !== heroTopic?.id && !secondaryFeatured.find(f => f.id === t.id));
 
   // Credibility tiers
   const sortedByCredibility = [...topics].sort((a, b) => a.credibility.score - b.credibility.score);
@@ -76,7 +114,7 @@ const Index = () => {
   const highCredibility = [...sortedByCredibility].reverse().filter(t => t.credibility.label === 'High').slice(0, 3);
 
   // User's followed topics
-  const myTopics = filtered.filter(t => followedTopics.includes(t.category));
+  const myTopics = sortedFiltered.filter(t => followedTopics.includes(t.category));
 
   const toggleFollow = (cat: string) => {
     setFollowedTopics(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
@@ -122,6 +160,7 @@ const Index = () => {
         selectedCountry={selectedCountry} onCountryChange={setSelectedCountry}
         selectedBias={selectedBias} onBiasChange={setSelectedBias}
         selectedCredibility={selectedCredibility} onCredibilityChange={setSelectedCredibility}
+        sortValue={sortValue} onSortChange={setSortValue}
         categories={allCategories} countries={allCountries}
       />
 
