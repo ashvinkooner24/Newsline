@@ -1,14 +1,15 @@
 import { useState, useMemo, useEffect } from 'react';
-import { getTopics } from '@/api/newsApi';
+import { getStories } from '@/api/newsApi';
 import { allCategories, allCountries } from '@/data/mockNews';
-import { TopicSummary } from '@/types/news';
-import { TopicCard } from '@/components/TopicCard';
+import { StorySummary } from '@/types/news';
+import { StoryCard } from '@/components/StoryCard';
 import { SearchFilter } from '@/components/SearchFilter';
 import { HeaderBar } from '@/components/HeaderBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Clock, TrendingUp, Shield, AlertTriangle, CheckCircle, Bookmark, Globe, Landmark, Cpu, HeartPulse, GraduationCap, Banknote, Scale, Tv, Trophy, ShieldAlert, Users, Briefcase, Swords } from 'lucide-react';
 import { BiasMeter } from '@/components/BiasMeter';
 import { CredibilityGauge } from '@/components/CredibilityGauge';
+import { getArticleCount, getSourceCount, getUniqueSourceCount } from '@/lib/storyMetrics';
 
 const topicIcons: Record<string, React.ReactNode> = {
   Technology: <Cpu className="w-4 h-4" />,
@@ -29,14 +30,29 @@ const topicIcons: Record<string, React.ReactNode> = {
 };
 
 const Index = () => {
-  const [topics, setTopics] = useState<TopicSummary[]>([]);
+  const [stories, setStories] = useState<StorySummary[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getTopics()
-      .then(data => setTopics(data))
-      .catch(err => console.error('[Index] Failed to load topics:', err))
+    getStories()
+      .then(data => setStories(data))
+      .catch(err => console.error('[Index] Failed to load stories:', err))
       .finally(() => setLoading(false));
+  }, []);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = (_e: Event) => {
+      setSearch('');
+      setSelectedCategory('');
+      setSelectedCountry('');
+      setSelectedBias('');
+      setSelectedCredibility('');
+      setSortValue('');
+    };
+    window.addEventListener('resetFilters', handler as EventListener);
+    return () => window.removeEventListener('resetFilters', handler as EventListener);
   }, []);
 
   const [search, setSearch] = useState('');
@@ -44,10 +60,11 @@ const Index = () => {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedBias, setSelectedBias] = useState('');
   const [selectedCredibility, setSelectedCredibility] = useState('');
+  const [sortValue, setSortValue] = useState('');
   const [followedTopics, setFollowedTopics] = useState<string[]>(['Technology', 'Geopolitics', 'Economy']);
 
   const filtered = useMemo(() => {
-    return topics.filter(t => {
+    return stories.filter(t => {
       if (search && !t.headline.toLowerCase().includes(search.toLowerCase()) && !t.topic.toLowerCase().includes(search.toLowerCase())) return false;
       if (selectedCategory && t.category !== selectedCategory) return false;
       if (selectedCountry && t.country !== selectedCountry) return false;
@@ -62,25 +79,68 @@ const Index = () => {
       if (selectedCredibility && t.credibility.label !== selectedCredibility) return false;
       return true;
     });
-  }, [topics, search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
+  }, [stories, search, selectedCategory, selectedCountry, selectedBias, selectedCredibility]);
 
-  const heroTopic = filtered.find(t => t.isBreaking) || filtered.find(t => t.isFeatured) || filtered[0];
-  const _featuredSecondary = filtered.filter(t => t.isFeatured && t.id !== heroTopic?.id).slice(0, 2);
-  const secondaryFeatured = _featuredSecondary.length > 0 ? _featuredSecondary : filtered.filter(t => t.id !== heroTopic?.id).slice(0, 2);
-  const restTopics = filtered.filter(t => t.id !== heroTopic?.id && !secondaryFeatured.find(f => f.id === t.id));
+  const sortedFiltered = useMemo(() => {
+    const arr = [...filtered];
+    if (!sortValue) return arr;
+    const [key, dir] = (sortValue || '').split(':');
+    const multiplier = dir === 'asc' ? 1 : -1;
+
+    const getLatest = (t: StorySummary) => {
+      try {
+        if (t.articles && t.articles.length) {
+          const times = t.articles.map(a => new Date(a.publishedAt).getTime()).filter(Boolean);
+          if (times.length) return Math.max(...times);
+        }
+      } catch (e) {
+        // ignore
+      }
+      return new Date(t.updatedAt || 0).getTime();
+    };
+
+    switch (key) {
+      case 'published':
+        arr.sort((a, b) => (getLatest(a) - getLatest(b)) * multiplier);
+        break;
+      case 'credibility':
+        arr.sort((a, b) => (a.credibility.score - b.credibility.score) * multiplier);
+        break;
+      case 'lean':
+        arr.sort((a, b) => (a.biasAnalysis.leanScore - b.biasAnalysis.leanScore) * multiplier);
+        break;
+      case 'sources':
+        arr.sort((a, b) => (getSourceCount(a) - getSourceCount(b)) * multiplier);
+        break;
+      default:
+        break;
+    }
+    return arr;
+  }, [filtered, sortValue]);
+
+  const heroTopic = sortedFiltered.find(t => t.isBreaking) || sortedFiltered.find(t => t.isFeatured) || sortedFiltered[0];
+  const _featuredSecondary = sortedFiltered.filter(t => t.isFeatured && t.id !== heroTopic?.id).slice(0, 2);
+  const secondaryFeatured = _featuredSecondary.length > 0 ? _featuredSecondary : sortedFiltered.filter(t => t.id !== heroTopic?.id).slice(0, 2);
+  const restTopics = sortedFiltered.filter(t => t.id !== heroTopic?.id && !secondaryFeatured.find(f => f.id === t.id));
 
   // Credibility tiers
-  const sortedByCredibility = [...topics].sort((a, b) => a.credibility.score - b.credibility.score);
+  const hasAnyFilter = Boolean(selectedCategory || selectedCountry || selectedBias || selectedCredibility);
+  const sourceForCredibility = hasAnyFilter ? sortedFiltered : stories;
+  const sortedByCredibility = [...sourceForCredibility].sort((a, b) => a.credibility.score - b.credibility.score);
   const lowCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Low' || t.credibility.score < 65).slice(0, 3);
   const midCredibility = sortedByCredibility.filter(t => t.credibility.label === 'Medium').slice(0, 3);
   const highCredibility = [...sortedByCredibility].reverse().filter(t => t.credibility.label === 'High').slice(0, 3);
 
   // User's followed topics
-  const myTopics = filtered.filter(t => followedTopics.includes(t.category));
+  const myTopics = sortedFiltered.filter(t => followedTopics.includes(t.category));
 
   const toggleFollow = (cat: string) => {
     setFollowedTopics(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
   };
+
+  const isListView = Boolean(search) || Boolean(sortValue);
+  const totalArticleCount = stories.reduce((sum, story) => sum + getArticleCount(story), 0);
+  const totalSourceCount = getUniqueSourceCount(stories.flatMap(story => story.articles));
 
   return (
     <div className="min-h-screen bg-background">
@@ -90,7 +150,10 @@ const Index = () => {
       <div className="border-b border-border">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="text-center py-4">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-foreground tracking-tight">
+            <h1
+              className="font-display text-5xl md:text-6xl font-bold text-foreground tracking-tight cursor-pointer"
+              onClick={() => { window.dispatchEvent(new CustomEvent('resetFilters')); navigate('/'); }}
+            >
               The Newsline
             </h1>
             <p className="font-mono text-xs text-muted-foreground mt-1 tracking-widest uppercase">
@@ -106,9 +169,9 @@ const Index = () => {
         <div className="container max-w-6xl mx-auto px-4 py-2 flex items-center gap-6 text-xs font-mono text-muted-foreground">
           <div className="flex items-center gap-1.5">
             <TrendingUp className="w-3.5 h-3.5 text-primary" />
-            <span>{topics.length} active topics</span>
+            <span>{stories.length} active stories</span>
           </div>
-          <div>{topics.reduce((sum, t) => sum + t.articles.length, 0)} sources analyzed</div>
+          <div>{totalArticleCount} articles from {totalSourceCount} sources analyzed</div>
           <div className="ml-auto">
             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
           </div>
@@ -122,6 +185,7 @@ const Index = () => {
         selectedCountry={selectedCountry} onCountryChange={setSelectedCountry}
         selectedBias={selectedBias} onBiasChange={setSelectedBias}
         selectedCredibility={selectedCredibility} onCredibilityChange={setSelectedCredibility}
+        sortValue={sortValue} onSortChange={setSortValue}
         categories={allCategories} countries={allCountries}
       />
 
@@ -131,59 +195,77 @@ const Index = () => {
         </div>
       )}
 
-      <main className="container max-w-6xl mx-auto px-4 py-6">
-        {/* Hero + Secondary Featured */}
-        {heroTopic && (
-          <section className="mb-8">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Top Stories</span>
-              <div className="flex-1 border-t border-foreground" />
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <Link to={`/topic/${heroTopic.slug}`} className="lg:col-span-3 group">
-                <article className="space-y-3">
-                  {heroTopic.isBreaking && (
-                    <span className="inline-block font-mono text-xs font-bold text-destructive uppercase tracking-widest">● Breaking</span>
-                  )}
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
-                    {heroTopic.headline}
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed text-lg">{heroTopic.summary}</p>
-                  <div className="flex items-center gap-4 pt-2">
-                    <span className="font-mono text-xs text-primary uppercase tracking-wider">{heroTopic.category}</span>
-                    <span className="font-mono text-xs text-muted-foreground">{heroTopic.articles.length} sources</span>
-                    <CredibilityGauge credibility={heroTopic.credibility} compact />
-                  </div>
-                  <div className="max-w-xs pt-1">
-                    <BiasMeter leanScore={heroTopic.biasAnalysis.leanScore} overallLean={heroTopic.biasAnalysis.overallLean} compact />
-                  </div>
-                </article>
-              </Link>
-              <div className="lg:col-span-2 space-y-4 lg:border-l lg:border-border lg:pl-6">
-                {secondaryFeatured.map(topic => (
-                  <Link key={topic.id} to={`/topic/${topic.slug}`} className="block group">
-                    <article className="space-y-2 pb-4 border-b border-border last:border-0">
-                      <span className="font-mono text-xs text-primary uppercase tracking-wider">{topic.category}</span>
-                      <h3 className="font-display text-lg font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">
-                        {topic.headline}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{topic.summary}</p>
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs text-muted-foreground">{topic.articles.length} sources</span>
-                        <CredibilityGauge credibility={topic.credibility} compact />
+        {/* If user is searching or sorting show list-only results */}
+        {isListView ? (
+          <main className="container max-w-6xl mx-auto px-4 py-6">
+            <section className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Results</span>
+                <div className="flex-1 border-t border-foreground" />
+                <span className="font-mono text-xs text-muted-foreground">{sortedFiltered.length} stories</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {sortedFiltered.map((topic, i) => (
+                  <StoryCard key={topic.id} story={topic} index={i} />
+                ))}
+              </div>
+            </section>
+          </main>
+        ) : (
+          <main className="container max-w-6xl mx-auto px-4 py-6">
+            {/* Hero + Secondary Featured */}
+            {heroTopic && (
+              <section className="mb-8">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Top Stories</span>
+                  <div className="flex-1 border-t border-foreground" />
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                  <Link to={`/story/${heroTopic.slug}`} className="lg:col-span-3 group">
+                    <article className="space-y-3">
+                      {heroTopic.isBreaking && (
+                        <span className="inline-block font-mono text-xs font-bold text-destructive uppercase tracking-widest">● Breaking</span>
+                      )}
+                      <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
+                        {heroTopic.headline}
+                      </h2>
+                      <p className="text-muted-foreground leading-relaxed text-lg">{heroTopic.summary}</p>
+                      <div className="flex items-center gap-4 pt-2">
+                        <span className="font-mono text-xs text-primary uppercase tracking-wider">{heroTopic.category}</span>
+                        <span className="font-mono text-xs text-muted-foreground">{getArticleCount(heroTopic)} articles · {getSourceCount(heroTopic)} sources</span>
+                        <CredibilityGauge credibility={heroTopic.credibility} compact />
+                      </div>
+                      <div className="max-w-xs pt-1">
+                        <BiasMeter leanScore={heroTopic.biasAnalysis.leanScore} overallLean={heroTopic.biasAnalysis.overallLean} compact />
                       </div>
                     </article>
                   </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+                  <div className="lg:col-span-2 space-y-4 lg:border-l lg:border-border lg:pl-6">
+                    {secondaryFeatured.map(topic => (
+                      <Link key={topic.id} to={`/story/${topic.slug}`} className="block group">
+                        <article className="space-y-2 pb-4 border-b border-border last:border-0">
+                          <span className="font-mono text-xs text-primary uppercase tracking-wider">{topic.category}</span>
+                          <h3 className="font-display text-lg font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">
+                            {topic.headline}
+                          </h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{topic.summary}</p>
+                          <div className="flex items-center gap-3">
+                            <span className="font-mono text-xs text-muted-foreground">{getArticleCount(topic)} articles · {getSourceCount(topic)} sources</span>
+                            <CredibilityGauge credibility={topic.credibility} compact />
+                          </div>
+                        </article>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
 
         <div className="newspaper-divider mb-6" />
 
         {/* Your Topics */}
-        <section className="mb-8">
+        {!selectedCategory && (
+          <section className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Bookmark className="w-4 h-4 text-primary" />
             <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">Your Topics</span>
@@ -209,18 +291,20 @@ const Index = () => {
           {myTopics.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {myTopics.slice(0, 6).map((topic, i) => (
-                <TopicCard key={topic.id} topic={topic} index={i} />
+                <StoryCard key={topic.id} story={topic} index={i} />
               ))}
             </div>
           ) : (
             <p className="text-center text-muted-foreground py-6 font-mono text-sm">Select topics above to see personalized stories.</p>
           )}
-        </section>
+          </section>
+        )}
 
         <div className="newspaper-divider mb-6" />
 
         {/* Credibility Tiers */}
-        <section className="mb-8">
+        {!selectedCredibility && (
+          <section className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Shield className="w-4 h-4 text-primary" />
             <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">By Credibility</span>
@@ -234,12 +318,12 @@ const Index = () => {
                 <span className="font-mono text-xs font-bold text-credibility-high uppercase tracking-wider">High Credibility</span>
               </div>
               {highCredibility.map(t => (
-                <Link key={t.id} to={`/topic/${t.slug}`} className="block group">
+                <Link key={t.id} to={`/story/${t.slug}`} className="block group">
                   <div className="border-l-2 border-credibility-high pl-3 py-1">
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="font-mono text-xs text-credibility-high font-bold">{t.credibility.score}%</span>
-                      <span className="font-mono text-xs text-muted-foreground">{t.articles.length} sources</span>
+                      <span className="font-mono text-xs text-muted-foreground">{getArticleCount(t)} articles · {getSourceCount(t)} sources</span>
                     </div>
                   </div>
                 </Link>
@@ -252,12 +336,12 @@ const Index = () => {
                 <span className="font-mono text-xs font-bold text-credibility-medium uppercase tracking-wider">Medium Credibility</span>
               </div>
               {midCredibility.map(t => (
-                <Link key={t.id} to={`/topic/${t.slug}`} className="block group">
+                <Link key={t.id} to={`/story/${t.slug}`} className="block group">
                   <div className="border-l-2 border-credibility-medium pl-3 py-1">
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="font-mono text-xs text-credibility-medium font-bold">{t.credibility.score}%</span>
-                      <span className="font-mono text-xs text-muted-foreground">{t.articles.length} sources</span>
+                      <span className="font-mono text-xs text-muted-foreground">{getArticleCount(t)} articles · {getSourceCount(t)} sources</span>
                     </div>
                   </div>
                 </Link>
@@ -270,21 +354,22 @@ const Index = () => {
                 <span className="font-mono text-xs font-bold text-credibility-low uppercase tracking-wider">Low Credibility</span>
               </div>
               {lowCredibility.length > 0 ? lowCredibility.map(t => (
-                <Link key={t.id} to={`/topic/${t.slug}`} className="block group">
+                <Link key={t.id} to={`/story/${t.slug}`} className="block group">
                   <div className="border-l-2 border-credibility-low pl-3 py-1">
                     <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">{t.headline}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="font-mono text-xs text-credibility-low font-bold">{t.credibility.score}%</span>
-                      <span className="font-mono text-xs text-muted-foreground">{t.articles.length} sources</span>
+                      <span className="font-mono text-xs text-muted-foreground">{getArticleCount(t)} articles · {getSourceCount(t)} sources</span>
                     </div>
                   </div>
                 </Link>
               )) : (
-                <p className="font-mono text-xs text-muted-foreground py-4">No low credibility topics currently.</p>
+                <p className="font-mono text-xs text-muted-foreground py-4">No low credibility stories currently.</p>
               )}
             </div>
           </div>
-        </section>
+          </section>
+        )}
 
         <div className="newspaper-divider mb-6" />
 
@@ -296,8 +381,8 @@ const Index = () => {
             <div className="flex-1 border-t border-rule" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[...topics].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
-              <Link key={t.id} to={`/topic/${t.slug}`} className="group flex gap-4 border border-border bg-card p-4 hover:bg-accent/30 transition-colors">
+            {[...(hasAnyFilter ? sortedFiltered : stories)].sort((a, b) => (b.rating?.totalRatings || 0) - (a.rating?.totalRatings || 0)).slice(0, 4).map(t => (
+              <Link key={t.id} to={`/story/${t.slug}`} className="group flex gap-4 border border-border bg-card p-4 hover:bg-accent/30 transition-colors">
                 <div className="flex-1">
                   <h4 className="font-display text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t.headline}</h4>
                   <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{t.summary}</p>
@@ -318,18 +403,21 @@ const Index = () => {
           <div className="flex items-center gap-2 mb-4">
             <span className="font-display text-sm font-bold text-foreground uppercase tracking-wider">All Coverage</span>
             <div className="flex-1 border-t border-rule" />
-            <span className="font-mono text-xs text-muted-foreground">{restTopics.length} topics</span>
+            <span className="font-mono text-xs text-muted-foreground">{restTopics.length} stories</span>
           </div>
           {restTopics.length === 0 && (
-            <p className="text-center text-muted-foreground py-12 font-mono text-sm">No topics match your filters.</p>
+            <p className="text-center text-muted-foreground py-12 font-mono text-sm">No stories match your filters.</p>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {restTopics.map((topic, i) => (
-              <TopicCard key={topic.id} topic={topic} index={i} />
+              <StoryCard key={topic.id} story={topic} index={i} />
             ))}
           </div>
         </section>
-      </main>
+
+        </main>
+
+        )}
 
       <footer className="border-t-2 border-foreground mt-12">
         <div className="container max-w-6xl mx-auto px-4 py-6 text-center text-xs text-muted-foreground font-mono">

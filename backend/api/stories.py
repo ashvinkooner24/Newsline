@@ -6,7 +6,6 @@ from ..data.mockData import mock_users
 from ..db import stories_collection, users_collection
 from ..utils.slugify import slugify
 from collections import defaultdict
-import os
 
 router = APIRouter()
 
@@ -23,12 +22,7 @@ def _save_stories_to_db(wrappers: list[StoryWrapper]) -> int:
         doc["_slug"] = w.story.slug or slugify(w.story.heading)
         docs.append(doc)
 
-    # If MongoDB usage is disabled, skip writes (fast local mode)
-    if os.getenv("MONGO_DISABLED", "true").lower() in ("1", "true", "yes"):
-        print(f"[stories] MONGO_DISABLED set — skipping DB write, {len(docs)} docs not persisted")
-        return 0
-
-    # Try to persist to MongoDB but don't raise on failure — return 0 and
+    # Try to persist to active DB backend (MongoDB or SQLite) but don't raise — return 0 and
     # let the caller continue serving the results from memory/json.
     try:
         coll = stories_collection()
@@ -56,17 +50,6 @@ def _get_stories() -> list[StoryWrapper]:
     2. Fall back to MongoDB stories collection.
     3. Last resort: seed DB from stories.json if it exists.
     """
-    # If explicitly disabled, skip MongoDB entirely and serve from stories.json
-    if os.getenv("MONGO_DISABLED", "true").lower() in ("1", "true", "yes"):
-        try:
-            from ..data.mockData import _load_json_stories
-            json_stories = _load_json_stories()
-            if json_stories:
-                print(f"[stories] MONGO_DISABLED set — serving {len(json_stories)} stories from stories.json")
-                return json_stories
-        except Exception:
-            return []
-
     # 1. Pipeline cache
     try:
         from ..scoring.pipeline import get_cached_stories
@@ -130,7 +113,7 @@ def get_story(slug: str):
 class IngestRequest(BaseModel):
     articles_dir: str | None = None   # directory of .txt files
     csv_dir: str | None = None        # directory of .csv files (e.g. "backend/scraping")
-    max_topics: int = 300              # max topic groups to process from CSVs
+    max_story_groups: int = 300        # max story groups to process from CSVs
     similarity_threshold: float | None = None
     min_group_size: int | None = None
     max_group_size: int | None = None
@@ -141,8 +124,8 @@ class IngestRequest(BaseModel):
 def ingest_story(req: IngestRequest):
     """
     Run the full scoring pipeline.
-    - Provide articles_dir for legacy .txt mode (single topic).
-    - Provide csv_dir for multi-topic mode (load CSVs, cluster, process).
+    - Provide articles_dir for legacy .txt mode (single story group).
+    - Provide csv_dir for multi-story mode (load CSVs, cluster, process).
     """
     import time
     import traceback
@@ -157,14 +140,14 @@ def ingest_story(req: IngestRequest):
 
     t0 = time.time()
     print(f"\n{'='*60}")
-    print(f"[ingest] Starting pipeline: csv_dir={req.csv_dir}, max_topics={req.max_topics}")
+    print(f"[ingest] Starting pipeline: csv_dir={req.csv_dir}, max_story_groups={req.max_story_groups}")
     print(f"{'='*60}")
 
     try:
         results = run_pipeline(
             articles_dir=req.articles_dir,
             csv_dir=req.csv_dir,
-            max_topics=req.max_topics,
+            max_story_groups=req.max_story_groups,
             similarity_threshold=req.similarity_threshold,
             min_group_size=req.min_group_size,
             max_group_size=req.max_group_size,
@@ -226,9 +209,9 @@ def get_user(username: str):
 @router.get("/sources")
 def get_sources():
     """
-    Build source profiles dynamically from the current story data.
+    Build source profiles dynamically from the current stories.
     Returns a list of source profiles with article counts, credibility,
-    bias, and the topics they've contributed to.
+    bias, and the story categories they've contributed to.
     """
     stories = _get_stories()
 

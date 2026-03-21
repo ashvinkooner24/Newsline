@@ -1,4 +1,4 @@
-import { TopicSummary, Source, Comment, CommunityNote, UserProfile, SourceProfile } from '@/types/news';
+import { StorySummary, Source, Comment, CommunityNote, UserProfile, SourceProfile } from '@/types/news';
 
 const sources: Record<string, Source> = {
   reuters: { id: 'reuters', name: 'Reuters', url: 'https://reuters.com', credibilityScore: 92, biasLean: 'center', country: 'UK' },
@@ -31,7 +31,7 @@ const mockCommunityNotes: CommunityNote[] = [
   { id: 'cn2', userId: 'u5', userName: 'FactChecker101', text: 'Note: The Fox News article referenced is an opinion piece, not a news report. This should be factored into credibility scoring.', helpfulCount: 67, unhelpfulCount: 8, createdAt: '2026-02-20T18:00:00Z' },
 ];
 
-export const mockTopics: TopicSummary[] = [
+export const mockStories: StorySummary[] = [
   {
     id: '1', topic: 'AI Regulation', slug: 'ai-regulation',
     headline: 'Global Push for AI Safety Standards Intensifies as Nations Draft Competing Frameworks',
@@ -307,7 +307,10 @@ export const allCategories = [
   'Technology', 'Environment', 'Economy', 'Geopolitics', 'Finance',
   'Health', 'Politics', 'Science', 'Education', 'Entertainment',
   'Sport', 'Crime', 'Society', 'Business', 'Defence',
-  ...new Set(mockTopics.map(t => t.category)),
+  ...new Set(mockStories.map(t => t.category)),
 ].filter((v, i, a) => a.indexOf(v) === i);
-export const allCountries = [...new Set(mockTopics.map(t => t.country))];
-export const allSubtopics = [...new Set(mockTopics.filter(t => t.subtopic).map(t => t.subtopic!))];
+export const allCountries = [...new Set(mockStories.map(t => t.country))];
+export const allSubtopics = [...new Set(mockStories.filter(t => t.subtopic).map(t => t.subtopic!))];
+
+// Backward-compatible alias while migrating naming.
+export const mockTopics = mockStories;

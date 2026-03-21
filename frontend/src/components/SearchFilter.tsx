@@ -11,6 +11,8 @@ interface SearchFilterProps {
   onBiasChange: (v: string) => void;
   selectedCredibility: string;
   onCredibilityChange: (v: string) => void;
+  sortValue?: string;
+  onSortChange?: (v: string) => void;
   categories: string[];
   countries: string[];
 }
@@ -21,6 +23,7 @@ export const SearchFilter = ({
   selectedCountry, onCountryChange,
   selectedBias, onBiasChange,
   selectedCredibility, onCredibilityChange,
+  sortValue, onSortChange,
   categories, countries,
 }: SearchFilterProps) => {
   const hasFilters = selectedCategory || selectedCountry || selectedBias || selectedCredibility;
@@ -33,7 +36,7 @@ export const SearchFilter = ({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search topics, headlines..."
+            placeholder="Search stories, headlines..."
             value={search}
             onChange={e => onSearchChange(e.target.value)}
             className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-sm font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
@@ -53,6 +56,64 @@ export const SearchFilter = ({
           <FilterSelect label="Country" value={selectedCountry} onChange={onCountryChange} options={countries} />
           <FilterSelect label="Bias" value={selectedBias} onChange={onBiasChange} options={['left', 'center', 'right']} />
           <FilterSelect label="Credibility" value={selectedCredibility} onChange={onCredibilityChange} options={['High', 'Medium', 'Low']} />
+
+        </div>
+
+        {/* Sort Controls (separate from filters) */}
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Sort:</span>
+
+          <div className="flex items-center gap-2 border border-border rounded-sm px-3 py-2 bg-background">
+            <div className="text-xs font-mono text-muted-foreground">Published</div>
+            <select
+              value={sortValue?.startsWith('published') ? sortValue : ''}
+              onChange={e => onSortChange?.(e.target.value)}
+              className="ml-2 text-xs bg-background border border-border rounded-sm px-2 py-1 text-foreground focus:outline-none"
+            >
+              <option value="">—</option>
+              <option value="published:desc">Newest</option>
+              <option value="published:asc">Oldest</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2 border border-border rounded-sm px-3 py-2 bg-background">
+            <div className="text-xs font-mono text-muted-foreground">Credibility</div>
+            <select
+              value={sortValue?.startsWith('credibility') ? sortValue : ''}
+              onChange={e => onSortChange?.(e.target.value)}
+              className="ml-2 text-xs bg-background border border-border rounded-sm px-2 py-1 text-foreground focus:outline-none"
+            >
+              <option value="">—</option>
+              <option value="credibility:desc">High → Low</option>
+              <option value="credibility:asc">Low → High</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2 border border-border rounded-sm px-3 py-2 bg-background">
+            <div className="text-xs font-mono text-muted-foreground">Lean</div>
+            <select
+              value={sortValue?.startsWith('lean') ? sortValue : ''}
+              onChange={e => onSortChange?.(e.target.value)}
+              className="ml-2 text-xs bg-background border border-border rounded-sm px-2 py-1 text-foreground focus:outline-none"
+            >
+              <option value="">—</option>
+              <option value="lean:asc">Left → Right</option>
+              <option value="lean:desc">Right → Left</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2 border border-border rounded-sm px-3 py-2 bg-background">
+            <div className="text-xs font-mono text-muted-foreground">Sources</div>
+            <select
+              value={sortValue?.startsWith('sources') ? sortValue : ''}
+              onChange={e => onSortChange?.(e.target.value)}
+              className="ml-2 text-xs bg-background border border-border rounded-sm px-2 py-1 text-foreground focus:outline-none"
+            >
+              <option value="">—</option>
+              <option value="sources:desc">Most → Least</option>
+              <option value="sources:asc">Least → Most</option>
+            </select>
+          </div>
 
           {hasFilters && (
             <button

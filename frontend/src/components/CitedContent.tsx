@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 interface CitedContentProps {
   sections: SummarySection[];
   articles?: Article[];
-  topicSlug?: string;
+  storySlug?: string;
   communityNotes?: CommunityNote[];
 }
 
-export const CitedContent = ({ sections, articles = [], topicSlug, communityNotes = [] }: CitedContentProps) => {
+export const CitedContent = ({ sections, articles = [], storySlug, communityNotes = [] }: CitedContentProps) => {
   const [expandedSection, setExpandedSection] = useState<number | null>(null);
   const [addingNoteSection, setAddingNoteSection] = useState<number | null>(null);
 
@@ -80,9 +80,9 @@ export const CitedContent = ({ sections, articles = [], topicSlug, communityNote
                       return (
                         <div key={j} className={`py-2 px-3 text-sm leading-relaxed ${biasClass}`}>
                           <span className="text-foreground italic">&ldquo;{citation.text}&rdquo;</span>
-                          {article && topicSlug ? (
+                          {article && storySlug ? (
                             <Link
-                              to={`/topic/${topicSlug}/article/${article.id}`}
+                              to={`/story/${storySlug}/article/${article.id}`}
                               className="ml-2 font-mono text-xs text-primary hover:underline"
                             >
                               — {article.source.name}

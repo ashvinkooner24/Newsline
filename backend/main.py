@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from .models import StoryWrapper, Story, Segment, NewsProvider, User, Comment
 from .api.stories import router as stories_router
-from .db import ping as db_ping, close as db_close
+from .db import ping as db_ping, close as db_close, get_active_backend
 
 
 @asynccontextmanager
@@ -14,7 +14,11 @@ async def lifespan(app: FastAPI):
     if db_ping():
         print("[main] MongoDB connection verified ✓")
     else:
-        print("[main] ⚠ MongoDB is unreachable — some endpoints may fail")
+        backend = get_active_backend()
+        if backend == "sqlite":
+            print("[main] MongoDB unavailable — using SQLite fallback ✓")
+        else:
+            print("[main] ⚠ MongoDB is unreachable — some endpoints may fail")
     yield
     # ── shutdown ──
     db_close()

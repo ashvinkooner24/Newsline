@@ -5,8 +5,8 @@ Orchestrates the full ML → Gemini pipeline and exposes a simple cache so the
 FastAPI server can serve results immediately while a background thread runs.
 
 Supports two modes:
-  - articles_dir : all .txt files treated as one topic (legacy/test)
-  - csv_dir      : load CSVs, cluster by topic, process each group
+    - articles_dir : all .txt files treated as one story group (legacy/test)
+    - csv_dir      : load CSVs, cluster by story, process each group
 
 Usage (from main.py):
     from backend.scoring.pipeline import start_background_pipeline, get_cached_stories
@@ -260,10 +260,10 @@ def load_articles_from_csv(csv_dir: str, max_per_source: int = 1000) -> list[dic
 
 
 # ---------------------------------------------------------------------------
-# Topic grouping
+# Story grouping
 # ---------------------------------------------------------------------------
 
-def group_articles_by_topic(
+def group_articles_by_story(
     articles: list[dict],
     similarity_threshold: float = 0.75,
     min_group_size: int = 2,
@@ -271,7 +271,7 @@ def group_articles_by_topic(
     min_sources: int = 3,
 ) -> list[list[dict]]:
     """
-    Group articles by topic using sentence-transformer embeddings.
+    Group articles by story using sentence-transformer embeddings.
     Returns groups of 2+ articles from different sources about the same story.
     Uses title + first 200 chars of body for richer semantic matching.
     """
@@ -280,13 +280,13 @@ def group_articles_by_topic(
     if len(articles) < 2:
         return [articles] if articles else []
 
-    print(f"[pipeline] Topic grouping: encoding {len(articles)} articles (title+lead)…")
+    print(f"[pipeline] Story grouping: encoding {len(articles)} articles (title+lead)…")
     t0 = time.time()
     model = SentenceTransformer('all-MiniLM-L6-v2')
     texts = [a['title'] + '. ' + a.get('text', '')[:200] for a in articles]
     embeddings = model.encode(texts, convert_to_tensor=True)
     sim_matrix = util.cos_sim(embeddings, embeddings)
-    print(f"[pipeline] Topic grouping: embedding + similarity done in {time.time()-t0:.1f}s")
+    print(f"[pipeline] Story grouping: embedding + similarity done in {time.time()-t0:.1f}s")
 
     assigned: set[int] = set()
     groups: list[list[dict]] = []
@@ -327,13 +327,15 @@ def group_articles_by_topic(
             for a in group:
                 print(f"[pipeline]     • [{a['source']}] {a['title'][:70]}")
 
-    print(f"[pipeline] Topic grouping: {len(groups)} groups formed, "
+    print(f"[pipeline] Story grouping: {len(groups)} groups formed, "
           f"{len(assigned)}/{len(articles)} articles assigned")
     return groups
 
 
+
+
 # ---------------------------------------------------------------------------
-# Core pipeline for a single topic group
+# Core pipeline for a single story group
 # ---------------------------------------------------------------------------
 
 MAX_ARTICLE_CHARS = 4000  # truncate article text sent to scoring + Gemini
@@ -353,7 +355,7 @@ _SPORTS_KEYWORDS = re.compile(
 )
 
 
-def _is_sports_topic(articles: list[dict]) -> bool:
+def _is_sports_story(articles: list[dict]) -> bool:
     """Return True if the majority of articles in this group are about sports."""
     sports_count = 0
     for a in articles:
@@ -363,8 +365,8 @@ def _is_sports_topic(articles: list[dict]) -> bool:
     return sports_count >= len(articles) * 0.5
 
 
-def _process_topic_group(articles: list[dict]) -> dict:
-    """Run full scoring + Gemini aggregation for one topic group."""
+def _process_story_group(articles: list[dict]) -> dict:
+    """Run full scoring + Gemini aggregation for one story group."""
     from .sentiment_scoring import score_article
     from .agreement_scoring import compute_agreement
     from .credibility_scoring import compute_article_credibility
@@ -406,10 +408,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
 
     # ── STEP 2: Agreement scoring ──
     unique_sources = {a.get("source", "") for a in articles}
-    is_sports = _is_sports_topic(articles)
+    is_sports = _is_sports_story(articles)
     skip_agreement = is_sports or len(unique_sources) < 2
     if is_sports:
-        print(f"[pipeline]   ⚽ Sports topic detected — skipping agreement scoring entirely")
+        print(f"[pipeline]   ⚽ Sports story detected — skipping agreement scoring entirely")
     elif len(unique_sources) < 2:
         print(f"[pipeline]   ⚡ Only {len(unique_sources)} source(s) — skipping agreement scoring")
     t0 = time.time()
@@ -469,8 +471,10 @@ def _process_topic_group(articles: list[dict]) -> dict:
     )
 
     elapsed = time.time() - group_t0
-    print(f"[pipeline]   ✓ Topic group complete in {elapsed:.1f}s")
+    print(f"[pipeline]   ✓ Story group complete in {elapsed:.1f}s")
     return story_dict
+
+
 
 
 def _save_stories(stories: list[dict], json_path: str = STORIES_JSON_PATH) -> None:
@@ -507,7 +511,7 @@ def _save_stories(stories: list[dict], json_path: str = STORIES_JSON_PATH) -> No
 def run_pipeline(
     articles_dir: str | None = None,
     csv_dir: str | None = None,
-    max_topics: int = 10,
+    max_story_groups: int = 10,
     similarity_threshold: float | None = None,
     min_group_size: int | None = None,
     max_group_size: int | None = None,
@@ -517,8 +521,8 @@ def run_pipeline(
     Full scoring pipeline.
 
     Modes:
-      - articles_dir : legacy mode — all .txt files treated as one topic
-      - csv_dir      : multi-topic mode — load CSVs, cluster by topic, process each
+      - articles_dir : legacy mode — all .txt files treated as one story group
+      - csv_dir      : multi-story mode — load CSVs, cluster by story, process each
     """
     if csv_dir:
         t_load = time.time()
@@ -529,56 +533,56 @@ def run_pipeline(
 
         # Resolve grouping parameters from args or environment (env takes precedence when arg is None)
         import os
-        sim_thresh = float(os.getenv("TOPIC_SIMILARITY_THRESHOLD", "0.68")) if similarity_threshold is None else float(similarity_threshold)
-        min_gs = int(os.getenv("TOPIC_MIN_GROUP_SIZE", "2")) if min_group_size is None else int(min_group_size)
-        max_gs = int(os.getenv("TOPIC_MAX_GROUP_SIZE", "20")) if max_group_size is None else int(max_group_size)
-        min_srcs = int(os.getenv("TOPIC_MIN_SOURCES", "3")) if min_sources is None else int(min_sources)
+        sim_thresh = float(os.getenv("STORY_SIMILARITY_THRESHOLD", "0.68")) if similarity_threshold is None else float(similarity_threshold)
+        min_gs = int(os.getenv("STORY_MIN_GROUP_SIZE", "2")) if min_group_size is None else int(min_group_size)
+        max_gs = int(os.getenv("STORY_MAX_GROUP_SIZE", "20")) if max_group_size is None else int(max_group_size)
+        min_srcs = int(os.getenv("STORY_MIN_SOURCES", "3")) if min_sources is None else int(min_sources)
 
         t_group = time.time()
         print(f"[pipeline] Grouping params: similarity_threshold={sim_thresh}, min_group_size={min_gs}, max_group_size={max_gs}, min_sources={min_srcs}")
-        topic_groups = group_articles_by_topic(
+        story_groups = group_articles_by_story(
             all_articles,
             similarity_threshold=sim_thresh,
             min_group_size=min_gs,
             max_group_size=max_gs,
             min_sources=min_srcs,
         )
-        print(f"[pipeline] Found {len(topic_groups)} topic groups in {time.time()-t_group:.1f}s "
-              f"(processing up to {max_topics})")
+        print(f"[pipeline] Found {len(story_groups)} story groups in {time.time()-t_group:.1f}s "
+              f"(processing up to {max_story_groups})")
 
     elif articles_dir:
         txt_articles = load_articles_from_txt(articles_dir)
         if not txt_articles:
             raise FileNotFoundError(f"No .txt files found in {articles_dir!r}")
-        topic_groups = [txt_articles]
+        story_groups = [txt_articles]
 
     else:
         raise ValueError("Provide either articles_dir or csv_dir")
 
     results = []
     pipeline_t0 = time.time()
-    for i, group in enumerate(topic_groups[:max_topics]):
+    for i, group in enumerate(story_groups[:max_story_groups]):
         titles = [a["title"] for a in group]
         sources = sorted({a["source"] for a in group})
         print(
             f"\n[pipeline] ═══════════════════════════════════════════════"
-            f"\n[pipeline] Topic {i + 1}/{min(len(topic_groups), max_topics)}: "
+            f"\n[pipeline] Story {i + 1}/{min(len(story_groups), max_story_groups)}: "
             f"{len(group)} articles from {len(sources)} sources"
             f"\n[pipeline]   Title: {titles[0][:80]}…"
             f"\n[pipeline] ═══════════════════════════════════════════════"
         )
         try:
-            story_dict = _process_topic_group(group)
+            story_dict = _process_story_group(group)
             results.append(story_dict)
         except Exception as exc:
             import traceback
-            print(f"[pipeline] ERROR on topic {i + 1}: {exc}")
+            print(f"[pipeline] ERROR on story {i + 1}: {exc}")
             traceback.print_exc()
             continue
 
     total_elapsed = time.time() - pipeline_t0
     print(f"\n[pipeline] ═══════════════════════════════════════════════")
-    print(f"[pipeline] ALL TOPICS DONE: {len(results)}/{min(len(topic_groups), max_topics)} "
+    print(f"[pipeline] ALL STORIES DONE: {len(results)}/{min(len(story_groups), max_story_groups)} "
           f"succeeded in {total_elapsed:.1f}s ({total_elapsed/60:.1f} min)")
     print(f"[pipeline] ═══════════════════════════════════════════════")
 
@@ -593,7 +597,7 @@ def run_pipeline(
 def _pipeline_worker(
     articles_dir: str | None,
     csv_dir: str | None,
-    max_topics: int,
+    max_story_groups: int,
 ) -> None:
     global _stories_cache, _status
     try:
@@ -601,7 +605,7 @@ def _pipeline_worker(
             _status = {"state": "running", "error": None}
         print("[pipeline] Starting pipeline…")
         results = run_pipeline(
-            articles_dir=articles_dir, csv_dir=csv_dir, max_topics=max_topics,
+            articles_dir=articles_dir, csv_dir=csv_dir, max_story_groups=max_story_groups,
         )
         with _lock:
             _stories_cache = results
@@ -616,7 +620,7 @@ def _pipeline_worker(
 def start_background_pipeline(
     articles_dir: str | None = None,
     csv_dir: str | None = None,
-    max_topics: int = 10,
+    max_story_groups: int = 10,
 ) -> None:
     """
     Spawn a daemon thread that runs the full pipeline.
@@ -628,7 +632,7 @@ def start_background_pipeline(
 
     thread = threading.Thread(
         target=_pipeline_worker,
-        args=(articles_dir, csv_dir, max_topics),
+        args=(articles_dir, csv_dir, max_story_groups),
         daemon=True,
         name="scoring-pipeline",
     )
@@ -647,9 +651,9 @@ if __name__ == "__main__":
             sys.argv[2] if len(sys.argv) > 2
             else os.path.join(os.path.dirname(__file__), "..", "scraping")
         )
-        max_topics = int(sys.argv[3]) if len(sys.argv) > 3 else 5
-        print(f"[pipeline] CSV mode: {csv_dir}, max_topics={max_topics}")
-        results = run_pipeline(csv_dir=csv_dir, max_topics=max_topics)
+        max_story_groups = int(sys.argv[3]) if len(sys.argv) > 3 else 5
+        print(f"[pipeline] CSV mode: {csv_dir}, max_story_groups={max_story_groups}")
+        results = run_pipeline(csv_dir=csv_dir, max_story_groups=max_story_groups)
     else:
         articles_dir = (
             sys.argv[1] if len(sys.argv) > 1

@@ -124,7 +124,7 @@ export interface SourceProfile {
   topTopics: string[];
 }
 
-export interface TopicSummary {
+export interface StorySummary {
   id: string;
   topic: string;
   slug: string;
@@ -146,3 +146,6 @@ export interface TopicSummary {
   contradictions?: ContradictionReport[];
   articleMissingContext?: Record<string, string[]>;
 }
+
+// Backwards compatibility alias while migrating naming from Topic -> Story.
+export type TopicSummary = StorySummary;
